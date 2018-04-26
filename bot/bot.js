@@ -33,11 +33,9 @@ mongoose
 const commandsV2 = require('./modules/commandsV2.js');
 
 //find schemas
-fs.readdirSync(__dirname + '/db-models').forEach(function(filename) {
-  if (~filename.indexOf('.js')) {
-    require(__dirname + '/db-models/' + filename)
-  }
-})
+require('./db-models/pm2.js');
+require('./db-models/pool.js');
+require('./db-models/user.js');
 
 
 var aliases;

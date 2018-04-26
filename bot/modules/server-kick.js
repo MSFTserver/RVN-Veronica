@@ -47,15 +47,6 @@ exports.kick = {
           ', reason: ' +
           reason
       );
-    msg.mentions.members
-      .first()
-      .send(
-        'you have been kicked by ' +
-          msg.author.username +
-          '\nReason: ' +
-          reason +
-          '\n you may rejoin if you do not break any rules any furthur rules broken will result in a permanent ban!'
-      );
     member.kick(member + ' **kicked**      reason: ' + reason);
   }
 };

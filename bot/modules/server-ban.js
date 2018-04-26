@@ -47,11 +47,6 @@ exports.ban = {
           ', reason: ' +
           reason
       );
-    msg.mentions.members
-      .first()
-      .send(
-        'you have been __**BANNED**__ you may no longer join this server until this ban has been lifted!'
-      );
     member.ban({
       days: 7,
       reason: 'banned by ' + msg.author.username + '      Reason: ' + reason

@@ -28,7 +28,7 @@ exports.userinfo = {
     var user = msg.mentions.users.first()
       ? msg.mentions.users.first()
       : msg.author;
-    findEntry(bot, msg, 'accUserID', user.id);
+    findEntry(bot, msg, 'users', 'accUserID', user.id, findProfile);
     function findProfile(bot, msg, docs) {
       let member = msg.guild.member(user);
       if (!member) {

@@ -82,7 +82,7 @@ exports.rep = {
         );
         return;
       }
-      findEntry(bot, msg, 'accUserID', user.id, findProfile1);
+      findEntry(bot, msg, 'users', 'accUserID', user.id, findProfile1);
       function findProfile1(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (
@@ -135,7 +135,7 @@ exports.rep = {
         );
         return;
       }
-      findEntry(bot, msg, 'accUserID', usr.id, findProfile2);
+      findEntry(bot, msg, 'users', 'accUserID', usr.id, findProfile2);
       function findProfile2(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (
@@ -174,7 +174,7 @@ exports.rep = {
       }
     }
     function getUserRep(bot, msg, usr) {
-      findEntry(bot, msg, 'accUserID', usr.id, findProfile3);
+      findEntry(bot, msg, 'users', 'accUserID', usr.id, findProfile3);
       function findProfile3(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (

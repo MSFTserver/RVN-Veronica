@@ -1,6 +1,4 @@
-exports.commands = [
-  'credits' // command name that will be used for next lines of code below
-];
+exports.commands = ['credits'];
 
 exports.credits = {
   usage: '',

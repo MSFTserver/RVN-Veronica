@@ -3,13 +3,11 @@ let inPrivate = require('../helpers.js').inPrivate;
 let config = require('config');
 let channelID = config.get('General').Channels.botspam;
 
-exports.commands = [
-  '8ball' // command name that will be used for next lines of code below
-];
+exports.commands = ['8ball'];
 
 exports['8ball'] = {
-  usage: '<question?>', //command usage like !demo <@username>, exclude !demo
-  description: 'answers yes or no question', //the description of command for !help command
+  usage: '<question?>',
+  description: 'answers yes or no question',
   process: function(bot, msg, suffix) {
     if (!inPrivate(msg) && !inSpam(msg)) {
       msg.channel.send(

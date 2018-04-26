@@ -5,7 +5,6 @@ module.exports = {
       script: './bot/bot.js',
       cwd: 'C:/Users/RavenDev/Desktop/Bots/Veronica',
       instance_id_env: '0',
-      log_date_format: 'MMMM Do YYYY, h:mm:ss a',
       error_file:
         'C:/Users/RavenDev/Desktop/Bots/Veronica/Logs/veronica-err.log',
       out_file: 'C:/Users/RavenDev/Desktop/Bots/Veronica/Logs/veronica-out.log',

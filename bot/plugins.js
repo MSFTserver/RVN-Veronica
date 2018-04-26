@@ -8,6 +8,9 @@ function getPlugins(srcpath) {
 }
 let plugin_directory = path.join(__dirname, 'modules');
 let plugins = getPlugins(plugin_directory);
+let moment = require('moment-timezone');
+let config = require('config');
+let pm2Name = config.get('General').pm2Name;
 
 exports.init = function init() {
   load_plugins();
@@ -22,7 +25,10 @@ function load_plugins() {
     try {
       plugin = require(`${plugin_directory}/${plugins[i]}`);
     } catch (err) {
-      console.log(`Improper setup of the '${plugins[i]}' plugin. : ${err}`);
+      var time = moment()
+        .tz('America/Los_Angeles')
+        .format('MM-DD-YYYY hh:mm a');
+      console.log('[' + time + ' PST][' + pm2Name + `] Improper setup of the '${plugins[i]}' plugin. : ${err}`);
     }
     if (plugin) {
       if ('commands' in plugin) {
@@ -43,8 +49,11 @@ function load_plugins() {
       }
     }
   }
+  var time = moment()
+    .tz('America/Los_Angeles')
+    .format('MM-DD-YYYY hh:mm a');
   console.log(
-    `Loaded ${dbot.commandCount()} chat commands and ${
+    '[' + time + ' PST][' + pm2Name + `] Loaded ${dbot.commandCount()} chat commands and ${
       otherFunc
     } custom functions.`
   );

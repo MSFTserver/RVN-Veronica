@@ -5,15 +5,10 @@ let keys = config.get('rvntweets').config;
 let trackers = config.get('rvntweets').trackers;
 let tweetChannel = config.get('General').Channels.twitterRSS;
 let moment = require('moment-timezone');
-let Probe = require('pmx').probe();
-let counter = 0;
+let pm2MetricGet = require('../db-helpers.js').pm2MetricGet;
+let pm2MetricSave = require('../db-helpers.js').pm2MetricSave;
 setInterval(function() {
-  let metric = Probe.metric({
-    name: 'rvn tweets',
-    value: function() {
-      return counter;
-    }
-  });
+  pm2MetricGet('tweets');
 }, 100);
 let colors = [
   '37887',
@@ -83,9 +78,7 @@ let colors = [
   '8274776'
 ];
 
-exports.custom = [
-  'rvntweets' //change this to your function name
-];
+exports.custom = ['rvntweets'];
 
 exports.rvntweets = function(bot) {
   var Twitter = new TwitterStream(keys, false);
@@ -94,7 +87,7 @@ exports.rvntweets = function(bot) {
   });
   Twitter.on('data', function(obj) {
     var dt = new Date();
-    var timestamp = moment()
+    var time = moment()
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
     var data = obj.toString();
@@ -111,7 +104,7 @@ exports.rvntweets = function(bot) {
         description: tweet + '\n\n[View Tweet](' + url + ')',
         color: randcolor,
         footer: {
-          text: 'Tweeted @ ' + timestamp + ' PST'
+          text: 'Tweeted @ ' + time + ' PST'
         },
         thumbnail: {
           url: userpic
@@ -121,7 +114,7 @@ exports.rvntweets = function(bot) {
           url: 'https://twitter.com/' + username
         }
       };
-      counter++;
+      pm2MetricSave('tweets');
       bot.channels.get(tweetChannel).send({ embed });
     }
   });

@@ -6,9 +6,7 @@ let channelID = config.get('General').Channels.botspam;
 let explorerApiUrl = config.get('General').urls.explorerApiUrl;
 let coinSymbol = config.get('General').urls.CoinSymbol;
 
-exports.commands = [
-  'balance' // command that is in this file, every command needs it own export as shown below
-];
+exports.commands = ['balance'];
 
 exports.balance = {
   usage: '<Address>',

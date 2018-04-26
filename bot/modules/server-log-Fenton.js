@@ -1,7 +1,5 @@
 let fs = require('fs');
 let moment = require('moment-timezone');
-const mongoose = require('mongoose');
-let usersSchema = require('..\\' + '\\db-models\\user.js');
 
 exports.custom = ['Fenton'];
 

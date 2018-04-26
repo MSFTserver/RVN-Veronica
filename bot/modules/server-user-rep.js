@@ -1,14 +1,11 @@
-let moment = require('moment-timezone');
-const mongoose = require('mongoose');
-let usersSchema = require('..\\' + '\\db-models\\user.js');
-let users = mongoose.model('users');
+let findEntry = require('../db-helpers.js').findEntry;
+let newEntry = require('../db-helpers.js').newEntry;
+let updateEntry = require('../db-helpers.js').updateEntry;
 let inSpam = require('../helpers.js').inSpam;
 let inPrivate = require('../helpers.js').inPrivate;
 let hasPerms = require('../helpers.js').hasPerms;
 let config = require('config');
 let channelID = config.get('General').Channels.botspam;
-let logChannel = config.get('moderation').logchannel;
-let pm2Name = config.get('General').pm2Name;
 
 exports.commands = ['rep'];
 
@@ -85,7 +82,8 @@ exports.rep = {
         );
         return;
       }
-      users.find({ accUserID: usr.id }, function(err, docs) {
+      findEntry(bot, msg, 'accUserID', user.id, findProfile1);
+      function findProfile1(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (
             !msg.guild ||
@@ -96,7 +94,7 @@ exports.rep = {
           } else {
             var joindate = msg.guild.member(usr).joinedAt.toString();
           }
-          var newUserProfile = {
+          var newProfile = {
             accUserID: usr.id,
             accUsername: usr.username,
             accDiscriminator: usr.discriminator,
@@ -105,42 +103,7 @@ exports.rep = {
             accCreatedDate: usr.createdAt,
             accRep: 0
           };
-          var newUser = new users(newUserProfile);
-          newUser
-            .save()
-            .then(newUser => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] Saved New user: ' + user.username)
-              console.log(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] Saved New user: ' +
-                  usr.username
-              );
-              msg.channel.send(
-                ' cant take reputation points from ' +
-                  docs[0].accUsername +
-                  ' with 0'
-              );
-            })
-            .catch(err => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] ERROR saving Profile:\n' + err);
-              console.log(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] ERROR saving Profile:\n' +
-                  err
-              );
-            });
+          newEntry(bot, msg, 'users', newProfile);
           return;
         } else {
           if (Number(amt) > docs[0].accRep) {
@@ -151,7 +114,7 @@ exports.rep = {
           } else {
             var userRep = docs[0].accRep - Number(amt);
           }
-          var newUserProfile = {
+          var updateProfile = {
             accUserID: docs[0].accUserID,
             accUsername: docs[0].accUsername,
             accDiscriminator: docs[0].accDiscriminator,
@@ -160,40 +123,10 @@ exports.rep = {
             accCreatedDate: docs[0].accCreatedDate,
             accRep: userRep
           };
-          users
-            .updateOne({ accUserID: usr.id }, { $set: newUserProfile })
-            .then(users => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] Updated user: ' + user[1].username)
-              //console.log('[' + time + ' PST][' + pm2Name + '] Updated user: ' + user.username)
-              msg.channel.send(
-                userRep +
-                  ' reputation points has been taken from ' +
-                  docs[0].accUsername +
-                  ', totaling (' +
-                  userRep +
-                  ')'
-              );
-            })
-            .catch(err => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] ERROR Updating Profile:\n' + err);
-              console.log(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] ERROR Updating Profile:\n' +
-                  err
-              );
-            });
+          updateEntry(bot, msg, 'users', 'accUserID', usr.id, updateProfile);
           return;
         }
-      });
+      }
     }
     function giveUserRep(bot, msg, usr, amt) {
       if (getValidatedAmount(amt) === null) {
@@ -202,7 +135,8 @@ exports.rep = {
         );
         return;
       }
-      users.find({ accUserID: usr.id }, function(err, docs) {
+      findEntry(bot, msg, 'accUserID', usr.id, findProfile2);
+      function findProfile2(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (
             !msg.guild ||
@@ -213,7 +147,7 @@ exports.rep = {
           } else {
             var joindate = msg.guild.member(usr).joinedAt.toString();
           }
-          var newUserProfile = {
+          var newProfile = {
             accUserID: usr.id,
             accUsername: usr.username,
             accDiscriminator: usr.discriminator,
@@ -222,48 +156,10 @@ exports.rep = {
             accCreatedDate: usr.createdAt,
             accRep: 0 + Number(amt)
           };
-          var newUser = new users(newUserProfile);
-          newUser
-            .save()
-            .then(newUser => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] Saved New user: ' + user.username)
-              console.log(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] Saved New user: ' +
-                  usr.username
-              );
-              msg.channel.send(
-                docs[0].accUsername +
-                  ' has been awarded ' +
-                  amt +
-                  ' reputation points, totaling (' +
-                  (Number(docs[0].accRep) + Number(amt)) +
-                  ')'
-              );
-            })
-            .catch(err => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] ERROR saving Profile:\n' + err);
-              console.log(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] ERROR saving Profile:\n' +
-                  err
-              );
-            });
+          newEntry(bot, msg, 'users', newProfile);
           return;
         } else {
-          var newUserProfile = {
+          var upadateProfile = {
             accUserID: docs[0].accUserID,
             accUsername: docs[0].accUsername,
             accDiscriminator: docs[0].accDiscriminator,
@@ -272,43 +168,14 @@ exports.rep = {
             accCreatedDate: docs[0].accCreatedDate,
             accRep: docs[0].accRep + Number(amt)
           };
-          users
-            .updateOne({ accUserID: usr.id }, { $set: newUserProfile })
-            .then(users => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] Updated user: ' + user[1].username)
-              //console.log('[' + time + ' PST][' + pm2Name + '] Updated user: ' + user.username)
-              msg.channel.send(
-                docs[0].accUsername +
-                  ' has been awarded ' +
-                  amt +
-                  ' reputation points, totaling (' +
-                  (Number(docs[0].accRep) + Number(amt)) +
-                  ')'
-              );
-            })
-            .catch(err => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] ERROR Updating Profile:\n' + err);
-              console.log(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] ERROR Updating Profile:\n' +
-                  err
-              );
-            });
+          updateEntry(bot, msg, 'users', 'accUserID', usr.id, updateProfile);
           return;
         }
-      });
+      }
     }
     function getUserRep(bot, msg, usr) {
-      users.find({ accUserID: usr.id }, function(err, docs) {
+      findEntry(bot, msg, 'accUserID', usr.id, findProfile3);
+      function findProfile3(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (
             !msg.guild ||
@@ -319,7 +186,7 @@ exports.rep = {
           } else {
             var joindate = msg.guild.member(usr).joinedAt.toString();
           }
-          var newUserProfile = {
+          var newProfile = {
             accUserID: usr.id,
             accUsername: usr.username,
             accDiscriminator: usr.discriminator,
@@ -328,41 +195,11 @@ exports.rep = {
             accCreatedDate: usr.createdAt,
             accRep: 0
           };
-          var newUser = new users(newUserProfile);
-          newUser
-            .save()
-            .then(newUser => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] Saved New user: ' + user.username)
-              console.log(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] Saved New user: ' +
-                  usr.username
-              );
-              msg.channel.send(
-                usr.username +
-                  ' has 0 reputation points!\n stay active to earn more and show you are active in this community'
-              );
-            })
-            .catch(err => {
-              var time = moment()
-                .tz('America/Los_Angeles')
-                .format('MM-DD-YYYY hh:mm a');
-              //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] ERROR saving Profile:\n' + err);
-              console.log(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] ERROR saving Profile:\n' +
-                  err
-              );
-            });
+          msg.channel.send(
+            usr.username +
+              ' has 0 reputation points!\n stay active to earn more and show you are active in this community'
+          );
+          newEntry(bot, msg, 'users', newProfile);
           return;
         } else {
           msg.channel.send(
@@ -373,7 +210,7 @@ exports.rep = {
           );
           return;
         }
-      });
+      }
     }
     function getValidatedAmount(amount) {
       amount = amount.trim();

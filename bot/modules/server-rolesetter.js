@@ -1,16 +1,12 @@
+let moment = require('moment-timezone');
 let config = require('config');
 let serverRolesetter = config.get('serverRolesetter');
 let inPrivate = require('../helpers.js').inPrivate;
 let inSpam = require('../helpers.js').inSpam;
 let channelID = config.get('General').Channels.botspam;
-let Probe = require('pmx').probe();
-let counter = 0;
-let metric = Probe.metric({
-  name: 'roles set',
-  value: function() {
-    return counter;
-  }
-});
+let pm2MetricGet = require('../db-helpers.js').pm2MetricGet;
+let pm2MetricSave = require('../db-helpers.js').pm2MetricSave;
+pm2MetricGet('roles');
 
 exports.commands = ['addrole', 'delrole', 'roles'];
 
@@ -33,7 +29,11 @@ exports.addrole = {
       if (serverRolesetter.allowedroles.includes(suffix)) {
         if (newrole !== null) {
           if (!msg.member.roles.find('name', suffix)) {
-            counter++;
+            var time = moment()
+              .tz('America/Los_Angeles')
+              .format('MM-DD-YYYY hh:mm a');
+            pm2MetricSave('roles');
+            pm2MetricGet('roles');
             msg.member
               .addRole(newrole)
               .then(

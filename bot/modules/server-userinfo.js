@@ -1,11 +1,10 @@
+let findEntry = require('../db-helpers.js').findEntry;
+let newEntry = require('../db-helpers.js').newEntry;
 let moment = require('moment-timezone');
-const mongoose = require('mongoose');
-let usersSchema = require('..\\' + '\\db-models\\user.js');
 let inSpam = require('../helpers.js').inSpam;
 let inPrivate = require('../helpers.js').inPrivate;
 let config = require('config');
 let modLogChannel = config.get('moderation').modLogChannel;
-let logChannel = config.get('moderation').logchannel;
 let pm2Name = config.get('General').pm2Name;
 
 exports.commands = ['userinfo'];
@@ -22,15 +21,15 @@ exports.userinfo = {
     }
     if (!inSpam(msg)) {
       msg.channel.send(
-        'please use <#' + channelID + '> to talk to RoleSetter Bot'
+        'please use <#' + channelID + '> to talk to Profile Bot'
       );
       return;
     }
     var user = msg.mentions.users.first()
       ? msg.mentions.users.first()
       : msg.author;
-    var users = mongoose.model('users');
-    users.find({ accUserID: user.id }, function(err, docs) {
+    findEntry(bot, msg, 'accUserID', user.id);
+    function findProfile(bot, msg, docs) {
       let member = msg.guild.member(user);
       if (!member) {
         nickname = 'error getting this data';
@@ -54,7 +53,7 @@ exports.userinfo = {
         var joined = join;
         var created = user.createdAt;
         var userRep = 0;
-        var newUserProfile = {
+        var newProfile = {
           accUserID: userid,
           accUsername: username,
           accDiscriminator: discriminator,
@@ -63,36 +62,7 @@ exports.userinfo = {
           accCreatedDate: created,
           accRep: userRep
         };
-        var newUser = new users(newUserProfile);
-        newUser
-          .save()
-          .then(newUser => {
-            //bot.channels.get(logChannel).send('Saved New user: ' + msg.author.username);
-            //console.log('Saved New user: ' + msg.author.username);
-          })
-          .catch(err => {
-            var time = moment()
-              .tz('America/Los_Angeles')
-              .format('MM-DD-YYYY hh:mm a');
-            bot.channels
-              .get(logChannel)
-              .send(
-                '[' +
-                  time +
-                  ' PST][' +
-                  pm2Name +
-                  '] ERROR saving Profile:\n' +
-                  err
-              );
-            console.log(
-              '[' +
-                time +
-                ' PST][' +
-                pm2Name +
-                '] ERROR saving Profile:\n' +
-                err
-            );
-          });
+        newEntry('users', newProfile);
       } else {
         var userid = docs[0].accUserID;
         var username = docs[0].accUsername;
@@ -192,6 +162,6 @@ exports.userinfo = {
             ' looked up profile for ' +
             user.username
         );
-    });
+    }
   }
 };

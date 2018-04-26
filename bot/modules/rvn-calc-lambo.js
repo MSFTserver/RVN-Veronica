@@ -12,16 +12,14 @@ let cmcApiUrl = config.get('General').urls.cmcApiUrl;
 let coinName = config.get('General').urls.CoinName;
 let coinSymbol = config.get('General').urls.CoinSymbol;
 
-exports.commands = [
-  'lambo' // command name that will be used for next lines of code below
-];
+exports.commands = ['lambo'];
 
 exports.lambo = {
-  usage: '<amount-optional>', //command usage like !demo <@username>, exclude !demo
+  usage: '<amount-optional>',
   description:
     'displays amount of ' +
     coinName +
-    ' to get a lambo\n    if <amount> is supplied that will be deducted from total price towards 1 Lambo!', //the description of command for !help command
+    ' to get a lambo\n    if <amount> is supplied that will be deducted from total price towards 1 Lambo!',
   process: function(bot, msg, suffix) {
     let dt = new Date();
     let timestamp = moment()

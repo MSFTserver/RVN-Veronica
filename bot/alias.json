@@ -15,6 +15,7 @@
   "profileuser": "userinfo",
   "delete": "purge",
   "remove": "purge",
+  "prune": "purge",
   "stats": "serverstats",
   "server": "serverstats",
   "serverinfo": "serverstats",

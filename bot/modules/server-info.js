@@ -1,13 +1,11 @@
 const discord = require('discord.js');
 let hasPerms = require('../helpers.js').hasPerms;
 
-exports.commands = [
-  'serverstats' // command name that will be used for next lines of code below
-];
+exports.commands = ['serverstats'];
 
 exports.serverstats = {
-  usage: '', //command usage like !demo <@username>, exclude !demo
-  description: 'Displays server stats', //the description of command for !help command
+  usage: '',
+  description: 'Displays server stats',
   process: function(bot, msg, suffix) {
     if (hasPerms(msg)) {
       var data = msg.guild;

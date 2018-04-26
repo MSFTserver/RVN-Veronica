@@ -1,21 +1,14 @@
 let fs = require('fs');
 let moment = require('moment-timezone');
-let Probe = require('pmx').probe();
-let counter = 0;
-let metric = Probe.metric({
-  name: 'notes logged',
-  value: function() {
-    return counter;
-  }
-});
+let pm2MetricGet = require('../db-helpers.js').pm2MetricGet;
+let pm2MetricSave = require('../db-helpers.js').pm2MetricSave;
+pm2MetricGet('notes');
 
-exports.commands = [
-  'botmaster' // command name that will be used for next lines of code below
-];
+exports.commands = ['botmaster'];
 
 exports.botmaster = {
-  usage: '<message for botmaster>', //command usage like !demo <@username>, exclude !demo
-  description: 'leave a note for the bot masters', //the description of command for !help command
+  usage: '<message for botmaster>',
+  description: 'leave a note for the bot masters',
   process: function(bot, msg, suffix) {
     var logStream = fs.createWriteStream('Logs/Bot-Dev-Notes.txt', {
       flags: 'a'
@@ -33,7 +26,8 @@ exports.botmaster = {
         ': ' +
         msg.content
     );
-    counter++;
+    pm2MetricSave('notes');
+    pm2MetricGet('notes');
     msg.channel.send('Message has been logged for Bot Devs!');
   }
 };

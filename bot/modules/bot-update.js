@@ -1,17 +1,12 @@
 let cmd = require('node-cmd');
 let moment = require('moment-timezone');
 let isBotDev = require('../helpers.js').isBotDev;
+let pm2MetricGet = require('../db-helpers.js').pm2MetricGet;
+let pm2MetricSave = require('../db-helpers.js').pm2MetricSave;
 let config = require('config');
 let logChannel = config.get('moderation').logchannel;
 let pm2Name = config.get('General').pm2Name;
-let Probe = require('pmx').probe();
-let counter = 0;
-let metric = Probe.metric({
-  name: 'Git Pull Updates',
-  value: function() {
-    return counter;
-  }
-});
+pm2MetricGet('updates');
 
 exports.commands = ['update'];
 
@@ -27,7 +22,8 @@ exports.update = {
         .tz('America/Los_Angeles')
         .format('MM-DD-YYYY hh:mm a');
       msg.channel.send('Updating pm2 app (' + pm2Name + ') from Git repo!');
-      counter++;
+      pm2MetricSave('updates');
+      pm2MetricGet('updates');
       bot.channels
         .get(logChannel)
         .send(

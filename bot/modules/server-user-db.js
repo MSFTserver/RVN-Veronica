@@ -1,104 +1,8 @@
-let moment = require('moment-timezone');
-const mongoose = require('mongoose');
-let isBotDev = require('../helpers.js').isBotDev;
 let inPrivate = require('../helpers.js').inPrivate;
 let hasExcludedSpamChannels = require('../helpers.js').hasExcludedSpamChannels;
-let usersSchema = require('..\\' + '\\db-models\\user.js');
-let config = require('config');
-let logChannel = config.get('moderation').logchannel;
-let pm2Name = config.get('General').pm2Name;
-
-exports.commands = ['syncdb'];
-
-exports.syncdb = {
-  usage: '',
-  description: 'initiates a sync of database from user list',
-  process: function(bot, msg) {
-    var memCount = msg.guild.members.size;
-    msg.channel.send('Starting to sync ' + memCount + ' Users to DB!');
-    getProfiles(bot, msg, memCount);
-    function getProfiles() {
-      var users = mongoose.model('users');
-      var userProfile = msg.guild.members;
-      var memCount = userProfile.size;
-      var counter = 0;
-      userProfile.forEach(function(user) {
-        counter++;
-        if (counter === memCount) {
-          msg.channel.send(
-            'Saved ' + counter + '/' + memCount + ' Users to db!'
-          );
-        }
-        users.count({ accUserID: user.user.id }, function(err, count) {
-          users.find({ accUserID: user.user.id }, function(err, docs) {
-            if (!docs || !docs[0]) {
-              var userid = user.user.id;
-              var username = user.user.username;
-              var discriminator = user.user.discriminator;
-              var ava = user.user.avatarURL;
-              var joined = user.joinedAt;
-              var created = user.user.createdAt;
-              var userRep = 0;
-            } else {
-              var userid = docs[0].accUserID;
-              var username = docs[0].accUsername;
-              var discriminator = docs[0].accDiscriminator;
-              var ava = docs[0].accAvatar;
-              var joined = docs[0].accJoinedDate;
-              var created = docs[0].accCreatedDate;
-              var userRep = docs[0].accRep;
-            }
-            var newUserProfile = {
-              accUserID: userid,
-              accUsername: username,
-              accDiscriminator: discriminator,
-              accAvatar: ava,
-              accJoinedDate: joined,
-              accCreatedDate: created,
-              accRep: userRep
-            };
-            if (count > 0) {
-              users
-                .updateOne(
-                  { accUserID: msg.author.id },
-                  { $set: newUserProfile }
-                )
-                .then(users => {
-                  //bot.channels.get(logChannel).send('Updated user: ' + msg.author.username)
-                  //console.log('Updated user: ' + msg.author.username)
-                })
-                .catch(err => {
-                  var time = moment()
-                    .tz('America/Los_Angeles')
-                    .format('MM-DD-YYYY hh:mm a');
-                  //bot.channels .get(logChannel) .send( '[' + time + ' PST][' + pm2Name + '] ERROR Updating Profile:\n' + err );
-                  //console.log( '[' + time + ' PST][' + pm2Name + '] ERROR Updating Profile:\n' + err );
-                });
-            } else {
-              var newUser = new users(newUserProfile);
-              newUser
-                .save()
-                .then(newUser => {
-                  var time = moment()
-                    .tz('America/Los_Angeles')
-                    .format('MM-DD-YYYY hh:mm a');
-                  //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] Saved New user: ' + user.username)
-                  //console.log('[' + time + ' PST][' + pm2Name + '] Saved New user: ' + user.username );
-                })
-                .catch(err => {
-                  var time = moment()
-                    .tz('America/Los_Angeles')
-                    .format('MM-DD-YYYY hh:mm a');
-                  //bot.channels.get(logChannel).send('[' + time + ' PST][' + pm2Name + '] ERROR saving Profile:\n' + err);
-                  // console.log( '[' + time + ' PST][' + pm2Name + '] ERROR saving Profile:\n' + err );
-                });
-            }
-          });
-        });
-      });
-    }
-  }
-};
+let findEntry = require('../db-helpers.js').findEntry;
+let newEntry = require('../db-helpers.js').newEntry;
+let updateEntry = require('../db-helpers.js').updateEntry;
 
 exports.custom = ['UserDBs'];
 
@@ -118,100 +22,42 @@ exports.UserDBs = function(bot) {
       ) {
         return;
       }
-      var users = mongoose.model('users');
-      users.count({ accUserID: msg.author.id }, function(err, count) {
-        users.find({ accUserID: msg.author.id }, function(err, docs) {
-          if (!docs || !docs[0]) {
-            if (
-              !msg.guild ||
-              !msg.guild.member(msg.author) ||
-              !msg.guild.member(msg.author).joinedAt
-            ) {
-              var joindate = null;
-            } else {
-              var joindate = msg.guild.member(msg.author).joinedAt.toString();
-            }
-            var newUserProfile = {
-              accUserID: msg.author.id,
-              accUsername: msg.author.username,
-              accDiscriminator: msg.author.discriminator,
-              accAvatar: msg.author.avatarURL,
-              accJoinedDate: joindate,
-              accCreatedDate: msg.author.createdAt,
-              accRep: 0 + 1
-            };
+      findEntry(bot, msg, 'users', 'accUserID', msg.author.id, findProfile);
+      function findProfile(bot, msg, gotProfile) {
+        if (!gotProfile) {
+          if (
+            !msg.guild ||
+            !msg.guild.member(msg.author) ||
+            !msg.guild.member(msg.author).joinedAt
+          ) {
+            var joindate = null;
           } else {
-            var newUserProfile = {
-              accRep: docs[0].accRep + 1
-            };
+            var joindate = msg.guild.member(msg.author).joinedAt.toString();
           }
-          if (count > 0) {
-            users
-              .updateOne({ accUserID: msg.author.id }, { $set: newUserProfile })
-              .then(users => {
-                //bot.channels.get(logChannel).send('Updated user: ' + msg.author.username)
-                //console.log('Updated user: ' + msg.author.username)
-              })
-              .catch(err => {
-                var time = moment()
-                  .tz('America/Los_Angeles')
-                  .format('MM-DD-YYYY hh:mm a');
-                bot.channels
-                  .get(logChannel)
-                  .send(
-                    '[' +
-                      time +
-                      ' PST][' +
-                      pm2Name +
-                      '] ERROR Updating Profile:\n' +
-                      err
-                  );
-                console.log(
-                  '[' +
-                    time +
-                    ' PST][' +
-                    pm2Name +
-                    '] ERROR Updating Profile:\n' +
-                    err
-                );
-              });
-          } else {
-            var newUser = new users(newUserProfile);
-            newUser
-              .save()
-              .then(newUser => {
-                bot.channels
-                  .get(logChannel)
-                  .send('Saved New user: ' + msg.author.username);
-                console.log('Saved New user: ' + msg.author.username);
-              })
-              .catch(err => {
-                var time = moment()
-                  .tz('America/Los_Angeles')
-                  .format('MM-DD-YYYY hh:mm a');
-                bot.channels
-                  .get(logChannel)
-                  .send(
-                    '[' +
-                      time +
-                      ' PST][' +
-                      pm2Name +
-                      '] ERROR saving Profile:\n' +
-                      err
-                  );
-                console.log(
-                  '[' +
-                    time +
-                    ' PST][' +
-                    pm2Name +
-                    '] ERROR saving Profile:\n' +
-                    err
-                );
-              });
-          }
-        });
-      });
-      return;
+          var newProfile = {
+            accUserID: msg.author.id,
+            accUsername: msg.author.username,
+            accDiscriminator: msg.author.discriminator,
+            accAvatar: msg.author.avatarURL,
+            accJoinedDate: joindate,
+            accCreatedDate: msg.author.createdAt,
+            accRep: 1
+          };
+          newEntry(bot, msg, 'users', newProfile);
+        } else {
+          var updateProfile = {
+            accRep: Number(gotProfile[0].accRep) + 1
+          };
+          updateEntry(
+            bot,
+            msg,
+            'users',
+            'accUserID',
+            msg.author.id,
+            updateProfile
+          );
+        }
+      }
     }
   });
 };

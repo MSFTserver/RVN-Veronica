@@ -17,14 +17,28 @@ config = config.get('bot');
 mongoose
   .connect(mongoURL)
   .then(() => {
-    console.log('Mongodb Connection Successful');
+    var time = moment()
+      .tz('America/Los_Angeles')
+      .format('MM-DD-YYYY hh:mm a');
+    console.log('[' + time + ' PST][' + pm2Name + '] Mongodb Connection Successful');
   })
   .catch(err => {
-    console.log('Mongodb Connection Error:', err);
+    var time = moment()
+      .tz('America/Los_Angeles')
+      .format('MM-DD-YYYY hh:mm a');
+    console.log('[' + time + ' PST][' + pm2Name + '] Mongodb Connection Error:', err);
   });
 
 //load modules
 const commandsV2 = require('./modules/commandsV2.js');
+
+//find schemas
+fs.readdirSync(__dirname + '/db-models').forEach(function(filename) {
+  if (~filename.indexOf('.js')) {
+    require(__dirname + '/db-models/' + filename)
+  }
+})
+
 
 var aliases;
 // check if any aliases are defined
@@ -70,26 +84,6 @@ bot.on('ready', function() {
         ' servers'
     );
   require('./plugins.js').init();
-  console.log(
-    '[' +
-      time +
-      ' PST][' +
-      pm2Name +
-      '] type ' +
-      config.prefix +
-      'help in Discord for a commands list.'
-  );
-  bot.channels
-    .get(logChannel)
-    .send(
-      '[' +
-        time +
-        ' PST][' +
-        pm2Name +
-        '] type ' +
-        config.prefix +
-        'help in Discord for a commands list.'
-    );
   bot.user.setActivity(config.prefix + 'help');
   bot.channels
     .get(logChannel)

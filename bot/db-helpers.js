@@ -10,7 +10,15 @@ let pm2Name = config.get('General').pm2Name;
 // pm2 Find Entry start
 exports.findEntry = function(bot, msg, useDB, keyName, valueName, callback) {
   var database = mongoose.model(useDB);
-  var findKey = {[keyName]: valueName };
+  var key = keyName;
+  var value = valueName;
+  if (!key && !value) {
+    var findKey = {};
+  } else if (!key || !value){
+    var findKey = {};
+  } else {
+    var findKey = {[key]: value };
+  }
   database.find(findKey, function(err, docs) {
     if (!docs || !docs[0]){
       callback(bot, msg, false);
@@ -27,12 +35,18 @@ exports.newEntry = function(bot, msg, useDB, saveEntry) {
   entry
     .save()
     .then(entry => {
+      if (useDB == 'pools'){
+        msg.channel.send('Pool Saved!')
+      }
       var time = moment()
         .tz('America/Los_Angeles')
         .format('MM-DD-YYYY hh:mm a');
       //console.log('[' + time + ' PST][' + pm2Name + '] Saved New Entry');
     })
     .catch(err => {
+      if (useDB == 'pools'){
+        msg.channel.send('Error Saving Pool!')
+      }
       var time = moment()
         .tz('America/Los_Angeles')
         .format('MM-DD-YYYY hh:mm a');
@@ -46,6 +60,9 @@ exports.updateEntry = function(bot, msg, useDB, keyName, valueName, saveEntry) {
   var value = valueName;
   var updateKey = { [key]: value };
   var database = mongoose.model(useDB);
+  if (useDB == 'pools'){
+    msg.channel.send('Pool Updated!')
+  }
   database
     .updateOne(
       updateKey,
@@ -58,6 +75,9 @@ exports.updateEntry = function(bot, msg, useDB, keyName, valueName, saveEntry) {
       //console.log('[' + time + ' PST][' + pm2Name + '] Updated Entry')
     })
     .catch(err => {
+      if (useDB == 'pools'){
+        msg.channel.send('Error Updating Pool!')
+      }
       var time = moment()
         .tz('America/Los_Angeles')
         .format('MM-DD-YYYY hh:mm a');

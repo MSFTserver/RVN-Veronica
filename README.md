@@ -13,9 +13,21 @@
 
     * Also Responds to `!help <command>`
 
+* Reputation Bots
+
+  * displays reputation for you or specified user
+
+    * Responds to `!rep`
+
+    * Also Responds to `!rep <@username>`
+
+  * give or take rep from a specified user (moderator only)
+
+    * Responds to `!rep <take/give> <@username> <amount>`
+
 * Network bot
 
-  * displays current network Raven Netowrk Stats.
+  * displays current network Raven Network Stats.
 
     * Responds to `!network`
 
@@ -65,9 +77,11 @@
 
 * User info bot
 
-  * displays info about a certain users
+  * displays info about yourself or specified user
 
-    * Responds to `!userinfo <@username>`
+    * Responds to `!userinfo`
+
+    * Also Responds to `!userinfo <@username>`
 
 * Pools bot
 
@@ -93,51 +107,59 @@
 
     * Responds to `!status <url> <port>`
 
-* Role setter bot
+* Role setter bot (specified in the config!)
 
   * allows users to set specific roles for themselves
 
-    * (specified in the config!)
+    * Responds to `!roles` - List Available Roles
 
     * Responds to `!addrole <role-name>` - Adds to Role
 
     * Responds to `!delrole <role-name>` - Deletes from Role
 
-    * Responds to `!roles` - List Available Roles
-
-* helpful commands bot
+* helpful commands bot (set in the commands.json)
 
   * displays helpful commands you can use.
-
-    * (set in the commands.json)
 
     * Responds to `!helpcommands`
 
 * Welcome bot
 
-  * sends Direct Message when new users join,
+  * sends Direct Message when new users join, moderators only  can also send it again
 
-    * (moderator only) Responds to `!welcome <@username>`
+    * Responds to `!welcome <@username>`
 
 * Server Stats bot
 
-  * displays current servers Statistics
+  * displays current servers Statistics (moderator only)
 
-    * (moderator only) Responds to `!serverstats`
+    * Responds to `!serverstats`
 
-* Purge Bot
+* Moderation bots (moderator only)
 
-  * deletes # is amount of messages.
+  * deletes # of messages from specified channel/user or current channel.
 
-    * (moderator only) Responds to `!purge <#>`
+    * Responds to `!purge <#>`
 
-* pm2 Bots
+    * Also Responds to `!purge <#channel-name/@username> <#>`
+
+  * kicks a user for given Reason
+
+    * Responds to `!kick <@username> <reason>`
+
+  * bans user for given Reason
+
+    * Responds to `!ban <@username> <reason>`
+
+* pm2 Bots (Bot Devs Only)
 
   * allows updating and shutting down of bots
 
-    * (Bot Devs Only) Responds to `!update <app-name>`
+    * Responds to `!update <app-name>`
 
-    * (Bot Devs Only) Responds to `!shutdown <app-name>`
+    * Responds to `!shutdown <app-name>`
+
+* utilizes mongodb with included helper functions
 
 * Specific User Message Logger
 

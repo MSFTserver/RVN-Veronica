@@ -9,7 +9,7 @@ exports.commands = ['shutdown'];
 
 exports.shutdown = {
   usage: '<pm2-name>',
-  description: 'shuts down bot via pm2',
+  description: ':desktop: :construction_worker: shuts down bot via pm2 :construction_worker: :desktop:',
   process: function(bot, msg, suffix) {
     if (isBotDev(msg)) {
       if (suffix != pm2Name) {

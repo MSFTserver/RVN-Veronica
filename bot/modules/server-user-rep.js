@@ -12,7 +12,7 @@ exports.commands = ['rep'];
 exports.rep = {
   usage: '',
   description:
-    'check your reputation\n**!rep give <@ username> <amount>**\n    gives specified amoutn of rep to user\n**!rep take <@ username> <amount>**\n    takes specified amount of rep from user\n   rep is awarded 1 per message sent\n    more features will be added in the future',
+    'check your reputation\n     (rep is awarded 1 per message sent)\n**!rep give <@ username> <amount>**\n     :desktop: :cop: gives specified amoutn of rep to user :cop: :desktop:\n**!rep take <@ username> <amount>**\n    :desktop: :cop: takes specified amount of rep from user :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (!inPrivate(msg) && !inSpam(msg)) {
       msg.channel.send(

@@ -12,7 +12,7 @@ exports.commands = ['pools'];
 exports.pools = {
   usage: '<poolname>',
   description:
-    'Rvn Pools List\n  optionally add pools name to return just that pools setup\n**!pools set**, <poolName>, <poolURL>, <poolFee>, <poolStratum>, <poolPort>, <poolExtraInfo>\n     provide all required info for pool seprated by commas! extra info is not required, if providing extra info please do not include commas in the info message.\n    Example: `!pools set, Mining Panda, https://miningpanda.site, 1%, stratum+tcp://miningpanda.site:3636, 3636, diff starts at 10`\nif you would like to update your pools options and not chang others use `d` in place of info to leave default from database\nExample`!pools set, d, d, 0%, d, d, d`',
+    'Displays all raven pools setups\n     (optionally add pools name to return just that pools setup)\n**!pools set**, <poolName>, <poolURL>, <poolFee>, <poolStratum>, <poolPort>, <poolExtraInfo>\n     provide all required info for pool seprated by commas! extra info is not required, if providing extra info please do not include commas in the info message.\n     Example: `!pools set, Mining Panda, https://miningpanda.site, 1%, stratum+tcp://miningpanda.site:3636, 3636, diff starts at 10`\n     if you would like to update your pools options and not chang others use `d` in place of info to leave default from database\n     Example`!pools set, d, d, 0%, d, d, d`',
   process: function(bot, msg, suffix) {
     var words = suffix
       .trim()

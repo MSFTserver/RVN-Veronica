@@ -5,7 +5,7 @@ exports.commands = ['serverstats'];
 
 exports.serverstats = {
   usage: '',
-  description: 'Displays server stats',
+  description: ':desktop: :cop: Displays server stats :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (hasPerms(msg)) {
       var data = msg.guild;

@@ -8,7 +8,7 @@ exports.commands = ['ban'];
 
 exports.ban = {
   usage: '<@username> <reason>',
-  description: 'bans a user for given reason',
+  description: ':desktop: :cop: bans a user for given reason :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (!isAdmin(msg)) {
       msg.channel.send(

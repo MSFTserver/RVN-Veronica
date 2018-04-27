@@ -105,7 +105,7 @@ exports.commands = [
 
 exports.welcome = {
   usage: '<@username>',
-  description: 'send welcome message to specified user',
+  description: ':desktop: :cop: send welcome message to specified user :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {
       msg.channel.send('command cannot be used in a DM');

@@ -16,7 +16,7 @@ exports.commands = ['hashpower'];
 exports.hashpower = {
   usage: '<Mh/s> <fiat/coin>',
   description:
-    'Displays potential Earnings For Given Hashrate\n **Supported Fiats:** *usd*, *eur*, *gbp*, *aud*, *brl*, *cad*, *chf*, *clp*, *cny*, *czk*, *dkk*, *hkd*, *huf*, *idr*, *ils*, *inr*, *jpy*, *krw*, *mxn*, *myr*, *nok*, *nzd*, *php*, *pkr*, *pln*, *rub*, *sek*, *sgd*, *thb*, *try*, *twd*, *zar* (case-insensitive)',
+    'Displays potential Earnings For Given Hashrate\n     Supported Fiats: *usd*, *eur*, *gbp*, *aud*, *brl*, *cad*, *chf*, *clp*, *cny*, *czk*, *dkk*, *hkd*, *huf*, *idr*, *ils*, *inr*, *jpy*, *krw*, *mxn*, *myr*, *nok*, *nzd*, *php*, *pkr*, *pln*, *rub*, *sek*, *sgd*, *thb*, *try*, *twd*, *zar* (case-insensitive)',
   process: function(bot, msg, suffix) {
     if (!inPrivate(msg) && !hasRvnStatsNetworkChannels(msg)) {
       msg.channel.send(

@@ -8,7 +8,7 @@ exports.commands = ['kick'];
 
 exports.kick = {
   usage: '<@username> <reason>',
-  description: 'kick a user',
+  description: ':desktop: :cop: kick a user :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (!hasPerms(msg)) {
       msg.channel.send(

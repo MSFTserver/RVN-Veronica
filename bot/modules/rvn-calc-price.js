@@ -12,7 +12,7 @@ exports.commands = ['price'];
 exports.price = {
   usage: '<fiat/coin> <amount> <fiat/coin>',
   description:
-    'display price of specified coin/fiat in specified coin/fiat from crypto compare\n  **Example:** *!price RVN 100 USD*\n  **Supported Fiats:** *usd*, *eur*, *gbp*, *aud*, *brl*, *cad*, *chf*, *clp*, *cny*, *czk*, *dkk*, *hkd*, *huf*, *idr*, *ils*, *inr*, *jpy*, *krw*, *mxn*, *myr*, *nok*, *nzd*, *php*, *pkr*, *pln*, *rub*, *sek*, *sgd*, *thb*, *try*, *twd*, *zar* (case-insensitive)',
+    'display price of specified coin/fiat in specified coin/fiat from crypto compare\n     Example: `!price RVN 100 USD`\n     Supported Fiats: *usd*, *eur*, *gbp*, *aud*, *brl*, *cad*, *chf*, *clp*, *cny*, *czk*, *dkk*, *hkd*, *huf*, *idr*, *ils*, *inr*, *jpy*, *krw*, *mxn*, *myr*, *nok*, *nzd*, *php*, *pkr*, *pln*, *rub*, *sek*, *sgd*, *thb*, *try*, *twd*, *zar* (case-insensitive)',
   process: function(bot, msg, suffix) {
     let dt = new Date();
     let timestamp = moment()

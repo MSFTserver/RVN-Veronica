@@ -12,7 +12,7 @@ exports.commands = ['update'];
 
 exports.update = {
   usage: '<pm2-name>',
-  description: 'updates the bot via pm2 for no down time!',
+  description: ':desktop: :construction_worker: updates the bot via pm2 for no down time! :construction_worker: :desktop:',
   process: function(bot, msg, suffix) {
     if (isBotDev(msg)) {
       if (suffix != pm2Name) {

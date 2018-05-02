@@ -46,6 +46,9 @@ exports.UserDBs = function(bot) {
           newEntry(bot, msg, 'users', newProfile);
         } else {
           var updateProfile = {
+            accUsername: msg.author.username,
+            accDiscriminator: msg.author.discriminator,
+            accAvatar: msg.author.avatarURL,
             accRep: Number(gotProfile[0].accRep) + 1
           };
           updateEntry(

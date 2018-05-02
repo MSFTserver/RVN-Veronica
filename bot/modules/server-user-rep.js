@@ -159,7 +159,7 @@ exports.rep = {
           newEntry(bot, msg, 'users', newProfile);
           return;
         } else {
-          var upadateProfile = {
+          var updateProfile = {
             accUserID: docs[0].accUserID,
             accUsername: docs[0].accUsername,
             accDiscriminator: docs[0].accDiscriminator,

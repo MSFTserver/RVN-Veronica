@@ -2331,7 +2331,7 @@ exports.block = {
               var block = isNaN;
             }
             var Height = block;
-            var previousHeight = block - 1;
+            var previousHeight = Number(block) - 1;
           }
           needle.get(
             explorerApiUrl + 'api/block-index/' + Height,

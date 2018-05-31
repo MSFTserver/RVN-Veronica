@@ -47,7 +47,7 @@ exports.hashpower = {
     if (!checkFiat) {
       var fiat = 'USD';
     } else {
-      var fiat = words[1 + offset].toUpperCase()
+      var fiat = words[1 + offset].toUpperCase();
     }
     needle.get(cmcApiUrl + '?limit=0', function(error, response) {
       if (response.statusCode !== 200) {

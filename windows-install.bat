@@ -67,7 +67,7 @@ echo     destination: file
 echo     path: %SYSTEMDRIVE%\data\log\mongod.log
 echo storage:
 echo     dbPath: %SYSTEMDRIVE%\data\db
-)>%ProgramFiles%\MongoDB\server\3.6\bin
+)>%ProgramFiles%\MongoDB\server\3.6\bin\mongod.cfg
 ping localhost -n 4 >nul
 echo ___________________________________________________
 echo Installing mongo as service!

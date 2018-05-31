@@ -48,6 +48,7 @@ exports.block = {
         return n !== '';
       });
     if (words[0] == 'number') {
+      var block = words[1];
       getBlockbyNumber(block);
     } else if (words[0] == 'hash') {
       var block = words[1];

@@ -38,12 +38,13 @@ exports.hashpower = {
     if (words[0] == 'power') {
       var offset = 1;
     }
+    console.log(offset);
     var myhashrate = getValidatedAmount(words[0 + offset]);
     if (!myhashrate) {
       msg.channel.send('Please Specify a hashrate in Mh/s!');
       return;
     }
-    var checkFiat = words[1 + offset].toUpperCase();
+    var checkFiat = words[1 + offset];
     console.log(checkFiat);
     if (!checkFiat) {
       var fiat = 'USD';

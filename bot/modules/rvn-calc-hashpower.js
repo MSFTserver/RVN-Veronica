@@ -36,7 +36,7 @@ exports.hashpower = {
       });
     var offset = 0;
     if (words[0] == 'power') {
-      offset = 1;
+      var offset = 1;
     }
     var myhashrate = getValidatedAmount(words[0 + offset]);
     if (!myhashrate) {
@@ -44,8 +44,8 @@ exports.hashpower = {
       return;
     }
     var fiat = words[1 + offset].toUpperCase();
-    if (fiat == '' || fiat == null || fiat == undefined || fiat == ' ') {
-      fiat = 'USD';
+    if (!fiat) {
+      var fiat = 'USD';
     }
     needle.get(cmcApiUrl + '?limit=0', function(error, response) {
       if (response.statusCode !== 200) {

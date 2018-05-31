@@ -304,7 +304,7 @@ exports.block = {
                                 icon_url: 'https://i.imgur.com/yWf5USu.png'
                               }
                             };
-                            msg.channel.send.send({ embed });
+                            msg.channel.send({ embed });
                             return;
                           }
                         }

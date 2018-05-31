@@ -304,7 +304,7 @@ exports.block = {
                                 icon_url: 'https://i.imgur.com/yWf5USu.png'
                               }
                             };
-                            bot.channels.get(TimedHashChannel).send({ embed });
+                            msg.channel.send.send({ embed });
                             return;
                           }
                         }

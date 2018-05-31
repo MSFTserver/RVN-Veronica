@@ -972,8 +972,172 @@ exports.block = {
     }
     function getBlockbyNumber(block) {
       needle.get(explorerApiUrl + 'api/status', function(error, response) {
-        if (error || response.statusCode !== 200) {
-          msg.channel.send(explorerApiUrl + ' API is not available');
+        if (response.statusCode !== 200) {
+          if (response.statusCode == 122) {
+              msg.channel.send('ERROR: ' + 'Request-URI too long');
+             }
+          if (response.statusCode == 300) {
+             msg.channel.send('ERROR: ' + 'Multiple Choices');
+             }
+          if (response.statusCode == 301) {
+             msg.channel.send('ERROR: ' + 'Moved Permanently');
+             }
+          if (response.statusCode == 303) {
+             msg.channel.send('ERROR: ' + 'See Other');
+             }
+          if (response.statusCode == 304) {
+             msg.channel.send('ERROR: ' + 'Not Modified');
+             }
+          if (response.statusCode == 305) {
+             msg.channel.send('ERROR: ' + 'Use Proxy');
+             }
+          if (response.statusCode == 306) {
+             msg.channel.send('ERROR: ' + 'Switch Proxy');
+             }
+          if (response.statusCode == 307) {
+             msg.channel.send('ERROR: ' + 'Temporary Redirect');
+             }
+          if (response.statusCode == 308) {
+             msg.channel.send('ERROR: ' + 'Permanent Redirect');
+             }
+          if (response.statusCode == 400) {
+             msg.channel.send('ERROR: ' + 'Bad Request');
+             }
+          if (response.statusCode == 401) {
+             msg.channel.send('ERROR: ' + 'Unauth­orized');
+             }
+          if (response.statusCode == 402) {
+             msg.channel.send('ERROR: ' + 'Payment Required');
+             }
+          if (response.statusCode == 403) {
+             msg.channel.send('ERROR: ' + 'Forbidden');
+             }
+          if (response.statusCode == 404) {
+             msg.channel.send('ERROR: ' + 'Not Found');
+             }
+          if (response.statusCode == 405) {
+             msg.channel.send('ERROR: ' + 'Method Not Allowed');
+             }
+          if (response.statusCode == 406) {
+             msg.channel.send('ERROR: ' + 'Not Acceptable');
+             }
+          if (response.statusCode == 407) {
+             msg.channel.send('ERROR: ' + 'Proxy Authen­tic­ation Required');
+             }
+          if (response.statusCode == 408) {
+             msg.channel.send('ERROR: ' + 'Request Timeout');
+             }
+          if (response.statusCode == 409) {
+             msg.channel.send('ERROR: ' + 'Conflict');
+             }
+          if (response.statusCode == 410) {
+             msg.channel.send('ERROR: ' + 'Gone');
+             }
+          if (response.statusCode == 411) {
+             msg.channel.send('ERROR: ' + 'Length Required');
+             }
+          if (response.statusCode == 412) {
+             msg.channel.send('ERROR: ' + 'Precondition Failed');
+             }
+          if (response.statusCode == 413) {
+             msg.channel.send('ERROR: ' + 'Request Entity Too Large');
+             }
+          if (response.statusCode == 414) {
+             msg.channel.send('ERROR: ' + 'Request-URI Too Long');
+             }
+          if (response.statusCode == 415) {
+             msg.channel.send('ERROR: ' + 'Unsupported Media Type');
+             }
+          if (response.statusCode == 416) {
+             msg.channel.send('ERROR: ' + 'Requested Range Not Satisf­iable');
+             }
+          if (response.statusCode == 417) {
+             msg.channel.send('ERROR: ' + 'Expectation Failed');
+             }
+          if (response.statusCode == 418) {
+             msg.channel.send('ERROR: ' + 'I\'m a teapot');
+             }
+          if (response.statusCode == 422) {
+             msg.channel.send('ERROR: ' + 'Unprocessable Entity');
+             }
+          if (response.statusCode == 423) {
+             msg.channel.send('ERROR: ' + 'Locked');
+             }
+          if (response.statusCode == 424) {
+             msg.channel.send('ERROR: ' + 'Failed Dependency');
+             }
+          if (response.statusCode == 425) {
+             msg.channel.send('ERROR: ' + 'Unordered Collection');
+             }
+          if (response.statusCode == 426) {
+             msg.channel.send('ERROR: ' + 'Upgrade Required');
+             }
+          if (response.statusCode == 428) {
+             msg.channel.send('ERROR: ' + 'Precondition Required ');
+             }
+          if (response.statusCode == 429) {
+             msg.channel.send('ERROR: ' + 'Too Many Requests ');
+             }
+          if (response.statusCode == 431) {
+             msg.channel.send('ERROR: ' + 'Request Header Fields Too Large ');
+             }
+          if (response.statusCode == 444) {
+             msg.channel.send('ERROR: ' + 'No Response ');
+             }
+          if (response.statusCode == 449) {
+             msg.channel.send('ERROR: ' + 'Retry With ');
+             }
+          if (response.statusCode == 450) {
+             msg.channel.send('ERROR: ' + 'Blocked By Windows Parental Controls ');
+             }
+          if (response.statusCode == 451) {
+             msg.channel.send('ERROR: ' + 'Unavailable For Legal Reasons');
+             }
+          if (response.statusCode == 499) {
+             msg.channel.send('ERROR: ' + 'Client Closed Request');
+             }
+          if (response.statusCode == 500) {
+             msg.channel.send('ERROR: ' + 'Internal Server Error');
+             }
+          if (response.statusCode == 501) {
+             msg.channel.send('ERROR: ' + 'Not Implemented');
+             }
+          if (response.statusCode == 502) {
+             msg.channel.send('ERROR: ' + 'Bad Gateway');
+             }
+          if (response.statusCode == 503) {
+             msg.channel.send('ERROR: ' + 'Service Unavailable');
+             }
+          if (response.statusCode == 504) {
+             msg.channel.send('ERROR: ' + 'Gateway Timeout');
+             }
+          if (response.statusCode == 505) {
+             msg.channel.send('ERROR: ' + 'HTTP Version Not Supported');
+             }
+          if (response.statusCode == 506) {
+             msg.channel.send('ERROR: ' + 'Variant Also Negotiates');
+             }
+          if (response.statusCode == 507) {
+             msg.channel.send('ERROR: ' + 'Insufficient Storage');
+             }
+          if (response.statusCode == 508) {
+             msg.channel.send('ERROR: ' + 'Loop Detected');
+             }
+          if (response.statusCode == 509) {
+             msg.channel.send('ERROR: ' + 'Bandwidth Limit Exceeded');
+             }
+          if (response.statusCode == 510) {
+             msg.channel.send('ERROR: ' + 'Not Extended');
+             }
+          if (response.statusCode == 511) {
+             msg.channel.send('ERROR: ' + 'Network Authentication Required');
+             }
+          if (response.statusCode == 598) {
+             msg.channel.send('ERROR: ' + 'Network read timeout error');
+             }
+          if (response.statusCode == 599) {
+             msg.channel.send('ERROR: ' + 'Network connect timeout error');
+             }
         } else {
           if (!block) {
             var currentHeight = response.body.info.blocks;
@@ -985,26 +1149,514 @@ exports.block = {
           needle.get(
             explorerApiUrl + 'api/block-index/' + currentHeight,
             function(error, response) {
-              if (error || response.statusCode !== 200) {
-                msg.channel.send(explorerApiUrl + ' API is not available');
+              if (response.statusCode !== 200) {
+                if (response.statusCode == 122) {
+                    msg.channel.send('ERROR: ' + 'Request-URI too long');
+                   }
+                if (response.statusCode == 300) {
+                   msg.channel.send('ERROR: ' + 'Multiple Choices');
+                   }
+                if (response.statusCode == 301) {
+                   msg.channel.send('ERROR: ' + 'Moved Permanently');
+                   }
+                if (response.statusCode == 303) {
+                   msg.channel.send('ERROR: ' + 'See Other');
+                   }
+                if (response.statusCode == 304) {
+                   msg.channel.send('ERROR: ' + 'Not Modified');
+                   }
+                if (response.statusCode == 305) {
+                   msg.channel.send('ERROR: ' + 'Use Proxy');
+                   }
+                if (response.statusCode == 306) {
+                   msg.channel.send('ERROR: ' + 'Switch Proxy');
+                   }
+                if (response.statusCode == 307) {
+                   msg.channel.send('ERROR: ' + 'Temporary Redirect');
+                   }
+                if (response.statusCode == 308) {
+                   msg.channel.send('ERROR: ' + 'Permanent Redirect');
+                   }
+                if (response.statusCode == 400) {
+                   msg.channel.send('ERROR: ' + 'Bad Request');
+                   }
+                if (response.statusCode == 401) {
+                   msg.channel.send('ERROR: ' + 'Unauth­orized');
+                   }
+                if (response.statusCode == 402) {
+                   msg.channel.send('ERROR: ' + 'Payment Required');
+                   }
+                if (response.statusCode == 403) {
+                   msg.channel.send('ERROR: ' + 'Forbidden');
+                   }
+                if (response.statusCode == 404) {
+                   msg.channel.send('ERROR: ' + 'Not Found');
+                   }
+                if (response.statusCode == 405) {
+                   msg.channel.send('ERROR: ' + 'Method Not Allowed');
+                   }
+                if (response.statusCode == 406) {
+                   msg.channel.send('ERROR: ' + 'Not Acceptable');
+                   }
+                if (response.statusCode == 407) {
+                   msg.channel.send('ERROR: ' + 'Proxy Authen­tic­ation Required');
+                   }
+                if (response.statusCode == 408) {
+                   msg.channel.send('ERROR: ' + 'Request Timeout');
+                   }
+                if (response.statusCode == 409) {
+                   msg.channel.send('ERROR: ' + 'Conflict');
+                   }
+                if (response.statusCode == 410) {
+                   msg.channel.send('ERROR: ' + 'Gone');
+                   }
+                if (response.statusCode == 411) {
+                   msg.channel.send('ERROR: ' + 'Length Required');
+                   }
+                if (response.statusCode == 412) {
+                   msg.channel.send('ERROR: ' + 'Precondition Failed');
+                   }
+                if (response.statusCode == 413) {
+                   msg.channel.send('ERROR: ' + 'Request Entity Too Large');
+                   }
+                if (response.statusCode == 414) {
+                   msg.channel.send('ERROR: ' + 'Request-URI Too Long');
+                   }
+                if (response.statusCode == 415) {
+                   msg.channel.send('ERROR: ' + 'Unsupported Media Type');
+                   }
+                if (response.statusCode == 416) {
+                   msg.channel.send('ERROR: ' + 'Requested Range Not Satisf­iable');
+                   }
+                if (response.statusCode == 417) {
+                   msg.channel.send('ERROR: ' + 'Expectation Failed');
+                   }
+                if (response.statusCode == 418) {
+                   msg.channel.send('ERROR: ' + 'I\'m a teapot');
+                   }
+                if (response.statusCode == 422) {
+                   msg.channel.send('ERROR: ' + 'Unprocessable Entity');
+                   }
+                if (response.statusCode == 423) {
+                   msg.channel.send('ERROR: ' + 'Locked');
+                   }
+                if (response.statusCode == 424) {
+                   msg.channel.send('ERROR: ' + 'Failed Dependency');
+                   }
+                if (response.statusCode == 425) {
+                   msg.channel.send('ERROR: ' + 'Unordered Collection');
+                   }
+                if (response.statusCode == 426) {
+                   msg.channel.send('ERROR: ' + 'Upgrade Required');
+                   }
+                if (response.statusCode == 428) {
+                   msg.channel.send('ERROR: ' + 'Precondition Required ');
+                   }
+                if (response.statusCode == 429) {
+                   msg.channel.send('ERROR: ' + 'Too Many Requests ');
+                   }
+                if (response.statusCode == 431) {
+                   msg.channel.send('ERROR: ' + 'Request Header Fields Too Large ');
+                   }
+                if (response.statusCode == 444) {
+                   msg.channel.send('ERROR: ' + 'No Response ');
+                   }
+                if (response.statusCode == 449) {
+                   msg.channel.send('ERROR: ' + 'Retry With ');
+                   }
+                if (response.statusCode == 450) {
+                   msg.channel.send('ERROR: ' + 'Blocked By Windows Parental Controls ');
+                   }
+                if (response.statusCode == 451) {
+                   msg.channel.send('ERROR: ' + 'Unavailable For Legal Reasons');
+                   }
+                if (response.statusCode == 499) {
+                   msg.channel.send('ERROR: ' + 'Client Closed Request');
+                   }
+                if (response.statusCode == 500) {
+                   msg.channel.send('ERROR: ' + 'Internal Server Error');
+                   }
+                if (response.statusCode == 501) {
+                   msg.channel.send('ERROR: ' + 'Not Implemented');
+                   }
+                if (response.statusCode == 502) {
+                   msg.channel.send('ERROR: ' + 'Bad Gateway');
+                   }
+                if (response.statusCode == 503) {
+                   msg.channel.send('ERROR: ' + 'Service Unavailable');
+                   }
+                if (response.statusCode == 504) {
+                   msg.channel.send('ERROR: ' + 'Gateway Timeout');
+                   }
+                if (response.statusCode == 505) {
+                   msg.channel.send('ERROR: ' + 'HTTP Version Not Supported');
+                   }
+                if (response.statusCode == 506) {
+                   msg.channel.send('ERROR: ' + 'Variant Also Negotiates');
+                   }
+                if (response.statusCode == 507) {
+                   msg.channel.send('ERROR: ' + 'Insufficient Storage');
+                   }
+                if (response.statusCode == 508) {
+                   msg.channel.send('ERROR: ' + 'Loop Detected');
+                   }
+                if (response.statusCode == 509) {
+                   msg.channel.send('ERROR: ' + 'Bandwidth Limit Exceeded');
+                   }
+                if (response.statusCode == 510) {
+                   msg.channel.send('ERROR: ' + 'Not Extended');
+                   }
+                if (response.statusCode == 511) {
+                   msg.channel.send('ERROR: ' + 'Network Authentication Required');
+                   }
+                if (response.statusCode == 598) {
+                   msg.channel.send('ERROR: ' + 'Network read timeout error');
+                   }
+                if (response.statusCode == 599) {
+                   msg.channel.send('ERROR: ' + 'Network connect timeout error');
+                   }
               } else {
                 var currentBlockHash = response.body.blockHash;
                 needle.get(
                   explorerApiUrl + 'api/block-index/' + previousHeight,
                   function(error, response) {
-                    if (error || response.statusCode !== 200) {
-                      msg.channel.send(
-                        explorerApiUrl + ' API is not available'
-                      );
+                    if (response.statusCode !== 200) {
+                      if (response.statusCode == 122) {
+                          msg.channel.send('ERROR: ' + 'Request-URI too long');
+                         }
+                      if (response.statusCode == 300) {
+                         msg.channel.send('ERROR: ' + 'Multiple Choices');
+                         }
+                      if (response.statusCode == 301) {
+                         msg.channel.send('ERROR: ' + 'Moved Permanently');
+                         }
+                      if (response.statusCode == 303) {
+                         msg.channel.send('ERROR: ' + 'See Other');
+                         }
+                      if (response.statusCode == 304) {
+                         msg.channel.send('ERROR: ' + 'Not Modified');
+                         }
+                      if (response.statusCode == 305) {
+                         msg.channel.send('ERROR: ' + 'Use Proxy');
+                         }
+                      if (response.statusCode == 306) {
+                         msg.channel.send('ERROR: ' + 'Switch Proxy');
+                         }
+                      if (response.statusCode == 307) {
+                         msg.channel.send('ERROR: ' + 'Temporary Redirect');
+                         }
+                      if (response.statusCode == 308) {
+                         msg.channel.send('ERROR: ' + 'Permanent Redirect');
+                         }
+                      if (response.statusCode == 400) {
+                         msg.channel.send('ERROR: ' + 'Bad Request');
+                         }
+                      if (response.statusCode == 401) {
+                         msg.channel.send('ERROR: ' + 'Unauth­orized');
+                         }
+                      if (response.statusCode == 402) {
+                         msg.channel.send('ERROR: ' + 'Payment Required');
+                         }
+                      if (response.statusCode == 403) {
+                         msg.channel.send('ERROR: ' + 'Forbidden');
+                         }
+                      if (response.statusCode == 404) {
+                         msg.channel.send('ERROR: ' + 'Not Found');
+                         }
+                      if (response.statusCode == 405) {
+                         msg.channel.send('ERROR: ' + 'Method Not Allowed');
+                         }
+                      if (response.statusCode == 406) {
+                         msg.channel.send('ERROR: ' + 'Not Acceptable');
+                         }
+                      if (response.statusCode == 407) {
+                         msg.channel.send('ERROR: ' + 'Proxy Authen­tic­ation Required');
+                         }
+                      if (response.statusCode == 408) {
+                         msg.channel.send('ERROR: ' + 'Request Timeout');
+                         }
+                      if (response.statusCode == 409) {
+                         msg.channel.send('ERROR: ' + 'Conflict');
+                         }
+                      if (response.statusCode == 410) {
+                         msg.channel.send('ERROR: ' + 'Gone');
+                         }
+                      if (response.statusCode == 411) {
+                         msg.channel.send('ERROR: ' + 'Length Required');
+                         }
+                      if (response.statusCode == 412) {
+                         msg.channel.send('ERROR: ' + 'Precondition Failed');
+                         }
+                      if (response.statusCode == 413) {
+                         msg.channel.send('ERROR: ' + 'Request Entity Too Large');
+                         }
+                      if (response.statusCode == 414) {
+                         msg.channel.send('ERROR: ' + 'Request-URI Too Long');
+                         }
+                      if (response.statusCode == 415) {
+                         msg.channel.send('ERROR: ' + 'Unsupported Media Type');
+                         }
+                      if (response.statusCode == 416) {
+                         msg.channel.send('ERROR: ' + 'Requested Range Not Satisf­iable');
+                         }
+                      if (response.statusCode == 417) {
+                         msg.channel.send('ERROR: ' + 'Expectation Failed');
+                         }
+                      if (response.statusCode == 418) {
+                         msg.channel.send('ERROR: ' + 'I\'m a teapot');
+                         }
+                      if (response.statusCode == 422) {
+                         msg.channel.send('ERROR: ' + 'Unprocessable Entity');
+                         }
+                      if (response.statusCode == 423) {
+                         msg.channel.send('ERROR: ' + 'Locked');
+                         }
+                      if (response.statusCode == 424) {
+                         msg.channel.send('ERROR: ' + 'Failed Dependency');
+                         }
+                      if (response.statusCode == 425) {
+                         msg.channel.send('ERROR: ' + 'Unordered Collection');
+                         }
+                      if (response.statusCode == 426) {
+                         msg.channel.send('ERROR: ' + 'Upgrade Required');
+                         }
+                      if (response.statusCode == 428) {
+                         msg.channel.send('ERROR: ' + 'Precondition Required ');
+                         }
+                      if (response.statusCode == 429) {
+                         msg.channel.send('ERROR: ' + 'Too Many Requests ');
+                         }
+                      if (response.statusCode == 431) {
+                         msg.channel.send('ERROR: ' + 'Request Header Fields Too Large ');
+                         }
+                      if (response.statusCode == 444) {
+                         msg.channel.send('ERROR: ' + 'No Response ');
+                         }
+                      if (response.statusCode == 449) {
+                         msg.channel.send('ERROR: ' + 'Retry With ');
+                         }
+                      if (response.statusCode == 450) {
+                         msg.channel.send('ERROR: ' + 'Blocked By Windows Parental Controls ');
+                         }
+                      if (response.statusCode == 451) {
+                         msg.channel.send('ERROR: ' + 'Unavailable For Legal Reasons');
+                         }
+                      if (response.statusCode == 499) {
+                         msg.channel.send('ERROR: ' + 'Client Closed Request');
+                         }
+                      if (response.statusCode == 500) {
+                         msg.channel.send('ERROR: ' + 'Internal Server Error');
+                         }
+                      if (response.statusCode == 501) {
+                         msg.channel.send('ERROR: ' + 'Not Implemented');
+                         }
+                      if (response.statusCode == 502) {
+                         msg.channel.send('ERROR: ' + 'Bad Gateway');
+                         }
+                      if (response.statusCode == 503) {
+                         msg.channel.send('ERROR: ' + 'Service Unavailable');
+                         }
+                      if (response.statusCode == 504) {
+                         msg.channel.send('ERROR: ' + 'Gateway Timeout');
+                         }
+                      if (response.statusCode == 505) {
+                         msg.channel.send('ERROR: ' + 'HTTP Version Not Supported');
+                         }
+                      if (response.statusCode == 506) {
+                         msg.channel.send('ERROR: ' + 'Variant Also Negotiates');
+                         }
+                      if (response.statusCode == 507) {
+                         msg.channel.send('ERROR: ' + 'Insufficient Storage');
+                         }
+                      if (response.statusCode == 508) {
+                         msg.channel.send('ERROR: ' + 'Loop Detected');
+                         }
+                      if (response.statusCode == 509) {
+                         msg.channel.send('ERROR: ' + 'Bandwidth Limit Exceeded');
+                         }
+                      if (response.statusCode == 510) {
+                         msg.channel.send('ERROR: ' + 'Not Extended');
+                         }
+                      if (response.statusCode == 511) {
+                         msg.channel.send('ERROR: ' + 'Network Authentication Required');
+                         }
+                      if (response.statusCode == 598) {
+                         msg.channel.send('ERROR: ' + 'Network read timeout error');
+                         }
+                      if (response.statusCode == 599) {
+                         msg.channel.send('ERROR: ' + 'Network connect timeout error');
+                         }
                     } else {
                       var previousBlockHash = response.body.blockHash;
                       needle.get(
                         explorerApiUrl + 'api/txs?block=' + currentHeight,
                         function(error, response) {
-                          if (error || response.statusCode !== 200) {
-                            msg.channel.send(
-                              explorerApiUrl + ' API is not available'
-                            );
+                          if (response.statusCode !== 200) {
+                            if (response.statusCode == 122) {
+                                msg.channel.send('ERROR: ' + 'Request-URI too long');
+                               }
+                            if (response.statusCode == 300) {
+                               msg.channel.send('ERROR: ' + 'Multiple Choices');
+                               }
+                            if (response.statusCode == 301) {
+                               msg.channel.send('ERROR: ' + 'Moved Permanently');
+                               }
+                            if (response.statusCode == 303) {
+                               msg.channel.send('ERROR: ' + 'See Other');
+                               }
+                            if (response.statusCode == 304) {
+                               msg.channel.send('ERROR: ' + 'Not Modified');
+                               }
+                            if (response.statusCode == 305) {
+                               msg.channel.send('ERROR: ' + 'Use Proxy');
+                               }
+                            if (response.statusCode == 306) {
+                               msg.channel.send('ERROR: ' + 'Switch Proxy');
+                               }
+                            if (response.statusCode == 307) {
+                               msg.channel.send('ERROR: ' + 'Temporary Redirect');
+                               }
+                            if (response.statusCode == 308) {
+                               msg.channel.send('ERROR: ' + 'Permanent Redirect');
+                               }
+                            if (response.statusCode == 400) {
+                               msg.channel.send('ERROR: ' + 'Bad Request');
+                               }
+                            if (response.statusCode == 401) {
+                               msg.channel.send('ERROR: ' + 'Unauth­orized');
+                               }
+                            if (response.statusCode == 402) {
+                               msg.channel.send('ERROR: ' + 'Payment Required');
+                               }
+                            if (response.statusCode == 403) {
+                               msg.channel.send('ERROR: ' + 'Forbidden');
+                               }
+                            if (response.statusCode == 404) {
+                               msg.channel.send('ERROR: ' + 'Not Found');
+                               }
+                            if (response.statusCode == 405) {
+                               msg.channel.send('ERROR: ' + 'Method Not Allowed');
+                               }
+                            if (response.statusCode == 406) {
+                               msg.channel.send('ERROR: ' + 'Not Acceptable');
+                               }
+                            if (response.statusCode == 407) {
+                               msg.channel.send('ERROR: ' + 'Proxy Authen­tic­ation Required');
+                               }
+                            if (response.statusCode == 408) {
+                               msg.channel.send('ERROR: ' + 'Request Timeout');
+                               }
+                            if (response.statusCode == 409) {
+                               msg.channel.send('ERROR: ' + 'Conflict');
+                               }
+                            if (response.statusCode == 410) {
+                               msg.channel.send('ERROR: ' + 'Gone');
+                               }
+                            if (response.statusCode == 411) {
+                               msg.channel.send('ERROR: ' + 'Length Required');
+                               }
+                            if (response.statusCode == 412) {
+                               msg.channel.send('ERROR: ' + 'Precondition Failed');
+                               }
+                            if (response.statusCode == 413) {
+                               msg.channel.send('ERROR: ' + 'Request Entity Too Large');
+                               }
+                            if (response.statusCode == 414) {
+                               msg.channel.send('ERROR: ' + 'Request-URI Too Long');
+                               }
+                            if (response.statusCode == 415) {
+                               msg.channel.send('ERROR: ' + 'Unsupported Media Type');
+                               }
+                            if (response.statusCode == 416) {
+                               msg.channel.send('ERROR: ' + 'Requested Range Not Satisf­iable');
+                               }
+                            if (response.statusCode == 417) {
+                               msg.channel.send('ERROR: ' + 'Expectation Failed');
+                               }
+                            if (response.statusCode == 418) {
+                               msg.channel.send('ERROR: ' + 'I\'m a teapot');
+                               }
+                            if (response.statusCode == 422) {
+                               msg.channel.send('ERROR: ' + 'Unprocessable Entity');
+                               }
+                            if (response.statusCode == 423) {
+                               msg.channel.send('ERROR: ' + 'Locked');
+                               }
+                            if (response.statusCode == 424) {
+                               msg.channel.send('ERROR: ' + 'Failed Dependency');
+                               }
+                            if (response.statusCode == 425) {
+                               msg.channel.send('ERROR: ' + 'Unordered Collection');
+                               }
+                            if (response.statusCode == 426) {
+                               msg.channel.send('ERROR: ' + 'Upgrade Required');
+                               }
+                            if (response.statusCode == 428) {
+                               msg.channel.send('ERROR: ' + 'Precondition Required ');
+                               }
+                            if (response.statusCode == 429) {
+                               msg.channel.send('ERROR: ' + 'Too Many Requests ');
+                               }
+                            if (response.statusCode == 431) {
+                               msg.channel.send('ERROR: ' + 'Request Header Fields Too Large ');
+                               }
+                            if (response.statusCode == 444) {
+                               msg.channel.send('ERROR: ' + 'No Response ');
+                               }
+                            if (response.statusCode == 449) {
+                               msg.channel.send('ERROR: ' + 'Retry With ');
+                               }
+                            if (response.statusCode == 450) {
+                               msg.channel.send('ERROR: ' + 'Blocked By Windows Parental Controls ');
+                               }
+                            if (response.statusCode == 451) {
+                               msg.channel.send('ERROR: ' + 'Unavailable For Legal Reasons');
+                               }
+                            if (response.statusCode == 499) {
+                               msg.channel.send('ERROR: ' + 'Client Closed Request');
+                               }
+                            if (response.statusCode == 500) {
+                               msg.channel.send('ERROR: ' + 'Internal Server Error');
+                               }
+                            if (response.statusCode == 501) {
+                               msg.channel.send('ERROR: ' + 'Not Implemented');
+                               }
+                            if (response.statusCode == 502) {
+                               msg.channel.send('ERROR: ' + 'Bad Gateway');
+                               }
+                            if (response.statusCode == 503) {
+                               msg.channel.send('ERROR: ' + 'Service Unavailable');
+                               }
+                            if (response.statusCode == 504) {
+                               msg.channel.send('ERROR: ' + 'Gateway Timeout');
+                               }
+                            if (response.statusCode == 505) {
+                               msg.channel.send('ERROR: ' + 'HTTP Version Not Supported');
+                               }
+                            if (response.statusCode == 506) {
+                               msg.channel.send('ERROR: ' + 'Variant Also Negotiates');
+                               }
+                            if (response.statusCode == 507) {
+                               msg.channel.send('ERROR: ' + 'Insufficient Storage');
+                               }
+                            if (response.statusCode == 508) {
+                               msg.channel.send('ERROR: ' + 'Loop Detected');
+                               }
+                            if (response.statusCode == 509) {
+                               msg.channel.send('ERROR: ' + 'Bandwidth Limit Exceeded');
+                               }
+                            if (response.statusCode == 510) {
+                               msg.channel.send('ERROR: ' + 'Not Extended');
+                               }
+                            if (response.statusCode == 511) {
+                               msg.channel.send('ERROR: ' + 'Network Authentication Required');
+                               }
+                            if (response.statusCode == 598) {
+                               msg.channel.send('ERROR: ' + 'Network read timeout error');
+                               }
+                            if (response.statusCode == 599) {
+                               msg.channel.send('ERROR: ' + 'Network connect timeout error');
+                               }
                           } else {
                             var currentWinnerArray = response.body;
                             var currentWinner = [];
@@ -1154,10 +1806,172 @@ exports.block = {
                             needle.get(
                               explorerApiUrl + 'api/block/' + currentBlockHash,
                               function(error, response) {
-                                if (error || response.statusCode !== 200) {
-                                  msg.channel.send(
-                                    explorerApiUrl + ' API is not available'
-                                  );
+                                if (response.statusCode !== 200) {
+                                  if (response.statusCode == 122) {
+                                      msg.channel.send('ERROR: ' + 'Request-URI too long');
+                                     }
+                                  if (response.statusCode == 300) {
+                                     msg.channel.send('ERROR: ' + 'Multiple Choices');
+                                     }
+                                  if (response.statusCode == 301) {
+                                     msg.channel.send('ERROR: ' + 'Moved Permanently');
+                                     }
+                                  if (response.statusCode == 303) {
+                                     msg.channel.send('ERROR: ' + 'See Other');
+                                     }
+                                  if (response.statusCode == 304) {
+                                     msg.channel.send('ERROR: ' + 'Not Modified');
+                                     }
+                                  if (response.statusCode == 305) {
+                                     msg.channel.send('ERROR: ' + 'Use Proxy');
+                                     }
+                                  if (response.statusCode == 306) {
+                                     msg.channel.send('ERROR: ' + 'Switch Proxy');
+                                     }
+                                  if (response.statusCode == 307) {
+                                     msg.channel.send('ERROR: ' + 'Temporary Redirect');
+                                     }
+                                  if (response.statusCode == 308) {
+                                     msg.channel.send('ERROR: ' + 'Permanent Redirect');
+                                     }
+                                  if (response.statusCode == 400) {
+                                     msg.channel.send('ERROR: ' + 'Bad Request');
+                                     }
+                                  if (response.statusCode == 401) {
+                                     msg.channel.send('ERROR: ' + 'Unauth­orized');
+                                     }
+                                  if (response.statusCode == 402) {
+                                     msg.channel.send('ERROR: ' + 'Payment Required');
+                                     }
+                                  if (response.statusCode == 403) {
+                                     msg.channel.send('ERROR: ' + 'Forbidden');
+                                     }
+                                  if (response.statusCode == 404) {
+                                     msg.channel.send('ERROR: ' + 'Not Found');
+                                     }
+                                  if (response.statusCode == 405) {
+                                     msg.channel.send('ERROR: ' + 'Method Not Allowed');
+                                     }
+                                  if (response.statusCode == 406) {
+                                     msg.channel.send('ERROR: ' + 'Not Acceptable');
+                                     }
+                                  if (response.statusCode == 407) {
+                                     msg.channel.send('ERROR: ' + 'Proxy Authen­tic­ation Required');
+                                     }
+                                  if (response.statusCode == 408) {
+                                     msg.channel.send('ERROR: ' + 'Request Timeout');
+                                     }
+                                  if (response.statusCode == 409) {
+                                     msg.channel.send('ERROR: ' + 'Conflict');
+                                     }
+                                  if (response.statusCode == 410) {
+                                     msg.channel.send('ERROR: ' + 'Gone');
+                                     }
+                                  if (response.statusCode == 411) {
+                                     msg.channel.send('ERROR: ' + 'Length Required');
+                                     }
+                                  if (response.statusCode == 412) {
+                                     msg.channel.send('ERROR: ' + 'Precondition Failed');
+                                     }
+                                  if (response.statusCode == 413) {
+                                     msg.channel.send('ERROR: ' + 'Request Entity Too Large');
+                                     }
+                                  if (response.statusCode == 414) {
+                                     msg.channel.send('ERROR: ' + 'Request-URI Too Long');
+                                     }
+                                  if (response.statusCode == 415) {
+                                     msg.channel.send('ERROR: ' + 'Unsupported Media Type');
+                                     }
+                                  if (response.statusCode == 416) {
+                                     msg.channel.send('ERROR: ' + 'Requested Range Not Satisf­iable');
+                                     }
+                                  if (response.statusCode == 417) {
+                                     msg.channel.send('ERROR: ' + 'Expectation Failed');
+                                     }
+                                  if (response.statusCode == 418) {
+                                     msg.channel.send('ERROR: ' + 'I\'m a teapot');
+                                     }
+                                  if (response.statusCode == 422) {
+                                     msg.channel.send('ERROR: ' + 'Unprocessable Entity');
+                                     }
+                                  if (response.statusCode == 423) {
+                                     msg.channel.send('ERROR: ' + 'Locked');
+                                     }
+                                  if (response.statusCode == 424) {
+                                     msg.channel.send('ERROR: ' + 'Failed Dependency');
+                                     }
+                                  if (response.statusCode == 425) {
+                                     msg.channel.send('ERROR: ' + 'Unordered Collection');
+                                     }
+                                  if (response.statusCode == 426) {
+                                     msg.channel.send('ERROR: ' + 'Upgrade Required');
+                                     }
+                                  if (response.statusCode == 428) {
+                                     msg.channel.send('ERROR: ' + 'Precondition Required ');
+                                     }
+                                  if (response.statusCode == 429) {
+                                     msg.channel.send('ERROR: ' + 'Too Many Requests ');
+                                     }
+                                  if (response.statusCode == 431) {
+                                     msg.channel.send('ERROR: ' + 'Request Header Fields Too Large ');
+                                     }
+                                  if (response.statusCode == 444) {
+                                     msg.channel.send('ERROR: ' + 'No Response ');
+                                     }
+                                  if (response.statusCode == 449) {
+                                     msg.channel.send('ERROR: ' + 'Retry With ');
+                                     }
+                                  if (response.statusCode == 450) {
+                                     msg.channel.send('ERROR: ' + 'Blocked By Windows Parental Controls ');
+                                     }
+                                  if (response.statusCode == 451) {
+                                     msg.channel.send('ERROR: ' + 'Unavailable For Legal Reasons');
+                                     }
+                                  if (response.statusCode == 499) {
+                                     msg.channel.send('ERROR: ' + 'Client Closed Request');
+                                     }
+                                  if (response.statusCode == 500) {
+                                     msg.channel.send('ERROR: ' + 'Internal Server Error');
+                                     }
+                                  if (response.statusCode == 501) {
+                                     msg.channel.send('ERROR: ' + 'Not Implemented');
+                                     }
+                                  if (response.statusCode == 502) {
+                                     msg.channel.send('ERROR: ' + 'Bad Gateway');
+                                     }
+                                  if (response.statusCode == 503) {
+                                     msg.channel.send('ERROR: ' + 'Service Unavailable');
+                                     }
+                                  if (response.statusCode == 504) {
+                                     msg.channel.send('ERROR: ' + 'Gateway Timeout');
+                                     }
+                                  if (response.statusCode == 505) {
+                                     msg.channel.send('ERROR: ' + 'HTTP Version Not Supported');
+                                     }
+                                  if (response.statusCode == 506) {
+                                     msg.channel.send('ERROR: ' + 'Variant Also Negotiates');
+                                     }
+                                  if (response.statusCode == 507) {
+                                     msg.channel.send('ERROR: ' + 'Insufficient Storage');
+                                     }
+                                  if (response.statusCode == 508) {
+                                     msg.channel.send('ERROR: ' + 'Loop Detected');
+                                     }
+                                  if (response.statusCode == 509) {
+                                     msg.channel.send('ERROR: ' + 'Bandwidth Limit Exceeded');
+                                     }
+                                  if (response.statusCode == 510) {
+                                     msg.channel.send('ERROR: ' + 'Not Extended');
+                                     }
+                                  if (response.statusCode == 511) {
+                                     msg.channel.send('ERROR: ' + 'Network Authentication Required');
+                                     }
+                                  if (response.statusCode == 598) {
+                                     msg.channel.send('ERROR: ' + 'Network read timeout error');
+                                     }
+                                  if (response.statusCode == 599) {
+                                     msg.channel.send('ERROR: ' + 'Network connect timeout error');
+                                     }
                                 } else {
                                   var difficulty = response.body.difficulty;
                                   var currentTime = Number(response.body.time);
@@ -1206,13 +2020,173 @@ exports.block = {
                                       previousBlockHash,
                                     function(error, response) {
                                       if (
-                                        error ||
                                         response.statusCode !== 200
                                       ) {
-                                        msg.channel.send(
-                                          explorerApiUrl +
-                                            ' API is not available'
-                                        );
+                                        if (response.statusCode == 122) {
+                                            msg.channel.send('ERROR: ' + 'Request-URI too long');
+                                           }
+                                        if (response.statusCode == 300) {
+                                           msg.channel.send('ERROR: ' + 'Multiple Choices');
+                                           }
+                                        if (response.statusCode == 301) {
+                                           msg.channel.send('ERROR: ' + 'Moved Permanently');
+                                           }
+                                        if (response.statusCode == 303) {
+                                           msg.channel.send('ERROR: ' + 'See Other');
+                                           }
+                                        if (response.statusCode == 304) {
+                                           msg.channel.send('ERROR: ' + 'Not Modified');
+                                           }
+                                        if (response.statusCode == 305) {
+                                           msg.channel.send('ERROR: ' + 'Use Proxy');
+                                           }
+                                        if (response.statusCode == 306) {
+                                           msg.channel.send('ERROR: ' + 'Switch Proxy');
+                                           }
+                                        if (response.statusCode == 307) {
+                                           msg.channel.send('ERROR: ' + 'Temporary Redirect');
+                                           }
+                                        if (response.statusCode == 308) {
+                                           msg.channel.send('ERROR: ' + 'Permanent Redirect');
+                                           }
+                                        if (response.statusCode == 400) {
+                                           msg.channel.send('ERROR: ' + 'Bad Request');
+                                           }
+                                        if (response.statusCode == 401) {
+                                           msg.channel.send('ERROR: ' + 'Unauth­orized');
+                                           }
+                                        if (response.statusCode == 402) {
+                                           msg.channel.send('ERROR: ' + 'Payment Required');
+                                           }
+                                        if (response.statusCode == 403) {
+                                           msg.channel.send('ERROR: ' + 'Forbidden');
+                                           }
+                                        if (response.statusCode == 404) {
+                                           msg.channel.send('ERROR: ' + 'Not Found');
+                                           }
+                                        if (response.statusCode == 405) {
+                                           msg.channel.send('ERROR: ' + 'Method Not Allowed');
+                                           }
+                                        if (response.statusCode == 406) {
+                                           msg.channel.send('ERROR: ' + 'Not Acceptable');
+                                           }
+                                        if (response.statusCode == 407) {
+                                           msg.channel.send('ERROR: ' + 'Proxy Authen­tic­ation Required');
+                                           }
+                                        if (response.statusCode == 408) {
+                                           msg.channel.send('ERROR: ' + 'Request Timeout');
+                                           }
+                                        if (response.statusCode == 409) {
+                                           msg.channel.send('ERROR: ' + 'Conflict');
+                                           }
+                                        if (response.statusCode == 410) {
+                                           msg.channel.send('ERROR: ' + 'Gone');
+                                           }
+                                        if (response.statusCode == 411) {
+                                           msg.channel.send('ERROR: ' + 'Length Required');
+                                           }
+                                        if (response.statusCode == 412) {
+                                           msg.channel.send('ERROR: ' + 'Precondition Failed');
+                                           }
+                                        if (response.statusCode == 413) {
+                                           msg.channel.send('ERROR: ' + 'Request Entity Too Large');
+                                           }
+                                        if (response.statusCode == 414) {
+                                           msg.channel.send('ERROR: ' + 'Request-URI Too Long');
+                                           }
+                                        if (response.statusCode == 415) {
+                                           msg.channel.send('ERROR: ' + 'Unsupported Media Type');
+                                           }
+                                        if (response.statusCode == 416) {
+                                           msg.channel.send('ERROR: ' + 'Requested Range Not Satisf­iable');
+                                           }
+                                        if (response.statusCode == 417) {
+                                           msg.channel.send('ERROR: ' + 'Expectation Failed');
+                                           }
+                                        if (response.statusCode == 418) {
+                                           msg.channel.send('ERROR: ' + 'I\'m a teapot');
+                                           }
+                                        if (response.statusCode == 422) {
+                                           msg.channel.send('ERROR: ' + 'Unprocessable Entity');
+                                           }
+                                        if (response.statusCode == 423) {
+                                           msg.channel.send('ERROR: ' + 'Locked');
+                                           }
+                                        if (response.statusCode == 424) {
+                                           msg.channel.send('ERROR: ' + 'Failed Dependency');
+                                           }
+                                        if (response.statusCode == 425) {
+                                           msg.channel.send('ERROR: ' + 'Unordered Collection');
+                                           }
+                                        if (response.statusCode == 426) {
+                                           msg.channel.send('ERROR: ' + 'Upgrade Required');
+                                           }
+                                        if (response.statusCode == 428) {
+                                           msg.channel.send('ERROR: ' + 'Precondition Required ');
+                                           }
+                                        if (response.statusCode == 429) {
+                                           msg.channel.send('ERROR: ' + 'Too Many Requests ');
+                                           }
+                                        if (response.statusCode == 431) {
+                                           msg.channel.send('ERROR: ' + 'Request Header Fields Too Large ');
+                                           }
+                                        if (response.statusCode == 444) {
+                                           msg.channel.send('ERROR: ' + 'No Response ');
+                                           }
+                                        if (response.statusCode == 449) {
+                                           msg.channel.send('ERROR: ' + 'Retry With ');
+                                           }
+                                        if (response.statusCode == 450) {
+                                           msg.channel.send('ERROR: ' + 'Blocked By Windows Parental Controls ');
+                                           }
+                                        if (response.statusCode == 451) {
+                                           msg.channel.send('ERROR: ' + 'Unavailable For Legal Reasons');
+                                           }
+                                        if (response.statusCode == 499) {
+                                           msg.channel.send('ERROR: ' + 'Client Closed Request');
+                                           }
+                                        if (response.statusCode == 500) {
+                                           msg.channel.send('ERROR: ' + 'Internal Server Error');
+                                           }
+                                        if (response.statusCode == 501) {
+                                           msg.channel.send('ERROR: ' + 'Not Implemented');
+                                           }
+                                        if (response.statusCode == 502) {
+                                           msg.channel.send('ERROR: ' + 'Bad Gateway');
+                                           }
+                                        if (response.statusCode == 503) {
+                                           msg.channel.send('ERROR: ' + 'Service Unavailable');
+                                           }
+                                        if (response.statusCode == 504) {
+                                           msg.channel.send('ERROR: ' + 'Gateway Timeout');
+                                           }
+                                        if (response.statusCode == 505) {
+                                           msg.channel.send('ERROR: ' + 'HTTP Version Not Supported');
+                                           }
+                                        if (response.statusCode == 506) {
+                                           msg.channel.send('ERROR: ' + 'Variant Also Negotiates');
+                                           }
+                                        if (response.statusCode == 507) {
+                                           msg.channel.send('ERROR: ' + 'Insufficient Storage');
+                                           }
+                                        if (response.statusCode == 508) {
+                                           msg.channel.send('ERROR: ' + 'Loop Detected');
+                                           }
+                                        if (response.statusCode == 509) {
+                                           msg.channel.send('ERROR: ' + 'Bandwidth Limit Exceeded');
+                                           }
+                                        if (response.statusCode == 510) {
+                                           msg.channel.send('ERROR: ' + 'Not Extended');
+                                           }
+                                        if (response.statusCode == 511) {
+                                           msg.channel.send('ERROR: ' + 'Network Authentication Required');
+                                           }
+                                        if (response.statusCode == 598) {
+                                           msg.channel.send('ERROR: ' + 'Network read timeout error');
+                                           }
+                                        if (response.statusCode == 599) {
+                                           msg.channel.send('ERROR: ' + 'Network connect timeout error');
+                                           }
                                       } else {
                                         var previousTime = Number(
                                           response.body.time

@@ -224,21 +224,6 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-elmadev-discord-irc@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/elmadev-discord-irc/-/elmadev-discord-irc-2.4.1.tgz#959b68d749eb442475a4b5efcf84567c37666b75"
-  dependencies:
-    check-env "1.3.0"
-    commander "2.10.0"
-    discord.js "11.1.0"
-    irc-colors "^1.3.2"
-    irc-formatting "^1.0.0-rc3"
-    irc-upd "0.6.1"
-    lodash "^4.17.4"
-    simple-markdown "^0.2.1"
-    strip-json-comments "2.0.1"
-    winston "2.3.1"
-
 embed-creator@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/embed-creator/-/embed-creator-1.1.4.tgz#7f8a783db6ae384d029e746837d65553e6ff0f9e"
@@ -391,25 +376,6 @@ iconv@~2.2.1:
   resolved "https://registry.yarnpkg.com/iconv/-/iconv-2.2.3.tgz#e084d60eeb7d73da7f0a9c096e4c8abe090bfaed"
   dependencies:
     nan "^2.3.5"
-
-irc-colors@^1.1.0, irc-colors@^1.3.2:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/irc-colors/-/irc-colors-1.4.0.tgz#6cb9f6ce6b14eacb7a6b7e516e7b95d773b8439b"
-
-irc-formatting@^1.0.0-rc3:
-  version "1.0.0-rc3"
-  resolved "https://registry.yarnpkg.com/irc-formatting/-/irc-formatting-1.0.0-rc3.tgz#9520ea3d6a41b839394b21c511b59febeda55377"
-  dependencies:
-    zeropad "^1.1.0"
-
-irc-upd@0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/irc-upd/-/irc-upd-0.6.1.tgz#134fc7e48d7d82b6b06e5a28e56890522d43d38b"
-  dependencies:
-    irc-colors "^1.1.0"
-  optionalDependencies:
-    iconv "~2.2.1"
-    node-icu-charset-detector "~0.2.0"
 
 is-ci@^1.0.10:
   version "1.0.10"

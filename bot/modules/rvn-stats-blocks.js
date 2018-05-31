@@ -2313,18 +2313,18 @@ exports.block = {
             );
           }
         } else {
-          var isNaN = getValidatedAmount(block);
-          if(!isNaN){
-            msg.channel.send('Please specify a number for the block');
-            return;
-          } else {
-            var block = isNaN;
-          }
           if (!block) {
             var Height = response.body.info.blocks;
             var previousHeight = Number(response.body.info.blocks) - 1;
             var currentBlock = true;
           } else {
+            var isNaN = getValidatedAmount(block);
+            if(!isNaN){
+              msg.channel.send('Please specify a number for the block');
+              return;
+            } else {
+              var block = isNaN;
+            }
             var Height = block;
             var previousHeight = block - 1;
           }

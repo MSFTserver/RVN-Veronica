@@ -2308,6 +2308,7 @@ exports.network = {
                                   );
                                 }
                               } else {
+                                var confirmations = response.body.confirmations;
                                 var currentTime = Number(response.body.time);
                                 var currentReward = Number(
                                   response.body.reward
@@ -2878,7 +2879,10 @@ exports.network = {
                                         ' ' +
                                         coinSymbol +
                                         '\n' +
-                                        'Full Hash: ' + 
+                                        'Confirmations: ' +
+                                        numberWithCommas(confirmations) +
+                                        '\n' +
+                                        'Full Hash: ' +
                                         currentBlockHash +
                                         '\n' +
                                         'Algo Hash: ' +

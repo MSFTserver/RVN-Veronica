@@ -412,6 +412,7 @@ exports.block = {
             );
           }
         } else {
+          var confirmations = response.body.confirmations;
           var Height = response.body.height;
           var previousHeight = Height - 1;
           var difficulty = response.body.difficulty;
@@ -1969,6 +1970,9 @@ exports.block = {
                               numberWithCommas(Reward) +
                               ' ' +
                               coinSymbol +
+                              '\n' +
+                              'Confirmations: ' +
+                              numberWithCommas(confirmations) +
                               '\n' +
                               'Full Hash: ' +
                               block +
@@ -4364,6 +4368,7 @@ exports.block = {
                                     );
                                   }
                                 } else {
+                                  var confirmations = response.body.confirmations;
                                   var difficulty = response.body.difficulty;
                                   var Time = Number(response.body.time);
                                   var Reward = Number(
@@ -4940,6 +4945,9 @@ exports.block = {
                                           numberWithCommas(Reward) +
                                           ' ' +
                                           coinSymbol +
+                                          '\n' +
+                                          'Confirmations: ' +
+                                          numberWithCommas(confirmations) +
                                           '\n' +
                                           'Full Hash: ' +
                                           BlockHash +

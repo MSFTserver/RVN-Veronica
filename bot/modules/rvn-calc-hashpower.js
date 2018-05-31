@@ -44,11 +44,13 @@ exports.hashpower = {
       return;
     }
     var checkFiat = words[1 + offset].toUpperCase();
+    console.log(checkFiat);
     if (!checkFiat) {
       var fiat = 'USD';
     } else {
       var fiat = words[1 + offset].toUpperCase()
     }
+    console.log(fiat)
     needle.get(cmcApiUrl + '?limit=0', function(error, response) {
       if (response.statusCode !== 200) {
         if (response.statusCode == 122) {

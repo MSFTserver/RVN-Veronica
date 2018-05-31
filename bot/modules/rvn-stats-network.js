@@ -2857,12 +2857,12 @@ exports.network = {
                                       var currentBlockTime =
                                         currentTime - previousTime;
                                       var description =
+                                        '__**Current Block!**__' +
+                                        '\n' +
                                         'Difficulty: ' +
                                         numberWithCommas(
                                           difficulty.toFixed(0)
                                         ) +
-                                        '\n' +
-                                        '__**Current Block!**__' +
                                         '\n' +
                                         'Block: ' +
                                         currentHeight +

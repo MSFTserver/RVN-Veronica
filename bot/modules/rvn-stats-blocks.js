@@ -33,7 +33,7 @@ exports.commands = ['block'];
 exports.block = {
   usage: '',
   description:
-    'Displays current block info\n**!block number** <#>\n     displays block info using blocks Height\n**!block hash** <block-hash>\n     displays block info using blocks Hash',
+    'Displays  block info\n**!block number** <#>\n     displays block info using blocks Height\n**!block hash** <block-hash>\n     displays block info using blocks Hash',
   process: function(bot, msg, suffix) {
     if (!inPrivate(msg) && !hasRvnStatsNetworkChannels(msg)) {
       msg.channel.send(
@@ -394,47 +394,47 @@ exports.block = {
             );
           }
         } else {
-          var currentHeight = response.body.height;
-          var previousHeight = currentHeight - 1;
+          var Height = response.body.height;
+          var previousHeight = Height - 1;
           var difficulty = response.body.difficulty;
-          var currentTime = Number(response.body.time);
-          var currentReward = Number(response.body.reward);
-          var currentBlockAlgo = block.substr(block.length - 16);
-          var currentAlgo = currentBlockAlgo.split('');
-          var currentAlgoOrder =
-            algolist[currentAlgo[0]] +
+          var Time = Number(response.body.time);
+          var Reward = Number(response.body.reward);
+          var BlockAlgo = block.substr(block.length - 16);
+          var Algo = BlockAlgo.split('');
+          var AlgoOrder =
+            algolist[Algo[0]] +
             '->' +
-            algolist[currentAlgo[1]] +
+            algolist[Algo[1]] +
             '->' +
-            algolist[currentAlgo[2]] +
+            algolist[Algo[2]] +
             '->' +
-            algolist[currentAlgo[3]] +
+            algolist[Algo[3]] +
             '->' +
-            algolist[currentAlgo[4]] +
+            algolist[Algo[4]] +
             '->' +
-            algolist[currentAlgo[5]] +
+            algolist[Algo[5]] +
             '->' +
-            algolist[currentAlgo[6]] +
+            algolist[Algo[6]] +
             '->' +
-            algolist[currentAlgo[7]] +
+            algolist[Algo[7]] +
             '->\n' +
-            algolist[currentAlgo[8]] +
+            algolist[Algo[8]] +
             '->' +
-            algolist[currentAlgo[9]] +
+            algolist[Algo[9]] +
             '->' +
-            algolist[currentAlgo[10]] +
+            algolist[Algo[10]] +
             '->' +
-            algolist[currentAlgo[11]] +
+            algolist[Algo[11]] +
             '->' +
-            algolist[currentAlgo[12]] +
+            algolist[Algo[12]] +
             '->' +
-            algolist[currentAlgo[13]] +
+            algolist[Algo[13]] +
             '->' +
-            algolist[currentAlgo[14]] +
+            algolist[Algo[14]] +
             '->' +
-            algolist[currentAlgo[15]];
+            algolist[Algo[15]];
           needle.get(
-            explorerApiUrl + 'api/txs?block=' + currentHeight,
+            explorerApiUrl + 'api/txs?block=' + Height,
             function(error, response) {
               if (response.statusCode !== 200) {
                 if (response.statusCode == 122) {
@@ -833,130 +833,130 @@ exports.block = {
                   );
                 }
               } else {
-                var currentWinnerArray = response.body;
-                var currentWinner = [];
-                var currentWinnerAddys = [];
-                for (var i = 0; i < currentWinnerArray.txs.length; i++) {
+                var WinnerArray = response.body;
+                var Winner = [];
+                var WinnerAddys = [];
+                for (var i = 0; i < WinnerArray.txs.length; i++) {
                   var position = i++;
                   if (
-                    currentWinnerArray.txs[position].hasOwnProperty(
+                    WinnerArray.txs[position].hasOwnProperty(
                       'isCoinBase'
                     )
                   ) {
-                    currentWinner.push(currentWinnerArray.txs[position]);
+                    Winner.push(WinnerArray.txs[position]);
                   }
                 }
-                for (var l = 0; l < currentWinner[0].vout.length; l++) {
-                  var addys = currentWinner[0].vout[l].scriptPubKey.addresses;
+                for (var l = 0; l < Winner[0].vout.length; l++) {
+                  var addys = Winner[0].vout[l].scriptPubKey.addresses;
                   if (addys) {
-                    currentWinnerAddys.push(addys);
+                    WinnerAddys.push(addys);
                   }
                 }
-                var currentBlockWinner = currentWinnerAddys.join(' \n');
+                var BlockWinner = WinnerAddys.join(' \n');
                 if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RFgNoNzd8KEHbeFxnvJamy4yCV8ZDvR4jD'
                   )
                 ) {
-                  currentBlockWinner = '[suprnova](https://rvn.suprnova.cc/)';
+                  BlockWinner = '[suprnova](https://rvn.suprnova.cc/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RHQRGxCsVLwW6GYMkNHDRnzWaMHinXsGDt'
                   )
                 ) {
-                  currentBlockWinner = '[Yiimp](http://yiimp.eu/)';
+                  BlockWinner = '[Yiimp](http://yiimp.eu/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RNJMLCLiss7hf23rZSq9BzhoQ94H5EDQTy'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[Raven Miner](http://www.ravenminer.com/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RVG96MbaKEDFzzj9NzbAuxkDt86KAm2Qj5'
                   )
                 ) {
-                  currentBlockWinner = '[f2pool](https://labs.f2pool.com/labs)';
+                  BlockWinner = '[f2pool](https://labs.f2pool.com/labs)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RTUYcbkJo9zuW74brFc3bwxXyKpCiogxT7'
                   )
                 ) {
-                  currentBlockWinner = '[Pickaxe Pro](https://pickaxe.pro/)';
+                  BlockWinner = '[Pickaxe Pro](https://pickaxe.pro/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RN6vJ31K3Ycj7S4obdtYckXPPSAy7z5g2p'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[Mining Panda](https://miningpanda.site)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RG2tNoZpm6VKgpnUDqHr8L9gDL7kh43JnW'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[Crypto Pool Party](https://cryptopool.party/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RGdHyWTLp9rR5mfUX2hGdAjCuYaDqa3hDo'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[KRAWWW Miner](http://krawww-miner.eu/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RHLJmCnpZ9JKBxYj1RWc7teD8gHSxkTozs'
                   )
                 ) {
-                  currentBlockWinner = '[minepool](https://www.minepool.com/)';
+                  BlockWinner = '[minepool](https://www.minepool.com/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RF7FaQRQq9DdVcaZZikdahdacTiJh17NDU'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[Virtopia](https://mineit.virtopia.ca/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RGBjnf4gpXsJLvcGqvU1yc6ZwKQMEPqaTf'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[OMEGA Pool](https://www.omegapool.cc/?page=dashboard&coin=raven)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RAFmhKe26pSinN9eERhqWk1nUMnx33LDi2'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[Evocatioin Network](https://evocation.network/stats.html)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RK4GiCpC6nvX2sswH3pre1nwbng8S8ViCn'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[Coin Blockers](https://rvn.coinblockers.com/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'RQZS8LBvv2VWuAEWF5BXoRikoG6MRp5asH'
                   )
                 ) {
-                  currentBlockWinner = '[BSOD](https://bsod.pw/site/mining)';
+                  BlockWinner = '[BSOD](https://bsod.pw/site/mining)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'R9JkHdoFVMmuhDnQX3W8L6KDKfzueWNQuj'
                   )
                 ) {
-                  currentBlockWinner = '[Hash 4 Life](https://hash4.life/)';
+                  BlockWinner = '[Hash 4 Life](https://hash4.life/)';
                 } else if (
-                  currentBlockWinner.includes(
+                  BlockWinner.includes(
                     'REESXgjhAuarm3Vs9rxPZpEmuAoSmbHBXV'
                   )
                 ) {
-                  currentBlockWinner =
+                  BlockWinner =
                     '[Ominous Network](http://pool.ominousnetwork.com/)';
                 }
                 needle.get(
@@ -1929,7 +1929,7 @@ exports.block = {
                             }
                           } else {
                             var previousTime = Number(response.body.time);
-                            var currentBlockTime = currentTime - previousTime;
+                            var BlockTime = Time - previousTime;
                             var timestamp = moment()
                               .tz('America/Los_Angeles')
                               .format('MM-DD-YYYY hh:mm a');
@@ -1938,25 +1938,25 @@ exports.block = {
                               numberWithCommas(difficulty.toFixed(0)) +
                               '\n' +
                               'Block: ' +
-                              currentHeight +
+                              Height +
                               '\n' +
                               'Block Solved in: ' +
-                              currentBlockTime +
+                              BlockTime +
                               ' seconds ' +
                               '\n' +
                               'Block Solved by: \n' +
-                              currentBlockWinner +
+                              BlockWinner +
                               '\n' +
                               'Block Reward: ' +
-                              numberWithCommas(currentReward) +
+                              numberWithCommas(Reward) +
                               ' ' +
                               coinSymbol +
                               '\n' +
                               'Algo Hash: ' +
-                              currentBlockAlgo +
+                              BlockAlgo +
                               '\n' +
                               'Algo Order: \n' +
-                              currentAlgoOrder +
+                              AlgoOrder +
                               '\n\n' +
                               'Sources: ' +
                               explorerApiUrl;
@@ -2315,14 +2315,15 @@ exports.block = {
           }
         } else {
           if (!block) {
-            var currentHeight = response.body.info.blocks;
+            var Height = response.body.info.blocks;
             var previousHeight = Number(response.body.info.blocks) - 1;
+            var currentBlock = true;
           } else {
-            var currentHeight = block;
+            var Height = block;
             var previousHeight = block - 1;
           }
           needle.get(
-            explorerApiUrl + 'api/block-index/' + currentHeight,
+            explorerApiUrl + 'api/block-index/' + Height,
             function(error, response) {
               if (response.statusCode !== 200) {
                 if (response.statusCode == 122) {
@@ -2721,7 +2722,7 @@ exports.block = {
                   );
                 }
               } else {
-                var currentBlockHash = response.body.blockHash;
+                var BlockHash = response.body.blockHash;
                 needle.get(
                   explorerApiUrl + 'api/block-index/' + previousHeight,
                   function(error, response) {
@@ -3196,7 +3197,7 @@ exports.block = {
                     } else {
                       var previousBlockHash = response.body.blockHash;
                       needle.get(
-                        explorerApiUrl + 'api/txs?block=' + currentHeight,
+                        explorerApiUrl + 'api/txs?block=' + Height,
                         function(error, response) {
                           if (response.statusCode !== 200) {
                             if (response.statusCode == 122) {
@@ -3691,153 +3692,153 @@ exports.block = {
                               );
                             }
                           } else {
-                            var currentWinnerArray = response.body;
-                            var currentWinner = [];
-                            var currentWinnerAddys = [];
+                            var WinnerArray = response.body;
+                            var Winner = [];
+                            var WinnerAddys = [];
                             for (
                               var i = 0;
-                              i < currentWinnerArray.txs.length;
+                              i < WinnerArray.txs.length;
                               i++
                             ) {
                               var position = i++;
                               if (
-                                currentWinnerArray.txs[position].hasOwnProperty(
+                                WinnerArray.txs[position].hasOwnProperty(
                                   'isCoinBase'
                                 )
                               ) {
-                                currentWinner.push(
-                                  currentWinnerArray.txs[position]
+                                Winner.push(
+                                  WinnerArray.txs[position]
                                 );
                               }
                             }
                             for (
                               var l = 0;
-                              l < currentWinner[0].vout.length;
+                              l < Winner[0].vout.length;
                               l++
                             ) {
                               var addys =
-                                currentWinner[0].vout[l].scriptPubKey.addresses;
+                                Winner[0].vout[l].scriptPubKey.addresses;
                               if (addys) {
-                                currentWinnerAddys.push(addys);
+                                WinnerAddys.push(addys);
                               }
                             }
-                            var currentBlockWinner = currentWinnerAddys.join(
+                            var BlockWinner = WinnerAddys.join(
                               ' \n'
                             );
                             if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RFgNoNzd8KEHbeFxnvJamy4yCV8ZDvR4jD'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[suprnova](https://rvn.suprnova.cc/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RHQRGxCsVLwW6GYMkNHDRnzWaMHinXsGDt'
                               )
                             ) {
-                              currentBlockWinner = '[Yiimp](http://yiimp.eu/)';
+                              BlockWinner = '[Yiimp](http://yiimp.eu/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RNJMLCLiss7hf23rZSq9BzhoQ94H5EDQTy'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Raven Miner](http://www.ravenminer.com/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RVG96MbaKEDFzzj9NzbAuxkDt86KAm2Qj5'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[f2pool](https://labs.f2pool.com/labs)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RTUYcbkJo9zuW74brFc3bwxXyKpCiogxT7'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Pickaxe Pro](https://pickaxe.pro/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RN6vJ31K3Ycj7S4obdtYckXPPSAy7z5g2p'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Mining Panda](https://miningpanda.site)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RG2tNoZpm6VKgpnUDqHr8L9gDL7kh43JnW'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Crypto Pool Party](https://cryptopool.party/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RGdHyWTLp9rR5mfUX2hGdAjCuYaDqa3hDo'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[KRAWWW Miner](http://krawww-miner.eu/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RHLJmCnpZ9JKBxYj1RWc7teD8gHSxkTozs'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[minepool](https://www.minepool.com/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RF7FaQRQq9DdVcaZZikdahdacTiJh17NDU'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Virtopia](https://mineit.virtopia.ca/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RGBjnf4gpXsJLvcGqvU1yc6ZwKQMEPqaTf'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[OMEGA Pool](https://www.omegapool.cc/?page=dashboard&coin=raven)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RAFmhKe26pSinN9eERhqWk1nUMnx33LDi2'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Evocatioin Network](https://evocation.network/stats.html)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RK4GiCpC6nvX2sswH3pre1nwbng8S8ViCn'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Coin Blockers](https://rvn.coinblockers.com/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'RQZS8LBvv2VWuAEWF5BXoRikoG6MRp5asH'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[BSOD](https://bsod.pw/site/mining)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'R9JkHdoFVMmuhDnQX3W8L6KDKfzueWNQuj'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Hash 4 Life](https://hash4.life/)';
                             } else if (
-                              currentBlockWinner.includes(
+                              BlockWinner.includes(
                                 'REESXgjhAuarm3Vs9rxPZpEmuAoSmbHBXV'
                               )
                             ) {
-                              currentBlockWinner =
+                              BlockWinner =
                                 '[Ominous Network](http://pool.ominousnetwork.com/)';
                             }
                             needle.get(
-                              explorerApiUrl + 'api/block/' + currentBlockHash,
+                              explorerApiUrl + 'api/block/' + BlockHash,
                               function(error, response) {
                                 if (response.statusCode !== 200) {
                                   if (response.statusCode == 122) {
@@ -4337,46 +4338,46 @@ exports.block = {
                                   }
                                 } else {
                                   var difficulty = response.body.difficulty;
-                                  var currentTime = Number(response.body.time);
-                                  var currentReward = Number(
+                                  var Time = Number(response.body.time);
+                                  var Reward = Number(
                                     response.body.reward
                                   );
-                                  var currentBlockAlgo = currentBlockHash.substr(
-                                    currentBlockHash.length - 16
+                                  var BlockAlgo = BlockHash.substr(
+                                    BlockHash.length - 16
                                   );
-                                  var currentAlgo = currentBlockAlgo.split('');
-                                  var currentAlgoOrder =
-                                    algolist[currentAlgo[0]] +
+                                  var Algo = BlockAlgo.split('');
+                                  var AlgoOrder =
+                                    algolist[Algo[0]] +
                                     '->' +
-                                    algolist[currentAlgo[1]] +
+                                    algolist[Algo[1]] +
                                     '->' +
-                                    algolist[currentAlgo[2]] +
+                                    algolist[Algo[2]] +
                                     '->' +
-                                    algolist[currentAlgo[3]] +
+                                    algolist[Algo[3]] +
                                     '->' +
-                                    algolist[currentAlgo[4]] +
+                                    algolist[Algo[4]] +
                                     '->' +
-                                    algolist[currentAlgo[5]] +
+                                    algolist[Algo[5]] +
                                     '->' +
-                                    algolist[currentAlgo[6]] +
+                                    algolist[Algo[6]] +
                                     '->' +
-                                    algolist[currentAlgo[7]] +
+                                    algolist[Algo[7]] +
                                     '->\n' +
-                                    algolist[currentAlgo[8]] +
+                                    algolist[Algo[8]] +
                                     '->' +
-                                    algolist[currentAlgo[9]] +
+                                    algolist[Algo[9]] +
                                     '->' +
-                                    algolist[currentAlgo[10]] +
+                                    algolist[Algo[10]] +
                                     '->' +
-                                    algolist[currentAlgo[11]] +
+                                    algolist[Algo[11]] +
                                     '->' +
-                                    algolist[currentAlgo[12]] +
+                                    algolist[Algo[12]] +
                                     '->' +
-                                    algolist[currentAlgo[13]] +
+                                    algolist[Algo[13]] +
                                     '->' +
-                                    algolist[currentAlgo[14]] +
+                                    algolist[Algo[14]] +
                                     '->' +
-                                    algolist[currentAlgo[15]];
+                                    algolist[Algo[15]];
                                   needle.get(
                                     explorerApiUrl +
                                       'api/block/' +
@@ -4882,37 +4883,42 @@ exports.block = {
                                         var previousTime = Number(
                                           response.body.time
                                         );
-                                        var currentBlockTime =
-                                          currentTime - previousTime;
+                                        var BlockTime =
+                                          Time - previousTime;
                                         var timestamp = moment()
                                           .tz('America/Los_Angeles')
                                           .format('MM-DD-YYYY hh:mm a');
+                                        if (currentBlock){
+                                          var title = '**Current Block**\n';
+                                        } else {
+                                          var title = ''
+                                        }
                                         var description =
-                                          'Difficulty: ' +
+                                          title + 'Difficulty: ' +
                                           numberWithCommas(
                                             difficulty.toFixed(0)
                                           ) +
                                           '\n' +
                                           'Block: ' +
-                                          currentHeight +
+                                          Height +
                                           '\n' +
                                           'Block Solved in: ' +
-                                          currentBlockTime +
+                                          BlockTime +
                                           ' seconds ' +
                                           '\n' +
                                           'Block Solved by: \n' +
-                                          currentBlockWinner +
+                                          BlockWinner +
                                           '\n' +
                                           'Block Reward: ' +
-                                          numberWithCommas(currentReward) +
+                                          numberWithCommas(Reward) +
                                           ' ' +
                                           coinSymbol +
                                           '\n' +
                                           'Algo Hash: ' +
-                                          currentBlockAlgo +
+                                          BlockAlgo +
                                           '\n' +
                                           'Algo Order: \n' +
-                                          currentAlgoOrder +
+                                          AlgoOrder +
                                           '\n\n' +
                                           'Sources: ' +
                                           explorerApiUrl;

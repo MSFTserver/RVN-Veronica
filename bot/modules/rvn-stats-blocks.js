@@ -68,7 +68,7 @@ exports.block = {
           msg.channel.send(explorerApiUrl + ' API is not available');
         } else {
           var currentHeight = response.body.height;
-          var previousheight = currentHeight - 1;
+          var previousHeight = currentHeight - 1;
           var difficulty = response.body.difficulty;
           var currentTime = Number(response.body.time);
           var currentReward = Number(response.body.reward);

@@ -209,7 +209,7 @@ exports.price = {
     });
     function getValidatedAmount(amount) {
       amount = amount.trim();
-      return amount.match(/^[0-9]+(\.[0-9]+)?$/) ? amount : null;
+      return amount.match(/^[.0-9]+(\.[0-9]+)?$/) ? amount : null;
     }
   }
 };

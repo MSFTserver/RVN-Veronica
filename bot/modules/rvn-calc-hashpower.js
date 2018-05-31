@@ -259,22 +259,14 @@ exports.hashpower = {
           var fixamount = 4;
         }
         var myRate = Number(Otherprice);
-        needle.get(explorerApiUrl + 'api/getmininginfo', function(
-          error,
-          response
-        ) {
+        needle.get(explorerApiUrl + 'api/status', function(error, response) {
           if (error || response.statusCode !== 200) {
             msg.channel.send(explorerApiUrl + ' API is not available');
           } else {
-            var data = response.body;
-            var height = Number(data.blocks);
-            var hashrate = data.networkhashps;
-            var Diff = Number(data.difficulty);
-            var Reward = 5000;
-            var block_time = 60;
+            var Diff = Number(response.body.info.difficulty);
             var myHash = Number(myhashrate);
             var RVN =
-              Number(myHash) * 10 ** 6 * Reward * 60 / (Number(Diff) * 2 ** 32);
+              Number(myHash) * 10 ** 6 * 5000 * 60 / (Number(Diff) * 2 ** 32);
             var RVN1 = RVN * 60;
             var RVN24 = RVN * 1440;
             var Other = myRate * RVN;

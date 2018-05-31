@@ -30,13 +30,16 @@
   "General": {
       //pm2 botname
       "pm2Name": "veronica",
+      // Bot Dir
+      "botDir": "C:/Users/RavenDev/Desktop/Bots/Veronica",
       // MongoDB config
       "mongoURL": "mongodb://localhost/Veronica",
       //urls for bots!
       "urls": {
           "CoinName": "ravencoin",
           "CoinSymbol": "RVN",
-          "explorerApiUrl": "https://rvn.hash4.life/",
+          //this explorer has to tie to an insight api!
+          "explorerApiUrl": "https://ravencoin.network/",
           "cmcUrl": "https://coinmarketcap.com/currencies/",
           "cmcApiUrl": "https://api.coinmarketcap.com/v1/ticker/"
       },

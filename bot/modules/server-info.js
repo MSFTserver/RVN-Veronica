@@ -1,5 +1,6 @@
 const discord = require('discord.js');
 let hasPerms = require('../helpers.js').hasPerms;
+let inPrivate = require('../helpers.js').inPrivate;
 
 exports.commands = ['serverstats'];
 
@@ -7,6 +8,10 @@ exports.serverstats = {
   usage: '',
   description: ':desktop: :cop: Displays server stats :cop: :desktop:',
   process: function(bot, msg, suffix) {
+    if (inPrivate(msg)) {
+      msg.channel.send('You Can Not Use This Command In DMs!');
+      return;
+    }
     if (hasPerms(msg)) {
       var data = msg.guild;
       var ServerName = data.name;

@@ -1,5 +1,7 @@
-let cmd = require('node-cmd');
+/*let cmd = require('node-cmd');
+let shell = require('shelljs');
 let moment = require('moment-timezone');
+let isWindows = require('check-if-windows');
 let isBotDev = require('../helpers.js').isBotDev;
 let config = require('config');
 let logChannel = config.get('moderation').logchannel;
@@ -9,7 +11,8 @@ exports.commands = ['shutdown'];
 
 exports.shutdown = {
   usage: '<pm2-name>',
-  description: ':desktop: :construction_worker: shuts down bot via pm2 :construction_worker: :desktop:',
+  description:
+    ':desktop: :construction_worker: shuts down bot via pm2 :construction_worker: :desktop:',
   process: function(bot, msg, suffix) {
     if (isBotDev(msg)) {
       if (suffix != pm2Name) {
@@ -24,7 +27,12 @@ exports.shutdown = {
         .send(
           '[' + time + ' PST][' + pm2Name + '] Shutting Down pm2 app (veronica)'
         );
-      cmd.run('pm2 stop ' + pm2Name);
+      if (isWindows) {
+        cmd.run('pm2 stop ' + pm2Name);
+      } else {
+        shell.exec('pm2 stop ' + pm2Name);
+      }
     }
   }
 };
+*/

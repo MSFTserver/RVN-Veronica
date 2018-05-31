@@ -24,22 +24,28 @@ exports.onUserJoin = function(bot) {
           title: '*Click here for more info about Raven!*',
           description:
             'This community allows Raven users to interact with the team directly and for us to engage users in order to grow Ravencoin ! \n\n' +
-            '__**GROUND RULES**__\n' +
-            '1. Be respectful to other community members. Harassment will not be tolerated \n' +
-            '2. Do not spam, advertise or post referral links outside of the respective provided channels! \n' +
-            '3. All software linked should be Open Source and we would appreciate them to be GitHub links for the communities safety \n' +
-            '4. Use appropriate channels for your discussions/questions. If you are looking for help with RAVEN use #helpdesk, for price and market discussion use #trader-talk\n' +
-            '5. #thenest discussions should be at least somewhat related to Raven. \n\n' +
+            ':red_circle: __**GROUND RULES**__:red_circle:\n' +
+            '1. We welcome constructive criticism but have zero tolerance for aggressive or entitled demands. \n' +
+            '2. Be respectful to other community members. Harassment will not be tolerated!! \n' +
+            '3. Do not spam, advertise or post referral links outside of the respective provided channels! \n' +
+            '4. Do bot beg for coins. \n' +
+            '5. All software linked should be Open Source and we would appreciate them to be GitHub links for the communities safety. \n' +
+            '6. No spamming or flooding the chat with messages or unsolicitated DMs.\n' +
+            '7. Do not use the @ everyone / @ here ping without permission.\n' +
+            '8. Do not cause a nuisance in the community, repeated complaints from several members will lead to administrative action.\n' +
+            '9. Do not argue with staff. Decisions are final.\n' +
+            '10. Impersonating a Staff member will result in an IMMEDIATE ban! \n' +
+            '12. No inappropriate links, this INC: Screamer, Porn, NSFW or anything else of that nature.\n' +
+            '13. Don\'t troll people asking for support\n' +
+            '14. Do not reveal private information about any individuals or corporate entities. \n' +
+            '15. Do not engage in any other excessively disruptive behavior.\n' +
+            '16. if you have any issues with user feel free to reach out to either a Moderator(Red) or Admin(Green) \n' +
+            '\n' +
             '__**Helpful hints & links**__\n' +
             '1. Type !tip help to interact with our Tipbot which can be used to send and receive Raven Coins (RVN). **Enable 2FA in your Discord account settings!** \n' +
             '2. Backing up your Raven wallet is your responsbility!\n' +
             '3. Are you a dev? Check out the #development channel and also use `!addrole Developer` \n' +
-            '4. Check Pinned posts in each channel they provide relative and useful info to that channels topic \n\n' +
-            '**Donations**\n' +
-            'Development Donation Address: [RW3x4EfTRAtPV2DeKexwFgp8wb4TSYebZA](https://rvn.hash4.life/address/RW3x4EfTRAtPV2DeKexwFgp8wb4TSYebZA)\n' +
-            '100% of collected funds will be used for things like new pools, added network tools for RVN, new mining clients, and further code development.\n\n' +
-            'Marketing Donation Address: [RXYnS1zrMMSiphwaGemdck66fawqrUFJkv](https://rvn.hash4.life/address/RXYnS1zrMMSiphwaGemdck66fawqrUFJkv)\n' +
-            '100% of collected funds will be used for things like running ads, translations, graphics, videos, and any other applicable needs.\n',
+            '4. Check Pinned posts in each channel they provide relative and useful info to that channels topic',
           fields: [
             {
               name: 'Official Site',
@@ -105,7 +111,8 @@ exports.commands = [
 
 exports.welcome = {
   usage: '<@username>',
-  description: ':desktop: :cop: send welcome message to specified user :cop: :desktop:',
+  description:
+    ':desktop: :cop: send welcome message to specified user :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {
       msg.channel.send('command cannot be used in a DM');
@@ -136,23 +143,29 @@ exports.welcome = {
         embed: {
           title: '*Click here for more info about Raven!*',
           description:
-            'This community allows Raven users to interact with the team directly and for us to engage users in order to grow Ravencoin ! \n\n' +
-            '__**GROUND RULES**__\n' +
-            '1. Be respectful to other community members. Harassment will not be tolerated \n' +
-            '2. Do not spam, advertise or post referral links outside of the respective provided channels! \n' +
-            '3. All software linked should be Open Source and we would appreciate them to be GitHub links for the communities safety \n' +
-            '4. Use appropriate channels for your discussions/questions. If you are looking for help with RAVEN use #helpdesk, for price and market discussion use #trader-talk\n' +
-            '5. #thenest discussions should be at least somewhat related to Raven. \n\n' +
-            '__**Helpful hints & links**__\n' +
-            '1. Type !tip help to interact with our Tipbot which can be used to send and receive Raven Coins (RVN). **Enable 2FA in your Discord account settings!** \n' +
-            '2. Backing up your Raven wallet is your responsbility!\n' +
-            '3. Are you a dev? Check out the #development channel and also use `!addrole Developer` \n' +
-            '4. Check Pinned posts in each channel they provide relative and useful info to that channels topic \n\n' +
-            '**Donations**\n' +
-            'Development Donation Address: [RW3x4EfTRAtPV2DeKexwFgp8wb4TSYebZA](https://rvn.hash4.life/address/RW3x4EfTRAtPV2DeKexwFgp8wb4TSYebZA)\n' +
-            '100% of collected funds will be used for things like new pools, added network tools for RVN, new mining clients, and further code development.\n\n' +
-            'Marketing Donation Address: [RXYnS1zrMMSiphwaGemdck66fawqrUFJkv](https://rvn.hash4.life/address/RXYnS1zrMMSiphwaGemdck66fawqrUFJkv)\n' +
-            '100% of collected funds will be used for things like running ads, translations, graphics, videos, and any other applicable needs.\n',
+          'This community allows Raven users to interact with the team directly and for us to engage users in order to grow Ravencoin ! \n\n' +
+          ':red_circle: __**GROUND RULES**__:red_circle:\n' +
+          '1. We welcome constructive criticism but have zero tolerance for aggressive or entitled demands. \n' +
+          '2. Be respectful to other community members. Harassment will not be tolerated!! \n' +
+          '3. Do not spam, advertise or post referral links outside of the respective provided channels! \n' +
+          '4. Do bot beg for coins. \n' +
+          '5. All software linked should be Open Source and we would appreciate them to be GitHub links for the communities safety. \n' +
+          '6. No spamming or flooding the chat with messages or unsolicitated DMs.\n' +
+          '7. Do not use the @ everyone / @ here ping without permission.\n' +
+          '8. Do not cause a nuisance in the community, repeated complaints from several members will lead to administrative action.\n' +
+          '9. Do not argue with staff. Decisions are final.\n' +
+          '10. Impersonating a Staff member will result in an IMMEDIATE ban! \n' +
+          '12. No inappropriate links, this INC: Screamer, Porn, NSFW or anything else of that nature.\n' +
+          '13. Don\'t troll people asking for support\n' +
+          '14. Do not reveal private information about any individuals or corporate entities. \n' +
+          '15. Do not engage in any other excessively disruptive behavior.\n' +
+          '16. if you have any issues with user feel free to reach out to either a Moderator(Red) or Admin(Green) \n' +
+          '\n' +
+          '__**Helpful hints & links**__\n' +
+          '1. Type !tip help to interact with our Tipbot which can be used to send and receive Raven Coins (RVN). **Enable 2FA in your Discord account settings!** \n' +
+          '2. Backing up your Raven wallet is your responsbility!\n' +
+          '3. Are you a dev? Check out the #development channel and also use `!addrole Developer` \n' +
+          '4. Check Pinned posts in each channel they provide relative and useful info to that channels topic',
           fields: [
             {
               name: 'Official Site',

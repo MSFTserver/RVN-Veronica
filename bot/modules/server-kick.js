@@ -1,4 +1,5 @@
 let hasPerms = require('../helpers.js').hasPerms;
+let inPrivate = require('../helpers.js').inPrivate;
 let config = require('config');
 let modLogChannel = config.get('moderation').modLogChannel;
 let pm2Name = config.get('General').pm2Name;
@@ -10,6 +11,10 @@ exports.kick = {
   usage: '<@username> <reason>',
   description: ':desktop: :cop: kick a user :cop: :desktop:',
   process: function(bot, msg, suffix) {
+    if (inPrivate(msg)) {
+      msg.channel.send('You Can Not Use This Command In DMs!');
+      return;
+    }
     if (!hasPerms(msg)) {
       msg.channel.send(
         'you must have the kick members permission to use this command'

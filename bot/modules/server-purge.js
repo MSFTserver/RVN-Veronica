@@ -10,7 +10,8 @@ exports.commands = ['purge'];
 
 exports.purge = {
   usage: '<number of messages>',
-  description: ':desktop: :cop: Deletes message from current channel :cop: :desktop:\n**!purge** <#channel-name/@ username> <number of messages>\n     :desktop: :cop: Deletes Messages from User, Channel :cop: :desktop:',
+  description:
+    ':desktop: :cop: Deletes message from current channel :cop: :desktop:\n**!purge** <#channel-name/@ username> <number of messages>\n     :desktop: :cop: Deletes Messages from User, Channel :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {
       msg.channel.send('You Cant Purge Message In DMs!');

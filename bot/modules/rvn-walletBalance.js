@@ -6,14 +6,13 @@ let channelID = config.get('General').Channels.botspam;
 let explorerApiUrl = config.get('General').urls.explorerApiUrl;
 let coinSymbol = config.get('General').urls.CoinSymbol;
 
-exports.commands = ['balance'];
+exports.commands = ['address'];
 
-exports.balance = {
+exports.address = {
   usage: '<Address>',
   description:
     'Displays current balance of ' + coinSymbol + ' address supplied',
   process: function(bot, msg, suffix) {
-    var command = '!balance';
     words = suffix
       .trim()
       .split(' ')
@@ -46,33 +45,84 @@ exports.balance = {
       msg.channel.send('please supply a address!');
       return;
     }
-    needle.get(explorerApiUrl + 'ext/getbalance/' + address, function(
-      error,
-      response
-    ) {
-      if (error || response.statusCode !== 200) {
-        msg.channel.send(explorerApiUrl + ' API is not available');
-      } else {
-        var data = response.body;
-        if (data.error) {
-          msg.channel.send('Error: ' + data.error);
-          return;
+    needle.get(
+      explorerApiUrl + 'api/addr/' + address + '/?noTxList=1',
+      function(error, response) {
+        if (error || response.statusCode !== 200) {
+          msg.channel.send(explorerApiUrl + ' API is not available');
         }
-        var balance = data.split('.');
-        var description =
-          'Current balance: ' +
-          numberWithCommas(balance[0]) +
-          '.' +
-          balance[1] +
-          ' ' +
-          coinSymbol +
-          '';
+        var data = response.body;
+        var balance = data.balance;
+        var totalReceived = data.totalReceived;
+        var totalSent = data.totalSent;
+        var unconfirmedBalance = data.unconfirmedBalance;
+        var txApperances = data.txApperances;
+        if (unconfirmedBalance > 0) {
+          var unconfirmedTxApperances = data.unconfirmedTxApperances;
+          var description =
+            'Details for **' +
+            address +
+            '**\n' +
+            'Balance: **' +
+            numberWithCommas(balance) +
+            ' ' +
+            coinSymbol +
+            '**\n' +
+            'Received: **' +
+            numberWithCommas(totalReceived) +
+            ' ' +
+            coinSymbol +
+            '**\n' +
+            'Sent: **' +
+            numberWithCommas(totalSent) +
+            ' ' +
+            coinSymbol +
+            '**\n\n' +
+            '# of tx: **' +
+            numberWithCommas(txApperances) +
+            ' ' +
+            coinSymbol +
+            '**\n' +
+            'Unconfirmed Balance: **' +
+            numberWithCommas(unconfirmedBalance) +
+            ' ' +
+            coinSymbol +
+            '**\n' +
+            'Unconfirmed # of tx: **' +
+            numberWithCommas(unconfirmedTxApperances) +
+            '**';
+        } else {
+          var description =
+            'Details for **' +
+            address +
+            '**\n' +
+            'Balance: **' +
+            numberWithCommas(balance) +
+            ' ' +
+            coinSymbol +
+            '**\n' +
+            'Received: **' +
+            numberWithCommas(totalReceived) +
+            ' ' +
+            coinSymbol +
+            '**\n' +
+            'Sent: **' +
+            numberWithCommas(totalSent) +
+            ' ' +
+            coinSymbol +
+            '**\n' +
+            '# of tx: **' +
+            numberWithCommas(txApperances) +
+            '**';
+        }
         msg.channel.send(description);
         return;
       }
-    });
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
+    );
+    const numberWithCommas = x => {
+      var parts = x.toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return parts.join('.');
+    };
   }
 };

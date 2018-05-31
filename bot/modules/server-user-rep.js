@@ -14,9 +14,13 @@ exports.rep = {
   description:
     'check your reputation\n     (rep is awarded 1 per message sent)\n**!rep give <@ username> <amount>**\n     :desktop: :cop: gives specified amoutn of rep to user :cop: :desktop:\n**!rep take <@ username> <amount>**\n    :desktop: :cop: takes specified amount of rep from user :cop: :desktop:',
   process: function(bot, msg, suffix) {
-    if (!inPrivate(msg) && !inSpam(msg)) {
+    if (inPrivate(msg)) {
+      msg.channel.send('You Can Not Use This Command In DMs!');
+      return;
+    }
+    if (!inSpam(msg)) {
       msg.channel.send(
-        'Please use <#' + channelID + '> or DMs to talk to reputation bot.'
+        'Please use <#' + channelID + '> to talk to reputation bot.'
       );
       return;
     }
@@ -214,7 +218,7 @@ exports.rep = {
     }
     function getValidatedAmount(amount) {
       amount = amount.trim();
-      return amount.match(/^[0-9]+(\.[0-9]+)?$/) ? amount : null;
+      return amount.match(/^[.0-9]+(\.[0-9]+)?$/) ? amount : null;
     }
   }
 };

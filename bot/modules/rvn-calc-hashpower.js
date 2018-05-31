@@ -43,9 +43,11 @@ exports.hashpower = {
       msg.channel.send('Please Specify a hashrate in Mh/s!');
       return;
     }
-    var fiat = words[1 + offset].toUpperCase();
-    if (!fiat) {
+    var checkFiat = words[1 + offset].toUpperCase();
+    if (!checkFiat) {
       var fiat = 'USD';
+    } else {
+      var fiat = words[1 + offset].toUpperCase()
     }
     needle.get(cmcApiUrl + '?limit=0', function(error, response) {
       if (response.statusCode !== 200) {

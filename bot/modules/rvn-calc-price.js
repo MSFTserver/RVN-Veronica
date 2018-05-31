@@ -325,7 +325,7 @@ exports.price = {
           );
         }
       } else {
-        JSON1 = response.body;
+        var JSON1 = response.body;
         if (
           Number(JSON1.findIndex(symbols => symbols.symbol == currency1)) != -1
         ) {

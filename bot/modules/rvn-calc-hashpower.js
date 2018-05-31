@@ -315,7 +315,7 @@ exports.hashpower = {
           );
         }
       } else {
-        JSON1 = response.body;
+        var JSON1 = response.body;
         if (Number(JSON1.findIndex(symbols => symbols.symbol == fiat)) != -1) {
           var hasMatch = true;
         } else {
@@ -711,7 +711,7 @@ exports.hashpower = {
               var Otherprice = response.body[0][newdata];
               var sign = 'CLP$';
             }
-            if (FIAT == 'CNY') {
+            if (fiat == 'CNY') {
               var newdata = 'price_' + fiat.toLowerCase();
               var Otherprice = response.body[0][newdata];
               var sign = '¥';

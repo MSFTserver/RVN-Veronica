@@ -48,7 +48,6 @@ exports.block = {
         return n !== '';
       });
     if (words[0] == 'number') {
-      var block = getValidatedAmount(words[1]);
       getBlockbyNumber(block);
     } else if (words[0] == 'hash') {
       var block = words[1];
@@ -2314,6 +2313,13 @@ exports.block = {
             );
           }
         } else {
+          var isNaN = getValidatedAmount(block);
+          if(!isNaN){
+            msg.channel.send('Please specify a number for the block');
+            return;
+          } else {
+            var block = isNaN;
+          }
           if (!block) {
             var Height = response.body.info.blocks;
             var previousHeight = Number(response.body.info.blocks) - 1;

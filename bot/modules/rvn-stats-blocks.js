@@ -48,8 +48,14 @@ exports.block = {
         return n !== '';
       });
     if (words[0] == 'number') {
-      var block = words[1];
-      getBlockbyNumber(block);
+      var isNaN = getValidatedAmount(words[1]);
+      if (!isNaN) {
+        msg.channel.send('Please specify a number for the block');
+        return;
+      } else {
+        var block = words[1]
+        getBlockbyNumber(block);
+      }
     } else if (words[0] == 'hash') {
       var block = words[1];
       getBlockbyHash(block);
@@ -2320,7 +2326,7 @@ exports.block = {
             var currentBlock = true;
           } else {
             var isNaN = getValidatedAmount(block);
-            if(!isNaN){
+            if (!isNaN) {
               msg.channel.send('Please specify a number for the block');
               return;
             } else {

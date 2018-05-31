@@ -4989,9 +4989,9 @@ exports.block = {
       amount = amount.trim();
       return amount.match(/^[.0-9]+(\.[0-9]+)?$/) ? amount : null;
     }
-    function getValidatedHash(amount) {
+    function getValidatedHash(hash) {
       hash = hash.trim();
-      return hash.match(/^[a-zA-Z0-9]{64}$/) ? amount : null;
+      return hash.match(/^[a-zA-Z0-9]{64}$/) ? hash : null;
     }
     const numberWithCommas = x => {
       var parts = x.toString().split('.');

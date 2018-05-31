@@ -64,8 +64,10 @@ exports.block = {
         error,
         response
       ) {
-        if (error || response.statusCode !== 200) {
+        if (response.statusCode !== 200) {
           msg.channel.send(explorerApiUrl + ' API is not available');
+        } else if (response.StatusCode == 404) {
+          msg.channel.send('Block Hash Not Found!')
         } else {
           var currentHeight = response.body.height;
           var previousHeight = currentHeight - 1;

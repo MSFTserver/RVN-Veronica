@@ -55,7 +55,11 @@ exports.block = {
         }
         getBlockbyNumber(block);
     } else if (words[0] == 'hash') {
-      var block = words[1];
+      if (!words[1]) {
+        var block = null;
+      } else {
+        var block = words[1];
+      }
       getBlockbyHash(block);
     } else if (!words[0]) {
       var block = null;
@@ -2328,10 +2332,9 @@ exports.block = {
               msg.channel.send('Please specify a number for the block');
               return;
             } else {
-              var block = isNaN;
+              var Height = isNaN;
+              var previousHeight = Number(Height) - 1;
             }
-            var Height = block;
-            var previousHeight = Number(block) - 1;
           }
           needle.get(
             explorerApiUrl + 'api/block-index/' + Height,

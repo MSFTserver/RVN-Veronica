@@ -1970,6 +1970,9 @@ exports.block = {
                               ' ' +
                               coinSymbol +
                               '\n' +
+                              'Full Hash: ' +
+                              block +
+                              '\n' +
                               'Algo Hash: ' +
                               BlockAlgo +
                               '\n' +
@@ -4937,6 +4940,9 @@ exports.block = {
                                           numberWithCommas(Reward) +
                                           ' ' +
                                           coinSymbol +
+                                          '\n' +
+                                          'Full Hash: ' +
+                                          BlockHash +
                                           '\n' +
                                           'Algo Hash: ' +
                                           BlockAlgo +

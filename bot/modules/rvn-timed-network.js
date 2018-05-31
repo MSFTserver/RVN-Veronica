@@ -3548,6 +3548,9 @@ exports.TimedHash = function(bot) {
                                         ' ' +
                                         coinSymbol +
                                         '\n' +
+                                        'Full Hash: ' +
+                                        currentBlockHash +
+                                        '\n' +
                                         'Algo Hash: ' +
                                         currentBlockAlgo +
                                         '\n' +

@@ -2878,6 +2878,9 @@ exports.network = {
                                         ' ' +
                                         coinSymbol +
                                         '\n' +
+                                        'Full Hash: ' + 
+                                        currentBlockHash +
+                                        '\n' +
                                         'Algo Hash: ' +
                                         currentBlockAlgo +
                                         '\n' +

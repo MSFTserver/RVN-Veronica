@@ -36,7 +36,7 @@ exports.onUserJoin = function(bot) {
             '9. Do not argue with staff. Decisions are final.\n' +
             '10. Impersonating a Staff member will result in an IMMEDIATE ban! \n' +
             '12. No inappropriate links, this INC: Screamer, Porn, NSFW or anything else of that nature.\n' +
-            '13. Don\'t troll people asking for support\n' +
+            "13. Don't troll people asking for support\n" +
             '14. Do not reveal private information about any individuals or corporate entities. \n' +
             '15. Do not engage in any other excessively disruptive behavior.\n' +
             '16. if you have any issues with user feel free to reach out to either a Moderator(Red) or Admin(Green) \n' +
@@ -66,7 +66,7 @@ exports.onUserJoin = function(bot) {
             },
             {
               name: 'Block Explorer',
-              value: '[rvn.hash4.life](https://rvn.hash4.life/)',
+              value: '[ravencoin.network](https://ravencoin.network)',
               inline: true
             },
             {
@@ -105,9 +105,7 @@ exports.onUserJoin = function(bot) {
   });
 };
 
-exports.commands = [
-  'welcome' // command that is in this file, every command needs it own export as shown below
-];
+exports.commands = ['welcome'];
 
 exports.welcome = {
   usage: '<@username>',
@@ -143,29 +141,29 @@ exports.welcome = {
         embed: {
           title: '*Click here for more info about Raven!*',
           description:
-          'This community allows Raven users to interact with the team directly and for us to engage users in order to grow Ravencoin ! \n\n' +
-          ':red_circle: __**GROUND RULES**__:red_circle:\n' +
-          '1. We welcome constructive criticism but have zero tolerance for aggressive or entitled demands. \n' +
-          '2. Be respectful to other community members. Harassment will not be tolerated!! \n' +
-          '3. Do not spam, advertise or post referral links outside of the respective provided channels! \n' +
-          '4. Do bot beg for coins. \n' +
-          '5. All software linked should be Open Source and we would appreciate them to be GitHub links for the communities safety. \n' +
-          '6. No spamming or flooding the chat with messages or unsolicitated DMs.\n' +
-          '7. Do not use the @ everyone / @ here ping without permission.\n' +
-          '8. Do not cause a nuisance in the community, repeated complaints from several members will lead to administrative action.\n' +
-          '9. Do not argue with staff. Decisions are final.\n' +
-          '10. Impersonating a Staff member will result in an IMMEDIATE ban! \n' +
-          '12. No inappropriate links, this INC: Screamer, Porn, NSFW or anything else of that nature.\n' +
-          '13. Don\'t troll people asking for support\n' +
-          '14. Do not reveal private information about any individuals or corporate entities. \n' +
-          '15. Do not engage in any other excessively disruptive behavior.\n' +
-          '16. if you have any issues with user feel free to reach out to either a Moderator(Red) or Admin(Green) \n' +
-          '\n' +
-          '__**Helpful hints & links**__\n' +
-          '1. Type !tip help to interact with our Tipbot which can be used to send and receive Raven Coins (RVN). **Enable 2FA in your Discord account settings!** \n' +
-          '2. Backing up your Raven wallet is your responsbility!\n' +
-          '3. Are you a dev? Check out the #development channel and also use `!addrole Developer` \n' +
-          '4. Check Pinned posts in each channel they provide relative and useful info to that channels topic',
+            'This community allows Raven users to interact with the team directly and for us to engage users in order to grow Ravencoin ! \n\n' +
+            ':red_circle: __**GROUND RULES**__:red_circle:\n' +
+            '1. We welcome constructive criticism but have zero tolerance for aggressive or entitled demands. \n' +
+            '2. Be respectful to other community members. Harassment will not be tolerated!! \n' +
+            '3. Do not spam, advertise or post referral links outside of the respective provided channels! \n' +
+            '4. Do bot beg for coins. \n' +
+            '5. All software linked should be Open Source and we would appreciate them to be GitHub links for the communities safety. \n' +
+            '6. No spamming or flooding the chat with messages or unsolicitated DMs.\n' +
+            '7. Do not use the @ everyone / @ here ping without permission.\n' +
+            '8. Do not cause a nuisance in the community, repeated complaints from several members will lead to administrative action.\n' +
+            '9. Do not argue with staff. Decisions are final.\n' +
+            '10. Impersonating a Staff member will result in an IMMEDIATE ban! \n' +
+            '12. No inappropriate links, this INC: Screamer, Porn, NSFW or anything else of that nature.\n' +
+            "13. Don't troll people asking for support\n" +
+            '14. Do not reveal private information about any individuals or corporate entities. \n' +
+            '15. Do not engage in any other excessively disruptive behavior.\n' +
+            '16. if you have any issues with user feel free to reach out to either a Moderator(Red) or Admin(Green) \n' +
+            '\n' +
+            '__**Helpful hints & links**__\n' +
+            '1. Type !tip help to interact with our Tipbot which can be used to send and receive Raven Coins (RVN). **Enable 2FA in your Discord account settings!** \n' +
+            '2. Backing up your Raven wallet is your responsbility!\n' +
+            '3. Are you a dev? Check out the #development channel and also use `!addrole Developer` \n' +
+            '4. Check Pinned posts in each channel they provide relative and useful info to that channels topic',
           fields: [
             {
               name: 'Official Site',
@@ -186,7 +184,7 @@ exports.welcome = {
             },
             {
               name: 'Block Explorer',
-              value: '[threeeyed.info](http://threeeyed.info/)',
+              value: '[ravencoin.network](https://ravencoin.network)',
               inline: true
             },
             {

@@ -81,7 +81,7 @@ exports.block = {
           } else {
             var isHash = getValidatedHash(block);
             if (!isHash) {
-              msg.channel.send('Please specify a number for the block');
+              msg.channel.send('Please specify a Block Hash');
               return;
             }
           }

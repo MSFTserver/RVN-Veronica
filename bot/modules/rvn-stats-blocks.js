@@ -2336,7 +2336,6 @@ exports.block = {
     }
   });
 }
-});
     }
     function getBlockbyNumber(block) {
       needle.get(explorerApiUrl + 'api/status', function(error, response) {

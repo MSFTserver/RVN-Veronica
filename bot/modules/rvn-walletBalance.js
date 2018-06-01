@@ -370,7 +370,7 @@ exports.address = {
                 'Network connect timeout error'
             );
           }
-        }
+        } else {
         var data = response.body;
         var balance = data.balance;
         var totalReceived = data.totalReceived;
@@ -437,6 +437,7 @@ exports.address = {
         }
         msg.channel.send(description);
         return;
+		}
       }
     );
     const numberWithCommas = x => {

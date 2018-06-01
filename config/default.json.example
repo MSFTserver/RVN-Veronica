@@ -41,7 +41,7 @@
           //this explorer has to tie to an insight api!
           "explorerApiUrl": "https://ravencoin.network/",
           "cmcUrl": "https://coinmarketcap.com/currencies/",
-          "cmcApiUrl": "https://api.coinmarketcap.com/v1/ticker/"
+          "cmcApiUrl": "https://api.coinmarketcap.com/v2/"
       },
       //define channels for global usage
       "Channels": {

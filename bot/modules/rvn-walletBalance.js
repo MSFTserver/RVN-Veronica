@@ -371,73 +371,73 @@ exports.address = {
             );
           }
         } else {
-        var data = response.body;
-        var balance = data.balance;
-        var totalReceived = data.totalReceived;
-        var totalSent = data.totalSent;
-        var unconfirmedBalance = data.unconfirmedBalance;
-        var txApperances = data.txApperances;
-        if (unconfirmedBalance > 0) {
-          var unconfirmedTxApperances = data.unconfirmedTxApperances;
-          var description =
-            'Details for **' +
-            address +
-            '**\n' +
-            'Balance: **' +
-            numberWithCommas(balance) +
-            ' ' +
-            coinSymbol +
-            '**\n' +
-            'Received: **' +
-            numberWithCommas(totalReceived) +
-            ' ' +
-            coinSymbol +
-            '**\n' +
-            'Sent: **' +
-            numberWithCommas(totalSent) +
-            ' ' +
-            coinSymbol +
-            '**\n\n' +
-            '# of tx: **' +
-            numberWithCommas(txApperances) +
-            ' ' +
-            coinSymbol +
-            '**\n' +
-            'Unconfirmed Balance: **' +
-            numberWithCommas(unconfirmedBalance) +
-            ' ' +
-            coinSymbol +
-            '**\n' +
-            'Unconfirmed # of tx: **' +
-            numberWithCommas(unconfirmedTxApperances) +
-            '**';
-        } else {
-          var description =
-            'Details for **' +
-            address +
-            '**\n' +
-            'Balance: **' +
-            numberWithCommas(balance) +
-            ' ' +
-            coinSymbol +
-            '**\n' +
-            'Received: **' +
-            numberWithCommas(totalReceived) +
-            ' ' +
-            coinSymbol +
-            '**\n' +
-            'Sent: **' +
-            numberWithCommas(totalSent) +
-            ' ' +
-            coinSymbol +
-            '**\n' +
-            '# of tx: **' +
-            numberWithCommas(txApperances) +
-            '**';
+          var data = response.body;
+          var balance = data.balance;
+          var totalReceived = data.totalReceived;
+          var totalSent = data.totalSent;
+          var unconfirmedBalance = data.unconfirmedBalance;
+          var txApperances = data.txApperances;
+          if (unconfirmedBalance > 0) {
+            var unconfirmedTxApperances = data.unconfirmedTxApperances;
+            var description =
+              'Details for **' +
+              address +
+              '**\n' +
+              'Balance: **' +
+              numberWithCommas(balance) +
+              ' ' +
+              coinSymbol +
+              '**\n' +
+              'Received: **' +
+              numberWithCommas(totalReceived) +
+              ' ' +
+              coinSymbol +
+              '**\n' +
+              'Sent: **' +
+              numberWithCommas(totalSent) +
+              ' ' +
+              coinSymbol +
+              '**\n\n' +
+              '# of tx: **' +
+              numberWithCommas(txApperances) +
+              ' ' +
+              coinSymbol +
+              '**\n' +
+              'Unconfirmed Balance: **' +
+              numberWithCommas(unconfirmedBalance) +
+              ' ' +
+              coinSymbol +
+              '**\n' +
+              'Unconfirmed # of tx: **' +
+              numberWithCommas(unconfirmedTxApperances) +
+              '**';
+          } else {
+            var description =
+              'Details for **' +
+              address +
+              '**\n' +
+              'Balance: **' +
+              numberWithCommas(balance) +
+              ' ' +
+              coinSymbol +
+              '**\n' +
+              'Received: **' +
+              numberWithCommas(totalReceived) +
+              ' ' +
+              coinSymbol +
+              '**\n' +
+              'Sent: **' +
+              numberWithCommas(totalSent) +
+              ' ' +
+              coinSymbol +
+              '**\n' +
+              '# of tx: **' +
+              numberWithCommas(txApperances) +
+              '**';
+          }
+          msg.channel.send(description);
+          return;
         }
-        msg.channel.send(description);
-        return;
-		}
       }
     );
     const numberWithCommas = x => {

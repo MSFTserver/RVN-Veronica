@@ -317,7 +317,7 @@ exports.hashpower = {
           );
         }
       } else {
-        var JSON1 = response.body;
+        var JSON1 = response.body.data;
         if (
           Number(JSON1.findIndex(symbols => symbols.symbol == coinSymbol)) != -1
         ) {

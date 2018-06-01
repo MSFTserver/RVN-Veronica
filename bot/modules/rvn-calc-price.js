@@ -435,7 +435,7 @@ exports.price = {
         var position = Number(
           JSON1.findIndex(symbols => symbols.symbol == symbol1)
         );
-        if (!JSON1[position]) {
+        if (Number(position) == -1) {
           msg.channel.send('please use atleast 1 crypto currency!');
           return;
         }
@@ -445,7 +445,6 @@ exports.price = {
           msg.channel.send('Invalid Alt Coin');
           return;
         }
-        var name = response.body[position].id;
         needle.get(
           cmcApiUrl + 'ticker/' + coinID + '/?convert=' + symbol2,
           function(error, response) {

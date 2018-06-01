@@ -353,11 +353,11 @@ exports.lambo = {
             var index = JSON1.findIndex(symbols => symbols.symbol == coin);
           }
           var coinJson = JSON1[index];
-          var coinID = coinJson.id;
-          if (!hasMatch || !coinJson || !coinID) {
+          if (!hasMatch || !coinJson) {
             msg.channel.send('Invalid Alt Coin');
             return;
           }
+          var coinID = coinJson.id;
           needle.get(cmcApiUrl + 'ticker/' + coinID + '/?convert=USD', function(
             error,
             response

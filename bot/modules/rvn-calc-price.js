@@ -442,11 +442,11 @@ exports.price = {
           var index = JSON1.findIndex(symbols => symbols.symbol == symbol1);
         }
         var coinJson = JSON1[index];
-        var coinID = coinJson.id;
-        if (!hasMatch || !coinJson || !coinID) {
+        if (!hasMatch || !coinJson) {
           msg.channel.send('Invalid Alt Coin, Please specify atleast 1!');
           return;
         }
+        var coinID = coinJson.id;
         needle.get(
           cmcApiUrl + 'ticker/' + coinID + '/?convert=' + symbol2,
           function(error, response) {

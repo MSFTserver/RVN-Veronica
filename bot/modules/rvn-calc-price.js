@@ -433,13 +433,13 @@ exports.price = {
           }
         }
         if (
-          Number(JSON1.findIndex(symbols => symbols.symbol == coin)) != -1
+          Number(JSON1.findIndex(symbols => symbols.symbol == symbol1)) != -1
         ) {
           var hasMatch = true;
-          var index = JSON1.findIndex(symbols => symbols.symbol == coin);
+          var index = JSON1.findIndex(symbols => symbols.symbol == symbol1);
         } else {
           var hasMatch = false;
-          var index = JSON1.findIndex(symbols => symbols.symbol == coin);
+          var index = JSON1.findIndex(symbols => symbols.symbol == symbol1);
         }
         var coinJson = JSON1[index];
         var coinID = coinJson.id;

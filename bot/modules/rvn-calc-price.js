@@ -432,17 +432,19 @@ exports.price = {
             }
           }
         }
-        var position = Number(
-          JSON1.findIndex(symbols => symbols.symbol == symbol1)
-        );
-        if (Number(position) == -1) {
-          msg.channel.send('please use atleast 1 crypto currency!');
-          return;
+        if (
+          Number(JSON1.findIndex(symbols => symbols.symbol == coin)) != -1
+        ) {
+          var hasMatch = true;
+          var index = JSON1.findIndex(symbols => symbols.symbol == coin);
+        } else {
+          var hasMatch = false;
+          var index = JSON1.findIndex(symbols => symbols.symbol == coin);
         }
-        var coinJson = JSON1[position];
-        var symbol2 = coinJson.id;
-        if (!coinJson || !symbol2) {
-          msg.channel.send('Invalid Alt Coin');
+        var coinJson = JSON1[index];
+        var coinID = coinJson.id;
+        if (!hasMatch || !coinJson || !coinID) {
+          msg.channel.send('Invalid Alt Coin, Please specify atleast 1!');
           return;
         }
         needle.get(

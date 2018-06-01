@@ -43,7 +43,7 @@ exports.lambo = {
       if (!words[0]) {
         var coin = 'RVN';
       } else {
-        var coin = words[0];
+        var coin = words[0].toUpperCase();
       }
       if (!words[1]) {
         var amount = 1;

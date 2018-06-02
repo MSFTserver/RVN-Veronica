@@ -41,8 +41,7 @@ exports.update = {
         cmd.run(
           'cd ' +
             botDir +
-            ' && git pull origin master && npm install && pm2 reload ' +
-            pm2Name
+            ' git pull origin master && npm install && pm2 update all'
         );
       } else {
         bot.channels
@@ -56,8 +55,7 @@ exports.update = {
           );
         shell.cd(botDir);
         shell.exec(
-          'git pull origin master && npm install && pm2 reload ' + pm2Name
-        );
+          'git pull origin master && npm install && pm2 update all');
       }
     }
   }

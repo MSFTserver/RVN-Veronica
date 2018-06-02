@@ -4,6 +4,7 @@ module.exports = {
       name: 'veronica',
       script: './bot/bot.js',
       cwd: 'Location-of-Bot-Dir',
+      watch: true,
       instance_id_env: '0',
       error_file:
         'Location-of-Bot-Dir/Logs/veronica-err.log',

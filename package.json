@@ -27,11 +27,8 @@
     "yarn": "^1.5.1"
   },
   "scripts": {
-    "prettier": "prettier --single-quote true * --write",
-    "lint": "prettier --single-quote true --write bot/**/*.js",
     "precommit": "prettier --single-quote true --write \"{bot,.}/modules/*.{js,json}\"",
-    "prebuild": "call ./windows-install.bat",
-    "rebuild": "git pull origin master && npm install && pm2 delete veronica",
+    "rebuild": "git pull origin master && npm install && pm2 update all",
     "start": "pm2 start ecosystem.config.js"
   },
   "devDependencies": {

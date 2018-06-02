@@ -210,7 +210,7 @@ https://discordapp.com/oauth2/authorize?client_id=INSERT_CLIENT_ID_HERE&scope=bo
       * node - `node -v`
         * npm - `npm -v`
           * pm2 - `pm2 -v`
-          * yarn - `yarn -v`
+          * yarn - `yarn --version`
 
 3) start the bot with `yarn start` or `pm2 start ecosystem.config.js` in the bots root directory
 

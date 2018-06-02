@@ -71,7 +71,7 @@ echo     dbPath: %SYSTEMDRIVE%\data\db
 ping localhost -n 4 >nul
 echo ___________________________________________________
 echo Installing mongo as service!
-start "mongodb" /i C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe --config "C:\Program Files\MongoDB\Server\3.6\mongod.cfg" --install
+start "mongodb" /i %SYSTEMDRIVE%\Program Files\MongoDB\Server\3.6\bin\mongod.exe --config "%SYSTEMDRIVE%\Program Files\MongoDB\Server\3.6\mongod.cfg" --install
 ping localhost -n 4 >nul
 net start MongoDB
 ping localhost -n 4 >nul

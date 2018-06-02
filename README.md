@@ -2,7 +2,6 @@
 
 (This README will be updated along with bot updates)
 
-<h3>
 <details style="font-size=30px;"><summary><u>Features:</u></summary>
 
 * Helper
@@ -174,53 +173,69 @@
 * [PM2 support](http://pm2.keymetrics.io/)
 
 </details>
-</h3>
 
-## Auto-Installation
+<details><summary><u>Installation</u></summary>
 
-for Windows Users Only!
+## Create a Bot
 
-Create a bot and get the bot's API Token:
-https://discordapp.com/developers/applications/me
+1) Create a bot and get the bots Token and Client ID: https://discordapp.com/developers/applications/me
 
-Edit and rename example config to default.json in /config
+    1) After going to the link above click “new application”. Give it a name, picture and description.
 
-if yarn is already installed just run `yarn prebuild`,
+    2) Click “Create Bot User” and click “Yes, Do It!” when the dialog pops up.
 
-otherwise proceed to running the windows-install.bat file!
+    3) Copy down the token used to login and Client ID to invite your new bot to your discord server.
 
-and finally `yarn start`
-
-ENJOY!
-
-## Manual-Installation
-
-### Requirements
-
-* mongodb > 3.2
-* git > 2.0.0
-* node > 8.0.0
-* npm > 0.12.x
-* pm2 > latest
-* yarn ( install with npm install -g yarn if not installed )
-
-Create a bot and get the bot's API Token:
-https://discordapp.com/developers/applications/me
-
-Edit the ecosystem.json.js file to match your directories
-
-Edit and rename example config to default.json in /config, then cd to bot directory
-
-make sure you have node, git, and MongoDB installed then run:
+2) invite the bot to your server using the link below and entering the Client ID or generate your own [Here :link:](https://discordapi.com/permissions.html)
 
 ```
-npm install
-npm yarn -g
-npm pm2 -g
-yarn start
+https://discordapp.com/oauth2/authorize?client_id=INSERT_CLIENT_ID_HERE&scope=bot&permissions=27648
 ```
 
-## Development
+## Edit Files
+
+1) Edit and rename `default.json.example` to `default.json` in `/config`.
+
+2) Edit and rename `ecosystem.json.js.example` to `ecosystem.json.js` in the root folder to match the correct directories.
+
+## Install Bot
+
+### Auto - Windows
+
+1) run the `windows-install.bat` file to install needed tools, Not on windows or don't want to auto install follow the instructions below for manual Installation.
+
+2) verify the following tools are installed by running the commands below in cmd:
+      * mongodb - `if exist "C:\Program Files\MongoDB" (echo folder exists) else (echo does not exist)`
+      * git - `git --version`
+      * node - `node -v`
+        * npm - `npm -v`
+          * pm2 - `pm2 -v`
+          * yarn - `yarn -v`
+
+3) start the bot with `yarn start` or `pm2 start ecosystem.config.js` in the bots root directory
+
+    1) if the bot fails to start and throws missing npm package errors simply run `npm install` again in the bots root directory
+
+### Manual - Linux/Mac
+
+1) Download and install the required tools listed below:
+
+      * [mongodb > 3.6](https://www.mongodb.com/download-center?jmp=nav#community)
+      * [git > 2.0.0](https://git-scm.com/downloads)
+      * [node > 8.0.0](https://nodejs.org/en/)
+        * [npm > 0.12.x](https://nodejs.org/en/)
+          * [pm2 > latest](http://pm2.keymetrics.io/)
+          * [yarn > latest](https://yarnpkg.com/en/docs/install)
+
+2) After the above tools have been installed run `npm install` in the bots root directory.
+
+    1) this may throw some errors on some systems not all packages are required for some systems, the bot will still run unless its a absolutely needed dependency.
+
+3) start the bot with `yarn start` or `pm2 start ecosystem.config.js` in the bots root directory
+
+</details>
+
+<details><summary><u>Development</u></summary>
 
 Be sure to run the command below before working on any code, this ensures
 prettier goes to work and keeps code to our standard.
@@ -229,7 +244,7 @@ prettier goes to work and keeps code to our standard.
 yarn install --production=false
 ```
 
-to run the prettier code use the following:
+to run the prettier on the code use the following:
 
 ```
 yarn precommit

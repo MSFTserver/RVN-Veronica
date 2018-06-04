@@ -353,7 +353,7 @@ exports.lambo = {
             var index = JSON1.findIndex(symbols => symbols.symbol == coin);
           }
           var coinJson = JSON1[index];
-          if (!hasMatch || !coinJson || !coinID) {
+          if (!hasMatch || !coinJson) {
             msg.channel.send('Invalid Alt Coin');
             return;
           }

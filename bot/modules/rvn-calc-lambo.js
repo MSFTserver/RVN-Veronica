@@ -344,6 +344,7 @@ exports.lambo = {
           }
         } else {
           let JSON1 = response.body.data;
+          let index, hasMatch;
           if (
             Number(JSON1.findIndex(symbols => symbols.symbol == coin)) != -1
           ) {

@@ -40,6 +40,7 @@ exports.lambo = {
         .filter(function(n) {
           return n !== '';
         });
+      let coin
       if (!words[0]) {
         let coin = 'RVN';
       } else {

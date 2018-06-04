@@ -54,8 +54,7 @@ exports.update = {
               '] Updating pm2 app from Git repo!'
           );
         shell.cd(botDir);
-        shell.exec(
-          'git pull origin master && npm install && pm2 update all');
+        shell.exec('git pull origin master && npm install && pm2 update all');
       }
     }
   }

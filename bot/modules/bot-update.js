@@ -1,4 +1,4 @@
-/*let cmd = require('node-cmd');
+let cmd = require('node-cmd');
 let shell = require('shelljs');
 let moment = require('moment-timezone');
 let isWindows = require('check-if-windows');
@@ -60,4 +60,3 @@ exports.update = {
     }
   }
 };
-*/

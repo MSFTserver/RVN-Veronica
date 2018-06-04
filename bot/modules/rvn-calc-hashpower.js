@@ -28,6 +28,10 @@ exports.hashpower = {
     let timestamp = moment()
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
+    if (!suffix) {
+      msg.channel.send('Please Specify a hashrate in Mh/s!\n!hash 10');
+      return;
+    }
     var words = suffix
       .trim()
       .split(' ')
@@ -40,7 +44,7 @@ exports.hashpower = {
     }
     var myhashrate = getValidatedAmount(words[0 + offset]);
     if (!myhashrate) {
-      msg.channel.send('Please Specify a hashrate in Mh/s!');
+      msg.channel.send('Please Specify a hashrate in Mh/s!\n!hash 10');
       return;
     }
     var checkFiat = words[1 + offset];

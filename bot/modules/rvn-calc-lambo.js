@@ -34,21 +34,21 @@ exports.lambo = {
     }
 
     function lamboCalc(bot, msg, suffix) {
-      var words = suffix
+      let words = suffix
         .trim()
         .split(' ')
         .filter(function(n) {
           return n !== '';
         });
       if (!words[0]) {
-        var coin = 'RVN';
+        let coin = 'RVN';
       } else {
-        var coin = words[0].toUpperCase();
+        let coin = words[0].toUpperCase();
       }
       if (!words[1]) {
-        var amount = 1;
+        let amount = 1;
       } else {
-        var amount = words[1];
+        let amount = words[1];
       }
       needle.get(cmcApiUrl + 'listings/', function(error, response) {
         if (response.statusCode !== 200) {
@@ -342,22 +342,22 @@ exports.lambo = {
             );
           }
         } else {
-          var JSON1 = response.body.data;
+          let JSON1 = response.body.data;
           if (
             Number(JSON1.findIndex(symbols => symbols.symbol == coin)) != -1
           ) {
-            var hasMatch = true;
-            var index = JSON1.findIndex(symbols => symbols.symbol == coin);
+            let hasMatch = true;
+            let index = JSON1.findIndex(symbols => symbols.symbol == coin);
           } else {
-            var hasMatch = false;
-            var index = JSON1.findIndex(symbols => symbols.symbol == coin);
+            let hasMatch = false;
+            let index = JSON1.findIndex(symbols => symbols.symbol == coin);
           }
-          var coinJson = JSON1[index];
+          let coinJson = JSON1[index];
           if (!hasMatch || !coinJson) {
             msg.channel.send('Invalid Alt Coin');
             return;
           }
-          var coinID = coinJson.id;
+          let coinID = coinJson.id;
           needle.get(cmcApiUrl + 'ticker/' + coinID + '/?convert=USD', function(
             error,
             response
@@ -679,14 +679,14 @@ exports.lambo = {
                 );
               }
             } else {
-              var rate = Number(response.body.data.quotes.USD.price);
-              var cost = 250000 / rate;
+              let rate = Number(response.body.data.quotes.USD.price);
+              let cost = 250000 / rate;
               if (amount <= 1) {
-                var message =
+                let message =
                   cost.toFixed(0) + ' ' + coin + ' = 1 Lambo Huracan';
               } else {
-                var cost = cost - amount;
-                var message =
+                let cost = cost - amount;
+                let message =
                   'Need **' +
                   cost.toFixed(0) +
                   ' ' +

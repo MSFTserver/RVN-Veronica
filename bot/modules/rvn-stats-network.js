@@ -137,11 +137,11 @@ exports.network = {
                                  newBlockArray.push(BlockArray);
                                }
                               }
-                              console.log(newBlockArray);
                               if (!newBlockArray[0]) {
                                 rvnSent = 0;
                                 rvnFees = 0;
                               } else {
+                                console.log(newBlockArray);
                                 var sentAmount = {};
                                 var feesAmount = {};
                                 for (var m = 0; m < newBlockArray.length; m++) {

@@ -168,13 +168,12 @@ exports.network = {
                                   i < BlockArray.length;
                                   i++
                                 ) {
+                                  var position = i++
                                   if (
-                                    BlockArray[i].hasOwnProperty(
-                                      'isCoinBase'
-                                    )
+                                    BlockArray[position].hasOwnProperty('isCoinBase')
                                   ) {
-                                    console.log(BlockArray[i]);
-                                    Winner.push(BlockArray[i]);
+                                    console.log(BlockArray[position]);
+                                    Winner.push(BlockArray[position]);
                                   }
                                 }
                                 for (

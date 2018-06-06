@@ -131,8 +131,9 @@ exports.network = {
                               var newBlockArray = [];
                               for (var l = 0; l < BlockArray.length; l++) {
                                 var position1 = l++
+                                console.log(BlockArray[position1].isCoinBase);
                                 if (
-                                  !BlockArray[position1].isCoinBase
+                                  BlockArray[position1].isCoinBase == true
                                 ) {
                                  newBlockArray.push(BlockArray);
                                }

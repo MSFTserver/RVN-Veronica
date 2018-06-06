@@ -141,7 +141,7 @@ exports.network = {
                                 rvnSent = 0;
                                 rvnFees = 0;
                               } else {
-                                console.log(newBlockArray);
+                                console.log(newBlockArray[0]);
                                 var sentAmount = [];
                                 var feesAmount = [];
                                 for (var m = 0; m < newBlockArray.length; m++) {

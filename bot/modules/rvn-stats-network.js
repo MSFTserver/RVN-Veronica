@@ -151,16 +151,16 @@ exports.network = {
                                 var WinnerAddys = [];
                                 for (
                                   var i = 0;
-                                  i < BlockArray.txs.length;
+                                  i < BlockArray.length;
                                   i++
                                 ) {
                                   var position = i++;
                                   if (
-                                    BlockArray.txs[position].hasOwnProperty(
+                                    BlockArray[position].hasOwnProperty(
                                       'isCoinBase'
                                     )
                                   ) {
-                                    Winner.push(BlockArray.txs[position]);
+                                    Winner.push(BlockArray[position]);
                                   }
                                 }
                                 for (

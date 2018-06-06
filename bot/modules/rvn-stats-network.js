@@ -139,7 +139,6 @@ exports.network = {
                                  newBlockArray.push(BlockArray);
                                }
                               }
-                              console.log(newBlockArray[0])
                               if (!newBlockArray[0]) {
                                 rvnSent = 0;
                                 rvnFees = 0;
@@ -153,6 +152,8 @@ exports.network = {
                                 }
                                 var rvnSent = sentAmount;
                                 var rvnFees = feesAmount;
+                                console.log(sentAmount);
+                                console.log(feesAmount);
                               }
                               if (!hasWinner) {
                                 var Winner = [];

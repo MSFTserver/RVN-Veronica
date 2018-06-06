@@ -129,8 +129,6 @@ exports.network = {
                               var BlockArray = response.body.txs;
                               var txs = BlockArray.length - 1;
                               var newBlockArray = [];
-                              var sentAmount = [];
-                              var feesAmount = [];
                               for (var l = 0; l < BlockArray.length; l++) {
                                 position = l++
                                 if (
@@ -142,13 +140,20 @@ exports.network = {
                                }
                               }
                               console.log(newBlockArray[0])
-                              for (var m = 0; m < newBlockArray.length; m++) {
-                                position = m++
-                                sentAmount.push(newBlockArray[m].valueIn);
-                                sentAmount.push(newBlockArray[m].fees);
+                              if (!newBlockArray[0]) {
+                                rvnSent = 0;
+                                rvnFees = 0;
+                              } else {
+                                var sentAmount = [];
+                                var feesAmount = [];
+                                for (var m = 0; m < newBlockArray.length; m++) {
+                                  position = m++
+                                  sentAmount.push(newBlockArray[m].valueIn);
+                                  sentAmount.push(newBlockArray[m].fees);
+                                }
+                                var rvnSent = sentAmount;
+                                var rvnFees = feesAmount;
                               }
-                              var rvnSent = sentAmount;
-                              var rvnFees = feesAmount;
                               if (!hasWinner) {
                                 var Winner = [];
                                 var WinnerAddys = [];

@@ -74,16 +74,16 @@ exports.network = {
                       } else {
                         var confirmations = response.body.confirmations;
                         var currentTime = Number(response.body.time);
+                        var BlockWinner =
+                          '[' +
+                          response.body.poolInfo.poolName +
+                          '](' +
+                          response.body.poolInfo.url +
+                          ')';
                         if (!response.body.poolInfo.poolName) {
                           var hasWinner = false;
                         } else {
                           var hasWinner = true;
-                          var BlockWinner =
-                            '[' +
-                            response.body.poolInfo.poolName +
-                            '](' +
-                            response.body.poolInfo.url +
-                            ')';
                         }
                         var Reward = Number(response.body.reward);
                         var BlockAlgo = BlockHash.substr(BlockHash.length - 16);

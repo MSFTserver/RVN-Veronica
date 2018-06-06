@@ -149,7 +149,7 @@ exports.network = {
                                 var feesAmount = [];
                                 for (var m = 0; m < newBlockArray.length; m++) {
                                   position = m++
-                                  console.log(newBlockArray[position]);
+                                  console.log(newBlockArray[position].valueOut);
                                   sentAmount.push(newBlockArray[position].valueOut);
                                   sentAmount.push(newBlockArray[position].fees);
                                 }

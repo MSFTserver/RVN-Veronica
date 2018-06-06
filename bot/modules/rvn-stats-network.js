@@ -159,9 +159,10 @@ exports.network = {
                                   return acc + val;
                                 });
                               }
+                              var Winner = [];
+                              var WinnerAddys = [];
                               if (!hasWinner) {
-                                var Winner = [];
-                                var WinnerAddys = [];
+                                console.log('no Pools in JSON!');
                                 for (
                                   var i = 0;
                                   i < BlockArray.length;

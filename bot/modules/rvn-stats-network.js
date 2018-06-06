@@ -146,8 +146,18 @@ exports.network = {
                                   sentAmount.push(newBlockArray[m].valueOut);
                                   feesAmount.push(newBlockArray[m].fees);
                                 }
-                                var rvnSent = sentAmount;
-                                var rvnFees = feesAmount;
+                                var rvnSent = sentAmount.reduce(function(
+                                  acc,
+                                  val
+                                ) {
+                                  return acc + val;
+                                });
+                                var rvnFees = feesAmount.reduce(function(
+                                  acc,
+                                  val
+                                ) {
+                                  return acc + val;
+                                });
                               }
                               if (!hasWinner) {
                                 var Winner = [];

@@ -147,10 +147,10 @@ exports.network = {
                                 var feesAmount = [];
                                 for (var m = 0; m < newBlockArray.length; m++) {
                                   position = m++
-                                  console.log(newBlockArray[position].valueOut);
-                                  console.log(newBlockArray[position].fees);
-                                  sentAmount.push(newBlockArray[position]);
-                                  sentAmount.push(newBlockArray[position]);
+                                  console.log(newBlockArray[position]);
+                                  console.log(newBlockArray[position]);
+                                  sentAmount.push(newBlockArray[position].valueOut);
+                                  sentAmount.push(newBlockArray[position].fees);
                                 }
                                 var rvnSent = sentAmount;
                                 var rvnFees = feesAmount;

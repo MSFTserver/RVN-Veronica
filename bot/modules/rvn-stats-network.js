@@ -126,19 +126,20 @@ exports.network = {
                             if (response.statusCode !== 200) {
                               msg.channel.send(getError(response.statusCode));
                             } else {
-                              var BlockArray = response.body;
-                              var txs = BlockArray.txs.length - 1;
+                              var BlockArray = response.body.txs;
+                              var txs = BlockArray.length - 1;
                               var sentAmount = [];
                               var feesAmount = [];
-                              for (var l = 0; l < BlockArray.txs.length; l++) {
+                              for (var l = 0; l < BlockArray.length; l++) {
                                 if (
-                                  !BlockArray.txs[l].hasOwnProperty(
+                                  !BlockArray[l].hasOwnProperty(
                                     'isCoinBase'
                                   )
                                 ) {
-                                  var valueIn = BlockArray.txs[l].valueIn;
-                                  var valuefees = BlockArray.txs[l].fees;
+                                  var valueIn = BlockArray[l].valueIn;
+                                  var valuefees = BlockArray[l].fees;
                                   if (valueIn[l]) {
+                                    console.log(valueIn)
                                     sentAmount.push(Number(valueIn));
                                     feesAmount.push(Number(valuefees));
                                   }

@@ -131,32 +131,21 @@ exports.network = {
                               var sentAmount = [];
                               var feesAmount = [];
                               for (var l = 0; l < BlockArray.length; l++) {
+                                position = l++
                                 if (
-                                  !BlockArray[l].hasOwnProperty(
+                                  !BlockArray[position].hasOwnProperty(
                                     'isCoinBase'
                                   )
                                 ) {
-                                  var valueIn = BlockArray[l].valueIn;
-                                  var valuefees = BlockArray[l].fees;
-                                  if (valueIn[l]) {
-                                    console.log(valueIn)
+                                  var valueIn = BlockArray[position].valueIn;
+                                  var valuefees = BlockArray[position].fees;
+                                  if (valueIn[position]) {
+                                    console.log(valueIn);
                                     sentAmount.push(Number(valueIn));
                                     feesAmount.push(Number(valuefees));
                                   }
                                 }
                               }
-                              var rvnSent = sentAmount.reduce(function(
-                                acc,
-                                val
-                              ) {
-                                return acc + val;
-                              });
-                              var rvnFees = feesAmount.reduce(function(
-                                acc,
-                                val
-                              ) {
-                                return acc + val;
-                              });
                               if (!hasWinner) {
                                 var Winner = [];
                                 var WinnerAddys = [];

@@ -126,16 +126,16 @@ exports.network = {
                             if (response.statusCode !== 200) {
                               msg.channel.send(getError(response.statusCode));
                             } else {
-                              var BlockArray = response.body.txs;
-                              var txs = BlockArray.length - 1;
+                              var BlockArray = response.body;
+                              var txs = BlockArray.txs.length - 1;
                               var newBlockArray = [];
-                              for (var l = 0; l < BlockArray.length; l++) {
+                              for (var l = 0; l < BlockArray.txs.length; l++) {
                                 var position1 = l++
-                                console.log(BlockArray[position1].isCoinBase);
+                                console.log(BlockArray.txs[position1].isCoinBase);
                                 if (
-                                  BlockArray[position1].isCoinBase == false
+                                  BlockArray.txs[position1].isCoinBase == false
                                 ) {
-                                 newBlockArray.push(BlockArray[position1]);
+                                 newBlockArray.push(BlockArray.txs[position1]);
                                }
                               }
                               if (!newBlockArray[0]) {
@@ -148,7 +148,7 @@ exports.network = {
                                 for (var m = 0; m < newBlockArray.length; m++) {
                                   var position2 = m++
                                   sentAmount.push(newBlockArray[position2].valueOut);
-                                  sentAmount.push(newBlockArray[position2].fees);
+                                  feesAmount.push(newBlockArray[position2].fees);
                                 }
                                 var rvnSent = sentAmount;
                                 var rvnFees = feesAmount;

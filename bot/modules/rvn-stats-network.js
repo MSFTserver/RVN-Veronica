@@ -131,7 +131,7 @@ exports.network = {
                               var newBlockArray = [];
                               for (var l = 0; l < BlockArray.length; l++) {
                                 if (
-                                  BlockArray[l].isCoinBase == false
+                                  !BlockArray[l].isCoinBase
                                 ) {
                                   console.log(BlockArray[l].isCoinBase);
                                   console.log(BlockArray[l]);

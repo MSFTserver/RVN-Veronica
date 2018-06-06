@@ -172,6 +172,7 @@ exports.network = {
                                       'isCoinBase'
                                     )
                                   ) {
+                                    console.log(BlockArray[i]);
                                     Winner.push(BlockArray[i]);
                                   }
                                 }

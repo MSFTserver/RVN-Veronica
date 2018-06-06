@@ -146,8 +146,8 @@ exports.network = {
                                   }
                                 }
                               }
-                              rvnSent = sentAmount;
-                              rvnFees = feesAmount;
+                              var rvnSent = sentAmount;
+                              var rvnFees = feesAmount;
                               if (!hasWinner) {
                                 var Winner = [];
                                 var WinnerAddys = [];

@@ -128,20 +128,36 @@ exports.network = {
                             } else {
                               var BlockArray = response.body.txs;
                               var txs = BlockArray.length - 1;
+                              var newBlockArray = [];
                               var sentAmount = [];
                               var feesAmount = [];
                               for (var l = 0; l < BlockArray.length; l++) {
                                 position = l++
-                                  var valueIn = BlockArray[position].valueIn;
-                                  var valuefees = BlockArray[position].fees;
-                                  if (valueIn) {
-                                    console.log(valueIn);
-                                    sentAmount.push(Number(valueIn));
-                                    feesAmount.push(Number(valuefees));
-                                }
+                                if (
+                                  !BlockArray[position].hasOwnProperty(
+                                    'isCoinBase'
+                                  )
+                                ) {
+                                 newBlockArray.push(BlockArray);
                               }
-                              var rvnSent = sentAmount;
-                              var rvnFees = feesAmount;
+                              }
+                              for (var m = 0; m < newBlockArray.length; m++) {
+                                position = m++
+                                sentAmount.push(newBlockArray[m].valueIn);
+                                sentAmount.push(newBlockArray[m].fees);
+                              }
+                              var rvnSent = sentAmount.reduce(function(
+                                acc,
+                                val
+                              ) {
+                                return acc + val;
+                              });
+                              var rvnFees = feesAmount.reduce(function(
+                                acc,
+                                val
+                              ) {
+                                return acc + val;
+                              });
                               if (!hasWinner) {
                                 var Winner = [];
                                 var WinnerAddys = [];

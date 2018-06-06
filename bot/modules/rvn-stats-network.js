@@ -131,13 +131,13 @@ exports.network = {
                               var newBlockArray = [];
                               for (var l = 0; l < BlockArray.length; l++) {
                                 var position1 = l++
-                                console.log(BlockArray[position1]);
                                 if (
                                   BlockArray[position1].hasOwnProperty('isCoinBase') == false
                                 ) {
                                  newBlockArray.push(BlockArray);
                                }
                               }
+                              console.log(newBlockArray);
                               if (!newBlockArray[0]) {
                                 rvnSent = 0;
                                 rvnFees = 0;

@@ -128,7 +128,7 @@ exports.network = {
                             } else {
                               var BlockArray = response.body.txs;
                               var txs = BlockArray.length - 1;
-                              var newBlockArray = [];
+                              var newBlockArray = {};
                               for (var l = 0; l < BlockArray.length; l++) {
                                 var position1 = l++
                                 if (
@@ -142,8 +142,8 @@ exports.network = {
                                 rvnSent = 0;
                                 rvnFees = 0;
                               } else {
-                                var sentAmount = [];
-                                var feesAmount = [];
+                                var sentAmount = {};
+                                var feesAmount = {};
                                 for (var m = 0; m < newBlockArray.length; m++) {
                                   var position2 = m++
                                   console.log(newBlockArray[position2].valueOut);

@@ -133,13 +133,7 @@ exports.network = {
                               var feesAmount = [];
                               for (var l = 0; l < BlockArray.length; l++) {
                                 position = l++
-                                if (
-                                  !BlockArray[position].hasOwnProperty(
-                                    'isCoinBase'
-                                  )
-                                ) {
                                  newBlockArray.push(BlockArray);
-                              }
                               }
                               for (var m = 0; m < newBlockArray.length; m++) {
                                 position = m++

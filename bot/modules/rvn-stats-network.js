@@ -132,7 +132,7 @@ exports.network = {
                               for (var l = 0; l < BlockArray.length; l++) {
                                 var position1 = l++
                                 if (
-                                  BlockArray[position1].hasOwnProperty('isCoinBase') == false
+                                  !BlockArray[position1].isCoinBase
                                 ) {
                                  newBlockArray.push(BlockArray);
                                }

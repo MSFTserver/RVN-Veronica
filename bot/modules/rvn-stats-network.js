@@ -149,8 +149,8 @@ exports.network = {
                                   position = m++
                                   console.log(newBlockArray[position].valueOut);
                                   console.log(newBlockArray[position].fees);
-                                  sentAmount.push(newBlockArray[position].valueOut);
-                                  sentAmount.push(newBlockArray[position].fees);
+                                  sentAmount.push(newBlockArray[position]);
+                                  sentAmount.push(newBlockArray[position]);
                                 }
                                 var rvnSent = sentAmount;
                                 var rvnFees = feesAmount;

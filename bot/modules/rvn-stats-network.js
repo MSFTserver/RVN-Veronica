@@ -80,6 +80,7 @@ exports.network = {
                           '](' +
                           response.body.poolInfo.url +
                           ')';
+                          console.log(BlockWinner);
                         if (!response.body.poolInfo.poolName) {
                           var hasWinner = false;
                         } else {

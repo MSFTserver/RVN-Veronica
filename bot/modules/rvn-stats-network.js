@@ -135,7 +135,7 @@ exports.network = {
                                 position = l++
                                  newBlockArray.push(BlockArray);
                               }
-                              console.log(newBlockArray)
+                              console.log(newBlockArray[0])
                               for (var m = 0; m < newBlockArray.length; m++) {
                                 position = m++
                                 sentAmount.push(newBlockArray[m].valueIn);

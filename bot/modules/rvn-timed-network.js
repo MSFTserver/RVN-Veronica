@@ -70,7 +70,7 @@ exports.TimedHash = function(bot) {
                       } else {
                         var confirmations = response.body.confirmations;
                         var currentTime = Number(response.body.time);
-                        if (!respnse.body.poolInfo.poolName) {
+                        if (!response.body.poolInfo.poolName) {
                           var hasWinner = false;
                         } else {
                           var hasWinner = true;

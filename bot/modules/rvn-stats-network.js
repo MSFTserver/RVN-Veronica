@@ -74,11 +74,7 @@ exports.network = {
                       } else {
                         var confirmations = response.body.confirmations;
                         var currentTime = Number(response.body.time);
-                        var BlockWinner = '[' +
-                          response.body.poolInfo.poolName +
-                          '](' +
-                          response.body.poolInfo.url +
-                          ')';
+                        var BlockWinner = '[' +response.body.poolInfo.poolName +'](' +response.body.poolInfo.url +')';
                         let hasWinner = true;
                         if (!response.body.poolInfo.poolName) {
                           hasWinner = false;

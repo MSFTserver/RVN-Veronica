@@ -133,7 +133,7 @@ exports.network = {
                                 var position1 = l++
                                 console.log(BlockArray[position1].isCoinBase);
                                 if (
-                                  BlockArray[position1].isCoinBase == true
+                                  BlockArray[position1].isCoinBase == false
                                 ) {
                                  newBlockArray.push(BlockArray);
                                }

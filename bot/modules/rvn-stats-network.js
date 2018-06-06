@@ -130,11 +130,11 @@ exports.network = {
                               var txs = BlockArray.length - 1;
                               var newBlockArray = [];
                               for (var l = 0; l < BlockArray.length; l++) {
-                                console.log(BlockArray[l]);
-                                console.log(BlockArray[l].isCoinBase);
                                 if (
                                   BlockArray[l].isCoinBase == false
                                 ) {
+                                  console.log(BlockArray[l].isCoinBase);
+                                  console.log(BlockArray[l]);
                                  newBlockArray.push(BlockArray[l]);
                                }
                               }

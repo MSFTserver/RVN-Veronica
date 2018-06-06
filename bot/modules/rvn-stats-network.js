@@ -74,13 +74,11 @@ exports.network = {
                       } else {
                         var confirmations = response.body.confirmations;
                         var currentTime = Number(response.body.time);
-                        var BlockWinner =
-                          '[' +
+                        var BlockWinner = '[' +
                           response.body.poolInfo.poolName +
                           '](' +
                           response.body.poolInfo.url +
                           ')';
-                          console.log(BlockWinner);
                         if (!response.body.poolInfo.poolName) {
                           var hasWinner = false;
                         } else {
@@ -163,7 +161,6 @@ exports.network = {
                               var Winner = [];
                               var WinnerAddys = [];
                               if (!hasWinner) {
-                                console.log('no Pools in JSON!');
                                 for (
                                   var i = 0;
                                   i < BlockArray.length;

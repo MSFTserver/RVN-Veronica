@@ -133,8 +133,6 @@ exports.network = {
                                 if (
                                   !BlockArray[l].isCoinBase
                                 ) {
-                                  console.log(BlockArray[l].isCoinBase);
-                                  console.log(BlockArray[l]);
                                  newBlockArray.push(BlockArray[l]);
                                }
                               }
@@ -142,13 +140,11 @@ exports.network = {
                                 rvnSent = 0;
                                 rvnFees = 0;
                               } else {
-                                console.log(newBlockArray);
                                 var sentAmount = [];
                                 var feesAmount = [];
                                 for (var m = 0; m < newBlockArray.length; m++) {
-                                  var position2 = m++
-                                  sentAmount.push(newBlockArray[position2].valueOut);
-                                  feesAmount.push(newBlockArray[position2].fees);
+                                  sentAmount.push(newBlockArray[m].valueOut);
+                                  feesAmount.push(newBlockArray[m].fees);
                                 }
                                 var rvnSent = sentAmount;
                                 var rvnFees = feesAmount;

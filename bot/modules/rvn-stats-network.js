@@ -132,18 +132,12 @@ exports.network = {
                               var feesAmount = [];
                               for (var l = 0; l < BlockArray.length; l++) {
                                 position = l++
-                                if (
-                                  !BlockArray[position].hasOwnProperty(
-                                    'isCoinBase'
-                                  )
-                                ) {
                                   var valueIn = BlockArray[position].valueIn;
                                   var valuefees = BlockArray[position].fees;
-                                  if (valueIn[position]) {
+                                  if (valueIn) {
                                     console.log(valueIn);
                                     sentAmount.push(Number(valueIn));
                                     feesAmount.push(Number(valuefees));
-                                  }
                                 }
                               }
                               var rvnSent = sentAmount;

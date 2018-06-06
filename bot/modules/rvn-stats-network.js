@@ -135,7 +135,7 @@ exports.network = {
                                 if (
                                   BlockArray[position1].isCoinBase == false
                                 ) {
-                                 newBlockArray.push(BlockArray);
+                                 newBlockArray.push(BlockArray[position1]);
                                }
                               }
                               if (!newBlockArray[0]) {

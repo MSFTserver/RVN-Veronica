@@ -132,10 +132,12 @@ exports.network = {
                               for (var l = 0; l < BlockArray.length; l++) {
                                 position = l++
                                 if (
-                                  !BlockArray[position].hasOwnProperty(
+                                  BlockArray[position].hasOwnProperty(
                                     'isCoinBase'
                                   )
                                 ) {
+                                 console.log(' ');
+                               } else {
                                  newBlockArray.push(BlockArray);
                                }
                               }
@@ -147,7 +149,6 @@ exports.network = {
                                 var feesAmount = [];
                                 for (var m = 0; m < newBlockArray.length; m++) {
                                   position = m++
-                                  console.log(newBlockArray[position]);
                                   console.log(newBlockArray[position]);
                                   sentAmount.push(newBlockArray[position].valueOut);
                                   sentAmount.push(newBlockArray[position].fees);

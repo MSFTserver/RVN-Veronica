@@ -79,10 +79,9 @@ exports.network = {
                           '](' +
                           response.body.poolInfo.url +
                           ')';
+                        let hasWinner = true;
                         if (!response.body.poolInfo.poolName) {
-                          var hasWinner = false;
-                        } else {
-                          var hasWinner = true;
+                          hasWinner = false;
                         }
                         var Reward = Number(response.body.reward);
                         var BlockAlgo = BlockHash.substr(BlockHash.length - 16);

@@ -34,6 +34,12 @@ exports.socketBlocks = function(bot) {
         voutAddy['amount'] = vout[l].value
         voutAddresses.push(voutAddy);
       }
+      if (voutAddresses.length > 4){
+        for (m=0; m < 4; m++){
+          console.log(voutAddresses.address);
+        }
+        console.log((voutAddresses.length - 4) + ' More')
+      }
       console.log(voutAddresses);
     }
     let dt = new Date();

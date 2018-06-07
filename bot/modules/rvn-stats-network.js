@@ -196,47 +196,47 @@ exports.network = {
                                     var description =
                                       '**Current Block!**' +
                                       '\n' +
-                                      '__**Height**:__\n' +
+                                      '__**Height**:__ ' +
                                       Height +
                                       '\n' +
                                       '__**Hash**:__\n' +
                                       BlockHash +
                                       '\n' +
-                                      '__**Difficulty**:__\n' +
+                                      '__**Difficulty**:__ ' +
                                       numberWithCommas(difficulty.toFixed(0)) +
                                       '\n' +
-                                      '__**Algo Hash**:__\n' +
+                                      '__**Algo Hash**:__ ' +
                                       BlockAlgo +
                                       '\n' +
                                       '__**Algo Order**:__\n' +
                                       AlgoOrder +
                                       '\n' +
-                                      '__**Solved by**:__\n' +
+                                      '__**Solved by**:__ ' +
                                       BlockWinner +
                                       '\n' +
-                                      '__**Solved in**:__\n' +
+                                      '__**Solved in**:__ ' +
                                       BlockTime +
                                       ' seconds ' +
                                       '\n' +
-                                      '__**Reward**:__\n' +
+                                      '__**Reward**:__ ' +
                                       numberWithCommas(Reward) +
                                       ' ' +
                                       coinSymbol +
                                       '\n' +
-                                      '__**Transactions**__:\n' +
+                                      '__**Transactions**__: ' +
                                       txs +
                                       '\n' +
-                                      '__**Amount**__:\n' +
+                                      '__**Amount**__: ' +
                                       rvnSent +
                                       ' ' +
                                       coinSymbol +
                                       '\n' +
-                                      '__**Fees**__:\n' +
+                                      '__**Fees**__: ' +
                                       rvnFees +
                                       ' ' +
                                       coinSymbol +
                                       '\n' +
-                                      '__**Confirmations**:__\n' +
+                                      '__**Confirmations**:__ ' +
                                       numberWithCommas(confirmations) +
                                       '\n\n' +
                                       '__Sources:__\n' +

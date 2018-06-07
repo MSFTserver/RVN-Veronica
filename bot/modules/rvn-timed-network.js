@@ -70,16 +70,10 @@ exports.TimedHash = function(bot) {
                       } else {
                         var confirmations = response.body.confirmations;
                         var currentTime = Number(response.body.time);
+                        let BlockWinner = '[' +response.body.poolInfo.poolName +'](' +response.body.poolInfo.url +')';
+                        let hasWinner = true;
                         if (!response.body.poolInfo.poolName) {
-                          var hasWinner = false;
-                        } else {
-                          var hasWinner = true;
-                          var BlockWinner =
-                            '[' +
-                            response.body.poolInfo.poolName +
-                            '](' +
-                            response.body.poolInfo.url +
-                            ')';
+                          hasWinner = false;
                         }
                         var Reward = Number(response.body.reward);
                         var BlockAlgo = BlockHash.substr(BlockHash.length - 16);
@@ -122,51 +116,53 @@ exports.TimedHash = function(bot) {
                             if (response.statusCode !== 200) {
                               bot.channels.get(TimedHashChannel).send(getError(response.statusCode));
                             } else {
-                              var BlockArray = response.body;
-                              var txs = BlockArray.txs.length - 1;
-                              var sentAmount = [];
-                              var feesAmount = [];
-                              for (var l = 0; l < BlockArray.txs.length; l++) {
+                              var BlockArray = response.body.txs;
+                              var txs = BlockArray.length - 1;
+                              var newBlockArray = [];
+                              for (var l = 0; l < BlockArray.length; l++) {
                                 if (
-                                  !BlockArray.txs[l].hasOwnProperty(
-                                    'isCoinBase'
-                                  )
+                                  !BlockArray[l].isCoinBase
                                 ) {
-                                  var valueIn = BlockArray.txs[l].valueIn;
-                                  var valuefees = BlockArray.txs[l].fees;
-                                  if (valueIn[l]) {
-                                    sentAmount.push(Number(valueIn));
-                                    feesAmount.push(Number(valuefees));
-                                  }
-                                }
+                                 newBlockArray.push(BlockArray[l]);
+                               }
                               }
-                              var rvnSent = sentAmount.reduce(function(
-                                acc,
-                                val
-                              ) {
-                                return acc + val;
-                              });
-                              var rvnFees = feesAmount.reduce(function(
-                                acc,
-                                val
-                              ) {
-                                return acc + val;
-                              });
+                              if (!newBlockArray[0]) {
+                                rvnSent = 0;
+                                rvnFees = 0;
+                              } else {
+                                var sentAmount = [];
+                                var feesAmount = [];
+                                for (var m = 0; m < newBlockArray.length; m++) {
+                                  sentAmount.push(newBlockArray[m].valueOut);
+                                  feesAmount.push(newBlockArray[m].fees);
+                                }
+                                var rvnSent = sentAmount.reduce(function(
+                                  acc,
+                                  val
+                                ) {
+                                  return acc + val;
+                                });
+                                var rvnFees = feesAmount.reduce(function(
+                                  acc,
+                                  val
+                                ) {
+                                  return acc + val;
+                                });
+                              }
+                              var Winner = [];
+                              var WinnerAddys = [];
                               if (!hasWinner) {
-                                var Winner = [];
-                                var WinnerAddys = [];
                                 for (
                                   var i = 0;
-                                  i < BlockArray.txs.length;
+                                  i < BlockArray.length;
                                   i++
                                 ) {
-                                  var position = i++;
+                                  var position = i++
                                   if (
-                                    BlockArray.txs[position].hasOwnProperty(
-                                      'isCoinBase'
-                                    )
+                                    BlockArray[position].hasOwnProperty('isCoinBase')
                                   ) {
-                                    Winner.push(BlockArray.txs[position]);
+                                    console.log(BlockArray[position]);
+                                    Winner.push(BlockArray[position]);
                                   }
                                 }
                                 for (
@@ -180,8 +176,9 @@ exports.TimedHash = function(bot) {
                                     WinnerAddys.push(addys);
                                   }
                                 }
-                                var BlockWinner = WinnerAddys.join(' \n');
+                                BlockWinner = WinnerAddys.join(' \n');
                               }
+                              console.log(BlockWinner);
                               needle.get(
                                 explorerApiUrl + 'api/block/' + prvsBlockHash,
                                 function(error, response) {
@@ -195,43 +192,47 @@ exports.TimedHash = function(bot) {
                                     var description =
                                       '**Current Block!**' +
                                       '\n' +
-                                      '__Height:__\n' +
+                                      '__**Height**:__ ' +
                                       Height +
                                       '\n' +
-                                      '__Hash:__\n' +
+                                      '__**Hash**:__\n' +
                                       BlockHash +
                                       '\n' +
-                                      '__Difficulty:__\n' +
+                                      '__**Difficulty**:__ ' +
                                       numberWithCommas(difficulty.toFixed(0)) +
                                       '\n' +
-                                      '__Reward:__\n' +
+                                      '__**Algo Hash**:__ ' +
+                                      BlockAlgo +
+                                      '\n' +
+                                      '__**Algo Order**:__\n' +
+                                      AlgoOrder +
+                                      '\n' +
+                                      '__**Solved by**:__ ' +
+                                      BlockWinner +
+                                      '\n' +
+                                      '__**Solved in**:__ ' +
+                                      BlockTime +
+                                      ' seconds ' +
+                                      '\n' +
+                                      '__**Reward**:__ ' +
                                       numberWithCommas(Reward) +
                                       ' ' +
                                       coinSymbol +
                                       '\n' +
-                                      '__Algo Hash:__\n' +
-                                      BlockAlgo +
-                                      '\n' +
-                                      '__Algo Order:__\n' +
-                                      AlgoOrder +
-                                      '\n' +
-                                      '__Solved by:__\n' +
-                                      BlockWinner +
-                                      '\n' +
-                                      '__Solved in:__\n' +
-                                      BlockTime +
-                                      ' seconds ' +
-                                      '\n' +
-                                      '__txs__:\n' +
+                                      '__**Transactions**__: ' +
                                       txs +
                                       '\n' +
-                                      '__Amount__:\n' +
+                                      '__**Amount**__: ' +
                                       rvnSent +
+                                      ' ' +
+                                      coinSymbol +
                                       '\n' +
-                                      '__Fees__:\n' +
+                                      '__**Fees**__: ' +
                                       rvnFees +
+                                      ' ' +
+                                      coinSymbol +
                                       '\n' +
-                                      '__Confirmations:__\n' +
+                                      '__**Confirmations**:__ ' +
                                       numberWithCommas(confirmations) +
                                       '\n\n' +
                                       '__Sources:__\n' +
@@ -253,9 +254,7 @@ exports.TimedHash = function(bot) {
                                           'https://i.imgur.com/yWf5USu.png'
                                       }
                                     };
-                                    bot.channels
-                                      .get(TimedHashChannel)
-                                      .send({ embed });
+                                    bot.channels.get(TimedHashChannel).send({ embed });
                                     return;
                                   }
                                 }

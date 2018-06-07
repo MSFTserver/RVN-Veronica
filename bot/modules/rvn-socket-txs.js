@@ -23,14 +23,14 @@ exports.socketBlocks = function(bot) {
       var vin = data.vin;
       var vout = data.vout;
       for (i=0; i < vin.length; i++) {
-        push.vinAddresses(vin.address);
+        vinAddresses.push(vin.address);
       }
       console.log(countDuplicates(vinAddresses));
       for (i=0; i < vout.length; i++) {
         voutAddy = new Object();
         voutAddy['address'] = vout.address
         voutAddy['amount'] = vout.value
-        push.voutAddresses(voutAddy);
+        voutAddresses.push(voutAddy);
       }
       console.log(voutAddresses);
     }
@@ -67,4 +67,5 @@ exports.socketBlocks = function(bot) {
     return mp;
 }, new Map).values()];
   }
+  return result;
 };

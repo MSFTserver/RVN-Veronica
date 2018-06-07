@@ -2,7 +2,7 @@ let moment = require('moment-timezone');
 let config = require('config');
 let BlocksWonChannel = config.get('SocketBots').BlocksWonChannel;
 let SocketUrl = config.get('SocketBots').SocketUrl;
-let server = require('http').createServer();
+let server = require('http').createServer(handler);
 let io = require('socket.io')(server);
 
 exports.custom = [

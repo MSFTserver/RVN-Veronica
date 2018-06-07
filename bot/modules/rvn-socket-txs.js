@@ -44,7 +44,7 @@ exports.socketBlocks = function(bot) {
         }
         console.log('vout: ' + newVoutAddresses +'\n'+ (voutAddresses.length - 4) + ' More');
       } else {
-        console.log('vout: 'voutAddresses);
+        console.log('vout: ' + voutAddresses);
       }
     }
     let dt = new Date();

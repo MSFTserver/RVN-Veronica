@@ -24,7 +24,7 @@ exports.socketBlocks = function(bot) {
     let dt = new Date();
     let timestamp = moment()
       .tz('America/Los_Angeles')
-      .format('MM-DD-YYYY hh:mm a');
+      .format('MM-DD-YYYY hh:mm::ss a');
     if (poolName) {
         const embed = {
           description: 'Won by [' + poolName + '](' + poolUrl +')\n[View Block](' + SocketUrl + '/block/' + blockHash + ')',

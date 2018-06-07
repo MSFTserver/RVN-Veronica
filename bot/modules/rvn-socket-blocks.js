@@ -11,10 +11,10 @@ exports.custom = [
 ]
 
 exports.socketBlocks = function(bot) {
-  socket.on('connect', function() {
-    socket.emit('subscribe', room);
+  io.on('connect', function() {
+    io.emit('subscribe', room);
   })
-  socket.on(eventToListenTo, function(data) {
+  io.on(eventToListenTo, function(data) {
     console.log(data);
     var poolName = data.block.poolInfo.poolName;
     var poolUrl = data.block.poolInfo.url;

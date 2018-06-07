@@ -18,7 +18,6 @@ exports.socketBlocks = function(bot) {
     socket.emit('subscribe', room);
   })
   socket.on(eventToListenTo, function(data) {
-    console.log(data);
     var poolName = data.block.poolInfo.poolName;
     var poolUrl = data.block.poolInfo.url;
     var blockHeight = data.block.height;
@@ -26,7 +25,19 @@ exports.socketBlocks = function(bot) {
     if (poolName) {
       bot.channels
         .get(BlocksWonChannel)
-        .send('Block ' + blockHeight + ' Won by [' + poolName + '](' + poolUrl +') [View Block](' + SocketUrl + '/block/' + blockHash + ')');
+        .send();
+        const embed = {
+          description: 'Won by [' + poolName + '](' + poolUrl +') [View Block](' + SocketUrl + '/block/' + blockHash + ')',
+          color: 7976557,
+          footer: {
+            text: 'Last Updated | ' + timestamp + ' PST'
+          },
+          author: {
+            name: 'Block ' + blockHeight,
+            icon_url: 'https://i.imgur.com/nKHVQgq.png'
+          }
+        };
+        msg.channel.send({ embed });
     }
   });
 }

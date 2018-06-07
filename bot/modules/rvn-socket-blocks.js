@@ -27,7 +27,7 @@ exports.socketBlocks = function(bot) {
       .format('MM-DD-YYYY hh:mm a');
     if (poolName) {
         const embed = {
-          description: 'Won by [' + poolName + '](' + poolUrl +') [View Block](' + SocketUrl + '/block/' + blockHash + ')',
+          description: 'Won by [' + poolName + '](' + poolUrl +')\n[View Block](' + SocketUrl + '/block/' + blockHash + ')',
           color: 7976557,
           footer: {
             text: 'Last Updated | ' + timestamp + ' PST'

@@ -2,17 +2,15 @@ let moment = require('moment-timezone');
 let config = require('config');
 let BlocksWonChannel = config.get('SocketBots').BlocksWonChannel;
 let SocketUrl = config.get('SocketBots').SocketUrl;
-let server = require('http').createServer(handler);
-let io = require('socket.io')(server);
+let io = require('socket.io-client')('SocketUrl');
+let eventToListenTo = 'raven/block'
+let room = 'raven'
 
 exports.custom = [
     'socketBlocks'
 ]
 
 exports.socketBlocks = function(bot) {
-  eventToListenTo = 'raven/block'
-  room = 'raven'
-  var socket = io(SocketUrl);
   socket.on('connect', function() {
     socket.emit('subscribe', room);
   })

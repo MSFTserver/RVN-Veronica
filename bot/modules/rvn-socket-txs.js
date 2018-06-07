@@ -27,7 +27,7 @@ exports.socketBlocks = function(bot) {
         vinAddy['address'] = vin[i].address
         vinAddresses.push(vinAddy);
       }
-      console.log('vin: ' + countDuplicates(vinAddresses));
+      console.log('vin: ' + countDuplicates(vinAddresses).toString());
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address
@@ -42,9 +42,9 @@ exports.socketBlocks = function(bot) {
           voutObject['amount'] = voutAddresses[m].amount
           newVoutAddresses.push(voutObject);
         }
-        console.log('vout: ' + newVoutAddresses +'\n'+ (voutAddresses.length - 4) + ' More');
+        console.log('vout: ' + newVoutAddresses.toString() +'\n'+ (voutAddresses.length - 4) + ' More');
       } else {
-        console.log('vout: ' + voutAddresses);
+        console.log('vout: ' + voutAddresses.toString());
       }
     }
     let dt = new Date();

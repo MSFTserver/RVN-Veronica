@@ -196,72 +196,73 @@ exports.TimedHash = function(bot) {
                                   } else {
                                     var prvsTime = Number(response.body.time);
                                     var BlockTime = currentTime - prvsTime;
-                                    const embed = {
-                                      description: '**Current Block!**' +
-                                      '\n' +
-                                      '__**Height**:__ ' +
-                                      Height +
-                                      '\n' +
-                                      '__**Hash**:__\n' +
-                                      BlockHash +
-                                      '\n' +
-                                      '__**Difficulty**:__ ' +
-                                      numberWithCommas(difficulty.toFixed(0)) +
-                                      '\n' +
-                                      '__**Algo Hash**:__ ' +
-                                      BlockAlgo +
-                                      '\n' +
-                                      '__**Algo Order**:__\n' +
-                                      AlgoOrder +
-                                      '\n' +
-                                      '__**Solved by**:__ ' +
-                                      BlockWinner +
-                                      '\n' +
-                                      '__**Solved in**:__ ' +
-                                      BlockTime +
-                                      ' seconds ' +
-                                      '\n' +
-                                      '__**Reward**:__ ' +
-                                      numberWithCommas(Reward) +
-                                      ' ' +
-                                      coinSymbol +
-                                      '\n' +
-                                      '__**Transactions**__: ' +
-                                      txs +
-                                      '\n' +
-                                      '__**Amount**__: ' +
-                                      rvnSent +
-                                      ' ' +
-                                      coinSymbol +
-                                      '\n' +
-                                      '__**Fees**__: ' +
-                                      rvnFees +
-                                      ' ' +
-                                      coinSymbol +
-                                      '\n' +
-                                      '__**Confirmations**:__ ' +
-                                      numberWithCommas(confirmations) +
-                                      '\n\n' +
-                                      '__Sources:__\n' +
-                                      explorerApiUrl,
-                                      color: 7976557,
-                                      footer: {
-                                        text:
-                                          'Last Updated | ' + timestamp + ' PST'
-                                      },
-                                      author: {
-                                        name:
-                                          coinName +
-                                          '(' +
-                                          coinSymbol +
-                                          ') Network Stats',
-                                        icon_url:
-                                          'https://i.imgur.com/yWf5USu.png'
-                                      }
-                                    };
                                     bot.channels
                                       .get(TimedHashChannel)
-                                      .send({ embed });
+                                      .send({ embed: {
+                                        {
+                                          description: '**Current Block!**' +
+                                          '\n' +
+                                          '__**Height**:__ ' +
+                                          Height +
+                                          '\n' +
+                                          '__**Hash**:__\n' +
+                                          BlockHash +
+                                          '\n' +
+                                          '__**Difficulty**:__ ' +
+                                          numberWithCommas(difficulty.toFixed(0)) +
+                                          '\n' +
+                                          '__**Algo Hash**:__ ' +
+                                          BlockAlgo +
+                                          '\n' +
+                                          '__**Algo Order**:__\n' +
+                                          AlgoOrder +
+                                          '\n' +
+                                          '__**Solved by**:__ ' +
+                                          BlockWinner +
+                                          '\n' +
+                                          '__**Solved in**:__ ' +
+                                          BlockTime +
+                                          ' seconds ' +
+                                          '\n' +
+                                          '__**Reward**:__ ' +
+                                          numberWithCommas(Reward) +
+                                          ' ' +
+                                          coinSymbol +
+                                          '\n' +
+                                          '__**Transactions**__: ' +
+                                          txs +
+                                          '\n' +
+                                          '__**Amount**__: ' +
+                                          rvnSent +
+                                          ' ' +
+                                          coinSymbol +
+                                          '\n' +
+                                          '__**Fees**__: ' +
+                                          rvnFees +
+                                          ' ' +
+                                          coinSymbol +
+                                          '\n' +
+                                          '__**Confirmations**:__ ' +
+                                          numberWithCommas(confirmations) +
+                                          '\n\n' +
+                                          '__Sources:__\n' +
+                                          explorerApiUrl,
+                                          color: 7976557,
+                                          footer: {
+                                            text:
+                                              'Last Updated | ' + timestamp + ' PST'
+                                          },
+                                          author: {
+                                            name:
+                                              coinName +
+                                              '(' +
+                                              coinSymbol +
+                                              ') Network Stats',
+                                            icon_url:
+                                              'https://i.imgur.com/yWf5USu.png'
+                                          }
+                                        }
+                                      }});
                                     return;
                                   }
                                 }

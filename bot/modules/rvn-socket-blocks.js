@@ -10,9 +10,9 @@ exports.custom = [
 ]
 
 exports.socketBlocks = function(bot) {
-  eventToListenTo = 'raven/block'
-  room = 'raven'
-  var socket = socketClient(SocketUrl);
+  let eventToListenTo = 'raven/block'
+  let room = 'raven'
+  let socket = socketClient(SocketUrl);
   socket.on('connect', function() {
     socket.emit('subscribe', room);
   })

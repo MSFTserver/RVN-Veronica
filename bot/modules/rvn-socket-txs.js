@@ -37,7 +37,7 @@ exports.socketBlocks = function(bot) {
       if (voutAddresses.length > 4){
         var newVoutAddresses = [];
         for (m=0; m < 4; m++){
-          var voutObject = new object();
+          var voutObject = new Object();
           voutObject['address'] = voutAddresses[m].address
           newVoutAddresses.push(voutObject);
         }

@@ -74,7 +74,7 @@ exports.network = {
                       } else {
                         var confirmations = response.body.confirmations;
                         var currentTime = Number(response.body.time);
-                        var BlockWinner = '[' +response.body.poolInfo.poolName +'](' +response.body.poolInfo.url +')';
+                        let BlockWinner = '[' +response.body.poolInfo.poolName +'](' +response.body.poolInfo.url +')';
                         let hasWinner = true;
                         if (!response.body.poolInfo.poolName) {
                           hasWinner = false;
@@ -180,8 +180,9 @@ exports.network = {
                                     WinnerAddys.push(addys);
                                   }
                                 }
-                                var BlockWinner = WinnerAddys.join(' \n');
+                                BlockWinner = WinnerAddys.join(' \n');
                               }
+                              console.log(BlockWinner);
                               needle.get(
                                 explorerApiUrl + 'api/block/' + prvsBlockHash,
                                 function(error, response) {

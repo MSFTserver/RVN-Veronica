@@ -2,26 +2,30 @@ let moment = require('moment-timezone');
 let config = require('config');
 let BlocksWonChannel = config.get('SocketBots').BlocksWonChannel;
 let SocketUrl = config.get('SocketBots').SocketUrl;
-let io = require('socket.io-client')(SocketUrl);
-let eventToListenTo = 'raven/block'
-let room = 'raven'
+let socketClient = require('socket.io-client');
+
 
 exports.custom = [
     'socketBlocks'
 ]
 
 exports.socketBlocks = function(bot) {
-  io.on('connect', function() {
-    io.emit('subscribe', room);
+  eventToListenTo = 'raven/block'
+  room = 'raven'
+  var socket = socketClient(SocketUrl);
+  socket.on('connect', function() {
+    socket.emit('subscribe', room);
   })
-  io.on(eventToListenTo, function(data) {
+  socket.on(eventToListenTo, function(data) {
     console.log(data);
     var poolName = data.block.poolInfo.poolName;
     var poolUrl = data.block.poolInfo.url;
     var blockHeight = data.block.height;
     var blockHash = data.block.hash;
-    bot.channels
-      .get(BlocksWonChannel)
-      .send('Block ' + blockHeight + ' Won by [' + poolName + '](' + poolUrl +') [View Block](' + SocketUrl + '/block/' + blockHash + ')');
+    if (poolName) {
+      bot.channels
+        .get(BlocksWonChannel)
+        .send('Block ' + blockHeight + ' Won by [' + poolName + '](' + poolUrl +') [View Block](' + SocketUrl + '/block/' + blockHash + ')');
+    }
   });
 }

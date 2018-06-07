@@ -27,7 +27,9 @@ exports.socketBlocks = function(bot) {
         vinAddy['address'] = vin[i].address
         vinAddresses.push(vinAddy);
       }
-      console.log('vin: ' + JSON.stringify(countDuplicates(vinAddresses)).replace("]", "").replace("[", "").replace("{", "").replace("}", "").replace('"', '')).replace(",", "\n");
+      var test = JSON.stringify(countDuplicates(vinAddresses));
+      var test2 = test.replace("]", "").replace("[", "").replace("{", "").replace("}", "").replace('"', '')).replace(",", "\n")
+      console.log('vin: ' + test2);
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address

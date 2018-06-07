@@ -161,7 +161,6 @@ exports.TimedHash = function(bot) {
                                   if (
                                     BlockArray[position].hasOwnProperty('isCoinBase')
                                   ) {
-                                    console.log(BlockArray[position]);
                                     Winner.push(BlockArray[position]);
                                   }
                                 }
@@ -178,7 +177,6 @@ exports.TimedHash = function(bot) {
                                 }
                                 BlockWinner = WinnerAddys.join(' \n');
                               }
-                              console.log(BlockWinner);
                               needle.get(
                                 explorerApiUrl + 'api/block/' + prvsBlockHash,
                                 function(error, response) {

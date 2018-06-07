@@ -2,7 +2,7 @@ let moment = require('moment-timezone');
 let config = require('config');
 let BlocksWonChannel = config.get('SocketBots').BlocksWonChannel;
 let SocketUrl = config.get('SocketBots').SocketUrl;
-let io = require('socket.io-client')('SocketUrl');
+let io = require('socket.io-client')(SocketUrl);
 let eventToListenTo = 'raven/block'
 let room = 'raven'
 

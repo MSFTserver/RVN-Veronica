@@ -21,6 +21,10 @@ exports.socketBlocks = function(bot) {
     var poolUrl = data.block.poolInfo.url;
     var blockHeight = data.block.height;
     var blockHash = data.block.hash;
+    let dt = new Date();
+    let timestamp = moment()
+      .tz('America/Los_Angeles')
+      .format('MM-DD-YYYY hh:mm a');
     if (poolName) {
       bot.channels
         .get(BlocksWonChannel)

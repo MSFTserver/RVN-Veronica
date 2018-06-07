@@ -199,7 +199,6 @@ exports.TimedHash = function(bot) {
                                     bot.channels
                                       .get(TimedHashChannel)
                                       .send({ embed: {
-                                        {
                                           description: '**Current Block!**' +
                                           '\n' +
                                           '__**Height**:__ ' +
@@ -262,7 +261,7 @@ exports.TimedHash = function(bot) {
                                               'https://i.imgur.com/yWf5USu.png'
                                           }
                                         }
-                                      }});
+                                      });
                                     return;
                                   }
                                 }

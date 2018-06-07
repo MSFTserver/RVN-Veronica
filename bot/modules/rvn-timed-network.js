@@ -15,7 +15,7 @@ exports.custom = ['TimedHash'];
 exports.TimedHash = function(bot) {
   setInterval(function() {
     sendInfo(bot);
-  }, 10000);//Timer);
+  }, 60000);//Timer);
 
   function sendInfo(bot) {
     let dt = new Date();

@@ -196,7 +196,8 @@ exports.TimedHash = function(bot) {
                                   } else {
                                     var prvsTime = Number(response.body.time);
                                     var BlockTime = currentTime - prvsTime;
-                                    var description = '**Current Block!**' +
+                                    var description =
+                                      '**Current Block!**' +
                                       '\n' +
                                       '__**Height**:__ ' +
                                       Height +
@@ -243,20 +244,27 @@ exports.TimedHash = function(bot) {
                                       '\n\n' +
                                       '__Sources:__\n' +
                                       explorerApiUrl;
-                                    bot.channels
-                                      .get(TimedHashChannel)
-                                      .send({ embed: {
-                                          description: description,
-                                          color: 7976557,
-                                          footer: {
-                                            text: 'Last Updated | ' + timestamp + ' PST'
-                                          },
-                                          author: {
-                                            name: coinName + '(' +  coinSymbol + ') Network Stats',
-                                            icon_url: 'https://i.imgur.com/yWf5USu.png'
-                                          }
+                                    bot.channels.get(TimedHashChannel).send({
+                                      embed: {
+                                        description: description,
+                                        color: 7976557,
+                                        footer: {
+                                          text:
+                                            'Last Updated | ' +
+                                            timestamp +
+                                            ' PST'
+                                        },
+                                        author: {
+                                          name:
+                                            coinName +
+                                            '(' +
+                                            coinSymbol +
+                                            ') Network Stats',
+                                          icon_url:
+                                            'https://i.imgur.com/yWf5USu.png'
                                         }
-                                      });
+                                      }
+                                    });
                                     return;
                                   }
                                 }

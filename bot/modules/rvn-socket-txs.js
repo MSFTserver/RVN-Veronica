@@ -31,7 +31,7 @@ exports.socketBlocks = function(bot) {
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address
-        voutAddy['amount'] = vout[l].value / 10000000
+        voutAddy['amount'] = vout[l].value / 100000000
         voutAddresses.push(voutAddy);
       }
       if (voutAddresses.length > 4){

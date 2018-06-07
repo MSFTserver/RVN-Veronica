@@ -42,7 +42,7 @@ exports.socketBlocks = function(bot) {
           newVoutAddresses.push(voutObject);
         }
         console.log(newVoutAddresses);
-        console.log((newVoutAddresses.length - 4) + ' More')
+        console.log((voutAddresses.length - 4) + ' More')
       } else {
         console.log(voutAddresses);
       }

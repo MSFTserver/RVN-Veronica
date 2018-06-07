@@ -19,26 +19,26 @@ exports.socketBlocks = function(bot) {
     let timestamp = moment()
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm::ss a');
-      const embed = {
-        description:
-          'Won by [' +
-          poolName +
-          '](' +
-          poolUrl +
-          ')\n[View Block](' +
-          SocketUrl +
-          '/block/' +
-          blockHash +
-          ')',
-        color: 7976557,
-        footer: {
-          text: 'Last Updated | ' + timestamp + ' PST'
-        },
-        author: {
-          name: 'Block ' + blockHeight,
-          icon_url: 'https://i.imgur.com/nKHVQgq.png'
-        }
-      };
+      // const embed = {
+      //   description:
+      //     'Won by [' +
+      //     poolName +
+      //     '](' +
+      //     poolUrl +
+      //     ')\n[View Block](' +
+      //     SocketUrl +
+      //     '/block/' +
+      //     blockHash +
+      //     ')',
+      //   color: 7976557,
+      //   footer: {
+      //     text: 'Last Updated | ' + timestamp + ' PST'
+      //   },
+      //   author: {
+      //     name: 'Block ' + blockHeight,
+      //     icon_url: 'https://i.imgur.com/nKHVQgq.png'
+      //   }
+      // };
       //bot.channels.get(BlocksWonChannel).send({ embed });
   });
 };

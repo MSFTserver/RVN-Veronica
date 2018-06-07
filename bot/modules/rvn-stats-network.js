@@ -74,7 +74,12 @@ exports.network = {
                       } else {
                         var confirmations = response.body.confirmations;
                         var currentTime = Number(response.body.time);
-                        let BlockWinner = '[' +response.body.poolInfo.poolName +'](' +response.body.poolInfo.url +')';
+                        let BlockWinner =
+                          '[' +
+                          response.body.poolInfo.poolName +
+                          '](' +
+                          response.body.poolInfo.url +
+                          ')';
                         let hasWinner = true;
                         if (!response.body.poolInfo.poolName) {
                           hasWinner = false;
@@ -124,11 +129,9 @@ exports.network = {
                               var txs = BlockArray.length - 1;
                               var newBlockArray = [];
                               for (var l = 0; l < BlockArray.length; l++) {
-                                if (
-                                  !BlockArray[l].isCoinBase
-                                ) {
-                                 newBlockArray.push(BlockArray[l]);
-                               }
+                                if (!BlockArray[l].isCoinBase) {
+                                  newBlockArray.push(BlockArray[l]);
+                                }
                               }
                               if (!newBlockArray[0]) {
                                 rvnSent = 0;
@@ -156,14 +159,12 @@ exports.network = {
                               var Winner = [];
                               var WinnerAddys = [];
                               if (!hasWinner) {
-                                for (
-                                  var i = 0;
-                                  i < BlockArray.length;
-                                  i++
-                                ) {
-                                  var position = i++
+                                for (var i = 0; i < BlockArray.length; i++) {
+                                  var position = i++;
                                   if (
-                                    BlockArray[position].hasOwnProperty('isCoinBase')
+                                    BlockArray[position].hasOwnProperty(
+                                      'isCoinBase'
+                                    )
                                   ) {
                                     Winner.push(BlockArray[position]);
                                   }

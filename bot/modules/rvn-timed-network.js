@@ -52,25 +52,36 @@ exports.TimedHash = function(bot) {
           response
         ) {
           if (response.statusCode !== 200) {
-            bot.channels.get(TimedHashChannel).send(getError(response.statusCode));
+            bot.channels
+              .get(TimedHashChannel)
+              .send(getError(response.statusCode));
           } else {
             var BlockHash = response.body.blockHash;
             needle.get(
               explorerApiUrl + 'api/block-index/' + prvsHeight,
               function(error, response) {
                 if (response.statusCode !== 200) {
-                  bot.channels.get(TimedHashChannel).send(getError(response.statusCode));
+                  bot.channels
+                    .get(TimedHashChannel)
+                    .send(getError(response.statusCode));
                 } else {
                   var prvsBlockHash = response.body.blockHash;
                   needle.get(
                     explorerApiUrl + 'api/block/' + BlockHash,
                     function(error, response) {
                       if (response.statusCode !== 200) {
-                        bot.channels.get(TimedHashChannel).send(getError(response.statusCode));
+                        bot.channels
+                          .get(TimedHashChannel)
+                          .send(getError(response.statusCode));
                       } else {
                         var confirmations = response.body.confirmations;
                         var currentTime = Number(response.body.time);
-                        let BlockWinner = '[' +response.body.poolInfo.poolName +'](' +response.body.poolInfo.url +')';
+                        let BlockWinner =
+                          '[' +
+                          response.body.poolInfo.poolName +
+                          '](' +
+                          response.body.poolInfo.url +
+                          ')';
                         let hasWinner = true;
                         if (!response.body.poolInfo.poolName) {
                           hasWinner = false;
@@ -114,17 +125,17 @@ exports.TimedHash = function(bot) {
                           explorerApiUrl + 'api/txs?block=' + Height,
                           function(error, response) {
                             if (response.statusCode !== 200) {
-                              bot.channels.get(TimedHashChannel).send(getError(response.statusCode));
+                              bot.channels
+                                .get(TimedHashChannel)
+                                .send(getError(response.statusCode));
                             } else {
                               var BlockArray = response.body.txs;
                               var txs = BlockArray.length - 1;
                               var newBlockArray = [];
                               for (var l = 0; l < BlockArray.length; l++) {
-                                if (
-                                  !BlockArray[l].isCoinBase
-                                ) {
-                                 newBlockArray.push(BlockArray[l]);
-                               }
+                                if (!BlockArray[l].isCoinBase) {
+                                  newBlockArray.push(BlockArray[l]);
+                                }
                               }
                               if (!newBlockArray[0]) {
                                 rvnSent = 0;
@@ -152,14 +163,12 @@ exports.TimedHash = function(bot) {
                               var Winner = [];
                               var WinnerAddys = [];
                               if (!hasWinner) {
-                                for (
-                                  var i = 0;
-                                  i < BlockArray.length;
-                                  i++
-                                ) {
-                                  var position = i++
+                                for (var i = 0; i < BlockArray.length; i++) {
+                                  var position = i++;
                                   if (
-                                    BlockArray[position].hasOwnProperty('isCoinBase')
+                                    BlockArray[position].hasOwnProperty(
+                                      'isCoinBase'
+                                    )
                                   ) {
                                     Winner.push(BlockArray[position]);
                                   }
@@ -181,9 +190,9 @@ exports.TimedHash = function(bot) {
                                 explorerApiUrl + 'api/block/' + prvsBlockHash,
                                 function(error, response) {
                                   if (response.statusCode !== 200) {
-                                    bot.channels.get(TimedHashChannel).send(
-                                      getError(response.statusCode)
-                                    );
+                                    bot.channels
+                                      .get(TimedHashChannel)
+                                      .send(getError(response.statusCode));
                                   } else {
                                     var prvsTime = Number(response.body.time);
                                     var BlockTime = currentTime - prvsTime;
@@ -252,7 +261,9 @@ exports.TimedHash = function(bot) {
                                           'https://i.imgur.com/yWf5USu.png'
                                       }
                                     };
-                                    bot.channels.get(TimedHashChannel).send({ embed });
+                                    bot.channels
+                                      .get(TimedHashChannel)
+                                      .send({ embed });
                                     return;
                                   }
                                 }

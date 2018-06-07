@@ -98,7 +98,12 @@ exports.block = {
           var difficulty = response.body.difficulty;
           var Time = Number(response.body.time);
           var Reward = Number(response.body.reward);
-          let BlockWinner = '[' +response.body.poolInfo.poolName +'](' +response.body.poolInfo.url +')';
+          let BlockWinner =
+            '[' +
+            response.body.poolInfo.poolName +
+            '](' +
+            response.body.poolInfo.url +
+            ')';
           let hasWinner = true;
           if (!response.body.poolInfo.poolName) {
             hasWinner = false;
@@ -148,11 +153,9 @@ exports.block = {
               var txs = BlockArray.length - 1;
               var newBlockArray = [];
               for (var l = 0; l < BlockArray.length; l++) {
-                if (
-                  !BlockArray[l].isCoinBase
-                ) {
-                 newBlockArray.push(BlockArray[l]);
-               }
+                if (!BlockArray[l].isCoinBase) {
+                  newBlockArray.push(BlockArray[l]);
+                }
               }
               if (!newBlockArray[0]) {
                 rvnSent = 0;
@@ -164,41 +167,24 @@ exports.block = {
                   sentAmount.push(newBlockArray[m].valueOut);
                   feesAmount.push(newBlockArray[m].fees);
                 }
-                var rvnSent = sentAmount.reduce(function(
-                  acc,
-                  val
-                ) {
+                var rvnSent = sentAmount.reduce(function(acc, val) {
                   return acc + val;
                 });
-                var rvnFees = feesAmount.reduce(function(
-                  acc,
-                  val
-                ) {
+                var rvnFees = feesAmount.reduce(function(acc, val) {
                   return acc + val;
                 });
               }
               var Winner = [];
               var WinnerAddys = [];
               if (!hasWinner) {
-                for (
-                  var i = 0;
-                  i < BlockArray.length;
-                  i++
-                ) {
-                  var position = i++
-                  if (
-                    BlockArray[position].hasOwnProperty('isCoinBase')
-                  ) {
+                for (var i = 0; i < BlockArray.length; i++) {
+                  var position = i++;
+                  if (BlockArray[position].hasOwnProperty('isCoinBase')) {
                     Winner.push(BlockArray[position]);
                   }
                 }
-                for (
-                  var l = 0;
-                  l < Winner[0].vout.length;
-                  l++
-                ) {
-                  var addys =
-                    Winner[0].vout[l].scriptPubKey.addresses;
+                for (var l = 0; l < Winner[0].vout.length; l++) {
+                  var addys = Winner[0].vout[l].scriptPubKey.addresses;
                   if (addys) {
                     WinnerAddys.push(addys);
                   }
@@ -223,54 +209,54 @@ exports.block = {
                           var timestamp = moment()
                             .tz('America/Los_Angeles')
                             .format('MM-DD-YYYY hh:mm a');
-                            var description =
-                              '**Current Block!**' +
-                              '\n' +
-                              '__**Height**:__ ' +
-                              Height +
-                              '\n' +
-                              '__**Hash**:__\n' +
-                              BlockHash +
-                              '\n' +
-                              '__**Difficulty**:__ ' +
-                              numberWithCommas(difficulty.toFixed(0)) +
-                              '\n' +
-                              '__**Algo Hash**:__ ' +
-                              BlockAlgo +
-                              '\n' +
-                              '__**Algo Order**:__\n' +
-                              AlgoOrder +
-                              '\n' +
-                              '__**Solved by**:__ ' +
-                              BlockWinner +
-                              '\n' +
-                              '__**Solved in**:__ ' +
-                              BlockTime +
-                              ' seconds ' +
-                              '\n' +
-                              '__**Reward**:__ ' +
-                              numberWithCommas(Reward) +
-                              ' ' +
-                              coinSymbol +
-                              '\n' +
-                              '__**Transactions**__: ' +
-                              txs +
-                              '\n' +
-                              '__**Amount**__: ' +
-                              rvnSent +
-                              ' ' +
-                              coinSymbol +
-                              '\n' +
-                              '__**Fees**__: ' +
-                              rvnFees +
-                              ' ' +
-                              coinSymbol +
-                              '\n' +
-                              '__**Confirmations**:__ ' +
-                              numberWithCommas(confirmations) +
-                              '\n\n' +
-                              '__Sources:__\n' +
-                              explorerApiUrl;
+                          var description =
+                            '**Current Block!**' +
+                            '\n' +
+                            '__**Height**:__ ' +
+                            Height +
+                            '\n' +
+                            '__**Hash**:__\n' +
+                            BlockHash +
+                            '\n' +
+                            '__**Difficulty**:__ ' +
+                            numberWithCommas(difficulty.toFixed(0)) +
+                            '\n' +
+                            '__**Algo Hash**:__ ' +
+                            BlockAlgo +
+                            '\n' +
+                            '__**Algo Order**:__\n' +
+                            AlgoOrder +
+                            '\n' +
+                            '__**Solved by**:__ ' +
+                            BlockWinner +
+                            '\n' +
+                            '__**Solved in**:__ ' +
+                            BlockTime +
+                            ' seconds ' +
+                            '\n' +
+                            '__**Reward**:__ ' +
+                            numberWithCommas(Reward) +
+                            ' ' +
+                            coinSymbol +
+                            '\n' +
+                            '__**Transactions**__: ' +
+                            txs +
+                            '\n' +
+                            '__**Amount**__: ' +
+                            rvnSent +
+                            ' ' +
+                            coinSymbol +
+                            '\n' +
+                            '__**Fees**__: ' +
+                            rvnFees +
+                            ' ' +
+                            coinSymbol +
+                            '\n' +
+                            '__**Confirmations**:__ ' +
+                            numberWithCommas(confirmations) +
+                            '\n\n' +
+                            '__Sources:__\n' +
+                            explorerApiUrl;
                           const embed = {
                             description: description,
                             color: 7976557,
@@ -340,7 +326,12 @@ exports.block = {
                           var difficulty = response.body.difficulty;
                           var Time = Number(response.body.time);
                           var Reward = Number(response.body.reward);
-                          let BlockWinner = '[' +response.body.poolInfo.poolName +'](' +response.body.poolInfo.url +')';
+                          let BlockWinner =
+                            '[' +
+                            response.body.poolInfo.poolName +
+                            '](' +
+                            response.body.poolInfo.url +
+                            ')';
                           let hasWinner = true;
                           if (!response.body.poolInfo.poolName) {
                             hasWinner = false;
@@ -381,84 +372,82 @@ exports.block = {
                             algolist[Algo[14]] +
                             '->' +
                             algolist[Algo[15]];
-                    needle.get(
-                      explorerApiUrl + 'api/txs?block=' + Height,
-                      function(error, response) {
-                        if (response.statusCode !== 200) {
-                          msg.channel.send(getError(response.statusCode));
-                        } else {
-                          var BlockArray = response.body.txs;
-                          var txs = BlockArray.length - 1;
-                          var newBlockArray = [];
-                          for (var l = 0; l < BlockArray.length; l++) {
-                            if (
-                              !BlockArray[l].isCoinBase
-                            ) {
-                             newBlockArray.push(BlockArray[l]);
-                           }
-                          }
-                          if (!newBlockArray[0]) {
-                            rvnSent = 0;
-                            rvnFees = 0;
-                          } else {
-                            var sentAmount = [];
-                            var feesAmount = [];
-                            for (var m = 0; m < newBlockArray.length; m++) {
-                              sentAmount.push(newBlockArray[m].valueOut);
-                              feesAmount.push(newBlockArray[m].fees);
-                            }
-                            var rvnSent = sentAmount.reduce(function(
-                              acc,
-                              val
-                            ) {
-                              return acc + val;
-                            });
-                            var rvnFees = feesAmount.reduce(function(
-                              acc,
-                              val
-                            ) {
-                              return acc + val;
-                            });
-                          }
-                          var Winner = [];
-                          var WinnerAddys = [];
-                          if (!hasWinner) {
-                            for (
-                              var i = 0;
-                              i < BlockArray.length;
-                              i++
-                            ) {
-                              var position = i++
-                              if (
-                                BlockArray[position].hasOwnProperty('isCoinBase')
-                              ) {
-                                Winner.push(BlockArray[position]);
-                              }
-                            }
-                            for (
-                              var l = 0;
-                              l < Winner[0].vout.length;
-                              l++
-                            ) {
-                              var addys =
-                                Winner[0].vout[l].scriptPubKey.addresses;
-                              if (addys) {
-                                WinnerAddys.push(addys);
-                              }
-                            }
-                            BlockWinner = WinnerAddys.join(' \n');
-                          }
+                          needle.get(
+                            explorerApiUrl + 'api/txs?block=' + Height,
+                            function(error, response) {
+                              if (response.statusCode !== 200) {
+                                msg.channel.send(getError(response.statusCode));
+                              } else {
+                                var BlockArray = response.body.txs;
+                                var txs = BlockArray.length - 1;
+                                var newBlockArray = [];
+                                for (var l = 0; l < BlockArray.length; l++) {
+                                  if (!BlockArray[l].isCoinBase) {
+                                    newBlockArray.push(BlockArray[l]);
+                                  }
+                                }
+                                if (!newBlockArray[0]) {
+                                  rvnSent = 0;
+                                  rvnFees = 0;
+                                } else {
+                                  var sentAmount = [];
+                                  var feesAmount = [];
+                                  for (
+                                    var m = 0;
+                                    m < newBlockArray.length;
+                                    m++
+                                  ) {
+                                    sentAmount.push(newBlockArray[m].valueOut);
+                                    feesAmount.push(newBlockArray[m].fees);
+                                  }
+                                  var rvnSent = sentAmount.reduce(function(
+                                    acc,
+                                    val
+                                  ) {
+                                    return acc + val;
+                                  });
+                                  var rvnFees = feesAmount.reduce(function(
+                                    acc,
+                                    val
+                                  ) {
+                                    return acc + val;
+                                  });
+                                }
+                                var Winner = [];
+                                var WinnerAddys = [];
+                                if (!hasWinner) {
+                                  for (var i = 0; i < BlockArray.length; i++) {
+                                    var position = i++;
+                                    if (
+                                      BlockArray[position].hasOwnProperty(
+                                        'isCoinBase'
+                                      )
+                                    ) {
+                                      Winner.push(BlockArray[position]);
+                                    }
+                                  }
+                                  for (
+                                    var l = 0;
+                                    l < Winner[0].vout.length;
+                                    l++
+                                  ) {
+                                    var addys =
+                                      Winner[0].vout[l].scriptPubKey.addresses;
+                                    if (addys) {
+                                      WinnerAddys.push(addys);
+                                    }
+                                  }
+                                  BlockWinner = WinnerAddys.join(' \n');
+                                }
                                 needle.get(
-                                  explorerApiUrl +
-                                    'api/block/' +
-                                    prvsBlockHash,
+                                  explorerApiUrl + 'api/block/' + prvsBlockHash,
                                   function(error, response) {
                                     if (response.statusCode !== 200) {
-                                      msg.channel.send(getError(response.statusCode));
-                                    } else {
-                                      var prvsTime = Number(
-                                        response.body.time
+                                      msg.channel.send(
+                                        getError(response.statusCode)
                                       );
+                                    } else {
+                                      var prvsTime = Number(response.body.time);
                                       var BlockTime = Time - prvsTime;
                                       var timestamp = moment()
                                         .tz('America/Los_Angeles')
@@ -477,7 +466,9 @@ exports.block = {
                                         BlockHash +
                                         '\n' +
                                         '__**Difficulty**:__ ' +
-                                        numberWithCommas(difficulty.toFixed(0)) +
+                                        numberWithCommas(
+                                          difficulty.toFixed(0)
+                                        ) +
                                         '\n' +
                                         '__**Algo Hash**:__ ' +
                                         BlockAlgo +
@@ -568,7 +559,8 @@ exports.block = {
     };
     function getError(errCode) {
       if (errCode == 122) {
-        var message = '<' + explorerApiUrl + '>' + ' ERROR: Request-URI too long';
+        var message =
+          '<' + explorerApiUrl + '>' + ' ERROR: Request-URI too long';
         return message;
       }
       if (errCode == 300) {
@@ -633,7 +625,10 @@ exports.block = {
       }
       if (errCode == 407) {
         var message =
-          '<' + explorerApiUrl + '>' + ' ERROR: Proxy Authen­tic­ation Required';
+          '<' +
+          explorerApiUrl +
+          '>' +
+          ' ERROR: Proxy Authen­tic­ation Required';
         return message;
       }
       if (errCode == 408) {
@@ -653,7 +648,8 @@ exports.block = {
         return message;
       }
       if (errCode == 412) {
-        var message = '<' + explorerApiUrl + '>' + ' ERROR: Precondition Failed';
+        var message =
+          '<' + explorerApiUrl + '>' + ' ERROR: Precondition Failed';
         return message;
       }
       if (errCode == 413) {
@@ -662,7 +658,8 @@ exports.block = {
         return message;
       }
       if (errCode == 414) {
-        var message = '<' + explorerApiUrl + '>' + ' ERROR: Request-URI Too Long';
+        var message =
+          '<' + explorerApiUrl + '>' + ' ERROR: Request-URI Too Long';
         return message;
       }
       if (errCode == 415) {
@@ -672,7 +669,10 @@ exports.block = {
       }
       if (errCode == 416) {
         var message =
-          '<' + explorerApiUrl + '>' + ' ERROR: Requested Range Not Satisf­iable';
+          '<' +
+          explorerApiUrl +
+          '>' +
+          ' ERROR: Requested Range Not Satisf­iable';
         return message;
       }
       if (errCode == 417) {
@@ -684,7 +684,8 @@ exports.block = {
         return message;
       }
       if (errCode == 422) {
-        var message = '<' + explorerApiUrl + '>' + ' ERROR: Unprocessable Entity';
+        var message =
+          '<' + explorerApiUrl + '>' + ' ERROR: Unprocessable Entity';
         return message;
       }
       if (errCode == 423) {
@@ -696,7 +697,8 @@ exports.block = {
         return message;
       }
       if (errCode == 425) {
-        var message = '<' + explorerApiUrl + '>' + ' ERROR: Unordered Collection';
+        var message =
+          '<' + explorerApiUrl + '>' + ' ERROR: Unordered Collection';
         return message;
       }
       if (errCode == 426) {
@@ -714,7 +716,10 @@ exports.block = {
       }
       if (errCode == 431) {
         var message =
-          '<' + explorerApiUrl + '>' + ' ERROR: Request Header Fields Too Large ';
+          '<' +
+          explorerApiUrl +
+          '>' +
+          ' ERROR: Request Header Fields Too Large ';
         return message;
       }
       if (errCode == 444) {
@@ -757,7 +762,8 @@ exports.block = {
         return message;
       }
       if (errCode == 503) {
-        var message = '<' + explorerApiUrl + '>' + ' ERROR: Service Unavailable';
+        var message =
+          '<' + explorerApiUrl + '>' + ' ERROR: Service Unavailable';
         return message;
       }
       if (errCode == 504) {
@@ -775,7 +781,8 @@ exports.block = {
         return message;
       }
       if (errCode == 507) {
-        var message = '<' + explorerApiUrl + '>' + ' ERROR: Insufficient Storage';
+        var message =
+          '<' + explorerApiUrl + '>' + ' ERROR: Insufficient Storage';
         return message;
       }
       if (errCode == 508) {
@@ -793,7 +800,10 @@ exports.block = {
       }
       if (errCode == 511) {
         var message =
-          '<' + explorerApiUrl + '>' + ' ERROR: Network Authentication Required';
+          '<' +
+          explorerApiUrl +
+          '>' +
+          ' ERROR: Network Authentication Required';
         return message;
       }
       if (errCode == 598) {

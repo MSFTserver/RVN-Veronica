@@ -19,7 +19,7 @@ exports.socketBlocks = function(bot) {
       var vinAddresses = [];
       var voutAddresses = [];
       console.log('txid: '+data.txid);
-      console.log('Total Amount: 'data.valueOut);
+      console.log('Total Amount: '+data.valueOut);
       var vin = data.vin;
       var vout = data.vout;
       for (i=0; i < vin.length; i++) {

@@ -35,12 +35,17 @@ exports.socketBlocks = function(bot) {
         voutAddresses.push(voutAddy);
       }
       if (voutAddresses.length > 4){
+        var newVoutAddresses = [];
         for (m=0; m < 4; m++){
-          console.log(voutAddresses[m].address);
+          var voutObject = new object();
+          voutObject['address'] = voutAddresses[m].address
+          newVoutAddresses.push(voutObject);
         }
-        console.log((voutAddresses.length - 4) + ' More')
+        console.log(newVoutAddresses);
+        console.log((newVoutAddresses.length - 4) + ' More')
+      } else {
+        console.log(voutAddresses);
       }
-      console.log(voutAddresses);
     }
     let dt = new Date();
     let timestamp = moment()

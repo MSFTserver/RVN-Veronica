@@ -15,6 +15,25 @@ exports.socketBlocks = function(bot) {
   });
   socket.on(eventToListenTo, function(data) {
     console.log(data);
+    if (!data.isRBF){
+      var vinAddresses = [];
+      var voutAddresses = [];
+      console.log(data.txid);
+      console.log(data.valueOut);
+      var vin = data.vin;
+      var vout = data.vout;
+      for (i=0; i < vin.legth; i++) {
+        push.vinAddresses(vin.address);
+      }
+      console.log(countDuplicates(vinAddresses));
+      for (i=0; i < vout.legth; i++) {
+        voutAddy = new Object();
+        voutAddy['address'] = vout.address
+        voutAddy['amount'] = vout.value
+        push.voutAddresses(voutAddy);
+      }
+      console.log(voutAddresses);
+    }
     let dt = new Date();
     let timestamp = moment()
       .tz('America/Los_Angeles')
@@ -41,4 +60,11 @@ exports.socketBlocks = function(bot) {
       // };
       //bot.channels.get(BlocksWonChannel).send({ embed });
   });
+  function countDuplicates(names){
+    const result = [...names.reduce( (mp, o) => {
+    if (!mp.has(o._id)) mp.set(o._id, Object.assign({ count: 0 }, o));
+    mp.get(o._id).count++;
+    return mp;
+}, new Map).values()];
+  }
 };

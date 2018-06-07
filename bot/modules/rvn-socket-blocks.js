@@ -26,9 +26,6 @@ exports.socketBlocks = function(bot) {
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
     if (poolName) {
-      bot.channels
-        .get(BlocksWonChannel)
-        .send();
         const embed = {
           description: 'Won by [' + poolName + '](' + poolUrl +') [View Block](' + SocketUrl + '/block/' + blockHash + ')',
           color: 7976557,
@@ -40,7 +37,9 @@ exports.socketBlocks = function(bot) {
             icon_url: 'https://i.imgur.com/nKHVQgq.png'
           }
         };
-        msg.channel.send({ embed });
+        bot.channels
+          .get(BlocksWonChannel)
+          .send({ embed });
     }
   });
 }

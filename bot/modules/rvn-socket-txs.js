@@ -23,13 +23,15 @@ exports.socketBlocks = function(bot) {
       var vin = data.vin;
       var vout = data.vout;
       for (i=0; i < vin.length; i++) {
-        vinAddresses.push(vin.address);
+        vinAddy = new Object();
+        vinAddy['address'] = vin[i].address
+        vinAddresses.push(vin[i].address);
       }
       console.log(countDuplicates(vinAddresses));
-      for (i=0; i < vout.length; i++) {
+      for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
-        voutAddy['address'] = vout.address
-        voutAddy['amount'] = vout.value
+        voutAddy['address'] = vout[l].address
+        voutAddy['amount'] = vout[l].value
         voutAddresses.push(voutAddy);
       }
       console.log(voutAddresses);

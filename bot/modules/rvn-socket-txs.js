@@ -27,7 +27,7 @@ exports.socketBlocks = function(bot) {
         vinAddy['address'] = vin[i].address
         vinAddresses.push(vinAddy);
       }
-      console.log('vin: ' + JSON.stringify(countDuplicates(vinAddresses)));
+      console.log('vin: ' + JSON.stringify(countDuplicates(vinAddresses)).replace("]", "").replace("[", "").replace("{", "").replace("}", "").replace('"', '')).replace(",", "\n");
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address

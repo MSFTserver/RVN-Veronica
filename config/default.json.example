@@ -142,5 +142,10 @@
       // how often bots will post in milliseconds
       "timerhash": 1800000,
       "timerstats": 1800000
+  },
+  "SocketBots": {
+      "socket": "https://ravencoin.network/",
+      // Channels Socket Bots are allowed to post in
+      "BlocksWonChannel": "430028854984310798"
   }
 }

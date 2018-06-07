@@ -20,6 +20,7 @@
     "pmx": "^1.6.4",
     "request": "^2.83.0",
     "shelljs": "^0.8.1",
+    "socket.io": "^2.1.1",
     "tcp-ping": "^0.1.1",
     "twitter-stream-api": "^0.5.2",
     "underscore-node": "^0.1.2",

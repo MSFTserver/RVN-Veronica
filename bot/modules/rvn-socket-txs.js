@@ -14,7 +14,7 @@ exports.socketBlocks = function(bot) {
     socket.emit('subscribe', room);
   });
   socket.on(eventToListenTo, function(data) {
-    console.log(data);
+    //console.log(data);
     if (!data.isRBF){
       var vinAddresses = [];
       var voutAddresses = [];
@@ -62,8 +62,8 @@ exports.socketBlocks = function(bot) {
   });
   function countDuplicates(names){
     const result = [...names.reduce( (mp, o) => {
-      if (!mp.has(o._id)) mp.set(o._id, Object.assign({ count: 0 }, o));
-      mp.get(o._id).count++;
+      if (!mp.has(o.address)) mp.set(o.address, Object.assign({ count: 0 }, o));
+      mp.get(o.address).count++;
       return mp;
     }, new Map).values()];
     return result;

@@ -3,7 +3,7 @@ let config = require('config');
 let BlocksWonChannel = config.get('SocketBots').BlocksWonChannel;
 let SocketUrl = config.get('SocketBots').SocketUrl;
 let app = require('http').createServer();
-let socket = require('socket.io').listen(app)
+let io = require('socket.io').listen(app)
 
 exports.custom = [
     'socketBlocks'

@@ -18,8 +18,8 @@ exports.socketBlocks = function(bot) {
     if (!data.isRBF){
       var vinAddresses = [];
       var voutAddresses = [];
-      console.log(data.txid);
-      console.log(data.valueOut);
+      console.log('txid: '+data.txid);
+      console.log('Total Amount: 'data.valueOut);
       var vin = data.vin;
       var vout = data.vout;
       for (i=0; i < vin.length; i++) {
@@ -27,7 +27,7 @@ exports.socketBlocks = function(bot) {
         vinAddy['address'] = vin[i].address
         vinAddresses.push(vinAddy);
       }
-      console.log(countDuplicates(vinAddresses));
+      console.log('vin: ' + countDuplicates(vinAddresses));
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address
@@ -42,10 +42,9 @@ exports.socketBlocks = function(bot) {
           voutObject['amount'] = voutAddresses[m].amount
           newVoutAddresses.push(voutObject);
         }
-        console.log(newVoutAddresses);
-        console.log((voutAddresses.length - 4) + ' More')
+        console.log('vout: ' + newVoutAddresses +'\n'+ (voutAddresses.length - 4) + ' More');
       } else {
-        console.log(voutAddresses);
+        console.log('vout: 'voutAddresses);
       }
     }
     let dt = new Date();

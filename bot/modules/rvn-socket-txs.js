@@ -44,9 +44,13 @@ exports.socketBlocks = function(bot) {
           voutObject['amount'] = voutAddresses[m].amount
           newVoutAddresses.push(voutObject);
         }
-        console.log('vout: ' + JSON.stringify(newVoutAddresses) +'\n'+ (voutAddresses.length - 4) + ' More');
+        var test3 = JSON.stringify(newVoutAddresses);
+        var test4 = test3.replace(/\"/g, "").replace("]", "").replace("[", "").replace("{", "").replace("}", "").replace(",", "\n")
+        console.log('vout: ' + test4 +'\n'+ (voutAddresses.length - 4) + ' More');
       } else {
-        console.log('vout: ' + JSON.stringify(voutAddresses));
+        var test5 = JSON.stringify(voutAddresses);
+        var test6 = test5.replace(/\"/g, "").replace("]", "").replace("[", "").replace("{", "").replace("}", "").replace(",", "\n")
+        console.log('vout: ' + test6);
       }
     }
     let dt = new Date();

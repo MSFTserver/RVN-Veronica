@@ -22,11 +22,11 @@ exports.socketBlocks = function(bot) {
       console.log(data.valueOut);
       var vin = data.vin;
       var vout = data.vout;
-      for (i=0; i < vin.legth; i++) {
+      for (i=0; i < vin.length; i++) {
         push.vinAddresses(vin.address);
       }
       console.log(countDuplicates(vinAddresses));
-      for (i=0; i < vout.legth; i++) {
+      for (i=0; i < vout.length; i++) {
         voutAddy = new Object();
         voutAddy['address'] = vout.address
         voutAddy['amount'] = vout.value

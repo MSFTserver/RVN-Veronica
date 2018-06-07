@@ -25,5 +25,5 @@ exports.socketBlocks = function(bot) {
     bot.channels
       .get(BlocksWonChannel)
       .send('Block ' + blockHeight + ' Won by [' + poolName + '](' + poolUrl +') [View Block](' + SocketUrl + '/block/' + blockHash + ')');
-}
+  });
 }

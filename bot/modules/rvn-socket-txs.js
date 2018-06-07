@@ -64,7 +64,7 @@ exports.socketBlocks = function(bot) {
   });
   function countDuplicates(names){
     const result = [...names.reduce( (mp, o) => {
-      if (!mp.has(o.address)) mp.set(o.address, Object.assign({ count: 0 }, o));
+      if (!mp.has(o.address)) mp.set(o.address, Object.assign(o, { inputs: 0 }));
       mp.get(o.address).count++;
       return mp;
     }, new Map).values()];

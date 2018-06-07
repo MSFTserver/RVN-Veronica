@@ -36,7 +36,7 @@ exports.socketBlocks = function(bot) {
       }
       if (voutAddresses.length > 4){
         for (m=0; m < 4; m++){
-          console.log(voutAddresses.address);
+          console.log(voutAddresses[m].address);
         }
         console.log((voutAddresses.length - 4) + ' More')
       }

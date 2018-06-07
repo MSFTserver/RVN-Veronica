@@ -144,7 +144,7 @@
       "timerstats": 1800000
   },
   "SocketBots": {
-      "socket": "https://ravencoin.network/",
+      "SocketUrl": "https://ravencoin.network/",
       // Channels Socket Bots are allowed to post in
       "BlocksWonChannel": "430028854984310798"
   }

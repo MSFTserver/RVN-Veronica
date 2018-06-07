@@ -15,7 +15,7 @@ exports.custom = ['TimedHash'];
 exports.TimedHash = function(bot) {
   setInterval(function() {
     sendInfo(bot);
-  }, Timer);
+  }, 10000);//Timer);
 
   function sendInfo(bot) {
     let dt = new Date();
@@ -196,8 +196,8 @@ exports.TimedHash = function(bot) {
                                   } else {
                                     var prvsTime = Number(response.body.time);
                                     var BlockTime = currentTime - prvsTime;
-                                    var description =
-                                      '**Current Block!**' +
+                                    const embed = {
+                                      description: '**Current Block!**' +
                                       '\n' +
                                       '__**Height**:__ ' +
                                       Height +
@@ -243,9 +243,7 @@ exports.TimedHash = function(bot) {
                                       numberWithCommas(confirmations) +
                                       '\n\n' +
                                       '__Sources:__\n' +
-                                      explorerApiUrl;
-                                    const embed = {
-                                      description: description,
+                                      explorerApiUrl,
                                       color: 7976557,
                                       footer: {
                                         text:

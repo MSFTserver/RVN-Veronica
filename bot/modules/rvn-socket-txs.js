@@ -48,7 +48,7 @@ exports.socketBlocks = function(bot) {
           .format('MM-DD-YYYY hh:mm::ss a');
           bot.channels.get(NewTxChannel).send({ embed: {
             description:
-              '**txid**: ' data.txid + '\n' +
+              '**txid**: '+ data.txid + '\n' +
               '**Total Amount**: '+data.valueOut + '\n' +
               '**vin**:\n    ' + newVin + '\n' +
               '**vout**:\n    ' + newVout +'\n'+
@@ -72,7 +72,7 @@ exports.socketBlocks = function(bot) {
           .format('MM-DD-YYYY hh:mm::ss a');
           bot.channels.get(NewTxChannel).send({ embed: {
             description:
-              '**txid**: ' data.txid + '\n' +
+              '**txid**: ' + data.txid + '\n' +
               '**Total Amount**: '+data.valueOut + '\n' +
               '**vin**:\n    ' + newVin + '\n' +
               '**vout**:\n    ' + newVout +'\n\n'+

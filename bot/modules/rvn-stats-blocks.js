@@ -92,7 +92,7 @@ exports.block = {
         if (response.statusCode !== 200) {
           msg.channel.send(getError(response.statusCode));
         } else {
-          var hashrate = response.data.networkhashps;
+          var hashrate = response.body.miningInfo.networkhashps;
           if (hashrate >= 10 ** 21 && hashrate < 10 ** 24) {
             var hashratecalc = hashrate / 10 ** 21;
             var hashrate = numberWithCommas(hashratecalc.toFixed(4)) + ' ZH/s';
@@ -331,7 +331,7 @@ exports.block = {
         if (response.statusCode !== 200) {
           msg.channel.send(getError(response.statusCode));
         } else {
-          var hashrate = response.data.networkhashps;
+          var hashrate = response.body.miningInfo.networkhashps;
           if (hashrate >= 10 ** 21 && hashrate < 10 ** 24) {
             var hashratecalc = hashrate / 10 ** 21;
             var hashrate = numberWithCommas(hashratecalc.toFixed(4)) + ' ZH/s';

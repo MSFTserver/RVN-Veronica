@@ -1,6 +1,7 @@
 let needle = require('needle');
 let config = require('config');
 let moment = require('moment-timezone');
+let explorerApiUrl = config.get('General').urls.explorerApiUrl;
 
 exports.commands = [
   'difficulty'

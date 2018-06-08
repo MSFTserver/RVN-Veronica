@@ -32,10 +32,10 @@ exports.socketBlocks = function(bot) {
           var vinObject = new Object();
           vinObject['address'] = vinTrim[n].address
           vinObject['inputs'] = vinTrim[n].inputs
-          newVinAddresses.push(voutObject);
+          newVinAddresses.push(vinObject);
         }
         var vinString = JSON.stringify(newVinAddresses);
-        var newVin = vinString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '    **inputs:** ').replace(/,/g, "\n    ") + 
+        var newVin = vinString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '    **inputs:** ').replace(/,/g, "\n    ") +
         '    ' + (newVinAddresses.length - 4) + ' More' + '\n\n';
       } else {
         var newVin = vinString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '    **inputs:** ').replace(/,/g, "\n    ");

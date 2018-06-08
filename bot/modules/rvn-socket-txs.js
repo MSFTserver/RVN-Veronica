@@ -59,7 +59,7 @@ exports.socketBlocks = function(bot) {
               text: 'Last Updated | ' + timestamp + ' PST'
             },
             author: {
-              name: '__**New Tx**__',
+              name: 'New Transaction',
               icon_url: 'https://i.imgur.com/nKHVQgq.png'
             }
           }});
@@ -82,7 +82,7 @@ exports.socketBlocks = function(bot) {
               text: 'Last Updated | ' + timestamp + ' PST'
             },
             author: {
-              name: '__**New Tx**__',
+              name: 'New Transaction',
               icon_url: 'https://i.imgur.com/nKHVQgq.png'
             }
           }});

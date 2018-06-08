@@ -24,8 +24,22 @@ exports.socketBlocks = function(bot) {
         vinAddy['address'] = vin[i].address
         vinAddresses.push(vinAddy);
       }
-      var vinTrim = JSON.stringify(countDuplicates(vinAddresses));
-      var newVin = vinTrim.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '    **inputs:** ').replace(/,/g, "\n    ");
+      var vinTrim = countDuplicates(vinAddresses);
+      var vinString = JSON.stringify(vinTrim);
+      if (vinTrim.length > 4){
+        var newVinAddresses = [];
+        for (n=0; n < 4; n++){
+          var vinObject = new Object();
+          vinObject['address'] = vinTrim[n].address
+          vinObject['inputs'] = vinTrim[n].inputs
+          newVinAddresses.push(voutObject);
+        }
+        var vinString = JSON.stringify(newVinAddresses);
+        var newVin = vinString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '    **inputs:** ').replace(/,/g, "\n    ") + 
+        '    ' + (newVinAddresses.length - 4) + ' More' + '\n\n';
+      } else {
+        var newVin = vinString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '    **inputs:** ').replace(/,/g, "\n    ");
+      }
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address
@@ -52,7 +66,7 @@ exports.socketBlocks = function(bot) {
               '**Total Amount**: '+data.valueOut + '\n' +
               '**vin**:\n    ' + newVin + '\n' +
               '**vout**:\n    ' + newVout +'\n'+
-              (voutAddresses.length - 4) + ' More' + '\n\n'+
+              '    ' + (voutAddresses.length - 4) + ' More' + '\n\n'+
               '[View tx](' + SocketUrl + '/tx/' + data.txid + ')',
             color: 7976557,
             footer: {

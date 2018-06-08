@@ -15,7 +15,7 @@ exports.difficulty = {
       } else {
         var diff = response.body.miningInfo.difficulty;
         var hashrate = response.body.miningInfo.networkhashps;
-        var blocks = response.body.blocks;
+        var blocks = response.body.miningInfo.blocks;
         var avgTime = diff * (2**32) / hashrate;
         var newDiff = (diff * 60) / avgTime;
         msg.channel.send('Current Diff: ' + diff.toFixed(4) + '\nEstimated Next Diff: ' + newDiff.toFixed(4) + '\nDiff changes in **' + blocks / 2016 + ' Blocks**' )

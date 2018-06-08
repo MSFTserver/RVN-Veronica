@@ -25,7 +25,7 @@ exports.socketBlocks = function(bot) {
         vinAddresses.push(vinAddy);
       }
       var vinTrim = JSON.stringify(countDuplicates(vinAddresses));
-      var newVin = vinTrim.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '**inputs:** ').replace(/,/g, "\n    ");
+      var newVin = vinTrim.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '    **inputs:** ').replace(/,/g, "\n    ");
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address
@@ -41,7 +41,7 @@ exports.socketBlocks = function(bot) {
           newVoutAddresses.push(voutObject);
         }
         var voutString = JSON.stringify(newVoutAddresses);
-        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/amount:/g, '**amount:** ').replace(/,/g, "\n    ");
+        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/amount:/g, '    **amount:** ').replace(/,/g, "\n    ");
         var dt = new Date();
         var timestamp = moment()
           .tz('America/Los_Angeles')
@@ -65,7 +65,7 @@ exports.socketBlocks = function(bot) {
           }});
       } else {
         var voutString = JSON.stringify(voutAddresses);
-        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/amount:/g, '**amount:** ').replace(/,/g, "\n    ");
+        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/amount:/g, '    **amount:** ').replace(/,/g, "\n    ");
         var dt = new Date();
         var timestamp = moment()
           .tz('America/Los_Angeles')

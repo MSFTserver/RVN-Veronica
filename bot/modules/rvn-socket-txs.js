@@ -17,8 +17,6 @@ exports.socketBlocks = function(bot) {
     if (!data.isRBF){
       var vinAddresses = [];
       var voutAddresses = [];
-      console.log('txid: '+data.txid);
-      console.log('Total Amount: '+data.valueOut);
       var vin = data.vin;
       var vout = data.vout;
       for (i=0; i < vin.length; i++) {
@@ -26,9 +24,8 @@ exports.socketBlocks = function(bot) {
         vinAddy['address'] = vin[i].address
         vinAddresses.push(vinAddy);
       }
-      var test = JSON.stringify(countDuplicates(vinAddresses));
-      var test2 = test.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/,/g, "\n    ")
-      console.log('vin:\n    ' + test2);
+      var vinTrim = JSON.stringify(countDuplicates(vinAddresses));
+      var newVin = vinTrim.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/,/g, "\n    ");
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address
@@ -43,40 +40,54 @@ exports.socketBlocks = function(bot) {
           voutObject['amount'] = voutAddresses[m].amount
           newVoutAddresses.push(voutObject);
         }
-        var test3 = JSON.stringify(newVoutAddresses);
-        var test4 = test3.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/,/g, "\n    ")
-        console.log('vout:\n    ' + test4 +'\n'+ (voutAddresses.length - 4) + ' More');
+        var voutString = JSON.stringify(newVoutAddresses);
+        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/,/g, "\n    ");
+        var dt = new Date();
+        var timestamp = moment()
+          .tz('America/Los_Angeles')
+          .format('MM-DD-YYYY hh:mm::ss a');
+          bot.channels.get(NewTxChannel).send({ embed: {
+            description:
+              '**txid**: ' data.txid + '\n' +
+              '**Total Amount**: '+data.valueOut + '\n' +
+              '**vin**:\n    ' + newVin + '\n' +
+              '**vout**:\n    ' + newVout +'\n'+
+              (voutAddresses.length - 4) + ' More' + '\n\n'+
+              '[View tx](' + SocketUrl + '/tx/' + data.txid + ')',
+            color: 7976557,
+            footer: {
+              text: 'Last Updated | ' + timestamp + ' PST'
+            },
+            author: {
+              name: '__**New Tx**__',
+              icon_url: 'https://i.imgur.com/nKHVQgq.png'
+            }
+          }});
       } else {
-        var test5 = JSON.stringify(voutAddresses);
-        var test6 = test5.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/,/g, "\n    ")
-        console.log('vout:\n    ' + test6);
+        var voutString = JSON.stringify(voutAddresses);
+        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/,/g, "\n    ");
+        var dt = new Date();
+        var timestamp = moment()
+          .tz('America/Los_Angeles')
+          .format('MM-DD-YYYY hh:mm::ss a');
+          bot.channels.get(NewTxChannel).send({ embed: {
+            description:
+              '**txid**: ' data.txid + '\n' +
+              '**Total Amount**: '+data.valueOut + '\n' +
+              '**vin**:\n    ' + newVin + '\n' +
+              '**vout**:\n    ' + newVout +'\n\n'+
+              '[View tx](' + SocketUrl + '/tx/' + data.txid + ')',
+            color: 7976557,
+            footer: {
+              text: 'Last Updated | ' + timestamp + ' PST'
+            },
+            author: {
+              name: '__**New Tx**__',
+              icon_url: 'https://i.imgur.com/nKHVQgq.png'
+            }
+          }});
       }
     }
-    let dt = new Date();
-    let timestamp = moment()
-      .tz('America/Los_Angeles')
-      .format('MM-DD-YYYY hh:mm::ss a');
-      // const embed = {
-      //   description:
-      //     'Won by [' +
-      //     poolName +
-      //     '](' +
-      //     poolUrl +
-      //     ')\n[View Block](' +
-      //     SocketUrl +
-      //     '/block/' +
-      //     blockHash +
-      //     ')',
-      //   color: 7976557,
-      //   footer: {
-      //     text: 'Last Updated | ' + timestamp + ' PST'
-      //   },
-      //   author: {
-      //     name: 'Block ' + blockHeight,
-      //     icon_url: 'https://i.imgur.com/nKHVQgq.png'
-      //   }
-      // };
-      //bot.channels.get(NewTxChannel).send({ embed });
   });
   function countDuplicates(names){
     const result = [...names.reduce( (mp, o) => {

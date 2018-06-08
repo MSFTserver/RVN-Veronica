@@ -25,7 +25,7 @@ exports.socketBlocks = function(bot) {
         vinAddresses.push(vinAddy);
       }
       var vinTrim = JSON.stringify(countDuplicates(vinAddresses));
-      var newVin = vinTrim.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address**: ').replace(/,/g, "\n    ");
+      var newVin = vinTrim.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '**address:** ').replace(/inputs:/g, '**inputs:** ').replace(/,/g, "\n    ");
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address

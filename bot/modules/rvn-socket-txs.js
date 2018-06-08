@@ -28,8 +28,8 @@ exports.socketBlocks = function(bot) {
         vinAddresses.push(vinAddy);
       }
       var test = JSON.stringify(countDuplicates(vinAddresses));
-      var test2 = test.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/,/g, "\n")
-      console.log('vin: ' + test2);
+      var test2 = test.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/,/g, "\n    ")
+      console.log('vin:\n    ' + test2);
       for (l=0; l < vout.length; l++) {
         voutAddy = new Object();
         voutAddy['address'] = vout[l].address
@@ -45,12 +45,12 @@ exports.socketBlocks = function(bot) {
           newVoutAddresses.push(voutObject);
         }
         var test3 = JSON.stringify(newVoutAddresses);
-        var test4 = test3.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/,/g, "\n")
-        console.log('vout: ' + test4 +'\n'+ (voutAddresses.length - 4) + ' More');
+        var test4 = test3.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/,/g, "\n    ")
+        console.log('vout:\n    ' + test4 +'\n'+ (voutAddresses.length - 4) + ' More');
       } else {
         var test5 = JSON.stringify(voutAddresses);
-        var test6 = test5.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/,/g, "\n")
-        console.log('vout: ' + test6);
+        var test6 = test5.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/,/g, "\n    ")
+        console.log('vout:\n    ' + test6);
       }
     }
     let dt = new Date();

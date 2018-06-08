@@ -41,7 +41,7 @@ exports.socketBlocks = function(bot) {
           newVoutAddresses.push(voutObject);
         }
         var voutString = JSON.stringify(newVoutAddresses);
-        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/,/g, "\n    ");
+        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/amount/g, '**amount**').replace(/,/g, "\n    ");
         var dt = new Date();
         var timestamp = moment()
           .tz('America/Los_Angeles')
@@ -65,7 +65,7 @@ exports.socketBlocks = function(bot) {
           }});
       } else {
         var voutString = JSON.stringify(voutAddresses);
-        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/,/g, "\n    ");
+        var newVout = voutString.replace(/\"/g, "").replace(/]/g, "").replace(/\[/g, "").replace(/{/g, "").replace(/}/g, "").replace(/address:/g, '').replace(/amount/g, '**amount**').replace(/,/g, "\n    ");
         var dt = new Date();
         var timestamp = moment()
           .tz('America/Los_Angeles')

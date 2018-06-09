@@ -34,7 +34,7 @@ exports.difficulty = {
         var avgTime = diff * (2**32) / hashrate;
         var newDiff = (diff * 60) / avgTime;
         var changeBlock = blocks + changeIn
-        msg.channel.send('Current Diff: **' + diff.toFixed(4) + '**\nEstimated Next Diff: **' + newDiff.toFixed(4) + '**\nDiff changes in **' + changeIn.toFixed(0) + ' Blocks** at **Block ' + changeBlock.toFixed(0) + '**' );
+        msg.channel.send('Current Diff: **' + diff.toFixed(4) + '**\nEstimated Next Diff: **' + newDiff.toFixed(4) + '**\nDiff changes in **' + Math.floor(changeIn) + ' Blocks** at **Block ' + Math.floor(changeBlock) + '**' );
       }
     });
     function getError(errCode) {

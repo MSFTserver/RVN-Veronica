@@ -30,11 +30,16 @@ exports.difficulty = {
         var diff = response.body.miningInfo.difficulty;
         var hashrate = response.body.miningInfo.networkhashps;
         var blocks = response.body.miningInfo.blocks;
-        var changeIn = blocks / 2016;
-        var avgTime = diff * (2**32) / hashrate;
-        var newDiff = (diff * 60) / avgTime;
-        var changeBlock = blocks + changeIn
-        msg.channel.send('Current Diff: **' + diff.toFixed(4) + '**\nEstimated Next Diff: **' + newDiff.toFixed(4) + '**\nDiff changes in **' + Math.floor(changeIn) + ' Blocks** at **Block ' + Math.floor(changeBlock) + '**' );
+        var changedDiff = blocks / 2016;
+        var newDiff = (diff * 60) / (diff * (2**32) / hashrate);
+        var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
+        var changeIn = changeOnBlock - blocks;
+        msg.channel.send(
+          'Current Diff: **' + diff.toFixed(4) +
+          '**\nEstimated Next Diff: **' + newDiff.toFixed(4) + '**\n' +
+          'Reatargeted: **' + Math.floor(changedDiff) + ' Times**\n' +
+          'Next Diff in **' + changeIn + ' Blocks** at **Block' + changeOnBlock + '**'
+        );
       }
     });
     function getError(errCode) {

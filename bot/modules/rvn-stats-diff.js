@@ -35,13 +35,18 @@ exports.difficulty = {
         var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
         var changeIn = changeOnBlock - blocks;
         msg.channel.send(
-          'Current Diff: **' + diff.toFixed(4) +
-          '**\nEstimated Next Diff: **' + newDiff.toFixed(4) + '**\n' +
-          'Retargeted: **' + Math.floor(changedDiff) + ' Times**\n' +
-          'Next Diff in **' + changeIn + ' Blocks** at **Block' + changeOnBlock + '**'
+          'Current Diff: **' + numberWithCommas(diff).toFixed(4) +
+          '**\nEstimated Next Diff: **' + numberWithCommas(newDiff).toFixed(4) + '**\n' +
+          'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n' +
+          'Next Diff in **' + numberWithCommas(changeIn) + ' Blocks** at **Block ' + numberWithCommas(changeOnBlock) + '**'
         );
       }
     });
+    const numberWithCommas = x => {
+      var parts = x.toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return parts.join('.');
+    };
     function getError(errCode) {
       if (errCode == 122) {
         var message = 'API ERROR: Request-URI too long';

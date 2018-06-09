@@ -37,7 +37,7 @@ exports.difficulty = {
         msg.channel.send(
           'Current Diff: **' + diff.toFixed(4) +
           '**\nEstimated Next Diff: **' + newDiff.toFixed(4) + '**\n' +
-          'Reatargeted: **' + Math.floor(changedDiff) + ' Times**\n' +
+          'Retargeted: **' + Math.floor(changedDiff) + ' Times**\n' +
           'Next Diff in **' + changeIn + ' Blocks** at **Block' + changeOnBlock + '**'
         );
       }

@@ -2,6 +2,9 @@ let needle = require('needle');
 let config = require('config');
 let moment = require('moment-timezone');
 let explorerApiUrl = config.get('General').urls.explorerApiUrl;
+let hasRvnStatsNetworkChannels = require('../helpers.js').hasRvnStatsNetworkChannels;
+let inPrivate = require('../helpers.js').inPrivate;
+let channelID = config.get('General').Channels.botspam;
 
 exports.commands = [
   'difficulty'
@@ -11,6 +14,12 @@ exports.difficulty = {
   usage: '',
   description: 'shows current difficulty and retarget',
   process: function(bot,msg,suffix){
+    if (!inPrivate(msg) && !hasRvnStatsNetworkChannels(msg)) {
+      msg.channel.send(
+        'Please use <#' + channelID + '> or DMs to talk to Diff bot.'
+      );
+      return;
+    }
     needle.get(explorerApiUrl + 'api/status?q=getMiningInfo', function(
       error,
       response
@@ -21,9 +30,11 @@ exports.difficulty = {
         var diff = response.body.miningInfo.difficulty;
         var hashrate = response.body.miningInfo.networkhashps;
         var blocks = response.body.miningInfo.blocks;
+        var changeIn = blocks / 2016;
         var avgTime = diff * (2**32) / hashrate;
         var newDiff = (diff * 60) / avgTime;
-        msg.channel.send('Current Diff: **' + diff.toFixed(4) + '**\nEstimated Next Diff: **' + newDiff.toFixed(4) + '**\nDiff changes in **' + blocks.toFixed(0) / 2016 + ' Blocks**' );
+        var changeBlock = blocks + changeIn
+        msg.channel.send('Current Diff: **' + diff.toFixed(4) + '**\nEstimated Next Diff: **' + newDiff.toFixed(4) + '**\nDiff changes in **' + changeIn.toFixed(0) + ' Blocks** at **Block ' + changeBlock.toFixed(0) + '**' );
       }
     });
     function getError(errCode) {

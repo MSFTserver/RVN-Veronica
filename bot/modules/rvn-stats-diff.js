@@ -35,8 +35,8 @@ exports.difficulty = {
         var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
         var changeIn = changeOnBlock - blocks;
         msg.channel.send(
-          'Current Diff: **' + numberWithCommas(diff).toFixed(4) +
-          '**\nEstimated Next Diff: **' + numberWithCommas(newDiff).toFixed(4) + '**\n' +
+          'Current Diff: **' + numberWithCommas(diff) +
+          '**\nEstimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +
           'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n' +
           'Next Diff in **' + numberWithCommas(changeIn) + ' Blocks** at **Block ' + numberWithCommas(changeOnBlock) + '**'
         );

@@ -1,112 +1,52 @@
-'use strict';
-let jp = require('jsonpath');
-let moment = require('moment-timezone');
-let numeral = require('numeral');
-let request = require('request');
-let config = require('config');
 let needle = require('needle');
-let hasRvnCalcPriceChannels = require('../helpers.js').hasRvnCalcPriceChannels;
+let config = require('config');
+let moment = require('moment-timezone');
+let explorerApiUrl = config.get('General').urls.explorerApiUrl;
+let hasRvnStatsNetworkChannels = require('../helpers.js').hasRvnStatsNetworkChannels;
 let inPrivate = require('../helpers.js').inPrivate;
 let channelID = config.get('General').Channels.botspam;
-let cmcApiUrl = config.get('General').urls.cmcApiUrl;
-let coinName = config.get('General').urls.CoinName;
-let coinSymbol = config.get('General').urls.CoinSymbol;
 
-exports.commands = ['lambo'];
+exports.commands = [
+  'difficulty'
+]
 
-exports.lambo = {
-  usage: '<amount-optional>',
-  description:
-    'displays amount of given alt coin to get a lambo\n    if <amount> is supplied that will be deducted from total price towards 1 Lambo!',
-  process: function(bot, msg, suffix) {
-    let dt = new Date();
-    let timestamp = moment()
-      .tz('America/Los_Angeles')
-      .format('MM-DD-YYYY hh:mm a');
-
-    if (!hasRvnCalcPriceChannels(msg) && !inPrivate(msg)) {
+exports.difficulty = {
+  usage: '',
+  description: 'shows current difficulty and retarget',
+  process: function(bot,msg,suffix){
+    if (!inPrivate(msg) && !hasRvnStatsNetworkChannels(msg)) {
       msg.channel.send(
-        'Please use <#' + channelID + '> or DMs to talk to price bot.'
+        'Please use <#' + channelID + '> or DMs to talk to Diff bot.'
       );
       return;
-    } else {
-      lamboCalc(bot, msg, suffix);
     }
-
-    function lamboCalc(bot, msg, suffix) {
-      var words = suffix
-        .trim()
-        .split(' ')
-        .filter(function(n) {
-          return n !== '';
-        });
-      if (!words[0]) {
-        var coin = 'RVN';
+    needle.get(explorerApiUrl + 'api/status?q=getMiningInfo', function(
+      error,
+      response
+    ) {
+      if (response.statusCode !== 200) {
+        msg.channel.send(getError(response.statusCode));
       } else {
-        var coin = words[0].toUpperCase();
+        var diff = response.body.miningInfo.difficulty;
+        var hashrate = response.body.miningInfo.networkhashps;
+        var blocks = response.body.miningInfo.blocks;
+        var changedDiff = blocks / 2016;
+        var newDiff = (diff * 60) / (diff * (2**32) / hashrate);
+        var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
+        var changeIn = changeOnBlock - blocks;
+        msg.channel.send(
+          'Current Diff: **' + numberWithCommas(diff) +
+          '**\nEstimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +
+          'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n' +
+          'Next Diff in **' + numberWithCommas(changeIn) + ' Blocks** at **Block ' + numberWithCommas(changeOnBlock) + '**'
+        );
       }
-      if (!words[1]) {
-        var amount = 1;
-      } else {
-        var amount = words[1];
-      }
-      needle.get(cmcApiUrl + 'listings/', function(error, response) {
-        if (response.statusCode !== 200) {
-          msg.channel.send(getError(response.statusCode));
-        } else {
-          var JSON1 = response.body.data;
-          if (
-            Number(JSON1.findIndex(symbols => symbols.symbol == coin)) != -1
-          ) {
-            var hasMatch = true;
-            var index = JSON1.findIndex(symbols => symbols.symbol == coin);
-          } else {
-            var hasMatch = false;
-            var index = JSON1.findIndex(symbols => symbols.symbol == coin);
-          }
-          var coinJson = JSON1[index];
-          if (!hasMatch || !coinJson) {
-            msg.channel.send('Invalid Alt Coin');
-            return;
-          }
-          var coinID = coinJson.id;
-          needle.get(cmcApiUrl + 'ticker/' + coinID + '/?convert=USD', function(
-            error,
-            response
-          ) {
-            if (response.statusCode !== 200) {
-              msg.channel.send(getError(response.statusCode));
-            } else {
-              var rate = Number(response.body.data.quotes.USD.price);
-              var cost = 250000 / rate;
-              if (amount <= 1) {
-                var message =
-                  cost.toFixed(0) + ' ' + coin + ' = 1 Lambo Huracan';
-              } else {
-                var cost = cost - amount;
-                var message =
-                  'Need **' +
-                  cost.toFixed(0) +
-                  ' ' +
-                  coin +
-                  '** for 1 Lambo Huracan';
-              }
-              const embed = {
-                description: message,
-                color: 7976557,
-                footer: {
-                  text: 'Last Updated | ' + timestamp + ' PST'
-                },
-                author: {
-                  name: coin + ' to 1 Lambo Calc'
-                }
-              };
-              msg.channel.send({ embed });
-            }
-          });
-        }
-      });
-    }
+    });
+    const numberWithCommas = x => {
+      var parts = x.toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return parts.join('.');
+    };
     function getError(errCode) {
       if (errCode == 122) {
         var message = 'API ERROR: Request-URI too long';
@@ -329,5 +269,5 @@ exports.lambo = {
         return message;
       }
     }
-  }
-};
+    }
+}

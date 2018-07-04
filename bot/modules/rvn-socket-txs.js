@@ -45,7 +45,7 @@ exports.socketBlocks = function(bot) {
             .replace(/address:/g, '**address:** ')
             .replace(/inputs:/g, '    **inputs:** ')
             .replace(/,/g, '\n    ') +
-          '    ' +
+          '\n    ' +
           (newVinAddresses.length - 4) +
           ' More' +
           '\n\n';

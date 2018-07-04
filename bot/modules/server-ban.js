@@ -9,7 +9,7 @@ exports.commands = ['ban'];
 
 exports.ban = {
   usage: '<@username> <purge 0,1,7> <reason>',
-  description: ':desktop: :cop: bans a user for given reason and whipes recent chat by specifing 0,1,7 :cop: :desktop:',
+  description: ':desktop: :cop: bans a user for given reason and whipes recent chat by specifing days (0,1,7) :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {
       msg.channel.send('You Can Not Use This Command In DMs!');
@@ -39,13 +39,13 @@ exports.ban = {
       return;
     }
     if (purge != 1 && purge != 7 && purge != 0) {
-      msg.reply(' Add a timeframe to remove messages from ' + member);
+      msg.reply(' Add a timeframe in days (0,1,7) to remove messages from ' + member);
       return;
     }
     var time = moment()
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
-    msg.channel.send(member + ' **BANNED**\npurged: ' + purge + ' messages\nreason: ' + reason);
+    msg.channel.send(member + ' **BANNED**\npurged: ' + purge + ' days of messages\nreason: ' + reason);
     bot.channels
       .get(modLogChannel)
       .send(

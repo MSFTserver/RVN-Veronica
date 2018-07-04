@@ -8,8 +8,8 @@ let moment = require('moment-timezone');
 exports.commands = ['ban'];
 
 exports.ban = {
-  usage: '<@username> <reason>',
-  description: ':desktop: :cop: bans a user for given reason :cop: :desktop:',
+  usage: '<@username> <purge 0,1,7> <reason>',
+  description: ':desktop: :cop: bans a user for given reason and whipes recent chat by specifing 0,1,7 :cop: :desktop:',
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {
       msg.channel.send('You Can Not Use This Command In DMs!');
@@ -22,10 +22,14 @@ exports.ban = {
       return;
     }
     let member = msg.mentions.members.first();
-    let reason = msg.content
+    let words = suffix
+      .trim()
       .split(' ')
-      .slice(2)
-      .join(' ');
+      .filter(function(n) {
+        return n !== '';
+      });
+    let purge = words[1];
+    let reason = words.slice(2);
     if (member == '<@undefinded>') {
       msg.reply(' The member you inserted to ban was invalid!');
       return;
@@ -34,10 +38,14 @@ exports.ban = {
       msg.reply(' Add a reason to ban ' + member + ' please.');
       return;
     }
+    if (purge != 1 || purge != 7 || purge != 0) {
+      msg.reply(' Add a timeframe to remove messages');
+      return;
+    }
     var time = moment()
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
-    msg.channel.send(member + ' **BANNED**\n reason: ' + reason);
+    msg.channel.send(member + ' **BANNED**\npurged: ' + purge + ' messages\nreason: ' + reason);
     bot.channels
       .get(modLogChannel)
       .send(
@@ -49,12 +57,14 @@ exports.ban = {
           msg.author.username +
           ' **BANNED**' +
           member +
-          ', reason: ' +
+          ',purged: ' + purge + ' days of messages, reason: ' +
           reason
       );
     member.ban({
-      days: 7,
+      days: Number(purge),
       reason: 'banned by ' + msg.author.username + '      Reason: ' + reason
+    }).catch(function(error) {
+      msg.channel.send(error)
     });
   }
 };

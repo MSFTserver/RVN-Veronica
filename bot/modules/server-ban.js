@@ -38,7 +38,7 @@ exports.ban = {
       msg.reply(' Add a reason to ban ' + member + ' please.');
       return;
     }
-    if (purge != 1 || purge != 7 || purge != 0) {
+    if (purge != 1 && purge != 7 && purge != 0) {
       msg.reply(' Add a timeframe to remove messages from ' + member);
       return;
     }

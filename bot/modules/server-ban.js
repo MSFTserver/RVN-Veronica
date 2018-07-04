@@ -28,7 +28,7 @@ exports.ban = {
       .filter(function(n) {
         return n !== '';
       });
-    let purge = words[1];
+    let purge = Number(words[1]);
     let reason = words.slice(2);
     if (member == '<@undefinded>') {
       msg.reply(' The member you inserted to ban was invalid!');
@@ -39,7 +39,7 @@ exports.ban = {
       return;
     }
     if (purge != 1 || purge != 7 || purge != 0) {
-      msg.reply(' Add a timeframe to remove messages');
+      msg.reply(' Add a timeframe to remove messages from ' + member);
       return;
     }
     var time = moment()

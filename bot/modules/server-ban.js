@@ -30,7 +30,7 @@ exports.ban = {
       });
     let purge = Number(words[1]);
     let reason = words.slice(2);
-    if (member == '<@undefinded>') {
+    if (member == '<@undefinded>' || member = undefined) {
       msg.reply(' The member you inserted to ban was invalid!');
       return;
     }

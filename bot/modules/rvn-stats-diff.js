@@ -29,7 +29,14 @@ exports.difficulty = {
       } else {
         var diff = response.body.miningInfo.difficulty;
         var hashrate = response.body.miningInfo.networkhashps;
-        var blocks = response.body.miningInfo.blocks;
+        needle.get(explorerApiUrl + 'api/status', function(
+          error,
+          response
+        ) {
+          if (response.statusCode !== 200) {
+            msg.channel.send(getError(response.statusCode));
+          } else {
+        var blocks = response.body.info.blocks;
         var changedDiff = blocks / 2016;
         var newDiff = (diff * 60) / (diff * (2**32) / hashrate);
         var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
@@ -40,6 +47,8 @@ exports.difficulty = {
           'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n' +
           'Next Diff in **' + numberWithCommas(changeIn) + ' Blocks** at **Block ' + numberWithCommas(changeOnBlock) + '**'
         );
+      }
+    });
       }
     });
     const numberWithCommas = x => {

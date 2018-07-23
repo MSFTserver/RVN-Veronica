@@ -24,7 +24,7 @@ exports.timeout = {
       );
       return;
     }
-      findEntry(bot, msg, 'users', 'accUserID', msg.author.id, findProfile);
+      findEntry(bot, msg, 'users', 'accUserID', member.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
         if (!gotProfile) {
           var suffix = msg.content.substring(
@@ -109,7 +109,7 @@ exports.timeout = {
               active: true
             };
             member.addRole(msg.guild.roles.find('name', 'Timeout'));
-            updateEntry(bot, msg, 'timeout', 'userID', msg.author.id, TimeoutUser);
+            updateEntry(bot, msg, 'timeout', 'userID', member.id, TimeoutUser);
             msg.channel.send(
               '**' + member +
               ' ** Has Been Put in Timeout a total of ' +

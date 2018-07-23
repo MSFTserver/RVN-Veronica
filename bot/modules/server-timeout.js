@@ -24,6 +24,35 @@ exports.timeout = {
       );
       return;
     }
+    var suffix = msg.content.substring(
+      9
+    );
+    console.log(suffix);
+    var member = msg.mentions.members.first();
+    var words = suffix
+      .trim()
+      .split(' ')
+      .filter(function(n) {
+        return n !== '';
+      });
+    console.log(words)
+    var timer = getValidatedAmount(words[1]);
+    var reason = words.slice(2);
+    var timestamp = moment()
+      .tz('America/Los_Angeles')
+      .format('MM-DD-YYYY hh:mm a');
+    if (member == '<@undefinded>' || member == undefined) {
+      msg.reply(' The member you inserted to timeout was invalid!');
+      return;
+    }
+    if (reason.length < 1) {
+      msg.reply(' Add a reason to Timeout ' + member + ' please.');
+      return;
+    }
+    if (timer === null)  {
+      msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
+      return;
+    }
       findEntry(bot, msg, 'users', 'accUserID', member.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
         if (!gotProfile) {

@@ -29,6 +29,7 @@ exports.timeout = {
     );
     console.log(suffix);
     var member = msg.mentions.members.first();
+    console.log(member);
     var words = suffix
       .trim()
       .split(' ')
@@ -60,8 +61,8 @@ exports.timeout = {
             9
           );
           console.log(suffix);
-          console.log(member);
           var member = msg.mentions.members.first();
+          console.log(member);
           var words = suffix
             .trim()
             .split(' ')
@@ -106,6 +107,7 @@ exports.timeout = {
             );
             console.log(suffix);
             var member = msg.mentions.members.first();
+            console.log(member);
             var words = suffix
               .trim()
               .split(' ')

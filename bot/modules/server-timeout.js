@@ -26,8 +26,11 @@ exports.timeout = {
     }
       findEntry(bot, msg, 'users', 'accUserID', msg.author.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
+        let suffix = msg.content.substring(
+          cmdTxt.length + config.prefix.length + 1
+        );
         let member = msg.mentions.members.first();
-        let words = msg
+        let words = suffix
           .trim()
           .split(' ')
           .filter(function(n) {

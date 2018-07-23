@@ -86,8 +86,8 @@ exports.timeout = {
             return;
           }
           var TimeoutUser = {
-            userID: msg.author.id,
-            username: msg.author.username,
+            userID: member.id,
+            username: member.username,
             reason: reason,
             time: timestamp,
             timer: timer,
@@ -130,7 +130,7 @@ exports.timeout = {
               return;
             }
             var TimeoutUser = {
-              username: msg.author.username,
+              username: member.username,
               reason: reason,
               time: timestamp,
               timer: timer,

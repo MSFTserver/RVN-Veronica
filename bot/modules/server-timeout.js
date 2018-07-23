@@ -31,7 +31,6 @@ exports.timeout = {
       .filter(function(n) {
         return n !== '';
       });
-    console.log(words)
     let timer = getValidatedAmount(words[1]);
     let reason = words.slice(2);
     let timestamp = moment()
@@ -58,12 +57,12 @@ exports.timeout = {
             reason: reason,
             time: timestamp,
             timer: timer,
-            times: 0,
+            times: 1,
             active: true
           };
           member.addRole(msg.guild.roles.find('name', 'Timeout'))
           newEntry(bot, msg, 'timeout', TimeoutUser)
-          msg.channel.send(member + ' ** Has Been Put in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
+          msg.channel.send('**' +member + ' ** Has Been Put in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
           bot.channels.get(modLogChannel).send('[' + timestamp + ' PST][' + pm2Name + '] ' + msg.author.username + ' Put ' + member + ' ** in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
         } else {
           if (!gotProfile[0].active) {
@@ -78,7 +77,7 @@ exports.timeout = {
             member.addRole(msg.guild.roles.find('name', 'Timeout'));
             updateEntry(bot, msg, 'timeout', 'userID', msg.author.id, TimeoutUser);
             msg.channel.send(
-              member +
+              '**' + member +
               ' ** Has Been Put in Timeout a total of ' +
               gotProfile[0].times +
               ' times, this time for ' +
@@ -90,7 +89,7 @@ exports.timeout = {
               .send(
                 '[' + timestamp + ' PST][' + pm2Name + '] ' +
                 msg.author.username +
-                'Put' +
+                ' Put **' +
                 member +
                 ' ** in Timeout total of ' +
                 gotProfile[0].times +

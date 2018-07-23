@@ -38,8 +38,8 @@ exports.timeout = {
             return n !== '';
           });
         console.log(words)
-        let timer = getValidatedAmount(words[2]);
-        let reason = words.slice(3);
+        let timer = getValidatedAmount(words[1]);
+        let reason = words.slice(2);
         let timestamp = moment()
           .tz('America/Los_Angeles')
           .format('MM-DD-YYYY hh:mm a');

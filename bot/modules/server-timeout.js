@@ -121,6 +121,7 @@ exports.timeoutChecker = function(bot) {
     var msg = null;
     findEntry(bot, msg, 'timeout', false, false, findUsers);
     function findUsers(bot, msg, docs) {
+      if (docs) {
       docs.forEach(function(results) {
         var user = results.username;
         var userID = results.userID;
@@ -141,6 +142,7 @@ exports.timeoutChecker = function(bot) {
           )
         }
       });
+    }
     }
 
   }, 60 * 1000);

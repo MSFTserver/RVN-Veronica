@@ -37,6 +37,7 @@ exports.timeout = {
           .filter(function(n) {
             return n !== '';
           });
+        console.log(words)
         let timer = getValidatedAmount(words[2]);
         let reason = words.slice(3);
         let timestamp = moment()

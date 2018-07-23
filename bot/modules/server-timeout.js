@@ -32,7 +32,7 @@ exports.timeout = {
         return n !== '';
       });
     console.log(words)
-    let timer = getValidatedAmount(Number(words[1]));
+    let timer = getValidatedAmount(words[1]);
     let reason = words.slice(2);
     if (member == '<@undefinded>' || member == undefined) {
       msg.reply(' The member you inserted to timeout was invalid!');

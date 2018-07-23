@@ -34,6 +34,9 @@ exports.timeout = {
     console.log(words)
     let timer = getValidatedAmount(words[1]);
     let reason = words.slice(2);
+    let timestamp = moment()
+      .tz('America/Los_Angeles')
+      .format('MM-DD-YYYY hh:mm a');
     if (member == '<@undefinded>' || member == undefined) {
       msg.reply(' The member you inserted to timeout was invalid!');
       return;
@@ -48,9 +51,6 @@ exports.timeout = {
     }
       findEntry(bot, msg, 'users', 'accUserID', msg.author.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
-        var timestamp = moment()
-          .tz('America/Los_Angeles')
-          .format('MM-DD-YYYY hh:mm a');
         if (!gotProfile) {
           var TimeoutUser = {
             userID: msg.author.id,

@@ -96,8 +96,8 @@ exports.timeout = {
           };
           member.addRole(msg.guild.roles.find('name', 'Timeout'))
           newEntry(bot, msg, 'timeout', TimeoutUser)
-          msg.channel.send('**' +member + ' ** Has Been Put in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
-          bot.channels.get(modLogChannel).send('[' + timestamp + ' PST][' + pm2Name + '] ' + msg.author.username + ' Put ' + member + ' ** in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
+          msg.channel.send('**' + member + ' ** Has Been Put in Timeout for ' + timer + ' Minutes\nreason: ' + reason)
+          bot.channels.get(modLogChannel).send('[' + timestamp + ' PST][' + pm2Name + '] ' + msg.author.username + ' Put ' + member + ' ** in Timeout for ' + timer + ' Minutes\nreason: ' + reason)
         } else {
           if (!gotProfile[0].active) {
             var suffix = msg.content.substring(

@@ -26,43 +26,43 @@ exports.timeout = {
     }
       findEntry(bot, msg, 'users', 'accUserID', msg.author.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
-        var suffix = msg.content.substring(
-          9
-        );
-        console.log(suffix);
-        var member = msg.mentions.members.first();
-        var words = suffix
-          .trim()
-          .split(' ')
-          .filter(function(n) {
-            return n !== '';
-          });
-        console.log(words)
-        var timer = getValidatedAmount(words[1]);
-        var reason = words.slice(2);
-        var timestamp = moment()
-          .tz('America/Los_Angeles')
-          .format('MM-DD-YYYY hh:mm a');
-        if (member == '<@undefinded>' || member == undefined) {
-          msg.reply(' The member you inserted to timeout was invalid!');
-          return;
-        }
-        if (reason.length < 1) {
-          msg.reply(' Add a reason to Timeout ' + member + ' please.');
-          return;
-        }
-        if (timer === null)  {
-          msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
-          return;
-        }
         if (!gotProfile) {
+          var suffix = msg.content.substring(
+            9
+          );
+          console.log(suffix);
+          var member = msg.mentions.members.first();
+          var words = suffix
+            .trim()
+            .split(' ')
+            .filter(function(n) {
+              return n !== '';
+            });
+          console.log(words)
+          var timer = getValidatedAmount(words[1]);
+          var reason = words.slice(2);
+          var timestamp = moment()
+            .tz('America/Los_Angeles')
+            .format('MM-DD-YYYY hh:mm a');
+          if (member == '<@undefinded>' || member == undefined) {
+            msg.reply(' The member you inserted to timeout was invalid!');
+            return;
+          }
+          if (reason.length < 1) {
+            msg.reply(' Add a reason to Timeout ' + member + ' please.');
+            return;
+          }
+          if (timer === null)  {
+            msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
+            return;
+          }
           var TimeoutUser = {
             userID: msg.author.id,
             username: msg.author.username,
             reason: reason,
             time: timestamp,
             timer: timer,
-            times: 1,
+            times: Number(1),
             active: true
           };
           member.addRole(msg.guild.roles.find('name', 'Timeout'))
@@ -71,6 +71,35 @@ exports.timeout = {
           bot.channels.get(modLogChannel).send('[' + timestamp + ' PST][' + pm2Name + '] ' + msg.author.username + ' Put ' + member + ' ** in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
         } else {
           if (!gotProfile[0].active) {
+            var suffix = msg.content.substring(
+              9
+            );
+            console.log(suffix);
+            var member = msg.mentions.members.first();
+            var words = suffix
+              .trim()
+              .split(' ')
+              .filter(function(n) {
+                return n !== '';
+              });
+            console.log(words)
+            var timer = getValidatedAmount(words[1]);
+            var reason = words.slice(2);
+            var timestamp = moment()
+              .tz('America/Los_Angeles')
+              .format('MM-DD-YYYY hh:mm a');
+            if (member == '<@undefinded>' || member == undefined) {
+              msg.reply(' The member you inserted to timeout was invalid!');
+              return;
+            }
+            if (reason.length < 1) {
+              msg.reply(' Add a reason to Timeout ' + member + ' please.');
+              return;
+            }
+            if (timer === null)  {
+              msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
+              return;
+            }
             var TimeoutUser = {
               username: msg.author.username,
               reason: reason,

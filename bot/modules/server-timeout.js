@@ -41,7 +41,7 @@ exports.timeout = {
       msg.reply(' Add a reason to Timeout ' + member + ' please.');
       return;
     }
-    if (getValidatedAmount(timer) === null)  {
+    if (getValidatedAmount(Number(timer)) === null)  {
       msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
       return;
     }

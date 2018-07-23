@@ -85,6 +85,17 @@ exports.updateEntry = function(bot, msg, useDB, keyName, valueName, saveEntry) {
     });
 };
 
+//Drop Database!!
+// Pm2 Metrics DB Get
+exports.dropdb = function(useDB) {
+  var database = mongoose.model(useDB);
+  database.dropDatabase(function(err, result){
+      if (err) {
+        console.log("Error Deleting db : "+err);
+      }
+  });
+};
+
 // Pm2 Metrics DB Get
 exports.pm2MetricGet = function(pm2MetricName) {
   var pm2Metrics = mongoose.model('pm2');

@@ -37,6 +37,7 @@ require('./db-models/pm2.js');
 require('./db-models/pool.js');
 require('./db-models/user.js');
 require('./db-models/timeout.js');
+require('./db-models/blockstime.js');
 
 
 var aliases;

@@ -24,32 +24,32 @@ exports.timeout = {
       );
       return;
     }
-    let member = msg.mentions.members.first();
-    let words = suffix
-      .trim()
-      .split(' ')
-      .filter(function(n) {
-        return n !== '';
-      });
-    let timer = getValidatedAmount(words[1]);
-    let reason = words.slice(2);
-    let timestamp = moment()
-      .tz('America/Los_Angeles')
-      .format('MM-DD-YYYY hh:mm a');
-    if (member == '<@undefinded>' || member == undefined) {
-      msg.reply(' The member you inserted to timeout was invalid!');
-      return;
-    }
-    if (reason.length < 1) {
-      msg.reply(' Add a reason to Timeout ' + member + ' please.');
-      return;
-    }
-    if (timer === null)  {
-      msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
-      return;
-    }
       findEntry(bot, msg, 'users', 'accUserID', msg.author.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
+        let member = msg.mentions.members.first();
+        let words = msg
+          .trim()
+          .split(' ')
+          .filter(function(n) {
+            return n !== '';
+          });
+        let timer = getValidatedAmount(words[2]);
+        let reason = words.slice(3);
+        let timestamp = moment()
+          .tz('America/Los_Angeles')
+          .format('MM-DD-YYYY hh:mm a');
+        if (member == '<@undefinded>' || member == undefined) {
+          msg.reply(' The member you inserted to timeout was invalid!');
+          return;
+        }
+        if (reason.length < 1) {
+          msg.reply(' Add a reason to Timeout ' + member + ' please.');
+          return;
+        }
+        if (timer === null)  {
+          msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
+          return;
+        }
         if (!gotProfile) {
           var TimeoutUser = {
             userID: msg.author.id,

@@ -29,6 +29,7 @@ exports.timeout = {
         let suffix = msg.content.substring(
           9
         );
+        console.log(suffix);
         let member = msg.mentions.members.first();
         let words = suffix
           .trim()

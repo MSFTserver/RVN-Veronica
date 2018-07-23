@@ -26,21 +26,21 @@ exports.timeout = {
     }
       findEntry(bot, msg, 'users', 'accUserID', msg.author.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
-        let suffix = msg.content.substring(
+        var suffix = msg.content.substring(
           9
         );
         console.log(suffix);
-        let member = msg.mentions.members.first();
-        let words = suffix
+        var member = msg.mentions.members.first();
+        var words = suffix
           .trim()
           .split(' ')
           .filter(function(n) {
             return n !== '';
           });
         console.log(words)
-        let timer = getValidatedAmount(words[1]);
-        let reason = words.slice(2);
-        let timestamp = moment()
+        var timer = getValidatedAmount(words[1]);
+        var reason = words.slice(2);
+        var timestamp = moment()
           .tz('America/Los_Angeles')
           .format('MM-DD-YYYY hh:mm a');
         if (member == '<@undefinded>' || member == undefined) {

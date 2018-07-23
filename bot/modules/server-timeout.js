@@ -71,7 +71,7 @@ exports.timeout = {
               reason: reason,
               time: timestamp,
               timer: timer,
-              times: Number(gotProfile[0].times) + 1,
+              times: Number(gotProfile[0].times + 1),
               active: true
             };
             member.addRole(msg.guild.roles.find('name', 'Timeout'));

@@ -62,8 +62,8 @@ exports.timeout = {
           };
           member.addRole(msg.guild.roles.find('name', 'Timeout'))
             .then(
-              newEntry(bot, msg, 'timeout', TimeoutUser);
-              msg.channel.send(member + ' ** Has Been Put in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason);
+              newEntry(bot, msg, 'timeout', TimeoutUser)
+              msg.channel.send(member + ' ** Has Been Put in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
               bot.channels
                 .get(modLogChannel)
                 .send(
@@ -74,7 +74,7 @@ exports.timeout = {
                     '] ' +
                     msg.author.username +
                     'Put' + member + ' ** in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason
-                );
+                )
             );
         } else {
           if (!gotProfile[0].active) {
@@ -87,7 +87,7 @@ exports.timeout = {
               active: true
             };
             member.addRole(msg.guild.roles.find('name', 'Timeout')).then(
-            updateEntry(bot, msg, 'timeout', 'userID', msg.author.id, TimeoutUser);
+            updateEntry(bot, msg, 'timeout', 'userID', msg.author.id, TimeoutUser)
             msg.channel.send(
               member +
               ' ** Has Been Put in Timeout a total of ' +
@@ -95,7 +95,7 @@ exports.timeout = {
               ' times, this time for ' +
               gotProfile[0].timer +
               ' Minutes\nreason: ' +
-              gotProfile[0].reason);
+              gotProfile[0].reason)
             bot.channels
               .get(modLogChannel)
               .send(
@@ -109,7 +109,7 @@ exports.timeout = {
                 gotProfile[0].timer +
                 ' Minutes\nreason: ' +
                 gotProfile[0].reason
-              );
+              )
             );
           } else {
           msg.channel.send('user has already been put in timeout for ' + gotProfile[0].timer + ' minutes @ ' + gotProfile[0].time);
@@ -145,12 +145,12 @@ exports.timeoutChecker = function(bot) {
           .format('MM-DD-YYYY hh:mm a');
         var then = moment(timeoutDate);
         if (now > then) {
-          member.removeRole(bot.guild.roles.find('name', 'Timeout'))
-          .then(
-            var TimeoutUser = {
+        var TimeoutUser = {
               active: false
             };
-            updateEntry(bot, msg, 'timeout', 'userID', results.userID, TimeoutUser);
+          member.removeRole(bot.guild.roles.find('name', 'Timeout'))
+          .then(
+            updateEntry(bot, msg, 'timeout', 'userID', results.userID, TimeoutUser)
           )
         }
       });

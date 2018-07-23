@@ -26,7 +26,7 @@ exports.kick = {
       .split(' ')
       .slice(2)
       .join(' ');
-    if (member == '<@undefinded>') {
+    if (member == '<@undefinded>' || member == undefined) {
       msg.reply(' The member you inserted to kick was invalid!');
       return;
     }

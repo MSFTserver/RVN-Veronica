@@ -61,21 +61,9 @@ exports.timeout = {
             active: true
           };
           member.addRole(msg.guild.roles.find('name', 'Timeout'))
-            .then(
-              newEntry(bot, msg, 'timeout', TimeoutUser)
-              msg.channel.send(member + ' ** Has Been Put in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
-              bot.channels
-                .get(modLogChannel)
-                .send(
-                  '[' +
-                    time +
-                    ' PST][' +
-                    pm2Name +
-                    '] ' +
-                    msg.author.username +
-                    'Put' + member + ' ** in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason
-                )
-            );
+          newEntry(bot, msg, 'timeout', TimeoutUser)
+          msg.channel.send(member + ' ** Has Been Put in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
+          bot.channels.get(modLogChannel).send('[' + time + ' PST][' + pm2Name + '] ' + msg.author.username + ' Put ' + member + ' ** in Timeout for ' + gotProfile[0].timer + ' Minutes\nreason: ' + gotProfile[0].reason)
         } else {
           if (!gotProfile[0].active) {
             var TimeoutUser = {
@@ -86,8 +74,8 @@ exports.timeout = {
               times: Number(gotProfile[0].times) + 1,
               active: true
             };
-            member.addRole(msg.guild.roles.find('name', 'Timeout')).then(
-            updateEntry(bot, msg, 'timeout', 'userID', msg.author.id, TimeoutUser)
+            member.addRole(msg.guild.roles.find('name', 'Timeout'));
+            updateEntry(bot, msg, 'timeout', 'userID', msg.author.id, TimeoutUser);
             msg.channel.send(
               member +
               ' ** Has Been Put in Timeout a total of ' +
@@ -95,7 +83,7 @@ exports.timeout = {
               ' times, this time for ' +
               gotProfile[0].timer +
               ' Minutes\nreason: ' +
-              gotProfile[0].reason)
+              gotProfile[0].reason);
             bot.channels
               .get(modLogChannel)
               .send(
@@ -109,8 +97,7 @@ exports.timeout = {
                 gotProfile[0].timer +
                 ' Minutes\nreason: ' +
                 gotProfile[0].reason
-              )
-            );
+              );
           } else {
           msg.channel.send('user has already been put in timeout for ' + gotProfile[0].timer + ' minutes @ ' + gotProfile[0].time);
           return;

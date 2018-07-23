@@ -60,6 +60,7 @@ exports.timeout = {
             9
           );
           console.log(suffix);
+          console.log(member);
           var member = msg.mentions.members.first();
           var words = suffix
             .trim()

@@ -31,7 +31,7 @@ exports.timeout = {
       .filter(function(n) {
         return n !== '';
       });
-    let timer = Number(words[1]);
+    let timer = getValidatedAmount(Number(words[1]));
     let reason = words.slice(2);
     if (member == '<@undefinded>' || member == undefined) {
       msg.reply(' The member you inserted to timeout was invalid!');
@@ -41,7 +41,7 @@ exports.timeout = {
       msg.reply(' Add a reason to Timeout ' + member + ' please.');
       return;
     }
-    if (getValidatedAmount(Number(timer)) === null)  {
+    if (timer === null)  {
       msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
       return;
     }

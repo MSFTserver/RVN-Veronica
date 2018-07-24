@@ -189,8 +189,8 @@ exports.timeoutChecker = function(bot) {
         var timeoutFor = results.timer;
         var then = moment(timeoutStart).add(Number(timeoutFor), 'minutes');
         var now = moment();
-        console.log(now);
-        console.log(then);
+        console.log(now.unix());
+        console.log(then.unix());
         if (now > then) {
         var TimeoutUser = {
               active: false

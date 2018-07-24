@@ -181,6 +181,7 @@ exports.timeoutChecker = function(bot) {
     function findUsers(bot, msg, docs) {
       if (docs) {
       docs.forEach(function(results) {
+        if (results.active) {
         var user = results.username;
         var userID = results.userID;
         var member = bot.guilds.find('id', '429127343165145089').members.find('id', userID);
@@ -197,6 +198,7 @@ exports.timeoutChecker = function(bot) {
             updateEntry(bot, msg, 'timeout', 'userID', results.userID, TimeoutUser)
           )
         }
+      }
       });
     }
     }

@@ -96,6 +96,7 @@ exports.timeout = {
           msg.channel.send('**' + member + ' ** Has Been Put in Timeout for ' + timer + ' Minutes\nreason: ' + reason)
           bot.channels.get(modLogChannel).send('[' + timestamp + ' PST][' + pm2Name + '] ' + msg.author.username + ' Put ' + member + ' ** in Timeout for ' + timer + ' Minutes\nreason: ' + reason)
         } else {
+          console.log(gotProfile)
           if (!gotProfile[0].active) {
             var suffix = msg.content.substring(
               9
@@ -202,6 +203,5 @@ exports.timeoutChecker = function(bot) {
       });
     }
     }
-
   }, 60 * 1000);
 }

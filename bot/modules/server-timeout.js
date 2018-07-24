@@ -187,7 +187,8 @@ exports.timeoutChecker = function(bot) {
         var timeoutStart = results.time;
         var timeoutFor = results.timer;
         console.log(timeoutStart);
-        var timeoutDate = timeoutStart.add(timeoutFor, 'minutes');
+        var timeoutDate = moment(timeoutStart).tz('America/Los_Angeles')
+          .format('MM-DD-YYYY hh:mm a').add(timeoutFor, 'minutes');
         var now = moment().tz('America/Los_Angeles')
           .format('MM-DD-YYYY hh:mm a');
         var then = moment(timeoutDate);

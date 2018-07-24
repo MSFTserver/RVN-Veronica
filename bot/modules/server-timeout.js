@@ -184,14 +184,13 @@ exports.timeoutChecker = function(bot) {
         var user = results.username;
         var userID = results.userID;
         var member = bot.users.find('id', userID);
-        var timeoutStart = results.time;
+        var timeoutStart = moment(results.time).tz('America/Los_Angeles')
+          .format('MM-DD-YYYY hh:mm a');
         var timeoutFor = results.timer;
         console.log(timeoutStart);
-        var timeoutDate = moment(timeoutStart).tz('America/Los_Angeles')
-          .format('MM-DD-YYYY hh:mm a').add(timeoutFor, 'minutes');
+        var then = moment(timeoutStart).add(Number(timeoutFor), 'minutes');
         var now = moment().tz('America/Los_Angeles')
           .format('MM-DD-YYYY hh:mm a');
-        var then = moment(timeoutDate);
         if (now > then) {
         var TimeoutUser = {
               active: false

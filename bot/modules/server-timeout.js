@@ -27,16 +27,14 @@ exports.timeout = {
     var suffix = msg.content.substring(
       9
     );
-    console.log(suffix);
     var member = msg.mentions.members.first();
-    console.log(member.user);
+
     var words = suffix
       .trim()
       .split(' ')
       .filter(function(n) {
         return n !== '';
       });
-    console.log(words)
     var timer = getValidatedAmount(words[1]);
     var reason = words.slice(2);
     var timestamp = moment()
@@ -60,16 +58,13 @@ exports.timeout = {
           var suffix = msg.content.substring(
             9
           );
-          console.log(suffix);
           var member = msg.mentions.members.first();
-          console.log(member.user);
           var words = suffix
             .trim()
             .split(' ')
             .filter(function(n) {
               return n !== '';
             });
-          console.log(words)
           var timer = getValidatedAmount(words[1]);
           var reason = words.slice(2);
           var timestamp = moment()
@@ -88,8 +83,8 @@ exports.timeout = {
             return;
           }
           var TimeoutUser = {
-            userID: member.id,
-            username: member.username,
+            userID: member.user.id,
+            username: member.user.username +  '#' + member.user.discriminator,
             reason: reason,
             time: timestamp,
             timer: timer,
@@ -105,16 +100,13 @@ exports.timeout = {
             var suffix = msg.content.substring(
               9
             );
-            console.log(suffix);
             var member = msg.mentions.members.first();
-            console.log(member.user);
             var words = suffix
               .trim()
               .split(' ')
               .filter(function(n) {
                 return n !== '';
               });
-            console.log(words)
             var timer = getValidatedAmount(words[1]);
             var reason = words.slice(2);
             var timestamp = moment()
@@ -133,7 +125,7 @@ exports.timeout = {
               return;
             }
             var TimeoutUser = {
-              username: member.username,
+              username: member.user.username +  '#' + member.user.discriminator,
               reason: reason,
               time: timestamp,
               timer: timer,

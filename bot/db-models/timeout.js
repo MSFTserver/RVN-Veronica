@@ -15,7 +15,7 @@ var timeoutSchema = new Schema({
     required: true
   },
   time: {
-    type: Date,
+    type: Timestamp,
     required: true
   },
   timer: {

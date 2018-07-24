@@ -137,7 +137,7 @@ exports.timeout = {
             msg.channel.send(
               '**' + member +
               ' ** Has Been Put in Timeout a total of ' +
-              gotProfile[0].times +
+              (gotProfile[0].times + 1) +
               ' times, this time for ' +
               gotProfile[0].timer +
               ' Minutes\nreason: ' +
@@ -184,10 +184,8 @@ exports.timeoutChecker = function(bot) {
         var user = results.username;
         var userID = results.userID;
         var member = bot.guilds.find('id', '429127343165145089').members.find('id', userID);
-        console.log(bot.guilds.find('id', '429127343165145089').members.find('id', userID))
         var timeoutStart = moment(results.time)
         var timeoutFor = results.timer;
-        console.log(timeoutStart);
         var then = moment(timeoutStart).add(Number(timeoutFor), 'minutes');
         var now = moment();
         if (now > then) {

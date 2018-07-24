@@ -183,8 +183,8 @@ exports.timeoutChecker = function(bot) {
       docs.forEach(function(results) {
         var user = results.username;
         var userID = results.userID;
-        var member = bot.guilds.find('id', '429127343165145089').members.find('id', userID).GuildMember;
-        console.log(bot.guilds.find('id', '429127343165145089').members.find('id', userID).GuildMember)
+        var member = bot.guilds.find('id', '429127343165145089').members.find('id', userID)._roles;
+        console.log(bot.guilds.find('id', '429127343165145089').members.find('id', userID)._roles)
         var timeoutStart = moment(results.time)
         var timeoutFor = results.timer;
         console.log(timeoutStart);

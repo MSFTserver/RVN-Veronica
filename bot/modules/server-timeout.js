@@ -149,7 +149,7 @@ exports.timeout = {
                 msg.author.username +
                 ' Put **' +
                 member +
-                ' ** in Timeout total of ' +
+                ' ** in Timeout \nTimeouts: ' +
                 gotProfile[0].times +
                 ' times, this time for ' +
                 gotProfile[0].timer +
@@ -157,7 +157,7 @@ exports.timeout = {
                 gotProfile[0].reason
               );
           } else {
-          msg.channel.send('user has already been put in timeout for ' + gotProfile[0].timer + ' minutes on ' + gotProfile[0].time);
+          msg.channel.send('user has already been put in timeout for ' + gotProfile[0].timer + ' minutes on ' + moment(gotProfile[0].time).tz('America/Los_Angeles').format('MM-DD-YYYY hh:mm a'));
           return;
         }
 
@@ -184,13 +184,11 @@ exports.timeoutChecker = function(bot) {
         var user = results.username;
         var userID = results.userID;
         var member = bot.users.find('id', userID);
-        var timeoutStart = moment(results.time).tz('America/Los_Angeles')
-          .format('MM-DD-YYYY hh:mm a');
+        var timeoutStart = moment(results.time)
         var timeoutFor = results.timer;
         console.log(timeoutStart);
         var then = moment(timeoutStart).add(Number(timeoutFor), 'minutes');
-        var now = moment().tz('America/Los_Angeles')
-          .format('MM-DD-YYYY hh:mm a');
+        var now = moment();
         if (now > then) {
         var TimeoutUser = {
               active: false

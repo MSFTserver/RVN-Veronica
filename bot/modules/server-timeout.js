@@ -28,7 +28,6 @@ exports.timeout = {
       9
     );
     var member = msg.mentions.members.first();
-
     var words = suffix
       .trim()
       .split(' ')
@@ -52,7 +51,7 @@ exports.timeout = {
       msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
       return;
     }
-      findEntry(bot, msg, 'users', 'accUserID', member.user.id, findProfile);
+      findEntry(bot, msg, 'timeout', 'userID', member.user.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
         if (!gotProfile) {
           var suffix = msg.content.substring(

@@ -157,7 +157,7 @@ exports.timeout = {
                 gotProfile[0].reason
               );
           } else {
-          msg.channel.send('user has already been put in timeout for ' + gotProfile[0].timer + ' minutes @ ' + gotProfile[0].time);
+          msg.channel.send('user has already been put in timeout for ' + gotProfile[0].timer + ' minutes on ' + gotProfile[0].time);
           return;
         }
 
@@ -186,6 +186,7 @@ exports.timeoutChecker = function(bot) {
         var member = bot.users.find('id', userID);
         var timeoutStart = results.time;
         var timeoutFor = results.timer;
+        console.log(timeoutStart);
         var timeoutDate = timeoutStart.add(timeoutFor, 'minutes');
         var now = moment().tz('America/Los_Angeles')
           .format('MM-DD-YYYY hh:mm a');

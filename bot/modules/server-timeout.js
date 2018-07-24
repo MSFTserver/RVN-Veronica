@@ -37,8 +37,6 @@ exports.timeout = {
     var timer = getValidatedAmount(words[1]);
     var reason = words.slice(2);
     var timestamp = moment()
-      .tz('America/Los_Angeles')
-      .format('MM-DD-YYYY hh:mm a');
     if (member == '<@undefinded>' || member == undefined) {
       msg.reply(' The member you inserted to timeout was invalid!');
       return;
@@ -66,9 +64,7 @@ exports.timeout = {
             });
           var timer = getValidatedAmount(words[1]);
           var reason = words.slice(2);
-          var timestamp = moment()
-            .tz('America/Los_Angeles')
-            .format('MM-DD-YYYY hh:mm a');
+          var timestamp = moment();
           if (member == '<@undefinded>' || member == undefined) {
             msg.reply(' The member you inserted to timeout was invalid!');
             return;
@@ -93,7 +89,7 @@ exports.timeout = {
           member.addRole(msg.guild.roles.find('name', 'Timeout'))
           newEntry(bot, msg, 'timeout', TimeoutUser)
           msg.channel.send('**' + member + ' ** Has Been Put in Timeout for ' + timer + ' Minutes\nreason: ' + reason)
-          bot.channels.get(modLogChannel).send('[' + timestamp + ' PST][' + pm2Name + '] ' + msg.author.username + ' Put ' + member + ' ** in Timeout for ' + timer + ' Minutes\nreason: ' + reason)
+          bot.channels.get(modLogChannel).send('[' + timestamp.tz('America/Los_Angeles').format('MM-DD-YYYY hh:mm a') + ' PST][' + pm2Name + '] ' + msg.author.username + ' Put ' + member + ' ** in Timeout for ' + timer + ' Minutes\nreason: ' + reason)
         } else {
           console.log(gotProfile)
           if (!gotProfile[0].active) {
@@ -110,8 +106,6 @@ exports.timeout = {
             var timer = getValidatedAmount(words[1]);
             var reason = words.slice(2);
             var timestamp = moment()
-              .tz('America/Los_Angeles')
-              .format('MM-DD-YYYY hh:mm a');
             if (member == '<@undefinded>' || member == undefined) {
               msg.reply(' The member you inserted to timeout was invalid!');
               return;
@@ -145,7 +139,7 @@ exports.timeout = {
             bot.channels
               .get(modLogChannel)
               .send(
-                '[' + timestamp + ' PST][' + pm2Name + '] ' +
+                '[' + timestamp.tz('America/Los_Angeles').format('MM-DD-YYYY hh:mm a') + ' PST][' + pm2Name + '] ' +
                 msg.author.username +
                 ' Put **' +
                 member +

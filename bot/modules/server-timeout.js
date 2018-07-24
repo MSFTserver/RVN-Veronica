@@ -65,18 +65,6 @@ exports.timeout = {
           var timer = getValidatedAmount(words[1]);
           var reason = words.slice(2);
           var timestamp = moment();
-          if (member == '<@undefinded>' || member == undefined) {
-            msg.reply(' The member you inserted to timeout was invalid!');
-            return;
-          }
-          if (reason.length < 1) {
-            msg.reply(' Add a reason to Timeout ' + member + ' please.');
-            return;
-          }
-          if (timer === null)  {
-            msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
-            return;
-          }
           var TimeoutUser = {
             userID: member.user.id,
             username: member.user.username +  '#' + member.user.discriminator,
@@ -104,19 +92,7 @@ exports.timeout = {
               });
             var timer = getValidatedAmount(words[1]);
             var reason = words.slice(2);
-            var timestamp = moment()
-            if (member == '<@undefinded>' || member == undefined) {
-              msg.reply(' The member you inserted to timeout was invalid!');
-              return;
-            }
-            if (reason.length < 1) {
-              msg.reply(' Add a reason to Timeout ' + member + ' please.');
-              return;
-            }
-            if (timer === null)  {
-              msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
-              return;
-            }
+            var timestamp = moment();
             var TimeoutUser = {
               username: member.user.username +  '#' + member.user.discriminator,
               reason: reason,

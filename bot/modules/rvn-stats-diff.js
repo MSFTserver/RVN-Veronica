@@ -64,7 +64,7 @@ exports.difficulty = {
           var newTime = getDMHS(newMath);
           msg.channel.send(
             '__**based off the last ' + timeCount + ' blocks since diff change!**__\n' +
-            'Current Diff: **' + numberWithCommas(diff) + '**\n' +
+            'Current Diff: **' + numberWithCommas(diff.toFixed(0)) + '**\n' +
             'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks** ' +
             'At **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
             'Estimated Time Till Change is **' + newTime + '**\n' +

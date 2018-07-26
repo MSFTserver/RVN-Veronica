@@ -60,7 +60,8 @@ exports.difficulty = {
           var newDiff = (diff * 60) / (timeAvg * (2**32) / hashrate);
           var accuracy = timeCount / 2016 * 100;
           var oldTime = getDMHS(timeTotal);
-          var newTime = getDMHS((2016 - timeCount) * timeAvg);
+          var newMath = (2016 - timeCount) * timeAvg
+          var newTime = getDMHS(newMath);
           msg.channel.send(
             'Current Diff: **' + numberWithCommas(diff) +
             'Next Diff In: **' + numberWithCommas(changeIn) + ' Blocks**\n' +
@@ -89,7 +90,7 @@ exports.difficulty = {
       var mnts = Math.floor(seconds / 60);
       seconds  -= mnts*60;
       var DMHS = days + ' days, ' + hrs + ' Hrs, ' + mnts + ' Minutes, ' + seconds + ' Seconds'
-      return
+      return DMHS;
     }
     const numberWithCommas = x => {
       var parts = x.toString().split('.');

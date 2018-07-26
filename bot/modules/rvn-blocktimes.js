@@ -28,6 +28,7 @@ exports.BlockTimes = function(bot) {
     if (blockHeight == changeOnBlock){
       dropdb('blockTime');
     }
+    console.log(data);
     var BlockTimeLog = {
       Height: blockHeight,
       Time: blockTime,

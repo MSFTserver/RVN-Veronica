@@ -28,7 +28,6 @@ exports.BlockTimes = function(bot) {
     if (blockHeight == changeOnBlock){
       dropdb('blockTime');
     }
-    console.log(data);
     var BlockTimeLog = {
       Height: blockHeight,
       Time: blockTime,
@@ -41,7 +40,7 @@ exports.BlockTimes = function(bot) {
     function findLastBlock(bot, msg, docs) {
       if (docs){
       var lastTime = docs[0].Time;
-      var SolveTime = lastTime - blockTime;
+      var SolveTime = blockTime - lastTime;
       if (lastTime) {
         var SolvedIn = {
           SolveTime: SolveTime

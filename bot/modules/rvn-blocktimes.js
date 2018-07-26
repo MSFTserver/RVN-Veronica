@@ -38,6 +38,7 @@ exports.BlockTimes = function(bot) {
     console.log(BlockTimeLog);
     findEntry(bot, msg, 'blockTime', 'Height', lastHeight, findLastBlock);
     function findLastBlock(bot, msg, docs) {
+      if (docs){
       var lastTime = docs[0].Time;
       var SolveTime = lastTime - blockTime;
       if (lastTime) {
@@ -48,6 +49,7 @@ exports.BlockTimes = function(bot) {
         console.log(lastHeight);
         console.log(SolvedIn);
       }
+    }
     }
   });
 };

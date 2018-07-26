@@ -18,27 +18,35 @@ exports.BlockTimes = function(bot) {
     socket.emit('subscribe', room);
   });
   socket.on(eventToListenTo, function(data) {
-    var poolName = data.block.poolInfo.poolName;
-    var poolUrl = data.block.poolInfo.url;
     var blockHeight = data.block.height;
+    var lastHeight = blockHeight - 1;
     var blockHash = data.block.hash;
+    var blockTime = data.block.time;
     var changedDiff = blockHeight / 2016;
     var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
-    /*
-    var BlockTimeLog = {
-      Height: blockHeight,
-      Time: ,
-      Hashrate: blockHash,
-    };
-    newEntry(bot, msg, 'blockTime',  BlockTimeLog)
-    if (blockHeight > changeOnBlock - 1){
+    if (blockHeight == changeOnBlock){
       dropdb('blocktime');
     }
-    */
-    console.log(data);
-    let dt = new Date();
-    let timestamp = moment()
-      .tz('America/Los_Angeles')
-      .format('MM-DD-YYYY hh:mm::ss a');
+    var BlockTimeLog = {
+      Height: blockHeight,
+      Time: blockTime,
+      Hashrate: blockHash,
+      SolveTime: null
+    };
+    newEntry(bot, msg, 'blockTime',  BlockTimeLog);
+    console.log(BlockTimeLog);
+    findEntry(bot, msg, 'blocktime', 'Height', lastHeight, findLastBlock);
+    function findLastBlock(bot, msg, docs) {
+      var lastTime = docs[0].Time;
+      var SolveTime = lastTime - blockTime;
+      if (lastTime) {
+        var SolvedIn = {
+          SolveTime: SolveTime
+        };
+        updateEntry(bot, msg, 'blocktime', 'Height', lastHeight, SolvedIn);
+        console.log(lastHeight);
+        console.log(SolvedIn);
+      }
+    }
   });
 };

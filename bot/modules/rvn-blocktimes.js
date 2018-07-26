@@ -26,7 +26,7 @@ exports.BlockTimes = function(bot) {
     var changedDiff = blockHeight / 2016;
     var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
     if (blockHeight == changeOnBlock){
-      dropdb('blocktime');
+      dropdb('blockTime');
     }
     var BlockTimeLog = {
       Height: blockHeight,
@@ -36,7 +36,7 @@ exports.BlockTimes = function(bot) {
     };
     newEntry(bot, msg, 'blockTime',  BlockTimeLog);
     console.log(BlockTimeLog);
-    findEntry(bot, msg, 'blocktime', 'Height', lastHeight, findLastBlock);
+    findEntry(bot, msg, 'blockTime', 'Height', lastHeight, findLastBlock);
     function findLastBlock(bot, msg, docs) {
       var lastTime = docs[0].Time;
       var SolveTime = lastTime - blockTime;
@@ -44,7 +44,7 @@ exports.BlockTimes = function(bot) {
         var SolvedIn = {
           SolveTime: SolveTime
         };
-        updateEntry(bot, msg, 'blocktime', 'Height', lastHeight, SolvedIn);
+        updateEntry(bot, msg, 'blockTime', 'Height', lastHeight, SolvedIn);
         console.log(lastHeight);
         console.log(SolvedIn);
       }

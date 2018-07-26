@@ -57,15 +57,15 @@ exports.difficulty = {
           var timeTotal = arrSum(blockTimesLog);
           var timeAvg = arrAvg(blockTimesLog);
           var timeCount = arrCount(blockTimesLog);
-          var newDiff = (timeAvg * 60) / (diff * (2**32) / hashrate);
+          var newDiff = (diff * 120960) / timeAvg
           var accuracy = timeCount / 2016 * 100;
           var oldTime = getDMHS(timeTotal);
           var newMath = (2016 - timeCount) * timeAvg
           var newTime = getDMHS(newMath);
           msg.channel.send(
-            '__**based off the last ' + timeCount + ' blocks since diff change!**__' +
+            '__**based off the last ' + timeCount + ' blocks since diff change!**__\n' +
             'Current Diff: **' + numberWithCommas(diff) + '**\n' +
-            'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks**\n' +
+            'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks** ' +
             'At **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
             'Average Solve Time: **' + timeAvg + ' Seconds**\n' +
             'Longest Solve Time: **' + timeMax + ' Seconds**\n' +

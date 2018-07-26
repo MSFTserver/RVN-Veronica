@@ -68,8 +68,8 @@ exports.difficulty = {
             'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks** ' +
             'At **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
             'Estimated Time Till Change is **' + newTime + '**\n' +
-            'Estimated Diff: **' + numberWithCommas(newDiff) + '**\n' +
-            'Estimate Accuracy: **' + accuracy + '%**\n' +
+            'Estimated Diff: **' + numberWithCommas(newDiff.toFixed(0)) + '**\n' +
+            'Estimate Accuracy: **' + accuracy.toFixed(2) + '%**\n' +
             'Average Solve Time: **' + timeAvg + ' Seconds**\n' +
             'Longest Solve Time: **' + timeMax + ' Seconds**\n' +
             'Shortest Solve Time: **' + timeMin + ' Seconds**\n' +

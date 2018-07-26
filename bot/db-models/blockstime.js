@@ -10,7 +10,7 @@ var blockTimeSchema = new Schema({
     type: Number,
     required: true
   },
-  Hashrate: {
+  Diff: {
     type: Number,
     required: true
   },

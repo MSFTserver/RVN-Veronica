@@ -21,7 +21,7 @@ exports.BlockTimes = function(bot) {
   socket.on(eventToListenTo, function(data) {
     var blockHeight = data.block.height;
     var lastHeight = blockHeight - 1;
-    var blockHash = data.block.hash;
+    var blockDiff = data.block.difficulty;
     var blockTime = data.block.time;
     var changedDiff = blockHeight / 2016;
     var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
@@ -32,7 +32,7 @@ exports.BlockTimes = function(bot) {
     var BlockTimeLog = {
       Height: blockHeight,
       Time: blockTime,
-      Hashrate: blockHash,
+      Diff: blockDiff,
       SolveTime: null
     };
     newEntry(bot, msg, 'blockTime',  BlockTimeLog);

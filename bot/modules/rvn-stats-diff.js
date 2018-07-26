@@ -46,7 +46,7 @@ exports.difficulty = {
           var blockTimesLog = [];
           docs.forEach(function(results) {
             blockTimesLog.push(results.Time);
-          }
+          });
           const arrMax = arr => Math.max(...arr);
           const arrMin = arr => Math.min(...arr);
           const arrSum = arr => arr.reduce((a,b) => a + b, 0)

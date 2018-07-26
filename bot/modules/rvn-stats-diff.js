@@ -4,6 +4,7 @@ let moment = require('moment-timezone');
 let explorerApiUrl = config.get('General').urls.explorerApiUrl;
 let hasRvnStatsNetworkChannels = require('../helpers.js').hasRvnStatsNetworkChannels;
 let inPrivate = require('../helpers.js').inPrivate;
+let findEntry = require('../db-helpers.js').findEntry;
 let channelID = config.get('General').Channels.botspam;
 
 exports.commands = [
@@ -38,19 +39,58 @@ exports.difficulty = {
           } else {
         var blocks = response.body.info.blocks;
         var changedDiff = blocks / 2016;
-        var newDiff = (diff * 60) / (diff * (2**32) / hashrate);
         var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
         var changeIn = changeOnBlock - blocks;
-        msg.channel.send(
-          'Current Diff: **' + numberWithCommas(diff) +
-          '**\nEstimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +
-          'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n' +
-          'Next Diff in **' + numberWithCommas(changeIn) + ' Blocks** at **Block ' + numberWithCommas(changeOnBlock) + '**'
-        );
+        findEntry(bot, msg, 'blockTime', false, false, getBlockTimes);
+        function getBlockTimes(bot, msg, docs) {
+          var blockTimesLog = [];
+          docs.forEach(function(results) {
+            blockTimesLog.push(results.Time);
+          }
+          const arrMax = arr => Math.max(...arr);
+          const arrMin = arr => Math.min(...arr);
+          const arrSum = arr => arr.reduce((a,b) => a + b, 0)
+          const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
+          const arrCount = arr => arr.length;
+          var timeMax = arrMax(blockTimesLog);
+          var timeMin = arrMin(blockTimesLog);
+          var timeTotal = arrSum(blockTimesLog);
+          var timeAvg = arrAvg(blockTimesLog);
+          var timeCount = arrCount(blockTimesLog);
+          var newDiff = (diff * 60) / (timeAvg * (2**32) / hashrate);
+          var accuracy = timeCount / 2016 * 100;
+          var oldTime = getDMHS(timeTotal);
+          var newTime = getDMHS((2016 - timeCount) * timeAvg);
+          msg.channel.send(
+            'Current Diff: **' + numberWithCommas(diff) +
+            'Next Diff In: **' + numberWithCommas(changeIn) + ' Blocks**\n' +
+            'Next Diff At: **Block ' + numberWithCommas(changeOnBlock) + '****\n' +
+            'Estimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +
+            'Estimate Accurency: **' + accuracy + '%**\n'
+            'Estimated Time Till Change: ' + newTime + '\n' +
+            'Time Since Last Change: **' + oldTime + '\n' +
+            'Average Solve Time: **' + timeAvg + ' Seconds**\n' +
+            'Longest Solve Time: **' + timeMax + ' Seconds**\n' +
+            'Shortest Solve Time: **' + timeMin + ' Seconds**\n' +
+            'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n' +
+            'based off the last ' + timeCount + ' blocks since diff change!'
+          );
+        }
       }
     });
       }
     });
+    function getDMHS(timeInSeconds){
+      var seconds = parseInt(timeInSeconds, 10);
+      var days = Math.floor(seconds / (3600*24));
+      seconds  -= days*3600*24;
+      var hrs   = Math.floor(seconds / 3600);
+      seconds  -= hrs*3600;
+      var mnts = Math.floor(seconds / 60);
+      seconds  -= mnts*60;
+      var DMHS = days + ' days, ' + hrs + ' Hrs, ' + mnts + ' Minutes, ' + seconds + ' Seconds'
+      return
+    }
     const numberWithCommas = x => {
       var parts = x.toString().split('.');
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');

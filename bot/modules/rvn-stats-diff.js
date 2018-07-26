@@ -66,13 +66,13 @@ exports.difficulty = {
             '__**based off the last ' + timeCount + ' blocks since diff change!**__\n' +
             'Current Diff: **' + numberWithCommas(diff) + '**\n' +
             'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks** ' +
-            'At **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
+            'At **Block ' + numberWithCommas(changeOnBlock) + '** ' +
+            'Estimated Time Till Change is **' + newTime + '**\n' +
+            'Estimated Diff: **' + numberWithCommas(newDiff) + '**\n' +
+            'Estimate Accuracy: **' + accuracy + '%**\n' +
             'Average Solve Time: **' + timeAvg + ' Seconds**\n' +
             'Longest Solve Time: **' + timeMax + ' Seconds**\n' +
             'Shortest Solve Time: **' + timeMin + ' Seconds**\n' +
-            'Estimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +
-            'Estimate Accurency: **' + accuracy + '%**\n' +
-            'Estimated Time Till Change: **' + newTime + '**\n' +
             'Time Since Last Change: **' + oldTime + '**\n' +
             'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n'
           );

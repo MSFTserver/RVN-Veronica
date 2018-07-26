@@ -45,7 +45,7 @@ exports.difficulty = {
         function getBlockTimes(bot, msg, docs) {
           var blockTimesLog = [];
           docs.forEach(function(results) {
-            blockTimesLog.push(results.Time);
+            blockTimesLog.push(results.SolveTime);
           });
           const arrMax = arr => Math.max(...arr);
           const arrMin = arr => Math.min(...arr);

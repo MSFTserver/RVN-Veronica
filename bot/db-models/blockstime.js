@@ -13,6 +13,9 @@ var blockTimeSchema = new Schema({
   Hashrate: {
     type: Number,
     required: true
+  },
+  SolveTime: {
+    type: Number,
   }
 });
 mongoose.model('blockTime', blockTimeSchema);

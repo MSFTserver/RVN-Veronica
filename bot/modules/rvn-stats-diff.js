@@ -66,7 +66,7 @@ exports.difficulty = {
             '__**based off the last ' + timeCount + ' blocks since diff change!**__\n' +
             'Current Diff: **' + numberWithCommas(diff) + '**\n' +
             'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks** ' +
-            'At **Block ' + numberWithCommas(changeOnBlock) + '** ' +
+            'At **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
             'Estimated Time Till Change is **' + newTime + '**\n' +
             'Estimated Diff: **' + numberWithCommas(newDiff) + '**\n' +
             'Estimate Accuracy: **' + accuracy + '%**\n' +

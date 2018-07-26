@@ -11,6 +11,7 @@ let dropdb = require('../db-helpers.js').dropdb;
 exports.custom = ['BlockTimes'];
 
 exports.BlockTimes = function(bot) {
+  let msg = null;
   let eventToListenTo = 'raven/block';
   let room = 'raven';
   let socket = socketClient(SocketUrl);

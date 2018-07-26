@@ -70,7 +70,7 @@ exports.difficulty = {
             'Estimated Time Till Change is **' + newTime + '**\n' +
             'Estimated Diff: **' + numberWithCommas(newDiff.toFixed(0)) + '**\n' +
             'Estimate Accuracy: **' + accuracy.toFixed(2) + '%**\n' +
-            'Average Solve Time: **' + timeAvg + ' Seconds**\n' +
+            'Average Solve Time: **' + timeAvg.toFixed(0) + ' Seconds**\n' +
             'Longest Solve Time: **' + timeMax + ' Seconds**\n' +
             'Shortest Solve Time: **' + timeMin + ' Seconds**\n' +
             'Time Since Last Change: **' + oldTime + '**\n' +

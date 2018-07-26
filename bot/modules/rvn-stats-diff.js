@@ -63,7 +63,7 @@ exports.difficulty = {
           var newMath = (2016 - timeCount) * timeAvg
           var newTime = getDMHS(newMath);
           msg.channel.send(
-            'Current Diff: **' + numberWithCommas(diff) +
+            'Current Diff: **' + numberWithCommas(diff) + '**\n'
             'Next Diff In: **' + numberWithCommas(changeIn) + ' Blocks**\n' +
             'Next Diff At: **Block ' + numberWithCommas(changeOnBlock) + '****\n' +
             'Estimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +

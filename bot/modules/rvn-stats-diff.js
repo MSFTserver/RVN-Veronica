@@ -65,11 +65,11 @@ exports.difficulty = {
           msg.channel.send(
             'Current Diff: **' + numberWithCommas(diff) + '**\n' +
             'Next Diff In: **' + numberWithCommas(changeIn) + ' Blocks**\n' +
-            'Next Diff At: **Block ' + numberWithCommas(changeOnBlock) + '****\n' +
+            'Next Diff At: **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
             'Estimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +
             'Estimate Accurency: **' + accuracy + '%**\n' +
-            'Estimated Time Till Change: ' + newTime + '\n' +
-            'Time Since Last Change: **' + oldTime + '\n' +
+            'Estimated Time Till Change: **' + newTime + '**\n' +
+            'Time Since Last Change: **' + oldTime + '**\n' +
             'Average Solve Time: **' + timeAvg + ' Seconds**\n' +
             'Longest Solve Time: **' + timeMax + ' Seconds**\n' +
             'Shortest Solve Time: **' + timeMin + ' Seconds**\n' +

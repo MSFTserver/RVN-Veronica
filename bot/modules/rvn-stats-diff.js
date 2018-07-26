@@ -57,24 +57,24 @@ exports.difficulty = {
           var timeTotal = arrSum(blockTimesLog);
           var timeAvg = arrAvg(blockTimesLog);
           var timeCount = arrCount(blockTimesLog);
-          var newDiff = (diff * 60) / (timeAvg * (2**32) / hashrate);
+          var newDiff = (timeAvg * 60) / (diff * (2**32) / hashrate);
           var accuracy = timeCount / 2016 * 100;
           var oldTime = getDMHS(timeTotal);
           var newMath = (2016 - timeCount) * timeAvg
           var newTime = getDMHS(newMath);
           msg.channel.send(
+            '__**based off the last ' + timeCount + ' blocks since diff change!**__'
             'Current Diff: **' + numberWithCommas(diff) + '**\n' +
-            'Next Diff In: **' + numberWithCommas(changeIn) + ' Blocks**\n' +
-            'Next Diff At: **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
+            'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks**\n' +
+            'At **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
+            'Average Solve Time: **' + timeAvg + ' Seconds**\n' +
+            'Longest Solve Time: **' + timeMax + ' Seconds**\n' +
+            'Shortest Solve Time: **' + timeMin + ' Seconds**\n' +
             'Estimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +
             'Estimate Accurency: **' + accuracy + '%**\n' +
             'Estimated Time Till Change: **' + newTime + '**\n' +
             'Time Since Last Change: **' + oldTime + '**\n' +
-            'Average Solve Time: **' + timeAvg + ' Seconds**\n' +
-            'Longest Solve Time: **' + timeMax + ' Seconds**\n' +
-            'Shortest Solve Time: **' + timeMin + ' Seconds**\n' +
-            'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n' +
-            'based off the last ' + timeCount + ' blocks since diff change!'
+            'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n'
           );
         }
       }

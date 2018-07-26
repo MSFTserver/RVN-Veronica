@@ -67,7 +67,7 @@ exports.difficulty = {
             'Next Diff In: **' + numberWithCommas(changeIn) + ' Blocks**\n' +
             'Next Diff At: **Block ' + numberWithCommas(changeOnBlock) + '****\n' +
             'Estimated Next Diff: **' + numberWithCommas(newDiff) + '**\n' +
-            'Estimate Accurency: **' + accuracy + '%**\n'
+            'Estimate Accurency: **' + accuracy + '%**\n' +
             'Estimated Time Till Change: ' + newTime + '\n' +
             'Time Since Last Change: **' + oldTime + '\n' +
             'Average Solve Time: **' + timeAvg + ' Seconds**\n' +

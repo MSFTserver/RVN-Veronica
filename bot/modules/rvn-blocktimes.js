@@ -34,6 +34,7 @@ exports.BlockTimes = function(bot) {
       Diff: blockDiff,
       SolveTime: null
     };
+    console.log('Next Change: ' + changeOnBlock);
     newEntry(bot, msg, 'blockTime',  BlockTimeLog);
     console.log(BlockTimeLog);
     findEntry(bot, msg, 'blockTime', 'Height', lastHeight, findLastBlock);

@@ -22,15 +22,14 @@ exports.address = {
     if (
       words[0] == 'dev' ||
       words[0] == 'devfund' ||
-      words[0] == 'market' ||
-      words[0] == 'marketfund' ||
-      words[0] == 'marketingfund' ||
-      words[0] == 'marketing'
+      words[0] == 'development' ||
+      words[0] == 'legal' ||
+      words[0] == 'legalfund'
     ) {
-      if (words[0] == 'dev' || words[0] == 'devfund') {
-        var address = 'RW3x4EfTRAtPV2DeKexwFgp8wb4TSYebZA';
-      } else {
-        var address = 'RXYnS1zrMMSiphwaGemdck66fawqrUFJkv';
+      if (words[0] == 'dev' || words[0] == 'devfund' || words[0] == 'development') {
+        var address = 'rEgfYH2ed8a3Age6qLuhXeLvSUJU4Q3sBE';
+      } else if (words[0] == 'legal' || words[0] == 'legalfund') {
+        var address = 'rVFHXEu91BXK4NDaGGudjqBGdaWsaAK9Eg';
       }
     } else {
       var address = words[0];

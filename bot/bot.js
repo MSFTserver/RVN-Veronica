@@ -38,6 +38,7 @@ require('./db-models/pool.js');
 require('./db-models/user.js');
 require('./db-models/timeout.js');
 require('./db-models/blockstime.js');
+require('./db-models/blockstime-testnet.js');
 
 
 var aliases;

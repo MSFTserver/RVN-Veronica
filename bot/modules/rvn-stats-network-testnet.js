@@ -18,7 +18,7 @@ exports.tnnetwork = {
   process: function(bot, msg) {
     if (!inPrivate(msg) && !hasRvnStatsNetworkChannels(msg)) {
       msg.channel.send(
-        'Please use <#' + channelID + '> or DMs to talk to hash bot.'
+        'Please use <#' + channelID + '> or DMs to talk to Testnet bot.'
       );
       return;
     }
@@ -245,7 +245,7 @@ exports.tnnetwork = {
                                         );
                                         var BlockTime = currentTime - prvsTime;
                                         var description =
-                                          '**Current Block!**' +
+                                          '**Current TESTNET Block!**' +
                                           '\n' +
                                           '__**Height**:__ ' +
                                           Height +

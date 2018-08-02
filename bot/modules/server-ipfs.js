@@ -1,12 +1,13 @@
 const IPFS = require('ipfs');
 const node = new IPFS();
 let isIPFS = require('is-ipfs');
+let moment = require('moment-timezone');
 //start ipfs
 node.on('ready', () => {
     var time = moment()
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
-    console.log('[' + time + ' PST][' + pm2Name + '] IPFS Node started!')
+    console.log('[' + time + ' PST][veronica] IPFS Node started!')
 })
 exports.commands = [
   'ipfs'

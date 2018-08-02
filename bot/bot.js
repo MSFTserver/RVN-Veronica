@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const mongoose = require('mongoose');
 const IPFS = require('ipfs');
-const IPFSnode = new IPFS();
+const IPFSnode = new IPFS({ start: true })
 let _ = require('underscore-node');
 let moment = require('moment-timezone');
 let fs = require('fs');

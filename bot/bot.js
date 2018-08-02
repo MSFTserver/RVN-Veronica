@@ -33,19 +33,10 @@ mongoose
 
 //start ipfs
 IPFSnode.on('ready', () => {
-  IPFSnode.start(error => {
-    if (error) {
-      var time = moment()
-        .tz('America/Los_Angeles')
-        .format('MM-DD-YYYY hh:mm a');
-      console.error('[' + time + ' PST][' + pm2Name + '] IPFS Node failed to start!', error)
-      return
-    }
     var time = moment()
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
     console.log('[' + time + ' PST][' + pm2Name + '] IPFS Node started!')
-  });
 })
 
 //load modules

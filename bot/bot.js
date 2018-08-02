@@ -2,8 +2,6 @@
 // Load up libraries
 const Discord = require('discord.js');
 const mongoose = require('mongoose');
-const IPFS = require('ipfs');
-const IPFSnode = new IPFS({ start: true })
 let _ = require('underscore-node');
 let moment = require('moment-timezone');
 let fs = require('fs');
@@ -31,13 +29,7 @@ mongoose
     console.log('[' + time + ' PST][' + pm2Name + '] Mongodb Connection Error:', err);
   });
 
-//start ipfs
-IPFSnode.on('ready', () => {
-    var time = moment()
-      .tz('America/Los_Angeles')
-      .format('MM-DD-YYYY hh:mm a');
-    console.log('[' + time + ' PST][' + pm2Name + '] IPFS Node started!')
-})
+
 
 //load modules
 const commandsV2 = require('./modules/commandsV2.js');

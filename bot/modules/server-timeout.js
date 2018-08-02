@@ -35,7 +35,7 @@ exports.timeout = {
         return n !== '';
       });
     var timer = getValidatedAmount(words[1]);
-    var reason = words.slice(2);
+    var reason = words.slice(2).join(' ');
     var timestamp = moment()
     if (member == '<@undefinded>' || member == undefined) {
       msg.reply(' The member you inserted to timeout was invalid!');
@@ -63,7 +63,7 @@ exports.timeout = {
               return n !== '';
             });
           var timer = getValidatedAmount(words[1]);
-          var reason = words.slice(2);
+          var reason = words.slice(2).join(' ');
           var timestamp = moment();
           var TimeoutUser = {
             userID: member.user.id,
@@ -91,7 +91,7 @@ exports.timeout = {
                 return n !== '';
               });
             var timer = getValidatedAmount(words[1]);
-            var reason = words.slice(2);
+            var reason = words.slice(2).join(' ');
             var timestamp = moment();
             var TimeoutUser = {
               username: member.user.username +  '#' + member.user.discriminator,

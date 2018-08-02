@@ -46,7 +46,7 @@ exports.ipfs = {
     function createIPFS(bot,msg,message){
       var res1 = message.split(' ');
       var res2 = res1.length;
-      var res3 =str.length;
+      var res3 = message.length;
       var newPath = (res1[0] + res1[1]) + '' + (res2/res3 * res3 ** res2).toFixed(0);
       node.files.add({
         path: newPath.txt,

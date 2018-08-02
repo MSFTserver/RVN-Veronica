@@ -32,7 +32,7 @@ mongoose
   });
 
 //start ipfs
-node.on('ready', () => {
+IPFSnode.on('ready', () => {
   IPFSnode.start(error => {
     if (error) {
       var time = moment()

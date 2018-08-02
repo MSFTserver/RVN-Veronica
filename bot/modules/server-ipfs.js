@@ -40,7 +40,7 @@ exports.ipfs = {
       var res2 = res1.length;
       var res3 =str.length;
       var newPath = (res1[0] + res1[1]) + '' + (res2/res3 * res3 ** res2).toFixed(0);
-      IPFSnode.files.add({
+      node.files.add({
         path: newPath.txt,
         content: Buffer.from(message)
       }, function(err, filesAdded) {

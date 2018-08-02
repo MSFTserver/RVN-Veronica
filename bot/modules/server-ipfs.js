@@ -46,7 +46,7 @@ exports.ipfs = {
       }, function(err, filesAdded) {
         if (err) { msg.channel.send('error creating ipsf hash: '+err) }
         fileMultihash = filesAdded[0].hash
-        msg.channel.send('`' + message '` = ' + '`' + fileMultihash + '`');
+        msg.channel.send('`' + message + '` = ' + '`' + fileMultihash + '`');
         return
       });
     }

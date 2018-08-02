@@ -1,6 +1,6 @@
 const IPFS = require('ipfs');
 const node = new IPFS();
-let is-ipfs = require('is-ipfs')
+let isIPFS = require('is-ipfs');
 exports.commands = [
   'ipfs'
 ]

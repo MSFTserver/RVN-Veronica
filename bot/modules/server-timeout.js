@@ -156,8 +156,8 @@ exports.timeoutChecker = function(bot) {
         var member = bot.guilds.find('id', '429127343165145089').members.find('id', userID);
         var timeoutStart = moment(results.time)
         var timeoutFor = results.timer;
-        var then = moment(timeoutStart).add(Number(timeoutFor), 'minutes');
-        var now = moment();
+        var then = moment(timeoutStart).add(Number(timeoutFor), 'minutes').unix();
+        var now = moment().unix();
         if (now > then) {
         var TimeoutUser = {
               active: false

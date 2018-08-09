@@ -1,3 +1,4 @@
+/*
 let moment = require('moment-timezone');
 let config = require('config');
 let BlocksWonChannel = config.get('SocketBots').BlocksWonChannel;
@@ -50,3 +51,4 @@ exports.BlockTimesTN = function(bot) {
     }
   });
 };
+*/

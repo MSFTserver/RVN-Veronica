@@ -1,3 +1,4 @@
+/*
 'use strict';
 let needle = require('needle');
 let config = require('config');
@@ -565,3 +566,4 @@ exports.tnnetwork = {
     }
   }
 };
+*/

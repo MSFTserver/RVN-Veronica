@@ -63,17 +63,17 @@ exports.difficulty = {
           var newMath = (2016 - timeCount) * timeAvg
           var newTime = getDMHS(newMath);
           msg.channel.send(
-            '__**based off Block ' + (blocks - timeCount) + '!**__\n' +
+            '__**based off ' + timeCount + ' Blocks!**__\n' +
             'Current Diff: **' + numberWithCommas(diff.toFixed(0)) + '**\n' +
+            'Blocks Since Last Change: **' + (2016 - changeIn) + '**\n' +
             'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks** ' +
             'At **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
             'Estimated Time Till Change is **' + newTime + '**\n' +
             'Estimated Diff: **' + numberWithCommas(newDiff.toFixed(0)) + '**\n' +
             'Estimate Accuracy: **' + accuracy.toFixed(2) + '%**\n' +
             'Average Solve Time: **' + timeAvg.toFixed(0) + ' Seconds**\n' +
-            'Longest Solve Time: **' + timeMax + ' Seconds**\n' +
-            'Shortest Solve Time: **' + timeMin + ' Seconds**\n' +
-            'Time Since Last Change: **' + oldTime + '**\n' +
+            'Longest Solve Time: **' + timeMax.toFixed(0) + ' Seconds**\n' +
+            'Shortest Solve Time: **' + timeMin.toFixed(0) + ' Seconds**\n' +
             'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n'
           );
         }

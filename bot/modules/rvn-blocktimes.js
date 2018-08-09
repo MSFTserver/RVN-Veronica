@@ -42,7 +42,7 @@ exports.BlockTimes = function(bot) {
       var SolveTime = blockTime - lastTime;
       if (lastTime) {
         var SolvedIn = {
-          SolveTime: SolveTime
+          SolveTime: Math.abs(SolveTime)
         };
         updateEntry(bot, msg, 'blockTime', 'Height', lastHeight, SolvedIn);
       }

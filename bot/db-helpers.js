@@ -88,8 +88,8 @@ exports.updateEntry = function(bot, msg, useDB, keyName, valueName, saveEntry) {
 //Drop Database!!
 // Pm2 Metrics DB Get
 exports.dropdb = function(useDB) {
-  var database = mongoose.model(useDB);
-  database.drop(function(err){
+  var collection = mongoose.model(useDB);
+  collection.remove(function(err){
       if (err) {
         console.log("Error Deleting db : "+err);
       }

@@ -162,7 +162,7 @@ exports.timeoutChecker = function(bot) {
         var TimeoutUser = {
               active: false
             };
-          if (member.roles.find('name', 'Timeout'))){
+          if (member.roles.find('name', 'Timeout')) {
             member.removeRole(bot.guilds.find('id', '429127343165145089').roles.find('name', 'Timeout'))
             bot.guilds.find('id', '429127343165145089').roles.find('name', 'Timeout');
           } else {

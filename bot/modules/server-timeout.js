@@ -49,6 +49,10 @@ exports.timeout = {
       msg.reply(' Invalid Number, Add a timeframe in Minutes to Timeout ' + member + ' for');
       return;
     }
+    if (timer < 30){
+      msg.reply(' timer must be atleast 30 minutes!');
+      return;
+    }
       findEntry(bot, msg, 'timeout', 'userID', member.user.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
         if (!gotProfile) {
@@ -165,8 +169,10 @@ exports.timeoutChecker = function(bot) {
           if (member.roles.find('name', 'Timeout')) {
             member.removeRole(bot.guilds.find('id', '429127343165145089').roles.find('name', 'Timeout'))
             bot.guilds.find('id', '429127343165145089').roles.find('name', 'Timeout');
+            updateEntry(bot, msg, 'timeout', 'userID', member.user.id, TimeoutUser);
           } else {
-            console.log('error removing Role From User!!')
+            console.log('User doesnt have that role!!');
+            updateEntry(bot, msg, 'timeout', 'userID', member.user.id, TimeoutUser);
           }
         }
       }

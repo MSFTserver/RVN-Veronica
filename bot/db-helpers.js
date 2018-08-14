@@ -86,13 +86,11 @@ exports.updateEntry = function(bot, msg, useDB, keyName, valueName, saveEntry) {
 };
 
 //Drop Database!!
-// Pm2 Metrics DB Get
 exports.dropdb = function(useDB) {
-  var collection = mongoose.model(useDB);
-  collection.remove(function(err){
-      if (err) {
-        console.log("Error Deleting db : "+err);
-      }
+  mongoose.connection.db.dropCollection(useDB, function(err, result) {
+    if (err) {
+      console.log("Error Deleting db : "+err);
+    }
   });
 };
 

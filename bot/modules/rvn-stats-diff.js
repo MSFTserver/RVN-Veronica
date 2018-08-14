@@ -44,6 +44,9 @@ exports.difficulty = {
         findEntry(bot, msg, 'blockTime', false, false, getBlockTimes);
         function getBlockTimes(bot, msg, docs) {
           var blockTimesLog = [];
+          if (!docs) {
+            msg.channel.send('no blocks in database set yet!!!')
+          }
           docs.forEach(function(results) {
             blockTimesLog.push(results.SolveTime);
           });

@@ -1,4 +1,4 @@
-/*
+
 const authors = [];
 let warned = [];
 let banned = [];
@@ -18,7 +18,7 @@ let pm2Name = config.get('General').pm2Name;
  * @param  {object} options - Optional (Custom configuarion options)
  * @return {[type]}         [description]
  */
-/*
+
 exports.custom = ['antiSpam'];
 
 exports.antiSpam = function(bot) {
@@ -122,7 +122,7 @@ exports.antiSpam = function(bot) {
    * @param  {Object} msg
    * @param  {string} userid userid
    */
-/*
+
   function warn(msg, userid) {
     var time = moment()
       .tz('America/Los_Angeles')
@@ -146,7 +146,7 @@ exports.antiSpam = function(bot) {
    * @param  {string} userid userid
    * @return {boolean} True or False
    */
-/*
+
   function ban(msg, userid) {
     for (let i = 0; i < messagelog.length; i++) {
       if (messagelog[i].author == msg.author.id) {
@@ -186,4 +186,3 @@ exports.antiSpam = function(bot) {
     }
   }
 };
-*/

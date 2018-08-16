@@ -26,7 +26,7 @@ exports.BlockTimes = function(bot) {
     var changedDiff = blockHeight / 2016;
     var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
     if (blockHeight == changeOnBlock - 1){
-      dropdb('blockTime');
+      dropdb('blocktimes');
     }
     var BlockTimeLog = {
       Height: blockHeight,

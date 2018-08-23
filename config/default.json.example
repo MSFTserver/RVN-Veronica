@@ -146,6 +146,18 @@
   "SocketBots": {
       "SocketUrl": "https://ravencoin.network/",
       // Channels Socket Bots are allowed to post in
-      "BlocksWonChannel": "430028854984310798"
+      "BlocksWonChannel": "430028854984310798",
+      "NewTxChannel": "454508663906762752"
+  },
+  "irc": {
+     "nickname": "Veronica",
+     "server": "chat.freenode.net",
+     "discordToken": "v2C9NvU",
+     "autoSendCommands": [
+      ["PRIVMSG", "NickServ", "IDENTIFY password"]
+      ],
+      "channelMapping": {
+         "#irc-ravencoin-dev": "#ravencoin-dev"
+      }
   }
 }

@@ -56,33 +56,33 @@ exports.difficulty = {
           const arrSum = arr => arr.reduce((a,b) => a + b, 0)
           const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
           const arrCount = arr => arr.length;
-          var timeMax = arrMax(blockTimesLog.slice(0, 999999));
-          var timeMin = arrMin(blockTimesLog.slice(0, 999999));
+          var timeMax = arrMax(blockTimesLog.slice(-999999));
+          var timeMin = arrMin(blockTimesLog.slice(-999999));
           //var timeTotal = arrSum(blockTimesLog.slice(0, 999999));
-          var timeAvg = arrAvg(blockTimesLog.slice(0, 999999));
-          var timeCount = arrCount(blockTimesLog.slice(0, 999999));
-          var diffMax = arrMax(blockDiffLog.slice(0, 999999));
-          var diffMin = arrMin(blockDiffLog.slice(0, 999999));
-          var diffCount = arrCount(blockDiffLog.slice(0, 999999));
+          var timeAvg = arrAvg(blockTimesLog.slice(-999999));
+          var timeCount = arrCount(blockTimesLog.slice(-999999));
+          var diffMax = arrMax(blockDiffLog.slice(-999999));
+          var diffMin = arrMin(blockDiffLog.slice(-999999));
+          var diffCount = arrCount(blockDiffLog.slice(-999999));
           var diffAvg = arrAvg(blockDiffLog);
           var newDiff = 2222222 / (((diff + 2600) / 9 ) ** 2);
           var message = '__**Dark Gravity Wave Calc!**__\n' +
           'Current Diff: **' + numberWithCommas(diff.toFixed(0)) + '**\n' +
           'Estimated Diff: **' + numberWithCommas(newDiff.toFixed(0)) + '**\n';
           if (diffCount > 100) {
-            var diffAvg100 = arrAvg(blockDiffLog.slice(0, 99));
+            var diffAvg100 = arrAvg(blockDiffLog.slice(-99));
             message = message + 'Average Diff (100 blocks): **' + numberWithCommas(diffAvg100.toFixed(0)) + '**\n';
             if (diffCount > 1000) {
-              var diffAvg1k = arrAvg(blockDiffLog.slice(0, 999));
+              var diffAvg1k = arrAvg(blockDiffLog.slice(-999));
               message = message + 'Average Diff (1k blocks): **' + numberWithCommas(diffAvg1k.toFixed(0)) + '**\n';
               if (diffCount > 10000) {
-                var diffAvg10k = arrAvg(blockDiffLog.slice(0, 9999));
+                var diffAvg10k = arrAvg(blockDiffLog.slice(-9999));
                 message = message + 'Average Diff (10k blocks): **' + numberWithCommas(diffAvg10k.toFixed(0)) + '**\n';
                 if (diffCount > 100000) {
-                  var diffAvg100k = arrAvg(blockDiffLog.slice(0, 99999));
+                  var diffAvg100k = arrAvg(blockDiffLog.slice(-99999));
                   message = message + 'Average Diff (100k blocks): **' + numberWithCommas(diffAvg100k.toFixed(0)) + '**\n';
                   if (diffCount > 1000000) {
-                    var diffAvg1m = arrAvg(blockDiffLog.slice(0, 999999));
+                    var diffAvg1m = arrAvg(blockDiffLog.slice(-999999));
                     message = message + 'Average Diff (1m blocks): **' + numberWithCommas(diffAvg1m.toFixed(0)) + '**\n';
                   }
                 }

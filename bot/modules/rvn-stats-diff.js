@@ -64,7 +64,7 @@ exports.difficulty = {
           var diffMax = arrMax(blockDiffLog.slice(0, 999999));
           var diffMin = arrMin(blockDiffLog.slice(0, 999999));
           var diffCount = arrCount(blockDiffLog.slice(0, 999999));
-          var diffAvg = arrAvg(blockDiffLog;
+          var diffAvg = arrAvg(blockDiffLog);
           var newDiff = 2222222 / (((diff + 2600) / 9 ) ** 2);
           var message = '__**Dark Gravity Wave Calc!**__\n' +
           'Current Diff: **' + numberWithCommas(diff.toFixed(0)) + '**\n' +

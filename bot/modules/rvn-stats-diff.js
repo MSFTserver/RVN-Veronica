@@ -29,7 +29,6 @@ exports.difficulty = {
         msg.channel.send(getError(response.statusCode));
       } else {
         var diff = response.body.miningInfo.difficulty;
-        var hashrate = response.body.miningInfo.networkhashps;
         needle.get(explorerApiUrl + 'api/status', function(
           error,
           response
@@ -38,64 +37,81 @@ exports.difficulty = {
             msg.channel.send(getError(response.statusCode));
           } else {
         var blocks = response.body.info.blocks;
-        var changedDiff = blocks / 2016;
-        var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
-        var changeIn = changeOnBlock - blocks;
         findEntry(bot, msg, 'blockTime', false, false, getBlockTimes);
         function getBlockTimes(bot, msg, docs) {
           var blockTimesLog = [];
+          var blockDiffLog = [];
           if (!docs || docs.length <= 2) {
             msg.channel.send('no blocks in database set yet!!!');
             return;
           }
-          docs.forEach(function(results) {
-            blockTimesLog.push(results.SolveTime);
+          docs.forEach(function(results1) {
+            blockTimesLog.push(results1.SolveTime);
+          });
+          docs.forEach(function(results2) {
+            blockDiffLog.push(results2.Diff);
           });
           const arrMax = arr => Math.max(...arr);
           const arrMin = arr => Math.min(...arr);
           const arrSum = arr => arr.reduce((a,b) => a + b, 0)
           const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
           const arrCount = arr => arr.length;
-          var timeMax = arrMax(blockTimesLog);
-          var timeMin = arrMin(blockTimesLog);
-          var timeTotal = arrSum(blockTimesLog);
-          var timeAvg = arrAvg(blockTimesLog);
-          var timeCount = arrCount(blockTimesLog);
-          var newDiff = (diff * 60) / timeAvg
-          var accuracy = timeCount / 2016 * 100;
-          var oldTime = getDMHS(timeTotal);
-          var newMath = (2016 - timeCount) * timeAvg
-          var newTime = getDMHS(newMath);
-          msg.channel.send(
-            '__**based off ' + timeCount + ' Blocks!**__\n' +
-            'Current Diff: **' + numberWithCommas(diff.toFixed(0)) + '**\n' +
-            'Blocks Since Last Change: **' + (2016 - changeIn) + '**\n' +
-            'Next Diff In **' + numberWithCommas(changeIn) + ' Blocks** ' +
-            'At **Block ' + numberWithCommas(changeOnBlock) + '**\n' +
-            'Estimated Time Till Change is **' + newTime + '**\n' +
-            'Estimated Diff: **' + numberWithCommas(newDiff.toFixed(0)) + '**\n' +
-            'Estimate Accuracy: **' + accuracy.toFixed(2) + '%**\n' +
-            'Average Solve Time: **' + timeAvg.toFixed(0) + ' Seconds**\n' +
-            'Longest Solve Time: **' + timeMax.toFixed(0) + ' Seconds**\n' +
-            'Shortest Solve Time: **' + timeMin.toFixed(0) + ' Seconds**\n' +
-            'Retargeted: **' + numberWithCommas(Math.floor(changedDiff)) + ' Times**\n'
-          );
+          var timeMax = arrMax(blockTimesLog.slice(0, 999999));
+          var timeMin = arrMin(blockTimesLog.slice(0, 999999));
+          //var timeTotal = arrSum(blockTimesLog.slice(0, 999999));
+          var timeAvg = arrAvg(blockTimesLog.slice(0, 999999));
+          var timeCount = arrCount(blockTimesLog.slice(0, 999999));
+          var diffMax = arrMax(blockDiffLog.slice(0, 999999));
+          var diffMin = arrMin(blockDiffLog.slice(0, 999999));
+          var diffCount = arrCount(blockDiffLog.slice(0, 999999));
+          var newDiff = 2222222 / (((diff + 2600) / 9 ) ** 2);
+          var message = '__**Dark Gravity Wave Calc!**__\n' +
+          'Current Diff: **' + numberWithCommas(diff.toFixed(0)) + '**\n' +
+          'Estimated Diff: **' + numberWithCommas(newDiff.toFixed(0)) + '**\n';
+          if (diffCount > 100) {
+            var diffAvg100 = arrAvg(blockDiffLog.slice(0, 99));
+            message = 'Average Diff (100 blocks): **' + numberWithCommas(diffAvg100.toFixed(0)) + '**\n';
+            if (diffCount > 1000) {
+              var diffAvg1k = arrAvg(blockDiffLog.slice(0, 999));
+              message = message + 'Average Diff (1k blocks): **' + numberWithCommas(diffAvg1k.toFixed(0)) + '**\n';
+              if (diffCount > 10000) {
+                var diffAvg10k = arrAvg(blockDiffLog.slice(0, 9999));
+                message = message + 'Average Diff (10k blocks): **' + numberWithCommas(diffAvg10k.toFixed(0)) + '**\n';
+                if (diffCount > 100000) {
+                  var diffAvg100k = arrAvg(blockDiffLog.slice(0, 99999));
+                  message = message + 'Average Diff (100k blocks): **' + numberWithCommas(diffAvg100k.toFixed(0)) + '**\n';
+                  if (diffCount > 1000000) {
+                    var diffAvg1m = arrAvg(blockDiffLog.slice(0, 999999));
+                    message = message + 'Average Diff (1m blocks): **' + numberWithCommas(diffAvg1m.toFixed(0)) + '**\n';
+                  }
+                }
+              }
+            }
+          }
+          var message = message + '**based off ' + timeCount + ' Blocks!**\n' +
+          'Average Difficulty: **' + numberWithCommas(diffAvg.toFixed(0)) +  '**\n' +
+          'Highest Difficulty: **' + numberWithCommas(diffMax.toFixed(0)) +  '**\n' +
+          'Lowest Difficulty: **' + numberWithCommas(diffMin.toFixed(0)) +  '**\n' +
+          'Average Solve Time: **' + timeAvg.toFixed(0) + ' Seconds**\n' +
+          'Longest Solve Time: **' + timeMax.toFixed(0) + ' Seconds**\n' +
+          'Shortest Solve Time: **' + timeMin.toFixed(0) + ' Seconds**\n';
+          msg.channel.send(message);
         }
       }
     });
       }
     });
-    function getDMHS(timeInSeconds){
-      var seconds = parseInt(timeInSeconds, 10);
-      var days = Math.floor(seconds / (3600*24));
-      seconds  -= days*3600*24;
-      var hrs   = Math.floor(seconds / 3600);
-      seconds  -= hrs*3600;
-      var mnts = Math.floor(seconds / 60);
-      seconds  -= mnts*60;
-      var DMHS = days + ' days, ' + hrs + ' Hrs, ' + mnts + ' Minutes, ' + seconds + ' Seconds'
-      return DMHS;
-    }
+    // function getDMHS(timeInSeconds){
+    //   var seconds = parseInt(timeInSeconds, 10);
+    //   var days = Math.floor(seconds / (3600*24));
+    //   seconds  -= days*3600*24;
+    //   var hrs   = Math.floor(seconds / 3600);
+    //   seconds  -= hrs*3600;
+    //   var mnts = Math.floor(seconds / 60);
+    //   seconds  -= mnts*60;
+    //   var DMHS = days + ' days, ' + hrs + ' Hrs, ' + mnts + ' Minutes, ' + seconds + ' Seconds'
+    //   return DMHS;
+    // }
     const numberWithCommas = x => {
       var parts = x.toString().split('.');
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');

@@ -23,11 +23,6 @@ exports.BlockTimes = function(bot) {
     var lastHeight = blockHeight - 1;
     var blockDiff = data.block.difficulty;
     var blockTime = data.block.time;
-    var changedDiff = blockHeight / 2016;
-    var changeOnBlock = (Math.floor(changedDiff) + 1) * 2016;
-    if (blockHeight == changeOnBlock - 1){
-      dropdb('blocktimes');
-    }
     var BlockTimeLog = {
       Height: blockHeight,
       Time: blockTime,

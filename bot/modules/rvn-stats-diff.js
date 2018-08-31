@@ -71,7 +71,7 @@ exports.difficulty = {
           'Estimated Diff: **' + numberWithCommas(newDiff.toFixed(0)) + '**\n';
           if (diffCount > 100) {
             var diffAvg100 = arrAvg(blockDiffLog.slice(0, 99));
-            message = 'Average Diff (100 blocks): **' + numberWithCommas(diffAvg100.toFixed(0)) + '**\n';
+            message = message + 'Average Diff (100 blocks): **' + numberWithCommas(diffAvg100.toFixed(0)) + '**\n';
             if (diffCount > 1000) {
               var diffAvg1k = arrAvg(blockDiffLog.slice(0, 999));
               message = message + 'Average Diff (1k blocks): **' + numberWithCommas(diffAvg1k.toFixed(0)) + '**\n';

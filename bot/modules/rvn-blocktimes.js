@@ -29,19 +29,19 @@ exports.BlockTimes = function(bot) {
       Diff: blockDiff,
       SolveTime: null
     };
-    newEntry(bot, msg, 'blockTime',  BlockTimeLog);
+    newEntry(bot, msg, 'blockTime', BlockTimeLog);
     findEntry(bot, msg, 'blockTime', 'Height', lastHeight, findLastBlock);
     function findLastBlock(bot, msg, docs) {
-      if (docs){
-      var lastTime = docs[0].Time;
-      var SolveTime = blockTime - lastTime;
-      if (lastTime) {
-        var SolvedIn = {
-          SolveTime: Math.abs(SolveTime)
-        };
-        updateEntry(bot, msg, 'blockTime', 'Height', lastHeight, SolvedIn);
+      if (docs) {
+        var lastTime = docs[0].Time;
+        var SolveTime = blockTime - lastTime;
+        if (lastTime) {
+          var SolvedIn = {
+            SolveTime: Math.abs(SolveTime)
+          };
+          updateEntry(bot, msg, 'blockTime', 'Height', lastHeight, SolvedIn);
+        }
       }
-    }
     }
   });
 };

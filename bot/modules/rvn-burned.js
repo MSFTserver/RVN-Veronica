@@ -1,152 +1,116 @@
 let needle = require('needle');
 let config = require('config');
-let moment = require('moment-timezone');
-let explorerApiUrl = config.get('General').urls.explorerApiUrl;
-let hasRvnStatsNetworkChannels = require('../helpers.js')
-  .hasRvnStatsNetworkChannels;
+let hasRvnCalcPriceChannels = require('../helpers.js').hasRvnCalcPriceChannels;
 let inPrivate = require('../helpers.js').inPrivate;
-let findEntry = require('../db-helpers.js').findEntry;
 let channelID = config.get('General').Channels.botspam;
+let explorerApiUrl = config.get('General').urls.explorerApiUrl;
+let coinSymbol = config.get('General').urls.CoinSymbol;
+let burn1 = 'RXissueAssetXXXXXXXXXXXXXXXXXhhZGt';
+let burn2 = 'RXReissueAssetXXXXXXXXXXXXXXVEFAWu';
+let burn3 = 'RXissueSubAssetXXXXXXXXXXXXXWcwhwL';
+let burn4 = 'RXissueUniqueAssetXXXXXXXXXXWEAe58';
+let burn = 'RXBurnXXXXXXXXXXXXXXXXXXXXXXWUo9FV';
 
-exports.commands = ['difficulty'];
+exports.commands = ['burned'];
 
-exports.difficulty = {
+exports.burned = {
   usage: '',
-  description: 'shows current difficulty and retarget',
+  description: 'Displays current balance of Burned ' + coinSymbol,
   process: function(bot, msg, suffix) {
-    if (!inPrivate(msg) && !hasRvnStatsNetworkChannels(msg)) {
+    words = suffix
+      .trim()
+      .split(' ')
+      .filter(function(n) {
+        return n !== '';
+      });
+    if (!inPrivate(msg) && !hasRvnCalcPriceChannels(msg)) {
       msg.channel.send(
-        'Please use <#' + channelID + '> or DMs to talk to Diff bot.'
+        'Please use <#' + channelID + '> or DMs to talk to burned coins bot.'
       );
       return;
     }
-    needle.get(explorerApiUrl + 'api/status?q=getMiningInfo', function(
+    needle.get(explorerApiUrl + 'api/addr/' + burn1 + '/?noTxList=1', function(
       error,
       response
     ) {
       if (response.statusCode !== 200) {
         msg.channel.send(getError(response.statusCode));
       } else {
-        var diff = response.body.miningInfo.difficulty;
-        needle.get(explorerApiUrl + 'api/status', function(error, response) {
-          if (response.statusCode !== 200) {
-            msg.channel.send(getError(response.statusCode));
-          } else {
-            var blocks = response.body.info.blocks;
-            findEntry(bot, msg, 'blockTime', false, false, getBlockTimes);
-            function getBlockTimes(bot, msg, docs) {
-              var blockTimesLog = [];
-              var blockDiffLog = [];
-              if (!docs || docs.length <= 2) {
-                msg.channel.send('no blocks in database set yet!!!');
-                return;
-              }
-              docs.forEach(function(results1) {
-                blockTimesLog.push(results1.SolveTime);
-              });
-              docs.forEach(function(results2) {
-                blockDiffLog.push(results2.Diff);
-              });
-              const arrMax = arr => Math.max(...arr);
-              const arrMin = arr => Math.min(...arr);
-              const arrSum = arr => arr.reduce((a, b) => a + b, 0);
-              const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
-              const arrCount = arr => arr.length;
-              var timeMax = arrMax(blockTimesLog.slice(-999999));
-              var timeMin = arrMin(blockTimesLog.slice(-999999));
-              //var timeTotal = arrSum(blockTimesLog.slice(0, 999999));
-              var timeAvg = arrAvg(blockTimesLog.slice(-999999));
-              var timeCount = arrCount(blockTimesLog.slice(-999999));
-              var diffMax = arrMax(blockDiffLog.slice(-999999));
-              var diffMin = arrMin(blockDiffLog.slice(-999999));
-              var diffCount = arrCount(blockDiffLog.slice(-999999));
-              var diffAvg = arrAvg(blockDiffLog);
-              var newDiff = 2222222 / ((diff + 2600) / 9) ** 2;
-              var message =
-                '__**Dark Gravity Wave Average!**__\n' +
-                'Current Diff: **' +
-                numberWithCommas(diff.toFixed(0)) +
-                '**\n';
-              if (diffCount > 100) {
-                var diffAvg100 = arrAvg(blockDiffLog.slice(-99));
-                message =
-                  message +
-                  'Average Diff (100 blocks): **' +
-                  numberWithCommas(diffAvg100.toFixed(0)) +
-                  '**\n';
-                if (diffCount > 1000) {
-                  var diffAvg1k = arrAvg(blockDiffLog.slice(-999));
-                  message =
-                    message +
-                    'Average Diff (1k blocks): **' +
-                    numberWithCommas(diffAvg1k.toFixed(0)) +
-                    '**\n';
-                  if (diffCount > 10000) {
-                    var diffAvg10k = arrAvg(blockDiffLog.slice(-9999));
-                    message =
-                      message +
-                      'Average Diff (10k blocks): **' +
-                      numberWithCommas(diffAvg10k.toFixed(0)) +
-                      '**\n';
-                    if (diffCount > 100000) {
-                      var diffAvg100k = arrAvg(blockDiffLog.slice(-99999));
-                      message =
-                        message +
-                        'Average Diff (100k blocks): **' +
-                        numberWithCommas(diffAvg100k.toFixed(0)) +
-                        '**\n';
-                      if (diffCount > 1000000) {
-                        var diffAvg1m = arrAvg(blockDiffLog.slice(-999999));
-                        message =
-                          message +
-                          'Average Diff (1m blocks): **' +
-                          numberWithCommas(diffAvg1m.toFixed(0)) +
-                          '**\n';
+        var data = response.body;
+        var balance = data.balance;
+        needle.get(
+          explorerApiUrl + 'api/addr/' + burn1 + '/?noTxList=1',
+          function(error, response) {
+            if (response.statusCode !== 200) {
+              msg.channel.send(getError(response.statusCode));
+            } else {
+              var data = response.body;
+              var balance1 = data.balance;
+              needle.get(
+                explorerApiUrl + 'api/addr/' + burn2 + '/?noTxList=1',
+                function(error, response) {
+                  if (response.statusCode !== 200) {
+                    msg.channel.send(getError(response.statusCode));
+                  } else {
+                    var data = response.body;
+                    var balance2 = data.balance;
+                    needle.get(
+                      explorerApiUrl + 'api/addr/' + burn3 + '/?noTxList=1',
+                      function(error, response) {
+                        if (response.statusCode !== 200) {
+                          msg.channel.send(getError(response.statusCode));
+                        } else {
+                          var data = response.body;
+                          var balance3 = data.balance;
+                          needle.get(
+                            explorerApiUrl +
+                              'api/addr/' +
+                              burn4 +
+                              '/?noTxList=1',
+                            function(error, response) {
+                              if (response.statusCode !== 200) {
+                                msg.channel.send(getError(response.statusCode));
+                              } else {
+                                var data = response.body;
+                                var balance4 = data.balance;
+                                var description =
+                                  '__**Ravencoin Burned!**__\n' +
+                                  burn +
+                                  ' = ' +
+                                  balance +
+                                  '\n' +
+                                  burn1 +
+                                  ' = ' +
+                                  balance +
+                                  '\n' +
+                                  burn2 +
+                                  ' = ' +
+                                  balance +
+                                  '\n' +
+                                  burn3 +
+                                  ' = ' +
+                                  balance +
+                                  '\n' +
+                                  burn4 +
+                                  ' = ' +
+                                  balance +
+                                  '\n';
+                                msg.channel.send(description);
+                                return;
+                              }
+                            }
+                          );
+                        }
                       }
-                    }
+                    );
                   }
                 }
-              }
-              var message =
-                message +
-                '**based off ' +
-                timeCount +
-                ' Blocks!**\n' +
-                'Average Difficulty: **' +
-                numberWithCommas(diffAvg.toFixed(0)) +
-                '**\n' +
-                'Highest Difficulty: **' +
-                numberWithCommas(diffMax.toFixed(0)) +
-                '**\n' +
-                'Lowest Difficulty: **' +
-                numberWithCommas(diffMin.toFixed(0)) +
-                '**\n' +
-                'Average Solve Time: **' +
-                timeAvg.toFixed(0) +
-                ' Seconds**\n' +
-                'Longest Solve Time: **' +
-                timeMax.toFixed(0) +
-                ' Seconds**\n' +
-                'Shortest Solve Time: **' +
-                timeMin.toFixed(0) +
-                ' Seconds**\n';
-              msg.channel.send(message);
+              );
             }
           }
-        });
+        );
       }
     });
-    // function getDMHS(timeInSeconds){
-    //   var seconds = parseInt(timeInSeconds, 10);
-    //   var days = Math.floor(seconds / (3600*24));
-    //   seconds  -= days*3600*24;
-    //   var hrs   = Math.floor(seconds / 3600);
-    //   seconds  -= hrs*3600;
-    //   var mnts = Math.floor(seconds / 60);
-    //   seconds  -= mnts*60;
-    //   var DMHS = days + ' days, ' + hrs + ' Hrs, ' + mnts + ' Minutes, ' + seconds + ' Seconds'
-    //   return DMHS;
-    // }
     const numberWithCommas = x => {
       var parts = x.toString().split('.');
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');

@@ -26,7 +26,11 @@ exports.address = {
       words[0] == 'legal' ||
       words[0] == 'legalfund'
     ) {
-      if (words[0] == 'dev' || words[0] == 'devfund' || words[0] == 'development') {
+      if (
+        words[0] == 'dev' ||
+        words[0] == 'devfund' ||
+        words[0] == 'development'
+      ) {
         var address = 'rEgfYH2ed8a3Age6qLuhXeLvSUJU4Q3sBE';
       } else if (words[0] == 'legal' || words[0] == 'legalfund') {
         var address = 'rVFHXEu91BXK4NDaGGudjqBGdaWsaAK9Eg';

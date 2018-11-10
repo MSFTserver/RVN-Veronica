@@ -11,7 +11,7 @@
 // let hasExcludedSpamChannels = require('../helpers.js').hasExcludedSpamChannels;
 // let hasExcludedSpamUsers = require('../helpers.js').hasExcludedSpamUsers;
 // let pm2Name = config.get('General').pm2Name;
-// 
+//
 // /**
 //  * Add simple spam protection to your discord server.
 //  * @param  {Bot} bot - The discord.js CLient/bot

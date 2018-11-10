@@ -73,28 +73,18 @@ exports.burned = {
                               } else {
                                 var data = response.body;
                                 var balance4 = data.balance;
+                                var total = balance + balance1 + balance2 + balance3 + balance4;
+                                var assets = balance1 / 500
                                 var description =
                                   '__**Ravencoin Burned!**__\n' +
-                                  burn +
-                                  ' = ' +
-                                  balance +
-                                  '\n' +
-                                  burn1 +
-                                  ' = ' +
-                                  balance1 +
-                                  '\n' +
-                                  burn2 +
-                                  ' = ' +
-                                  balance2 +
-                                  '\n' +
-                                  burn3 +
-                                  ' = ' +
-                                  balance3 +
-                                  '\n' +
-                                  burn4 +
-                                  ' = ' +
-                                  balance4 +
-                                  '\n';
+                                  burn +' = ' +balance +'\n' +
+                                  burn1 +' = ' +balance1 +'\n' +
+                                  burn2 +' = ' +balance2 +'\n' +
+                                  burn3 +' = ' +balance3 +'\n' +
+                                  burn4 +' = ' +balance4 +'\n' +
+                                  'Total Burned = ' + total + '\n' +
+                                  'Assets Created = ' + assets.toFixed(0);
+
                                 msg.channel.send(description);
                                 return;
                               }

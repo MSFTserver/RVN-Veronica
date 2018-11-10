@@ -78,19 +78,18 @@ exports.burned = {
                                 var subAssets = balance3 / 100;
                                 var uniqueAssets = balance4 / 5;
                                 var reissues = balance2 / 100;
-                                var description =
-                                  '__**:fire:Ravencoin Burned!:fire:**__\n\n' +
+                                var description = '__**:fire:Ravencoin Burned!:fire:**__\n' +
                                   '[General = ' +numberWithCommas(balance) +'](https://ravencoin.network/address/' + burn + ')\n' +
                                   '[Main Asset = ' +numberWithCommas(balance1) +'](https://ravencoin.network/address/' + burn1 + ')\n' +
                                   '[Sub Asset = ' +numberWithCommas(balance2) +'](https://ravencoin.network/address/' + burn2 + ')\n' +
                                   '[Unique Asset = ' +numberWithCommas(balance3) +'](https://ravencoin.network/address/' + burn3 + ')\n' +
                                   '[reissues = ' +numberWithCommas(balance4) +'](https://ravencoin.network/address/' + burn4 + ')\n\n' +
-                                  '**Total Burned = ' + numberWithCommas(total) + '**\n' +
+                                  '**Total Burned = ' + numberWithCommas(total) + '**\n\n' +
                                   '__**Asset Count**__\n' +
-                                  'Main Assets = ' + numberWithCommas(mainAssets.toFixed(0)) + '' +
-                                  'Sub Assets = ' + numberWithCommas(subAssets.toFixed(0)) + '' +
-                                  'Unique Assets = ' + numberWithCommas(uniqueAssets.toFixed(0)) + '' +
-                                  'Reissues = ' + numberWithCommas(reissues.toFixed(0)) + '';
+                                  'Main Assets = ' + numberWithCommas(mainAssets.toFixed(0)) + '\n' +
+                                  'Sub Assets = ' + numberWithCommas(subAssets.toFixed(0)) + '\n' +
+                                  'Unique Assets = ' + numberWithCommas(uniqueAssets.toFixed(0)) + '\n' +
+                                  'Reissues = ' + numberWithCommas(reissues.toFixed(0));
                                   const embed = {
                                           'description': description
                                           'color': 16734464

@@ -9,7 +9,7 @@ let burn1 = 'RXissueAssetXXXXXXXXXXXXXXXXXhhZGt';
 let burn2 = 'RXReissueAssetXXXXXXXXXXXXXXVEFAWu';
 let burn3 = 'RXissueSubAssetXXXXXXXXXXXXXWcwhwL';
 let burn4 = 'RXissueUniqueAssetXXXXXXXXXXWEAe58';
-let burn = 'RXBurnXXXXXXXXXXXXXXXXXXXXXXWUo9FV';
+let burn0 = 'RXBurnXXXXXXXXXXXXXXXXXXXXXXWUo9FV';
 
 exports.commands = ['burned'];
 
@@ -29,7 +29,7 @@ exports.burned = {
       );
       return;
     }
-    needle.get(explorerApiUrl + 'api/addr/' + burn + '/?noTxList=1', function(
+    needle.get(explorerApiUrl + 'api/addr/' + burn0 + '/?noTxList=1', function(
       error,
       response
     ) {
@@ -79,7 +79,7 @@ exports.burned = {
                                 var uniqueAssets = balance4 / 5;
                                 var reissues = balance2 / 100;
                                 var description = '__**:fire:Ravencoin Burned!:fire:**__\n' +
-                                  'General: [' +numberWithCommas(balance0) +'](https://ravencoin.network/address/' + burn + ')\n' +
+                                  'General: [' +numberWithCommas(balance0) +'](https://ravencoin.network/address/' + burn0 + ')\n' +
                                   'Main Asset: [' +numberWithCommas(balance1) +'](https://ravencoin.network/address/' + burn1 + ')\n' +
                                   'Sub Asset: [' +numberWithCommas(balance3) +'](https://ravencoin.network/address/' + burn3 + ')\n' +
                                   'Unique Asset: [' +numberWithCommas(balance4) +'](https://ravencoin.network/address/' + burn4 + ')\n' +

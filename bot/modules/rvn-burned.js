@@ -91,7 +91,7 @@ exports.burned = {
                                   'Unique Assets: ' + numberWithCommas(uniqueAssets.toFixed(0)) + '\n' +
                                   'Reissues: ' + numberWithCommas(reissues.toFixed(0));
                                   const embed = {
-                                          description: description
+                                          description: description,
                                           color: 16734464
                                         };
                                   msg.channel.send({ embed });

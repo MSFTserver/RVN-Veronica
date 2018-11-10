@@ -77,13 +77,13 @@ exports.burned = {
                                 var assets = balance1 / 500
                                 var description =
                                   '__**Ravencoin Burned!**__\n' +
-                                  burn +' = ' +balance +'\n' +
-                                  burn1 +' = ' +balance1 +'\n' +
-                                  burn2 +' = ' +balance2 +'\n' +
-                                  burn3 +' = ' +balance3 +'\n' +
-                                  burn4 +' = ' +balance4 +'\n' +
-                                  'Total Burned = ' + total + '\n' +
-                                  'Assets Created = ' + assets.toFixed(0);
+                                  burn +' = ' +numberWithCommas(balance) +'\n' +
+                                  burn1 +' = ' +numberWithCommas(balance1) +'\n' +
+                                  burn2 +' = ' +numberWithCommas(balance2) +'\n' +
+                                  burn3 +' = ' +numberWithCommas(balance3) +'\n' +
+                                  burn4 +' = ' +numberWithCommas(balance4) +'\n' +
+                                  'Total Burned = ' + numberWithCommas(total) + '\n' +
+                                  'Assets Created = ' + numberWithCommas(sets.toFixed(0));
 
                                 msg.channel.send(description);
                                 return;

@@ -74,18 +74,28 @@ exports.burned = {
                                 var data = response.body;
                                 var balance4 = data.balance;
                                 var total = balance + balance1 + balance2 + balance3 + balance4;
-                                var assets = balance1 / 500
+                                var mainAssets = balance1 / 500;
+                                var subAssets = balance3 / 100;
+                                var uniqueAssets = balance4 / 5;
+                                var reissues = balance2 / 100;
                                 var description =
-                                  '__**Ravencoin Burned!**__\n' +
-                                  burn +' = ' +numberWithCommas(balance) +'\n' +
-                                  burn1 +' = ' +numberWithCommas(balance1) +'\n' +
-                                  burn2 +' = ' +numberWithCommas(balance2) +'\n' +
-                                  burn3 +' = ' +numberWithCommas(balance3) +'\n' +
-                                  burn4 +' = ' +numberWithCommas(balance4) +'\n' +
+                                  '__**:fire:Ravencoin Burned!:fire:**__\n\n' +
+                                  '[General = ' +numberWithCommas(balance) +'](https://ravencoin.network/address/' + burn + ')\n' +
+                                  '[Main Asset = ' +numberWithCommas(balance1) +'](https://ravencoin.network/address/' + burn1 + ')\n' +
+                                  '[Sub Asset = ' +numberWithCommas(balance2) +'](https://ravencoin.network/address/' + burn2 + ')\n' +
+                                  '[Unique Asset = ' +numberWithCommas(balance3) +'](https://ravencoin.network/address/' + burn3 + ')\n' +
+                                  '[reissues = ' +numberWithCommas(balance4) +'](https://ravencoin.network/address/' + burn4 + ')\n\n' +
                                   '**Total Burned = ' + numberWithCommas(total) + '**\n' +
-                                  '**Assets Created = ' + numberWithCommas(assets.toFixed(0)) + '**';
-
-                                msg.channel.send(description);
+                                  '__**Asset Count**__\n' +
+                                  'Main Assets = ' + numberWithCommas(mainAssets.toFixed(0)) + '' +
+                                  'Sub Assets = ' + numberWithCommas(subAssets.toFixed(0)) + '' +
+                                  'Unique Assets = ' + numberWithCommas(uniqueAssets.toFixed(0)) + '' +
+                                  'Reissues = ' + numberWithCommas(reissues.toFixed(0)) + '';
+                                  const embed = {
+                                          'description': description
+                                          'color': 16734464
+                                        };
+                                  msg.channel.send({ embed });
                                 return;
                               }
                             }

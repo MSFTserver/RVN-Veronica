@@ -81,19 +81,19 @@ exports.burned = {
                                   '\n' +
                                   burn1 +
                                   ' = ' +
-                                  balance +
+                                  balance1 +
                                   '\n' +
                                   burn2 +
                                   ' = ' +
-                                  balance +
+                                  balance2 +
                                   '\n' +
                                   burn3 +
                                   ' = ' +
-                                  balance +
+                                  balance3 +
                                   '\n' +
                                   burn4 +
                                   ' = ' +
-                                  balance +
+                                  balance4 +
                                   '\n';
                                 msg.channel.send(description);
                                 return;

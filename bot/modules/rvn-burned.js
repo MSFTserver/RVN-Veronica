@@ -83,7 +83,7 @@ exports.burned = {
                                   burn3 +' = ' +numberWithCommas(balance3) +'\n' +
                                   burn4 +' = ' +numberWithCommas(balance4) +'\n' +
                                   'Total Burned = ' + numberWithCommas(total) + '\n' +
-                                  'Assets Created = ' + numberWithCommas(sets.toFixed(0));
+                                  'Assets Created = ' + numberWithCommas(assets.toFixed(0));
 
                                 msg.channel.send(description);
                                 return;

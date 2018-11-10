@@ -81,9 +81,9 @@ exports.burned = {
                                 var description = '__**:fire:Ravencoin Burned!:fire:**__\n' +
                                   'General: [' +numberWithCommas(balance0) +'](https://ravencoin.network/address/' + burn + ')\n' +
                                   'Main Asset: [' +numberWithCommas(balance1) +'](https://ravencoin.network/address/' + burn1 + ')\n' +
-                                  'Sub Asset: [' +numberWithCommas(balance2) +'](https://ravencoin.network/address/' + burn2 + ')\n' +
-                                  'Unique Asset: [' +numberWithCommas(balance3) +'](https://ravencoin.network/address/' + burn3 + ')\n' +
-                                  'reissues: [' +numberWithCommas(balance4) +'](https://ravencoin.network/address/' + burn4 + ')\n\n' +
+                                  'Sub Asset: [' +numberWithCommas(balance3) +'](https://ravencoin.network/address/' + burn3 + ')\n' +
+                                  'Unique Asset: [' +numberWithCommas(balance4) +'](https://ravencoin.network/address/' + burn4 + ')\n' +
+                                  'reissues: [' +numberWithCommas(balance2) +'](https://ravencoin.network/address/' + burn2 + ')\n\n' +
                                   '**Total Burned: ' + numberWithCommas(total) + '**\n\n' +
                                   '__**Asset Count**__\n' +
                                   'Main Assets: ' + numberWithCommas(mainAssets.toFixed(0)) + '\n' +

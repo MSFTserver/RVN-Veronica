@@ -29,7 +29,7 @@ exports.burned = {
       );
       return;
     }
-    needle.get(explorerApiUrl + 'api/addr/' + burn1 + '/?noTxList=1', function(
+    needle.get(explorerApiUrl + 'api/addr/' + burn + '/?noTxList=1', function(
       error,
       response
     ) {

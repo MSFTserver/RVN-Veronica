@@ -37,7 +37,7 @@ exports.burned = {
         msg.channel.send(getError(response.statusCode));
       } else {
         var data = response.body;
-        var balance = data.balance;
+        var balance0 = data.balance;
         needle.get(
           explorerApiUrl + 'api/addr/' + burn1 + '/?noTxList=1',
           function(error, response) {
@@ -73,7 +73,7 @@ exports.burned = {
                               } else {
                                 var data = response.body;
                                 var balance4 = data.balance;
-                                var total = balance + balance1 + balance2 + balance3 + balance4;
+                                var total = balance0 + balance1 + balance2 + balance3 + balance4;
                                 var mainAssets = balance1 / 500;
                                 var subAssets = balance3 / 100;
                                 var uniqueAssets = balance4 / 5;

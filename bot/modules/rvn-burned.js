@@ -79,7 +79,7 @@ exports.burned = {
                                 var uniqueAssets = balance4 / 5;
                                 var reissues = balance2 / 100;
                                 var description = '__**:fire:Ravencoin Burned!:fire:**__\n' +
-                                  'General: [' +numberWithCommas(balance) +'](https://ravencoin.network/address/' + burn + ')\n' +
+                                  'General: [' +numberWithCommas(balance0) +'](https://ravencoin.network/address/' + burn + ')\n' +
                                   'Main Asset: [' +numberWithCommas(balance1) +'](https://ravencoin.network/address/' + burn1 + ')\n' +
                                   'Sub Asset: [' +numberWithCommas(balance2) +'](https://ravencoin.network/address/' + burn2 + ')\n' +
                                   'Unique Asset: [' +numberWithCommas(balance3) +'](https://ravencoin.network/address/' + burn3 + ')\n' +

@@ -91,7 +91,7 @@ exports.asset = {
           );
           return;
         }
-        findEntry(bot, msg, 'assetOTC', 'assetName', words[1].trim(), findAsset);
+        findEntry(bot, msg, 'assetOTC', 'assetName', words[1].replace(' ', ''), findAsset);
         function findAsset(bot, msg, docs) {
           if (!docs || !docs[0]) {
             msg.channel.send('no assets with name: ' + words[1].trim());

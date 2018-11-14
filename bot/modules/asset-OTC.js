@@ -71,7 +71,7 @@ exports.asset = {
               return str;
           }
             var Price = results.assetPrice;
-            var createLink = '(' + Name + ')[https://www.assetsexplorer.com/asset/' + hex + '] : ' + Price;
+            var createLink = '[' + Name + '](https://www.assetsexplorer.com/asset/' + hex + ') : ' + Price;
             assets.push(createLink);
           });
           var message = assets.toString().replace(/,/g, '\n     ');

@@ -91,10 +91,10 @@ exports.asset = {
           );
           return;
         }
-        findEntry(bot, msg, 'assetOTC', 'assetName', words[1], findAsset);
+        findEntry(bot, msg, 'assetOTC', 'assetName', words[1].toUpperCase(), findAsset);
         function findAsset(bot, msg, docs) {
           if (!docs || !docs[0]) {
-            msg.channel.send('no assets with name: ' + words[1]);
+            msg.channel.send('no assets with name: ' + words[1].toUpperCase());
             return;
           } else {
             var OwnerID = docs[0].assetOwnerID;

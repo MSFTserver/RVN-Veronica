@@ -18,10 +18,7 @@ exports.OTC = {
       .filter(function(n) {
         return n !== '';
       });
-    if (!words[0]) {
-      msg.channel.send('**!OTC list**\n     Displays all raven assets forsale OTC\n     (optionally add asset name to return just that assets info)\n**!OTC sell**, <assetName>, <!isAdminAsset>, <assetType>, <assetUnits>, <assetQuantity>, <assetReissuable>, <assetIPFS>, <Price>\n     provide all required info for asset seprated by commas!\n     Example: `!OTC sell, VERONICA, True/False/Yes/No, Main/sub/unique, 0-8, 0, Yes/No/True/False, Yes/No/True/False/IPFShash, 10000 RVN`\n**!OTC update**, <assetName>, <!AdminAsset>, <assetType>, <assetUnits>, <assetQuantity>, <assetReissuable>, <assetIPFS>, <Price>\n     if you would like to update your assets info and not change other things use `d` in place of info to leave default from database\n     Example`!OTC update, d, d, d, d, d, True, d, d`');
-      return;
-    } else if (words[0] == 'list') {
+     if (words[0] == 'list') {
       assetList(bot,msg,suffix);
       return;
     } else if (words[0].toLowerCase() == 'sell,') {

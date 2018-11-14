@@ -66,7 +66,7 @@ exports.asset = {
 
               for (; i < tmp_len; i += 1) {
                   c = tmp.charCodeAt(i);
-                  str += d2h(c) + ' ';
+                  str += d2h(c);
               }
               return str;
           }
@@ -75,7 +75,14 @@ exports.asset = {
             assets.push(createLink);
           });
           var message = assets.toString().replace(/,/g, '\n     ');
-          msg.channel.send('__**Assets Listed**__\n     ' + message + '\n    use `!asset list <assetName>` to see info about specific asset.');
+          var description = message + '\n    use `!asset list <assetName>` to see info about specific asset.');
+          msg.channel.send({
+            embed: {
+              title: '_**Assets listed for sale**__',
+              description: description,
+              color: 8995497
+            }
+          });
         }
       } else {
         if (!inPrivate(msg) && !inSpam(msg)) {
@@ -111,7 +118,7 @@ exports.asset = {
 
               for (; i < tmp_len; i += 1) {
                   c = tmp.charCodeAt(i);
-                  str += d2h(c) + ' ';
+                  str += d2h(c);
               }
               return str;
           }

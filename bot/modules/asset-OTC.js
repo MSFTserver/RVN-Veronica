@@ -55,6 +55,9 @@ exports.asset = {
           docs.forEach(function(results) {
             var Name = results.assetName;
             var hex = convert2Hex1(Name);
+            function d2h(d) {
+                return d.toString(16);
+            }
             function convert2Hex1 (tmp) {
               var str = '',
                   i = 0,
@@ -97,6 +100,9 @@ exports.asset = {
             var hasIPFS = docs[0].assetIPFS;
             var Price = docs[0].assetPrice;
             var hex = convert2Hex2(Name);
+            function d2h(d) {
+                return d.toString(16);
+            }
             function convert2Hex2 (tmp) {
               var str = '',
                   i = 0,

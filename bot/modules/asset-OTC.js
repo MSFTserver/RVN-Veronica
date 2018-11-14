@@ -72,7 +72,7 @@ exports.asset = {
           }
             var Price = results.assetPrice;
             var createLink = '(' + Name + ')[https://www.assetsexplorer.com/asset/' + hex + '] : ' + Price;
-            assets.Push(createLink)
+            assets.push(createLink);
           });
           var message = assets.toString().replace(/,/g, '\n     ');
           msg.channel.send('__**Assets Listed**__\n     ' + message + '\n    use `!asset list <assetName>` to see info about specific asset.');

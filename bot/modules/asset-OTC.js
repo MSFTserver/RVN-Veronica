@@ -85,7 +85,7 @@ exports.asset = {
           groups.forEach(function(results) {
             var message = results.toString().replace(/,/g, '\n     ');
             var description = message + '\n    use `!asset list <assetName>` to see info about specific asset.';
-            msg.channel.send({
+            msg.author.send({
               embed: {
                 title: '__**Assets listed for sale**__',
                 description: '    ' + description,

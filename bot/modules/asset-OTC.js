@@ -94,6 +94,7 @@ exports.asset = {
         findEntry(bot, msg, 'assetOTC', 'assetName', words[1], findAsset);
         function findAsset(bot, msg, docs) {
           if (!docs || !docs[0]) {
+            msg.channel.send('no assets with name: ' + words[1]);
             return;
           } else {
             var OwnerID = docs[0].assetOwnerID;
@@ -132,13 +133,13 @@ exports.asset = {
               '     Quantity: ' + Quantity + '\n' +
               '     Reissuable:' + Reissuable + '\n' +
               '     IPFS: ' + hasIPFS + '\n';
-            msg.author.send({
+            msg.channel.send({
               embed: {
                 title: 'Lister: ' + Owner,
                 description: message,
                 color: 8995497,
                 author: {
-                  name: name,
+                  name: Name,
                   url: 'https://www.assetsexplorer.com/asset/' + hex
                 }
               }

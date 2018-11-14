@@ -41,6 +41,7 @@ require('./db-models/user.js');
 require('./db-models/timeout.js');
 require('./db-models/blockstime.js');
 require('./db-models/blockstime-testnet.js');
+require('./db-models/assetOTC.js');
 
 
 var aliases;

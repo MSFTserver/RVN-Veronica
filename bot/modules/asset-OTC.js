@@ -52,7 +52,7 @@ exports.OTC = {
             var Name = results.assetName;
             var hex = convert2Hex(Name);
             var Price = results.assetPrice
-            var createLink = '(' + Name + ')[https://www.assetsexplorer.com/asset/' + hex '] : ' + Price;
+            var createLink = '(' + Name + ')[https://www.assetsexplorer.com/asset/' + hex + '] : ' + Price;
             assets.Push(createLink)
           });
           var message = assets.toString().replace(/,/g, '\n     ');

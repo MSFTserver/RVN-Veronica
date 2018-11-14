@@ -53,7 +53,7 @@ exports.asset = {
         function findAssets(bot, msg, docs) {
           var assets = []
           docs.forEach(function(results) {
-            var Name = results.assetName;
+            var Name = results.assetName.toUpperCase();
             var hex = convert2Hex1(Name);
             function d2h(d) {
                 return d.toString(16);
@@ -99,7 +99,7 @@ exports.asset = {
           } else {
             var OwnerID = docs[0].assetOwnerID;
             var Owner = docs[0].assetOwner;
-            var Name = docs[0].assetName;
+            var Name = docs[0].assetName.toUpperCase();
             var Admin = docs[0].assetAdmin;
             var Type = docs[0].assetType;
             var Units = docs[0].assetUnits;
@@ -180,7 +180,7 @@ exports.asset = {
           var newAsset = {
             assetOwnerID: msg.author.id,
             assetOwner: msg.author.username,
-            assetName: Name.trim(),
+            assetName: Name.trim().toUpperCase(),
             assetAdmin: Admin.trim(),
             assetType: Type.trim(),
             assetUnits: Units.trim(),
@@ -213,7 +213,7 @@ exports.asset = {
           );
           return;
         }
-      findEntry(bot, msg, 'assetOTC', 'assetName', words[1], getAssetandUpdate);
+      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].toUpperCase(), getAssetandUpdate);
       function getAssetandUpdate(bot, msg, docs) {
         if (!docs || !docs[0]) {
           msg.channel.send('no asset found in database with name: ' + words[1] )
@@ -227,9 +227,9 @@ exports.asset = {
           var OwnerID = docs[0].assetOwnerID;
           var Owner = docs[0].assetOwner;
           if (words[1].trim() == 'd') {
-            var Name = docs[0].assetName;
+            var Name = docs[0].assetName.toUpperCase();
           } else {
-            var Name = words[1];
+            var Name = words[1].toUpperCase();
           }
           if (words[2].trim() == 'd') {
             var Admin = docs[0].assetAdmin;
@@ -269,7 +269,7 @@ exports.asset = {
           var updateAsset = {
             assetOwnerID: OwnerID,
             assetOwner: Owner,
-            assetName: Name.trim(),
+            assetName: Name.trim().toUpperCase(),
             assetAdmin: Admin.trim(),
             assetType: Type.trim(),
             assetUnits: Units.trim(),

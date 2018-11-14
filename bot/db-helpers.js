@@ -38,6 +38,9 @@ exports.newEntry = function(bot, msg, useDB, saveEntry) {
       if (useDB == 'pools'){
         msg.channel.send('Pool Saved!')
       }
+      if (useDB == 'assetOTC'){
+        msg.channel.send('asset Saved!')
+      }
       var time = moment()
         .tz('America/Los_Angeles')
         .format('MM-DD-YYYY hh:mm a');
@@ -46,6 +49,9 @@ exports.newEntry = function(bot, msg, useDB, saveEntry) {
     .catch(err => {
       if (useDB == 'pools'){
         msg.channel.send('Error Saving Pool!')
+      }
+      if (useDB == 'assetOTC'){
+        msg.channel.send('Error Saving Asset!')
       }
       var time = moment()
         .tz('America/Los_Angeles')
@@ -63,6 +69,9 @@ exports.updateEntry = function(bot, msg, useDB, keyName, valueName, saveEntry) {
   if (useDB == 'pools'){
     msg.channel.send('Pool Updated!')
   }
+  if (useDB == 'assetOTC'){
+    msg.channel.send('asset Updated!')
+  }
   database
     .updateOne(
       updateKey,
@@ -77,6 +86,9 @@ exports.updateEntry = function(bot, msg, useDB, keyName, valueName, saveEntry) {
     .catch(err => {
       if (useDB == 'pools'){
         msg.channel.send('Error Updating Pool!')
+      }
+      if (useDB == 'assetOTC'){
+        msg.channel.send('Error Updating asset!')
       }
       var time = moment()
         .tz('America/Los_Angeles')

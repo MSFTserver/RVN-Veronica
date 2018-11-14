@@ -91,7 +91,7 @@ exports.asset = {
           );
           return;
         }
-        findEntry(bot, msg, 'assetOTC', 'assetName', words[1].replace(' ', ''), findAsset);
+        findEntry(bot, msg, 'assetOTC', 'assetName', words[1], findAsset);
         function findAsset(bot, msg, docs) {
           if (!docs || !docs[0]) {
             msg.channel.send('no assets with name: ' + words[1].trim());
@@ -213,10 +213,10 @@ exports.asset = {
           );
           return;
         }
-      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].toUpperCase(), getAssetandUpdate);
+      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].trim(), getAssetandUpdate);
       function getAssetandUpdate(bot, msg, docs) {
         if (!docs || !docs[0]) {
-          msg.channel.send('no asset found in database with name: ' + words[1] )
+          msg.channel.send('no asset found in database with name: ' + words[1].trim() )
         } else {
           if (docs[0].assetOwnerID != msg.author.id) {
             msg.channel.send(

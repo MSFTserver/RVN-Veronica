@@ -21,7 +21,7 @@ exports.OTC = {
     if (!words[0]) {
       msg.channel.send('**!OTC list**\n     Displays all raven assets forsale OTC\n     (optionally add asset name to return just that assets info)\n**!OTC sell**, <assetName>, <!isAdminAsset>, <assetType>, <assetUnits>, <assetQuantity>, <assetReissuable>, <assetIPFS>, <Price>\n     provide all required info for asset seprated by commas!\n     Example: `!OTC sell, VERONICA, True/False/Yes/No, Main/sub/unique, 0-8, 0, Yes/No/True/False, Yes/No/True/False/IPFShash, 10000 RVN`\n**!OTC update**, <assetName>, <!AdminAsset>, <assetType>, <assetUnits>, <assetQuantity>, <assetReissuable>, <assetIPFS>, <Price>\n     if you would like to update your assets info and not change other things use `d` in place of info to leave default from database\n     Example`!OTC update, d, d, d, d, d, True, d, d`');
       return;
-    } else if (words[0].toLowerCase() == 'list,') {
+    } else if (words[0] == 'list') {
       assetList(bot,msg,suffix);
       return;
     } else if (words[0].toLowerCase() == 'sell,') {
@@ -43,15 +43,14 @@ exports.OTC = {
           );
           return;
         }
-        msg.channel
-          .send('assets list sent via DM')
+        msg.channel.send('assets list sent via DM')
         findEntry(bot, msg, 'assetOTC', false, false, findAssets);
         function findAssets(bot, msg, docs) {
           var assets = []
           docs.forEach(function(results) {
             var Name = results.assetName;
             var hex = convert2Hex(Name);
-            var Price = results.assetPrice
+            var Price = results.assetPrice;
             var createLink = '(' + Name + ')[https://www.assetsexplorer.com/asset/' + hex + '] : ' + Price;
             assets.Push(createLink)
           });

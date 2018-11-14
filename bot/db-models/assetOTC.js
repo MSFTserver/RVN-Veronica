@@ -5,7 +5,7 @@ var assetOTCSchema = new Schema({
     type: String,
     required: true
   },
-  assetOwnerUsername: {
+  assetOwner: {
     type: String,
     required: true
   },

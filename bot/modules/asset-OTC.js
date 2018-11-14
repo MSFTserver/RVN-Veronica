@@ -35,7 +35,13 @@ exports.asset = {
     }
 
     function assetList(bot, msg, suffix) {
-      if (!suffix) {
+      var words = suffix
+        .trim()
+        .split(' ')
+        .filter(function(n) {
+          return n !== '';
+        });
+      if (!words[1]) {
         if (!inPrivate(msg) && !inSpam(msg)) {
           msg.channel.send(
             'Please use <#' + channelID + '> or DMs to talk to assets bot.'
@@ -75,8 +81,7 @@ exports.asset = {
           );
           return;
         }
-        var regex = new RegExp(['^', suffix, '$'].join(''), 'i');
-        findEntry(bot, msg, 'assetOTC', 'assetName', regex, findAsset);
+        findEntry(bot, msg, 'assetOTC', 'assetName', words[1], findAsset);
         function findAsset(bot, msg, docs) {
           if (!docs || !docs[0]) {
             return;

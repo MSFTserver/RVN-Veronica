@@ -168,7 +168,7 @@ exports.asset = {
             assetQuantity: Quantity.trim(),
             assetReissuable: Reissuable.trim(),
             assetIPFS: hasIPFS.trim(),
-            assetPrice: Price.Trim(),
+            assetPrice: Price,
           };
           newEntry(bot, msg, 'assetOTC', newAsset);
         } else {
@@ -257,7 +257,7 @@ exports.asset = {
             assetQunatity: Quantity.trim(),
             assetReissuable: Reissuable.trim(),
             assetIPFS: hasIPFS.trim(),
-            assetPrice: Price.trim()
+            assetPrice: Price
           };
           updateEntry(
             bot,

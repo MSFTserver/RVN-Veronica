@@ -74,15 +74,24 @@ exports.asset = {
             var createLink = '[' + Name + '](https://www.assetsexplorer.com/asset/' + hex + ') : ' + Price;
             assets.push(createLink);
           });
-          var message = assets.toString().replace(/,/g, '\n     ');
-          var description = message + '\n    use `!asset list <assetName>` to see info about specific asset.';
-          msg.channel.send({
-            embed: {
-              title: '__**Assets listed for sale**__',
-              description: description,
-              color: 8995497
-            }
+          var groupSize = 10;
+          var groups = _.map(assets, function(item, index){
+            return index % groupSize === 0 ? assets.slice(index, index + groupSize) : null;
+            })
+            .filter(function(item){ return item;
+
           });
+          groups.forEach(function(results) {
+            var message = results.toString().replace(/,/g, '\n     ');
+            var description = message + '\n    use `!asset list <assetName>` to see info about specific asset.';
+            msg.channel.send({
+              embed: {
+                title: '__**Assets listed for sale**__',
+                description: '    ' + description,
+                color: 8995497
+              }
+            });
+                    });
         }
       } else {
         if (!inPrivate(msg) && !inSpam(msg)) {

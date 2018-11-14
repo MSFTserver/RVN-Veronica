@@ -37,7 +37,7 @@ exports.asset = {
     function assetList(bot, msg, suffix) {
       var words = suffix
         .trim()
-        .split(',')
+        .split(' ')
         .filter(function(n) {
           return n !== '';
         });
@@ -91,10 +91,10 @@ exports.asset = {
           );
           return;
         }
-        findEntry(bot, msg, 'assetOTC', 'assetName', words[1], findAsset);
+        findEntry(bot, msg, 'assetOTC', 'assetName', words[1].toUpperCase.trim(), findAsset);
         function findAsset(bot, msg, docs) {
           if (!docs || !docs[0]) {
-            msg.channel.send('no assets with name: ' + words[1].trim());
+            msg.channel.send('no assets with name: ' + words[1].toUpperCase.trim());
             return;
           } else {
             var OwnerID = docs[0].assetOwnerID;
@@ -213,10 +213,10 @@ exports.asset = {
           );
           return;
         }
-      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].trim(), getAssetandUpdate);
+      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].toUpperCase.trim(), getAssetandUpdate);
       function getAssetandUpdate(bot, msg, docs) {
         if (!docs || !docs[0]) {
-          msg.channel.send('no asset found in database with name: ' + words[1].trim() )
+          msg.channel.send('no asset found in database with name: ' + words[1].toUpperCase.trim() )
         } else {
           if (docs[0].assetOwnerID != msg.author.id) {
             msg.channel.send(
@@ -227,9 +227,9 @@ exports.asset = {
           var OwnerID = docs[0].assetOwnerID;
           var Owner = docs[0].assetOwner;
           if (words[1].trim() == 'd') {
-            var Name = docs[0].assetName.toUpperCase();
+            var Name = docs[0].assetName.toUpperCase.trim();
           } else {
-            var Name = words[1].toUpperCase();
+            var Name = words[1].toUpperCase.trim();
           }
           if (words[2].trim() == 'd') {
             var Admin = docs[0].assetAdmin;
@@ -283,7 +283,7 @@ exports.asset = {
             msg,
             'assetOTC',
             'assetName',
-            Name,
+            Name.toUpperCase.trim(),
             updateAsset
           );
         }

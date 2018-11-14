@@ -35,7 +35,7 @@ exports.asset = {
 
     function assetList(bot, msg, suffix) {
       if (!suffix) {
-        if (!inSpam(msg)) {
+        if (!inSpam(msg) && !inPrivate(msg)) {
           msg.channel.send(
             'Please use <#' + channelID + '> or DMs to talk to assets bot.'
           );
@@ -68,7 +68,7 @@ exports.asset = {
           msg.channel.send('__**Assets Listed**__\n     ' + message + '\n    use `!asset list <assetName>` to see info about specific asset.');
         }
       } else {
-        if (!inSpam(msg)) {
+        if (!inSpam(msg) && !inPrivate(msg)) {
           msg.channel.send(
             'Please use <#' + channelID + '> or DMs to talk to assets bot.'
           );
@@ -130,7 +130,7 @@ exports.asset = {
     }
 
     function newAsset(bot, msg, suffix) {
-      if (!inSpam(msg)) {
+      if (!inSpam(msg) && !inPrivate(msg)) {
         msg.channel.send('Please use <#' + channelID + '> to sell an asset.');
         return;
       }
@@ -177,7 +177,7 @@ exports.asset = {
       }
     }
     function updateAsset(bot, msg, suffix) {
-      if (!inSpam(msg)) {
+      if (!inSpam(msg) && !inPrivate(msg)) {
         msg.channel.send('Please use <#' + channelID + '> to update an asset.');
         return;
       }

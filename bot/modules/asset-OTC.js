@@ -5,6 +5,7 @@ let inSpam = require('../helpers.js').inSpam;
 let inPrivate = require('../helpers.js').inPrivate;
 let config = require('config');
 let channelID = config.get('General').Channels.botspam;
+let _ = require('underscore-node');
 
 exports.commands = ['asset'];
 

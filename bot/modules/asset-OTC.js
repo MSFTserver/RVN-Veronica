@@ -53,7 +53,7 @@ exports.asset = {
         function findAssets(bot, msg, docs) {
           var assets = []
           docs.forEach(function(results) {
-            var Name = results.assetName.toUpperCase();
+            var Name = results.assetName;
             var hex = convert2Hex1(Name);
             function d2h(d) {
                 return d.toString(16);
@@ -91,15 +91,15 @@ exports.asset = {
           );
           return;
         }
-        findEntry(bot, msg, 'assetOTC', 'assetName', words[1].toUpperCase.trim(), findAsset);
+        findEntry(bot, msg, 'assetOTC', 'assetName', words[1].trim(), findAsset);
         function findAsset(bot, msg, docs) {
           if (!docs || !docs[0]) {
-            msg.channel.send('no assets with name: ' + words[1].toUpperCase.trim());
+            msg.channel.send('no assets with name: ' + words[1].trim());
             return;
           } else {
             var OwnerID = docs[0].assetOwnerID;
             var Owner = docs[0].assetOwner;
-            var Name = docs[0].assetName.toUpperCase();
+            var Name = docs[0].assetName;
             var Admin = docs[0].assetAdmin;
             var Type = docs[0].assetType;
             var Units = docs[0].assetUnits;
@@ -166,21 +166,21 @@ exports.asset = {
         );
         return;
       }
-      findEntry(bot, msg, 'assetOTC', 'assetName', words[1], getAsset);
+      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].trim(), getAsset);
       function getAsset(bot, msg, docs) {
         if (!docs || !docs[0]) {
-          var Name = words[1];
-          var Admin = words[2]
-          var Type = words[3];
-          var Units = words[4];
-          var Quantity = words[5];
-          var Reissuable = words[6];
-          var hasIPFS = words[7];
+          var Name = words[1].trim();
+          var Admin = words[2].trim();
+          var Type = words[3].trim();
+          var Units = words[4].trim();
+          var Quantity = words[5].trim();
+          var Reissuable = words[6].trim();
+          var hasIPFS = words[7].trim();
           var Price = words[8];
           var newAsset = {
             assetOwnerID: msg.author.id,
             assetOwner: msg.author.username,
-            assetName: Name.trim().toUpperCase(),
+            assetName: Name.trim(),
             assetAdmin: Admin.trim(),
             assetType: Type.trim(),
             assetUnits: Units.trim(),
@@ -191,7 +191,7 @@ exports.asset = {
           };
           newEntry(bot, msg, 'assetOTC', newAsset);
         } else {
-          msg.channel.send( words[1] + ' already exists, if you own this asset please use update or remove.');
+          msg.channel.send( words[1].trim() + ' already exists, if you own this asset please use update or remove.');
           return;
         }
       }
@@ -213,10 +213,10 @@ exports.asset = {
           );
           return;
         }
-      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].toUpperCase.trim(), getAssetandUpdate);
+      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].trim(), getAssetandUpdate);
       function getAssetandUpdate(bot, msg, docs) {
         if (!docs || !docs[0]) {
-          msg.channel.send('no asset found in database with name: ' + words[1].toUpperCase.trim() )
+          msg.channel.send('no asset found in database with name: ' + words[1].trim() )
         } else {
           if (docs[0].assetOwnerID != msg.author.id) {
             msg.channel.send(
@@ -227,49 +227,49 @@ exports.asset = {
           var OwnerID = docs[0].assetOwnerID;
           var Owner = docs[0].assetOwner;
           if (words[1].trim() == 'd') {
-            var Name = docs[0].assetName.toUpperCase.trim();
+            var Name = docs[0].assetName;
           } else {
-            var Name = words[1].toUpperCase.trim();
+            var Name = words[1].trim();
           }
           if (words[2].trim() == 'd') {
             var Admin = docs[0].assetAdmin;
           } else {
-            var Admin = words[2];
+            var Admin = words[2].trim();
           }
           if (words[3].trim() == 'd') {
             var Type = docs[0].assetType;
           } else {
-            var Type = words[3];
+            var Type = words[3].trim();
           }
           if (words[4].trim() == 'd') {
             var Units = docs[0].assetUnits;
           } else {
-            var Units = words[4];
+            var Units = words[4].trim();
           }
           if (words[5].trim() == 'd') {
             var Quantity = docs[0].assetQuantity;
           } else {
-            var Quantity = words[5];
+            var Quantity = words[5].trim();
           }
           if (words[6].trim() == 'd') {
             var Reissuable = docs[0].assetReissuable;
           } else {
-            var Reissuable = words[6];
+            var Reissuable = words[6].trim();
           }
           if (words[7].trim() == 'd') {
             var hasIPFS = docs[0].assetIPFS;
           } else {
-            var hasIPFS = words[7];
+            var hasIPFS = words[7].trim();
           }
-          if (words[8].trim() == 'd') {
+          if (words[8] == 'd') {
             var Price = docs[0].assetPrice;
           } else {
-            var Price = words[8];
+            var Price = words[8]
           }
           var updateAsset = {
             assetOwnerID: OwnerID,
             assetOwner: Owner,
-            assetName: Name.trim().toUpperCase(),
+            assetName: Name.trim(),
             assetAdmin: Admin.trim(),
             assetType: Type.trim(),
             assetUnits: Units.trim(),
@@ -283,7 +283,7 @@ exports.asset = {
             msg,
             'assetOTC',
             'assetName',
-            Name.toUpperCase.trim(),
+            Name,
             updateAsset
           );
         }

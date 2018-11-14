@@ -125,9 +125,9 @@ exports.asset = {
           }
             var message =
               'Lister Discord ID: ' + OwnerID +
-              '\n(to verify you dm the correct person!)\n' +
-              '   is !admin Asset: ' + Admin + '\n' +
-              '   Type: ' + Type + '\n' +
+              '\n(to verify you dm the correct person!)\n\n' +
+              '   is !admin Asset: ' + Admin + '\n\n' +
+              '   Type: ' + Type + '\n\n' +
               '__**PRICE**__: ' + Price + '\n' +
               '     Units: ' + Units + '\n' +
               '     Quantity: ' + Quantity + '\n' +

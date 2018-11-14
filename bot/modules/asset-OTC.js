@@ -75,10 +75,10 @@ exports.asset = {
             assets.push(createLink);
           });
           var message = assets.toString().replace(/,/g, '\n     ');
-          var description = message + '\n    use `!asset list <assetName>` to see info about specific asset.');
+          var description = message + '\n    use `!asset list <assetName>` to see info about specific asset.';
           msg.channel.send({
             embed: {
-              title: '_**Assets listed for sale**__',
+              title: '__**Assets listed for sale**__',
               description: description,
               color: 8995497
             }

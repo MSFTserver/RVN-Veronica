@@ -141,7 +141,7 @@ exports.asset = {
         .filter(function(n) {
           return n !== '';
         });
-      if (!words[1] || !words[2] || !words[3] || !words[4] || !words[5] || !words[6] || !words[7] || words[8]) {
+      if (!words[1] || !words[2] || !words[3] || !words[4] || !words[5] || !words[6] || !words[7] || !words[8]) {
         msg.channel.send(
           'provide all required info for asset seprated by commas! \n**!asset sell**, <assetName>, <!AdminAsset>, <!AdminAsset>, <assetType>, <assetUnits>, <assetQuantity>, <assetReissuable>, <assetIPFS>, <Price>\n     provide all required info for asset seprated by commas!\n     Example: `!asset sell, VERONICA, Yes/No/True/False, Main/sub/unique, 0-8, 0, Yes/No/True/False, Yes/No/True/False/IPFShash, 10000 RVN`'
         );
@@ -188,7 +188,7 @@ exports.asset = {
         .filter(function(n) {
           return n !== '';
         });
-        if (!words[1] || !words[2] || !words[3] || !words[4] || !words[5] || !words[6] || !words[7] || words[8]) {
+        if (!words[1] || !words[2] || !words[3] || !words[4] || !words[5] || !words[6] || !words[7] || !words[8]) {
           msg.channel.send(
             'provide all required info for asset seprated by commas! \n**!asset update**, <assetName>, <!AdminAsset>, <assetType>, <assetUnits>, <assetQuantity>, <assetReissuable>, <assetIPFS>, <Price>\n     if you would like to update your assets info and not change other things use `d` in place of info to leave default from database\n     Example`!asset update, d, d, d, d, d, True, d, d`'
           );

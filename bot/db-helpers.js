@@ -112,7 +112,7 @@ exports.removeEntry = function (bot, msg, useDB, keyName, keyValue) {
   var value = keyValue;
   var updateKey = { [key]: value };
   var database = mongoose.model(useDB);
-  database.findAndRemove(updateKey, function(err, result) {
+  database.findOneAndRemove(updateKey, function(err, result) {
     if (err) {
       msg.channel.send("Could not delete Entry: " + keyValue);
       return;

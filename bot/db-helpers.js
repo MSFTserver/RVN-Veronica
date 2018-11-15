@@ -106,6 +106,25 @@ exports.dropdb = function(useDB) {
   });
 };
 
+//Remove entry
+exports.removeEntry = function (bot, msg, useDB, keyName, keyValue) {
+  var key = keyName;
+  var value = keyValue;
+  var updateKey = { [key]: value };
+  var database = mongoose.model(useDB);
+  database.findAndRemove(updateKey, function(err, result) {
+    if (err) {
+      msg.channel.send("Could not delete Entry: " + keyValue);
+      return;
+    }
+    if (useDB == 'assetOTC'){
+      msg.channel.send('asset Removed!')
+    } else {
+      msg.channel.send('entry Removed!')
+    }
+  });
+}
+
 // Pm2 Metrics DB Get
 exports.pm2MetricGet = function(pm2MetricName) {
   var pm2Metrics = mongoose.model('pm2');

@@ -1,6 +1,7 @@
 let findEntry = require('../db-helpers.js').findEntry;
 let newEntry = require('../db-helpers.js').newEntry;
 let updateEntry = require('../db-helpers.js').updateEntry;
+let removeEntry = require('../db-helpers.js').removeEntry;
 let inSpam = require('../helpers.js').inSpam;
 let inPrivate = require('../helpers.js').inPrivate;
 let config = require('config');
@@ -29,6 +30,9 @@ exports.asset = {
       return;
     } else if (words[0].toLowerCase() == 'update,') {
       updateAsset(bot, msg, suffix);
+      return;
+    } else if (words[0].toLowerCase() == 'remove,') {
+      removeAsset(bot, msg, suffix);
       return;
     } else {
       msg.channel.send('**!asset list**\n     Displays all raven assets forsale asset\n     (optionally add asset name to return just that assets info)\n**!asset sell**, <assetName>, <!AdminAsset>, <assetType>, <assetUnits>, <assetQuantity>, <assetReissuable>, <assetIPFS>, <Price>\n     provide all required info for asset seprated by commas!\n     Example: `!asset sell, VERONICA, Yes/No/True/False, Main/sub/unique, 0-8, 0, Yes/No/True/False, Yes/No/True/False/IPFShash, 10000 RVN`\n**!asset update**, <assetName>, <!AdminAsset>, <assetType>, <assetUnits>, <assetQuantity>, <assetReissuable>, <assetIPFS>, <Price>\n     if you would like to update your assets info and not change other things use `d` in place of info to leave default from database\n     Example`!asset update, d, d, d, d, d, True, d, d`');
@@ -296,6 +300,38 @@ exports.asset = {
             Name,
             updateAsset
           );
+        }
+      }
+    }
+    function removeAsset(bot, msg, suffix) {
+      if (!inPrivate(msg) && !inSpam(msg)) {
+        msg.channel.send('Please use <#' + channelID + '> to remove an asset.');
+        return;
+      }
+      var words = suffix
+        .trim()
+        .split(',')
+        .filter(function(n) {
+          return n !== '';
+        });
+        if (!words[1]) {
+          msg.channel.send(
+            'please provide an asset name you listed! \n**!asset update**, <assetName>'
+          );
+          return;
+        }
+      findEntry(bot, msg, 'assetOTC', 'assetName', words[1].trim(), getAssetandRemove);
+      function getAssetandRemove(bot, msg, docs) {
+        if (!docs || !docs[0]) {
+          msg.channel.send('no asset found in database with name: ' + words[1].trim() )
+        } else {
+          if (docs[0].assetOwnerID != msg.author.id) {
+            msg.channel.send(
+              'only the entry creator can edit this assets info!'
+            );
+            return;
+          }
+          removeEntry(bot, msg, 'assetOTC', 'assetName', words[1].trim());
         }
       }
     }

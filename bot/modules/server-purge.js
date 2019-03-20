@@ -20,16 +20,10 @@ exports.purge = {
     if (hasPerms(msg)) {
       let author = msg.author.username;
       if (msg.mentions.channels.first()) {
-        var words = suffix
-          .trim()
-          .split(' ')
-          .filter(function(n) {
-            return n !== '';
-          });
-        if (!words[1]) {
+        if (!suffix[1]) {
           var number = 2;
         } else {
-          var number = parseInt(words[1]);
+          var number = parseInt(suffix[1]);
         }
         if (number > 100) {
           var number = 100;
@@ -97,13 +91,7 @@ exports.purge = {
           });
       } else if (msg.mentions.users.first()) {
         msg.channel.fetchMessages({ limit: 100 }).then(messages => {
-          var words = suffix
-            .trim()
-            .split(' ')
-            .filter(function(n) {
-              return n !== '';
-            });
-          var count = parseInt(words[1]) || 2;
+          var count = parseInt(suffix[1]) || 2;
           if (count > 100) {
             var count = 100;
           }
@@ -169,16 +157,10 @@ exports.purge = {
             });
         });
       } else {
-        var words = suffix
-          .trim()
-          .split(' ')
-          .filter(function(n) {
-            return n !== '';
-          });
-        if (!words[0]) {
+        if (!suffix[0]) {
           var number = 2;
         } else {
-          var number = parseInt(words[0]);
+          var number = parseInt(suffix[0]);
         }
         if (number > 100) {
           var number = 100;

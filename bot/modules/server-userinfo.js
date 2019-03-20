@@ -30,13 +30,44 @@ exports.userinfo = {
       : msg.author;
     findEntry(bot, msg, 'users', 'accUserID', user.id, findProfile);
     function findProfile(bot, msg, docs) {
+      if (!docs) {
+        msg.channel.send('user not found in database!')
+        return
+      }
       let member = msg.guild.member(user);
       if (!member) {
-        nickname = 'error getting this data';
-        join = 'error getting this data';
+        nickname = 'null';
+        join = 'null';
       } else {
         var join = member.joinedAt.toString();
-        var nickname = member.nickname !== null ? member.nickname : 'none';
+        var nickname = member.nickname !== null ? member.nickname : 'null';
+        var roles = member.roles.map(val=> val.name);
+        var inVoice = member.voiceChannelID ? member.voiceChannelID : null;
+        var lastMsg = member.lastMessage;
+        var lastMsgChan,lastMsgCont;
+        console.log(lastMsg);
+        if (lastMsg){
+          lastMsgChan = lastMsg.channel ? lastMsg.channel.name : lastMsg.channel.name ? lastMsg.channel.name : 'null';
+          lastMsgCont = lastMsg.content.replace(/^(.{20}[^\s]*).*/, "$1") ? lastMsg.content.replace(/^(.{20}[^\s]*).*/, "$1") : "null"
+        } else {
+          lastMsgChan = "null";
+          lastMsgCont = "null";
+        }
+        console.log(lastMsgChan)
+        var index = roles.indexOf("@everyone");
+        if (index > -1) {
+         roles.splice(index, 1);
+        }
+        if (!inVoice){
+          inVoice = 'null';
+        } else {
+          var fetchVoice = msg.guild.channels.find(val=>val.id === inVoice);
+          if (!fetchVoice) {
+            inVoice = 'null';
+          } else {
+            inVoice = fetchVoice.name
+          }
+        }
       }
       let game =
         !!user.presence &&
@@ -44,7 +75,7 @@ exports.userinfo = {
         user.presence.game !== null &&
         user.presence.game.name !== null
           ? user.presence.game.name
-          : 'Nothing';
+          : 'null';
       if (!docs || !docs[0]) {
         var userid = user.id;
         var username = user.username;
@@ -116,7 +147,7 @@ exports.userinfo = {
           },
           {
             name: 'Game',
-            value: 'Playing ' + game,
+            value: game,
             inline: true
           },
           {
@@ -130,6 +161,23 @@ exports.userinfo = {
           {
             name: 'Reputation',
             value: rep,
+            inline: true
+          },
+          {
+            name: 'Roles',
+            value: roles.join(", "),
+            inline: true
+          },
+          {
+            name: 'Voice Channel',
+            value: inVoice,
+            inline: true
+          },
+          {
+            name: 'Last Message',
+            value: "Channel: "+lastMsgChan + "\n" +
+              "Content: " + lastMsgCont + "\n" +
+              "Test: ",
             inline: true
           },
           {

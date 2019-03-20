@@ -15,7 +15,7 @@ config = config.get('bot');
 
 // Start Mongoose
 mongoose
-  .connect(mongoURL)
+  .connect(mongoURL,{ useNewUrlParser: true, useCreateIndex: true })
   .then(() => {
     var time = moment()
       .tz('America/Los_Angeles')
@@ -36,12 +36,8 @@ const commandsV2 = require('./modules/commandsV2.js');
 
 //find schemas
 require('./db-models/pm2.js');
-require('./db-models/pool.js');
 require('./db-models/user.js');
 require('./db-models/timeout.js');
-require('./db-models/blockstime.js');
-require('./db-models/blockstime-testnet.js');
-require('./db-models/assetOTC.js');
 
 
 var aliases;
@@ -166,7 +162,7 @@ function checkMessageForCommand(msg, isEdit) {
       .toLowerCase();
     var suffix = msg.content.substring(
       cmdTxt.length + config.prefix.length + 1
-    ); //add one for the ! and one for the space
+    );
     if (msg.isMentioned(bot.user)) {
       try {
         cmdTxt = msg.content.split(' ')[1].toLowerCase();
@@ -271,6 +267,12 @@ function checkMessageForCommand(msg, isEdit) {
           ' as command'
       );
       try {
+        suffix = suffix
+          .trim()
+          .split(' ')
+          .filter(function(n) {
+            return n !== '';
+          });
         cmd.process(bot, msg, suffix, isEdit);
       } catch (e) {
         var time = moment()

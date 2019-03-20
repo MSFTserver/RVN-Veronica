@@ -1,4 +1,4 @@
-let isAdmin = require('../helpers.js').isAdmin;
+let hasPerms = require('../helpers.js').hasPerms;
 let inPrivate = require('../helpers.js').inPrivate;
 let config = require('config');
 let modLogChannel = config.get('moderation').modLogChannel;
@@ -16,32 +16,26 @@ exports.ban = {
       msg.channel.send('You Can Not Use This Command In DMs!');
       return;
     }
-    if (!isAdmin(msg)) {
-      msg.channel.send(
-        'you must have the ban members permission to use this command'
-      );
+    if (!hasPerms(msg)) {
       return;
     }
     let member = msg.mentions.members.first();
-    let words = suffix
-      .trim()
-      .split(' ')
-      .filter(function(n) {
-        return n !== '';
-      });
-    let purge = Number(words[1]);
-    let reason = words.slice(2);
-    if (member == '<@undefinded>' || member == undefined) {
+    if (!member) {
+      member = msg.guild.members.find(val => val.id === suffix[0])
+    }
+    if (!member) {
       msg.reply(' The member you inserted to ban was invalid!');
       return;
     }
+    let purge = Number(suffix[1]);
+    let reason = suffix.slice(2).join(' ');
     if (reason.length < 1) {
-      msg.reply(' Add a reason to ban ' + member + ' please.');
+      msg.reply(' Add a reason to ban `' + member.displayName + '` please.');
       return;
     }
-    if (purge != 1 && purge != 7 && purge != 0) {
+    if (purge != 1 || purge != 7 || purge != 0) {
       msg.reply(
-        ' Add a timeframe in days (0,1,7) to remove messages from ' + member
+        ' Add a timeframe in days (0,1,7) to remove messages from ' + member.displayName
       );
       return;
     }
@@ -49,7 +43,7 @@ exports.ban = {
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
     msg.channel.send(
-      member +
+      member.displayName +
         ' **BANNED**\npurged: ' +
         purge +
         ' days of messages\nreason: ' +
@@ -65,7 +59,7 @@ exports.ban = {
           '] ' +
           msg.author.username +
           ' **BANNED**' +
-          member +
+          member.displayName +
           ',purged: ' +
           purge +
           ' days of messages, reason: ' +

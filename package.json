@@ -1,51 +1,32 @@
 {
   "dependencies": {
-    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-preset-node8": "^1.2.0",
-    "bitcoin": "^3.0.1",
-    "check-if-windows": "^1.0.0",
-    "chrono-node": "^1.3.5",
     "config": "^1.27.0",
     "discord.js": "^11.2.1",
     "embed-creator": "^1.1.4",
-    "elmadev-discord-irc": "^2.4.1",
-    "git": "^0.1.5",
-    "ipfs": "^0.31.1",
-    "is-ipfs": "^0.4.2",
-    "jsonpath": "^0.2.12",
-    "moment": "^2.19.1",
     "moment-timezone": "^0.5.14",
     "mongoose": "^5.0.13",
-    "needle": "^2.0.1",
     "node-cmd": "^3.0.0",
     "node-config": "^0.0.2",
-    "numeral": "^2.0.6",
     "pm2": "^2.10.1",
     "pmx": "^1.6.4",
-    "request": "^2.83.0",
-    "shelljs": "^0.8.1",
-    "socket.io-client": "^2.1.1",
     "tcp-ping": "^0.1.1",
     "twitter-stream-api": "^0.5.2",
-    "underscore-node": "^0.1.2",
-    "wget": "^0.0.1",
-    "yarn": "^1.5.1"
+    "underscore-node": "^0.1.2"
   },
   "scripts": {
     "precommit": "prettier --single-quote true --write \"{bot,.}/modules/*.{js,json}\"",
-    "rebuild": "git pull origin master && npm install && pm2 update all",
     "start": "pm2 start ecosystem.config.js"
   },
   "devDependencies": {
-    "husky": "^0.14.3",
     "prettier": "1.8.1"
   },
   "name": "RVN-Veronica",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "discord bot for ravencoin communties discord",
   "main": "bot.js",
-  "repository": "https://github.com/MSFTserver/RVN-Veronica",
+  "repository": "https://github.com/raven-community/RVN-Veronica",
   "author": "MSFTserver <msftserver@gmail.com>",
   "license": "MIT"
 }

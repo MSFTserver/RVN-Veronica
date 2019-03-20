@@ -16,28 +16,28 @@ exports.kick = {
       return;
     }
     if (!hasPerms(msg)) {
-      msg.channel.send(
-        'you must have the kick members permission to use this command'
-      );
       return;
     }
     let member = msg.mentions.members.first();
+    if (!member) {
+      member = msg.guild.members.find(val => val.id === suffix[0])
+    }
+    if (!member) {
+      msg.reply(' The member you inserted to kick was invalid!');
+      return;
+    }
     let reason = msg.content
       .split(' ')
       .slice(2)
       .join(' ');
-    if (member == '<@undefinded>' || member == undefined) {
-      msg.reply(' The member you inserted to kick was invalid!');
-      return;
-    }
     if (reason.length < 1) {
-      msg.reply(' Add a reason to kick ' + member + ' please.');
+      msg.reply(' Add a reason to kick `' + member.displayName + '` please.');
       return;
     }
     var time = moment()
       .tz('America/Los_Angeles')
       .format('MM-DD-YYYY hh:mm a');
-    msg.channel.send(member + ' **kicked**\n reason: ' + reason);
+    msg.channel.send(member.displayName + ' **kicked**\n reason: ' + reason);
     bot.channels
       .get(modLogChannel)
       .send(
@@ -48,10 +48,10 @@ exports.kick = {
           '] ' +
           msg.author.username +
           ' **kicked** ' +
-          member +
+          member.displayName +
           ', reason: ' +
           reason
       );
-    member.kick(member + ' **kicked**      reason: ' + reason);
+    member.kick(member.displayName + ' **kicked**      reason: ' + reason);
   }
 };

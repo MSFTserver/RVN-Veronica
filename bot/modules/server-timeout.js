@@ -20,34 +20,28 @@ exports.timeout = {
       return;
     }
     if (!hasPerms(msg)) {
-      msg.channel.send(
-        'you must have the kick members permission to use this command'
-      );
       return;
     }
     var suffix = msg.content.substring(9);
-    var member = msg.mentions.members.first();
-    var words = suffix
-      .trim()
-      .split(' ')
-      .filter(function(n) {
-        return n !== '';
-      });
-    var timer = getValidatedAmount(words[1]);
-    var reason = words.slice(2).join(' ');
+    var timer = getValidatedAmount(suffix[1]);
+    var reason = suffix.slice(2).join(' ');
     var timestamp = moment();
-    if (member == '<@undefinded>' || member == undefined) {
-      msg.reply(' The member you inserted to timeout was invalid!');
+    var member = msg.mentions.members.first();
+    if (!member) {
+      member = msg.guild.members.find(val => val.id === suffix[0])
+    }
+    if (!member) {
+      msg.reply(' The member you inserted to ban was invalid!');
       return;
     }
     if (reason.length < 1) {
-      msg.reply(' Add a reason to Timeout ' + member + ' please.');
+      msg.reply(' Add a reason to Timeout ' + member.displayName + ' please.');
       return;
     }
     if (timer === null) {
       msg.reply(
         ' Invalid Number, Add a timeframe in Minutes to Timeout ' +
-          member +
+          member.displayName +
           ' for'
       );
       return;
@@ -61,14 +55,15 @@ exports.timeout = {
       if (!gotProfile) {
         var suffix = msg.content.substring(9);
         var member = msg.mentions.members.first();
-        var words = suffix
-          .trim()
-          .split(' ')
-          .filter(function(n) {
-            return n !== '';
-          });
-        var timer = getValidatedAmount(words[1]);
-        var reason = words.slice(2).join(' ');
+        if (!member) {
+          member = msg.guild.members.find(val => val.id === suffix[0])
+        }
+        if (!member) {
+          msg.reply(' The member you inserted to ban was invalid!');
+          return;
+        }
+        var timer = getValidatedAmount(suffix[1]);
+        var reason = suffix.slice(2).join(' ');
         var timestamp = moment();
         var TimeoutUser = {
           userID: member.user.id,
@@ -79,11 +74,11 @@ exports.timeout = {
           times: Number(1),
           active: true
         };
-        member.addRole(msg.guild.roles.find('name', 'Timeout'));
+        member.addRole(msg.guild.roles.find(val => val.name === 'Timeout'));
         newEntry(bot, msg, 'timeout', TimeoutUser);
         msg.channel.send(
           '**' +
-            member +
+            member.displayName +
             ' ** Has Been Put in Timeout for ' +
             timer +
             ' Minutes\nreason: ' +
@@ -99,7 +94,7 @@ exports.timeout = {
               '] ' +
               msg.author.username +
               ' Put ' +
-              member +
+              member.displayName +
               ' ** in Timeout for ' +
               timer +
               ' Minutes\nreason: ' +
@@ -109,14 +104,15 @@ exports.timeout = {
         if (!gotProfile[0].active) {
           var suffix = msg.content.substring(9);
           var member = msg.mentions.members.first();
-          var words = suffix
-            .trim()
-            .split(' ')
-            .filter(function(n) {
-              return n !== '';
-            });
-          var timer = getValidatedAmount(words[1]);
-          var reason = words.slice(2).join(' ');
+          if (!member) {
+            member = msg.guild.members.find(val => val.id === suffix[0])
+          }
+          if (!member) {
+            msg.reply(' The member you inserted to ban was invalid!');
+            return;
+          }
+          var timer = getValidatedAmount(suffix[1]);
+          var reason = suffix.slice(2).join(' ');
           var timestamp = moment();
           var TimeoutUser = {
             username: member.user.username + '#' + member.user.discriminator,
@@ -126,7 +122,7 @@ exports.timeout = {
             times: Number(gotProfile[0].times + 1),
             active: true
           };
-          member.addRole(msg.guild.roles.find('name', 'Timeout'));
+          member.addRole(msg.guild.roles.find(val => val.name === 'Timeout'));
           updateEntry(
             bot,
             msg,
@@ -199,8 +195,8 @@ exports.timeoutChecker = function(bot) {
             var user = results.username;
             var userID = results.userID;
             var member = bot.guilds
-              .find('id', '429127343165145089')
-              .members.find('id', userID);
+              .find(val => val.id === '429127343165145089')
+              .members.find(val => val.id === userID);
             var timeoutStart = moment(results.time);
             var timeoutFor = results.timer;
             var then = moment(timeoutStart)
@@ -211,15 +207,15 @@ exports.timeoutChecker = function(bot) {
               var TimeoutUser = {
                 active: false
               };
-              if (member.roles.find('name', 'Timeout')) {
+              if (member.roles.find(val => val.name === 'Timeout')) {
                 member.removeRole(
                   bot.guilds
-                    .find('id', '429127343165145089')
-                    .roles.find('name', 'Timeout')
+                    .find(val => val.id === '429127343165145089')
+                    .roles.find(val => val.name === 'Timeout')
                 );
                 bot.guilds
-                  .find('id', '429127343165145089')
-                  .roles.find('name', 'Timeout');
+                  .find(val => val.id === '429127343165145089')
+                  .roles.find(val => val.name === 'Timeout');
                 updateEntry(
                   bot,
                   msg,

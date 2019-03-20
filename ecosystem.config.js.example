@@ -3,13 +3,13 @@ module.exports = {
     {
       name: 'veronica',
       script: './bot/bot.js',
-      cwd: 'Location-of-Bot-Dir',
+      cwd: 'C:/XXXXXXXXXXXXXXX/Veronica',
       watch: true,
       ignore_watch : ['node_modules', 'Logs', 'Downloads', '.git'],
       instance_id_env: '0',
       error_file:
-        'Location-of-Bot-Dir/Logs/veronica-err.log',
-      out_file: 'Location-of-Bot-Dir/Logs/veronica-out.log',
+        'C:/XXXXXXXXXXXXX/Logs/veronica-err.log',
+      out_file: 'C:/XXXXXXXXXXXXX/Logs/veronica-out.log',
       env: {
         NODE_ENV: 'development'
       },

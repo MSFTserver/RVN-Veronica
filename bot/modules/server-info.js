@@ -16,35 +16,70 @@ exports.serverstats = {
       var data = msg.guild;
       var ServerName = data.name;
       var ServerImg = data.iconURL;
-      var ServerOwner = data.owner.user.username;
+      var ServerOwner = data.owner.user;
       var Members = data.memberCount;
       var Online = data.members.filter(m => m.presence.status === 'online')
         .size;
       var Away = data.members.filter(m => m.presence.status === 'idle').size;
+      var DND = data.members.filter(m => m.presence.status === 'dnd').size;
       var Offline = Members - (Online + Away);
       var Emojis = data.emojis.size;
-      var Roles = data.roles;
-      var RolesList = Roles.map(g => g.name);
-      var RolesArray = [];
-      for (var i = 1; i <= Number(Roles.size) - 1; ++i) {
-        RolesArray.push(
-          RolesList[i] + ': ' + Roles.find('name', RolesList[i]).members.size
-        );
+      var Roles = data.roles.size;
+      var TxtChannels = data.channels.filter(m => m.type === 'text').size;
+      var VcChannels = data.channels.filter(m => m.type === 'voice').size;
+      var Categories = data.channels.filter(m => m.type === 'category').size;
+      var Region = data.region;
+      var ServerID = data.id;
+      var Created = data.createdAt;
+      var Filtering = data.explicitContentFilter;
+      var Verification = data.verificationLevel;
+      var MFA = data.mfaLevel ? "Enabled" : "Disabled";
+      var Notifications = data.defaultMessageNotifications
+      if (!Filtering) {
+        Filtering = "Don't scan any messages."
+      } else if (Filtering === 2) {
+        Filtering = "Scanning all messages sent"
+      } else {
+        Filtering = "Scan messages sent by all members."
       }
-      var halfWayThough = Math.floor(RolesArray.length / 2);
-      var arrayFirstHalf = RolesArray.slice(0, halfWayThough);
-      var arraySecondHalf = RolesArray.slice(halfWayThough, RolesArray.length);
+      if (!Verification) {
+        Verification = "None."
+      } else if (Verification === 2) {
+        Verification = "Verified email also have been a member longer than 5min"
+      } else if (Verification === 3) {
+        Verification = "Verified email also have been a member longer than 10min"
+      } else if (Verification === 4) {
+        Verification = "Verified Phone Number!"
+      } else {
+        Verification = "Verified email"
+      }
       const embed = new discord.RichEmbed();
       embed
-        .addField('**Server Owner**: ', ServerOwner, true)
-        .addField('**Emojis**: ', Emojis, true)
-        .addField('**Total Users**: ', Members, true)
-        .addField('**Online Users**: ', Online, true)
-        .addField('**Idle Users**: ', Away, true)
-        .addField('**Offline Users**: ', Offline, true)
-        .addField('__**Total Roles**__:', Roles.size, false)
-        .addField('*List of Servers Roles 1*', arrayFirstHalf, true)
-        .addField('*List of Servers Roles 2*', arraySecondHalf, true)
+        .setDescription("__**Owner Info**__\n" +
+        "**Username**: " + ServerOwner.username + "#" + ServerOwner.discriminator + "\n" +
+        "**ID**: " + ServerOwner.id + "\n\n" +
+        "__**Server Info**__\n" +
+        "**Invite URL**: http://discord.ravencoin.online\n" +
+        '**Server ID**: ' + ServerID + "\n" +
+        '**Created**: ' + Created + "\n" +
+        '**Region**: ' + Region + "\n\n" +
+        '__**Security Info**__\n' +
+        '**Notifications**: ' + Notifications + "\n" +
+        '**Verification**: ' + Verification + "\n" +
+        '**Filtering**: ' + Filtering + "\n" +
+        '**Multi-Factor**: ' + MFA + "\n\n" +
+        "__**Server Stats**__\n" +
+        '**Emojis**: ' + Emojis + "\n" +
+        '**Roles**:' + Roles + "\n" +
+        '**Catagories**: ' + Categories + "\n" +
+        '**Text Channels**: ' + TxtChannels + "\n" +
+        '**Voice Channels**: ' + VcChannels + "\n\n" +
+        '__**User Stats**__\n' +
+        '**Online**: ' + Online + "\n" +
+        '**Idle**: ' + Away + "\n" +
+        '**DND**: ' + DND + "\n" +
+        '**Offline**: ' + Offline + "\n" +
+        '**Total**: ' + Members)
         .setColor(7976557)
         .setAuthor(ServerName, ServerImg);
       msg.channel.send({ embed });

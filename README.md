@@ -1,4 +1,4 @@
-# Bot for [RVN's Discord](https://discord.gg/BmwqstP)
+# Bot for [developer.ravencoin.online Discord](http://discord.ravencoin.online)
 
 (This README will be updated along with bot updates)
 
@@ -24,50 +24,6 @@
 
     * Responds to `!rep <take/give> <@username> <amount>`
 
-* Network bot
-
-  * displays current network Raven Network Stats.
-
-    * Responds to `!network`
-
-* Market bot
-
-  * displays current market stats from coinmarketcap
-
-    * Responds to `!market`
-
-* Hashpower bot
-
-  * calculates given MH/s to RVN & fiat per min, hr, day.
-
-    * Responds to `!hashpower <MH/s> <fiat>`
-
-* Price bot
-
-  * displays price of currencies.
-
-    * Responds to `!price <fiat/coin> <amount> <fiat/coin>`
-
-* Lambo bot
-
-  * displays how much rvn is needed or if amount is supplied how many needed for 1 lambo
-
-    * Responds to `!lambo`
-
-    * Responds to `!lambo <amount>`
-
-* Balance bot
-
-  * Displays balance of supplied Raven Address
-
-    * Responds to `!balance <address>`
-
-* Note bot
-
-  * logs note for the bot workers!
-
-    * Responds to `!botmaster <whatever you want to say>`
-
 * Uptime bot
 
   * displays bot current uptime!
@@ -82,18 +38,6 @@
 
     * Also Responds to `!userinfo <@username>`
 
-* Pools bot
-
-  * displays pools on the raven network
-
-    * Responds to `!pools`
-
-    * Also Responds to `!pools <pool name>`
-
-  * allows Pool Operators to add themselves to the list
-
-    * Responds to `!pools set, <poolName>, <poolURL>, <poolFee>, <poolStratum>, <poolPort>, <poolExtraInfo>`
-
 * 8ball bot
 
   * answers yes or no questions
@@ -106,27 +50,11 @@
 
     * Responds to `!status <url> <port>`
 
-* Role setter bot (specified in the config!)
-
-  * allows users to set specific roles for themselves
-
-    * Responds to `!roles` - List Available Roles
-
-    * Responds to `!addrole <role-name>` - Adds to Role
-
-    * Responds to `!delrole <role-name>` - Deletes from Role
-
 * helpful commands bot (set in the commands.json)
 
   * displays helpful commands you can use.
 
     * Responds to `!helpcommands`
-
-* Welcome bot
-
-  * sends Direct Message when new users join, moderators only  can also send it again
-
-    * Responds to `!welcome <@username>`
 
 * Server Stats bot
 
@@ -135,6 +63,16 @@
     * Responds to `!serverstats`
 
 * Moderation bots (moderator only)
+
+  * Role setter bot (specified in the config!)
+
+    * allows setting specific roles for users
+
+      * Responds to `!roles` - List Available Roles
+
+      * Responds to `!addrole <role-name> <user>` - Adds to Role
+
+      * Responds to `!delrole <role-name> <user>` - Deletes from Role
 
   * deletes # of messages from specified channel/user or current channel.
 
@@ -150,23 +88,9 @@
 
     * Responds to `!ban <@username> <reason>`
 
-* pm2 Bots (Bot Devs Only)
-
-  * allows updating and shutting down of bots
-
-    * Responds to `!update <app-name>`
-
-    * Responds to `!shutdown <app-name>`
-
 * utilizes mongodb with included helper functions
 
-* Specific User Message Logger
-
 * alias plugin to allow commands to be activated by a different word
-
-* Spam Detection Bot to Prevent Discord Raids and Spammers
-
-* Discord Invite Link Detection
 
 * Dynamic plugin loading with permission support.
 

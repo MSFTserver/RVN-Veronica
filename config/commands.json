@@ -32,105 +32,19 @@
       }
     }
   },
-  "!mining": {
+  "!invite": {
     "usage": "",
-    "description": "how to mine Ravencoin?",
+    "description": "Discord Invite Code",
     "operation": "send",
     "bundle": {
       "url": "",
       "title": "",
       "description":
-        "if you are wondering how to get started mining Ravencoin(RVN) check out [This Guide](https://virtopia.ca/how-to-mine-ravencoin-rvn/)",
+        "http://discord.ravencoin.online",
       "color": 7976557,
       "author": {
-        "name": "how to mine Ravencoin?",
-        "url": "https://virtopia.ca/how-to-mine-ravencoin-rvn/",
-        "icon_url": "https://i.imgur.com/yWf5USu.png"
-      }
-    }
-  },
-  "!ann": {
-    "usage": "",
-    "description": "Bitcointalk ANN Thread",
-    "operation": "send",
-    "bundle": {
-      "url": "",
-      "title": "",
-      "description":
-        "check our Bitcointalk Announcement Thread\nhttps://bitcointalk.org/index.php?topic=3238497",
-      "color": 7976557,
-      "author": {
-        "name": "Bitcointalk ANN Thread",
-        "url": "https://bitcointalk.org/index.php?topic=3238497",
-        "icon_url": "https://i.imgur.com/yWf5USu.png"
-      }
-    }
-  },
-  "!whitepaper": {
-    "usage": "",
-    "description": "x16r Whitepaper",
-    "operation": "send",
-    "bundle": {
-      "url": "",
-      "title": "",
-      "description":
-        "the whitepaper on the x16r algorithm\nhttps://ravencoin.org/wp-content/uploads/2018/01/X16R-Whitepaper.pdf",
-      "color": 7976557,
-      "author": {
-        "name": "x16r Whitepaper",
-        "url":
-          "https://ravencoin.org/wp-content/uploads/2018/01/X16R-Whitepaper.pdf",
-        "icon_url": "https://i.imgur.com/yWf5USu.png"
-      }
-    }
-  },
-  "!nodes": {
-    "usage": "",
-    "description": "Ravencoin Network Nodes",
-    "operation": "send",
-    "bundle": {
-      "url": "",
-      "title": "",
-      "description":
-        "here is a list of active nodes on the Ravencoin Network \nhttp://threeeyed.info/network",
-      "color": 7976557,
-      "author": {
-        "name": "Ravencoin Network Nodes",
-        "url": "http://threeeyed.info/network",
-        "icon_url": "https://i.imgur.com/yWf5USu.png"
-      }
-    }
-  },
-  "!whitepaper": {
-    "usage": "",
-    "description": "official Ravencoin WhitePaper!",
-    "operation": "send",
-    "bundle": {
-      "url": "",
-      "title": "",
-      "description":
-        "check the official [Ravencoin WhitePaper](https://ravencoin.org/Ravencoin.pdf) published on april 3 2018",
-      "color": 7976557,
-      "author": {
-        "name": "Official Ravencoin(RVN) whitepaper",
-        "url": "https://ravencoin.org/Ravencoin.pdf",
-        "icon_url": "https://i.imgur.com/yWf5USu.png"
-      }
-    }
-  },
-  "!roadmap": {
-    "usage": "",
-    "description": "official Ravencoin Roadmap!",
-    "operation": "send",
-    "bundle": {
-      "url": "",
-      "title": "",
-      "description":
-        "check the official [Ravencoin Roadmap](https://github.com/RavenProject/Ravencoin/tree/master/roadmap) published on april 3 2018",
-      "color": 7976557,
-      "author": {
-        "name": "Official Ravencoin(RVN) roadmap",
-        "url": "https://github.com/RavenProject/Ravencoin/tree/master/roadmap",
+        "name": "Invite Code",
+        "url": "http://discord.ravencoin.online",
         "icon_url": "https://i.imgur.com/yWf5USu.png"
       }
     }

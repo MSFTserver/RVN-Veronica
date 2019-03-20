@@ -10,16 +10,18 @@ exports.uptime = {
     if (suffix != pm2Name) {
       return;
     }
+    let days = Math.round(bot.uptime / (1000 * 60 * 60 * 24));
+    let hrs = Math.round(bot.uptime / (1000 * 60 * 60));
+    let min = Math.round(bot.uptime / (1000 * 60)) % 60
+    let sec = Math.round(bot.uptime / 1000) % 60
+    let message
+    if (!min) message = 'i have been Online for ' + sec +' seconds';
+    else if (!hrs) message = 'i have been Online for '+ min + ' minutes ' + sec +' seconds';
+    else if (!days) message = 'i have been Online for ' + hrs + ' hours ' + min + ' minutes ' + sec +' seconds';
+    else if (days < 1) message = 'i have been Online for ' + hrs + ' hours ' + min + ' minutes';
+    else 'i have been Online for ' +days + ' days ' + hrs + ' hours ' + min + ' minutes ' + sec +' seconds';
     msg.channel.send(
-      'i have been Online for ' +
-        Math.round(bot.uptime / (1000 * 60 * 60 * 24)) +
-        ' days, ' +
-        Math.round(bot.uptime / (1000 * 60 * 60)) +
-        ' hours, ' +
-        Math.round(bot.uptime / (1000 * 60)) % 60 +
-        ' minutes, and ' +
-        Math.round(bot.uptime / 1000) % 60 +
-        ' seconds'
+      message
     );
   }
 };

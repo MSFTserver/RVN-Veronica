@@ -7,9 +7,16 @@ let pm2Name = config.get('General').pm2Name;
 
 //DATABASE HELPERS
 
-// pm2 Find Entry start
+// Find Entry
 exports.findEntry = function(bot, msg, useDB, keyName, valueName, callback) {
   var database = mongoose.model(useDB);
+  try {
+     mongoose.model(useDB)
+  }
+  catch(err) {
+    console.log(err);
+    return;
+  }
   var key = keyName;
   var value = valueName;
   if (!key && !value) {

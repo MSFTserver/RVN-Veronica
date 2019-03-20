@@ -25,14 +25,15 @@ exports.UserDBs = function(bot) {
       findEntry(bot, msg, 'users', 'accUserID', msg.author.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
         if (!gotProfile) {
+          var guild = bot.guilds.find(guild => guild.name === "developer.ravencoin.online")
           if (
-            !msg.guild ||
-            !msg.guild.member(msg.author) ||
-            !msg.guild.member(msg.author).joinedAt
+            !guild ||
+            !guild.member(msg.author) ||
+            !guild.member(msg.author).joinedAt
           ) {
             var joindate = null;
           } else {
-            var joindate = msg.guild.member(msg.author).joinedAt.toString();
+            var joindate = guild.member(msg.author).joinedAt.toString();
           }
           var newProfile = {
             accUserID: msg.author.id,
@@ -60,6 +61,48 @@ exports.UserDBs = function(bot) {
             updateProfile
           );
         }
+      }
+    }
+  });
+  bot.on('guildMemberAdd', member => {
+    if (!member) return;
+    findEntry(bot, member, 'users', 'accUserID', member.id, findProfile);
+    function findProfile(bot, member, gotProfile) {
+      if (gotProfile) {
+        var updateProfile = {
+          accUsername: member.accUsername,
+          accDiscriminator: member.accDiscriminator,
+          accAvatar: member.accAvatar,
+          accRep: Number(gotProfile[0].accRep) + 1
+        };
+        updateEntry(
+          bot,
+          msg,
+          'users',
+          'accUserID',
+          msg.author.id,
+          updateProfile
+        );
+      } else {
+        var guild = bot.guilds.find(guild => guild.name === "developer.ravencoin.online")
+        if (
+          !guild ||
+          !guild.member(member) ||
+          !guild.member(member).joinedAt
+        ) {
+          var joindate = null;
+        } else {
+          var joindate = guild.member(member).joinedAt.toString();
+        }
+        newEntry('users', {
+          accUserID: member.id,
+          accUsername: member.username,
+          accDiscriminator: member.discriminator,
+          accAvatar: member.avatarURL,
+          accJoinedDate: joindate,
+          accCreatedDate: member.createdAt,
+          accRep: 0
+        });
       }
     }
   });

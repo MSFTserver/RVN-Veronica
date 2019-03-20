@@ -4,9 +4,6 @@ let serverRolesetter = config.get('serverRolesetter');
 let inPrivate = require('../helpers.js').inPrivate;
 let inSpam = require('../helpers.js').inSpam;
 let channelID = config.get('General').Channels.botspam;
-let pm2MetricGet = require('../db-helpers.js').pm2MetricGet;
-let pm2MetricSave = require('../db-helpers.js').pm2MetricSave;
-pm2MetricGet('roles');
 
 exports.commands = ['addrole', 'delrole', 'roles'];
 
@@ -24,41 +21,43 @@ exports.addrole = {
       );
       return;
     }
-    var newrole = msg.guild.roles.find('name', suffix);
-    if (suffix) {
-      if (serverRolesetter.allowedroles.includes(suffix)) {
-        if (newrole !== null) {
-          if (!msg.member.roles.find('name', suffix)) {
-            var time = moment()
-              .tz('America/Los_Angeles')
-              .format('MM-DD-YYYY hh:mm a');
-            pm2MetricSave('roles');
-            pm2MetricGet('roles');
-            msg.member
-              .addRole(newrole)
-              .then(
-                msg.channel.send(
-                  msg.member + ' has been added to the ' + suffix + ' role!'
-                )
-              );
-          } else {
-            msg.channel.send('It seems that you already have that role!');
-          }
-        } else {
-          msg.channel.send(
-            'The role ' + '`' + suffix + '`' + ' does not exist!'
-          );
-        }
-      } else {
-        msg.channel.send(
-          'That role is not one you can add yourself too! Please run the !roles command to find out which ones are allowed.'
-        );
-      }
-    } else {
+    var role = suffix[0];
+    if (!role) {
       msg.channel.send(
         'Please specify a role. Type !roles to see which you may add!'
       );
+      return;
     }
+    if (!serverRolesetter.allowedroles.includes(role)) {
+      msg.channel.send(
+        'That role is not one you can add yourself too! Please run the !roles command to find out which ones are allowed.'
+      );
+      return;
+    }
+    var newrole = msg.guild.roles.find(val => val.name === role);
+    if (!newrole) {
+      msg.channel.send(
+        'The role ' + '`' + role + '`' + ' does not exist!'
+      );
+      return;
+    }
+    if (msg.member.roles.find(val => val.name === role)) {
+      msg.channel.send('It seems that you already have that role!');
+      return
+    }
+    var time = moment()
+      .tz('America/Los_Angeles')
+      .format('MM-DD-YYYY hh:mm a');
+    var roles = [];
+    for (i=0;i < serverRolesetter.allowedroles.length;i++){
+      if (msg.member.roles.find(val => val.name === serverRolesetter.allowedroles[i])) {
+        roles.push(msg.guild.roles.find(val => val.name === serverRolesetter.allowedroles[i]));
+      }
+    }
+    msg.member.removeRoles(roles)
+      .then(() => msg.member.addRole(newrole))
+      .then(() => msg.channel.send(msg.member + ' has been added to the ' + role + ' role!'))
+      .catch(console.error)
   }
 };
 exports.delrole = {
@@ -75,38 +74,35 @@ exports.delrole = {
       );
       return;
     }
-    let oldrole = msg.guild.roles.find('name', suffix);
-    if (suffix) {
-      if (serverRolesetter.allowedroles.includes(suffix)) {
-        if (oldrole !== null) {
-          if (msg.member.roles.find('name', suffix)) {
-            msg.member
-              .removeRole(oldrole)
-              .then(
-                msg.channel.send(
-                  msg.member + ' has been removed from the ' + suffix + ' role!'
-                )
-              );
-          } else {
-            msg.channel.send(
-              'You do not seem to have that role! Try adding it first with the !addrole command!'
-            );
-          }
-        } else {
-          msg.channel.send(
-            'The role ' + '`' + suffix + '`' + ' does not exist!'
-          );
-        }
-      } else {
-        msg.channel.send(
-          'That role is not one you can add yourself too! Please run the !roles command to find out which ones are allowed.'
-        );
-      }
-    } else {
+    var role = suffix[0];
+    if (!role) {
       msg.channel.send(
         'Please specify a role. Type !roles to see which you may add!'
       );
     }
+    if (!serverRolesetter.allowedroles.includes(role)) {
+      msg.channel.send(
+        'That role is not one you can add yourself too! Please run the !roles command to find out which ones are allowed.'
+      );
+    }
+    let oldrole = msg.guild.roles.find(val => val.name === role);
+    if (!oldrole) {
+      msg.channel.send(
+        'The role ' + '`' + role + '`' + ' does not exist!'
+      );
+    }
+    if (!msg.member.roles.find(val => val.name === role)) {
+      msg.channel.send(
+        'You do not seem to have that role! Try adding it first with the !addrole command!'
+      );
+    }
+    msg.member
+      .removeRole(oldrole)
+      .then(
+        msg.channel.send(
+          msg.member + ' has been removed from the ' + role + ' role!'
+        )
+      );
   }
 };
 exports.roles = {
@@ -135,12 +131,12 @@ exports.roles = {
           },
           {
             name: 'How to add roles',
-            value: '`!addrole miner` would add the role to yourself.',
+            value: '`!addrole green` would add the role to yourself.',
             inline: false
           },
           {
             name: 'How to remove roles',
-            value: '`!delrole miner` would remove the role from yourself.',
+            value: '`!delrole green` would remove the role from yourself.',
             inline: false
           }
         ],

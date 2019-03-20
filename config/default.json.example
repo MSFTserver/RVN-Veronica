@@ -1,163 +1,73 @@
 {
   "bot": {
     // Bot configuration
-    "token": "Bot-Token",
+    "token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "prefix": "!",
     "debug": true
   },
    "moderation": {
       // Channel to log the bots moderation
-      "logchannel": "429853685179351050",
+      "logchannel": "553459512976080902",
       // error log channels
-      "modLogChannel": "429853872845094939",
+      "modLogChannel": "553484938150805515",
       // Bot Devs!
-      "botDev": "Bot Developer",
-      // Pool Owner/Operators
-      "poolOwner": "Pool Operator",
-      // Admin roles
-      "admin": [
-          "Admin",
-          "Moderator"
-      ],
       // Roles that have access to all commands.
       "perms": [
           "Admin",
-          "Moderator",
-          "Community Leader",
-          "Bots"
+          "Veronica"
       ]
   },
   "General": {
       //pm2 botname
       "pm2Name": "veronica",
       // Bot Dir
-      "botDir": "C:/Users/RavenDev/Desktop/Bots/Veronica",
+      "botDir": "C:/Users/MSFTserver/Desktop/Veronica",
       // MongoDB config
-      "mongoURL": "mongodb://localhost/Veronica",
-      //urls for bots!
-      "urls": {
-          "CoinName": "ravencoin",
-          "CoinSymbol": "RVN",
-          //this explorer has to tie to an insight api!
-          "explorerApiUrl": "https://ravencoin.network/",
-          "cmcUrl": "https://coinmarketcap.com/currencies/",
-          "cmcApiUrl": "https://api.coinmarketcap.com/v2/"
-      },
+      "mongoURL": "mongodb://localhost/VeronicaV2",
       //define channels for global usage
       "Channels": {
-          "mining": "429133710663876628",
-          "botspam": "429134627823812612",
-          "twitterRSS" : "430028765213753344"
+          "botspam": "553292468498595870",
+          "twitterRSS" : "553315165559455756"
       }
   },
-  "spamdetection": {
-      // Channels excluded from Spam Detection
-      "channels": [
-          "430028765213753344",
-          "430040746272227369",
-          "429855068922183681",
-          "429142059874648064",
-          "429134627823812612",
-		      "429145010835947529"
-      ],
-      "users": [
-          "244245498746241025",
-          "85600522467315712",
-          "359767877567381514"
-      ]
-  },
   "rvntweets": {
-      "config": {
-          "consumer_key" : "your_consumer_key",
-          "consumer_secret" : "your_consumer_secret",
-          "token" : "your_access_token_key",
-          "token_secret" : "your_access_token_secret"
-      },
-      "trackers": ["rvncoin","ravencoin","ravenfam"]
-  },
-  "rvnCalcPrice": {
-      // Main Price Bot channel for directing with help message
-      "mainchannel": "429133710663876628",
-      // Channels Price Bot is allowed to post in
-      "channels": [
-          "429134627823812612"
-      ]
-  },
-  "rvnStatsNetwork": {
-      // Main Hash Bot channel for directing with help message
-      "mainchannel": "429133710663876628",
-      // Channels Hash Bot is allowed to post in
-      "channels": [
-          "429134627823812612"
-      ]
-  },
-  "rvnStatsMarket": {
-      // Main Hash Bot channel for directing with help message
-      "mainchannel": "429133682578554900",
-      // Channels Hash Bot is allowed to post in
-      "channels": [
-          "429134627823812612"
-      ]
+    "config": {
+      "consumer_key": "XXXXXXXXXXXXXXXXXX",
+      "consumer_secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "token": "XXXXXXXXXXXXXXXXXXXXXX",
+      "token_secret": "XXXXXXXXXXXXXXXXXXXXXXXX"
+    },
+    "trackers": [
+      "rvndb",
+      "rvnbox",
+      "ravenfam",
+      "rvnfam",
+      "#ravencoin",
+      "rest.ravencoin.online",
+      "developer.ravencoin.online"
+    ]
   },
   "serverRolesetter": {
       // Roles Rolesetter bot is allowed to use
       "allowedroles": [
-          "fam",
-          "miner",
-          "trader",
-          "keyboard cowboy",
-          "marketing-ops"
+          "red",
+          "green",
+          "blue",
+          "orange",
+          "yellow",
+          "brown",
+          "cyan",
+          "purple",
+          "pink"
       ]
   },
-  "rvnPools": {
-      // Channels Pools List is allowed to post in
-      "channels": [
-          "429134627823812612",
-          "429134573197197312",
-          "430283521106378763",
-          "430326272141295616",
-          "431673248783138836",
-          "430455176122466304",
-          "430559276855984128",
-          "430506276703830038",
-          "430615003515715593",
-          "430652080886251540",
-          "430915719392264193",
-          "432916914541559809",
-          "433322915543384084",
-          "435216174020820992"
-      ]
-  },
-  "serverWebsiteStatus": {
-      // Channels Status Bot is allowed to post in
-      "channels": [
-          "429133710663876628",
-          "429134627823812612"
-      ]
-  },
-  "TimedBots": {
-      // Channels Timer Bots are allowed to post in
-      "hash": "430028899192406016",
-      "stats": "430028854984310798",
-      // how often bots will post in milliseconds
-      "timerhash": 1800000,
-      "timerstats": 1800000
-  },
-  "SocketBots": {
-      "SocketUrl": "https://ravencoin.network/",
-      // Channels Socket Bots are allowed to post in
-      "BlocksWonChannel": "430028854984310798",
-      "NewTxChannel": "454508663906762752"
-  },
-  "irc": {
-     "nickname": "Veronica",
-     "server": "chat.freenode.net",
-     "discordToken": "v2C9NvU",
-     "autoSendCommands": [
-      ["PRIVMSG", "NickServ", "IDENTIFY password"]
-      ],
-      "channelMapping": {
-         "#irc-ravencoin-dev": "#ravencoin-dev"
-      }
+  "excludedSpam": {
+    // Channels excluded from Spam Detection
+    "channels": [
+      "553292468498595870",
+      "553283356456910849",
+      "553459124084408335"
+    ],
+    "users": []
   }
 }

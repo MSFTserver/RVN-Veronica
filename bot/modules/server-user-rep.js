@@ -24,16 +24,10 @@ exports.rep = {
       );
       return;
     }
-    var words = suffix
-      .trim()
-      .split(' ')
-      .filter(function(n) {
-        return n !== '';
-      });
     var user = msg.mentions.users.first()
       ? msg.mentions.users.first()
       : msg.author;
-    var cmd = words[0];
+    var cmd = suffix[0];
     if (user == msg.author) {
       if (cmd == 'give' || cmd == 'take') {
         msg.channel.send(
@@ -52,13 +46,13 @@ exports.rep = {
           msg.channel.send('only staff can use this command');
           return;
         }
-        if (words[2] == undefined) {
+        if (suffix[2] == undefined) {
           msg.reply(
             'Invalid Amount Please specify a number!\n!rep give <@ username> <amount>'
           );
           return;
         }
-        var amount = words[2];
+        var amount = suffix[2];
         giveUserRep(bot, msg, user, amount);
         return;
       }
@@ -67,20 +61,20 @@ exports.rep = {
           msg.channel.send('only staff can use this command');
           return;
         }
-        if (words[2] == undefined) {
+        if (suffix[2] == undefined) {
           msg.reply(
             'Invalid Amount Please specify a number!\n!rep take <@ username> <amount>'
           );
           return;
         }
-        var amount = words[2];
+        var amount = suffix[2];
         takeUserRep(bot, msg, user, amount);
         return;
       }
     }
 
     function takeUserRep(bot, msg, usr, amt) {
-      if (words[0] == undefined || getValidatedAmount(amt) === null) {
+      if (suffix[0] == undefined || getValidatedAmount(amt) === null) {
         msg.reply(
           'Invalid Amount Please specify a number!\n!rep take <@ username> <amount>'
         );

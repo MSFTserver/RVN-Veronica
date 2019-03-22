@@ -1,6 +1,7 @@
 const discord = require('discord.js');
 let hasPerms = require('../helpers.js').hasPerms;
 let inPrivate = require('../helpers.js').inPrivate;
+let inSpam = require('../helpers.js').inSpam;
 
 exports.commands = ['serverstats'];
 
@@ -10,6 +11,12 @@ exports.serverstats = {
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {
       msg.channel.send('You Can Not Use This Command In DMs!');
+      return;
+    }
+    if (!inSpam(msg)) {
+      msg.channel.send(
+        'Please use <#' + channelID + '> to talk to stats bot.'
+      );
       return;
     }
     if (hasPerms(msg)) {
@@ -30,7 +37,9 @@ exports.serverstats = {
       var Categories = data.channels.filter(m => m.type === 'category').size;
       var Region = data.region;
       var ServerID = data.id;
-      var Created = data.createdAt;
+      var Created =  moment(data.createdAt)
+        .tz('America/Los_Angeles')
+        .format('MM-DD-YYYY hh:mm a z');
       var Filtering = data.explicitContentFilter;
       var Verification = data.verificationLevel;
       var MFA = data.mfaLevel ? "Enabled" : "Disabled";
@@ -62,9 +71,9 @@ exports.serverstats = {
         "**Invite URL**: http://discord.ravencoin.online\n" +
         '**Server ID**: ' + ServerID + "\n" +
         '**Created**: ' + Created + "\n" +
-        '**Region**: ' + Region + "\n\n" +
+        '**Region**: ' + Region + "\n" +
+        '**Notifications**: ' + Notifications + "\n\n" +
         '__**Security Info**__\n' +
-        '**Notifications**: ' + Notifications + "\n" +
         '**Verification**: ' + Verification + "\n" +
         '**Filtering**: ' + Filtering + "\n" +
         '**Multi-Factor**: ' + MFA + "\n\n" +

@@ -7,9 +7,11 @@ let tweetChannel = config.get('General').Channels.twitterRSS;
 let moment = require('moment-timezone');
 let pm2MetricGet = require('../db-helpers.js').pm2MetricGet;
 let pm2MetricSave = require('../db-helpers.js').pm2MetricSave;
+let randColor = require('../helpers.js').randColor;
 setInterval(function() {
   pm2MetricGet('tweets');
 }, 100);
+
 
 exports.custom = ['rvntweets'];
 
@@ -31,7 +33,7 @@ exports.rvntweets = function(bot) {
     var userpic = userdata.profile_image_url_https;
     var url = 'https://twitter.com/' + username + '/status/' + tweetID;
     var tweet = data.text;
-    var randcolor = 'RANDOM';
+    var randcolor = randColor();
     if (!tweet.startsWith('RT @')) {
       const embed = {
         description: tweet + '\n\n[View Tweet](' + url + ')',

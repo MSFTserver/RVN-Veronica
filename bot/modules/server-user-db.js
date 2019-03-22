@@ -33,15 +33,20 @@ exports.UserDBs = function(bot) {
           ) {
             var joindate = null;
           } else {
-            var joindate = guild.member(msg.author).joinedAt.toString();
+            var joindate = moment(guild.member(msg.author).joinedAt)
+              .tz('America/Los_Angeles')
+              .format('MM-DD-YYYY hh:mm a z');
           }
+          var created = moment(msg.author.createdAt)
+            .tz('America/Los_Angeles')
+            .format('MM-DD-YYYY hh:mm a z');
           var newProfile = {
             accUserID: msg.author.id,
             accUsername: msg.author.username,
             accDiscriminator: msg.author.discriminator,
             accAvatar: msg.author.avatarURL,
             accJoinedDate: joindate,
-            accCreatedDate: msg.author.createdAt,
+            accCreatedDate: created,
             accRep: 1
           };
           newEntry(bot, msg, 'users', newProfile);
@@ -92,15 +97,20 @@ exports.UserDBs = function(bot) {
         ) {
           var joindate = null;
         } else {
-          var joindate = guild.member(member).joinedAt.toString();
+          var joindate = moment(guild.member(member).joinedAt)
+            .tz('America/Los_Angeles')
+            .format('MM-DD-YYYY hh:mm a z');
         }
+        var created =  moment(member.createdAt)
+          .tz('America/Los_Angeles')
+          .format('MM-DD-YYYY hh:mm a z');
         newEntry('users', {
           accUserID: member.id,
           accUsername: member.username,
           accDiscriminator: member.discriminator,
           accAvatar: member.avatarURL,
           accJoinedDate: joindate,
-          accCreatedDate: member.createdAt,
+          accCreatedDate: created,
           accRep: 0
         });
       }

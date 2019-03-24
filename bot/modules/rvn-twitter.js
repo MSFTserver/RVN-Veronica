@@ -43,28 +43,16 @@ exports.rvntweets = function(bot) {
   });
   Twitter.on(`data error`, function(error) {
     console.log(`data error`, error);
-    console.log(`recreating twitter stream api`);
-    Twitter.close();
-    GenerateTweetStream();
   });
   Twitter.on(`data keep-alive`, function() {});
   Twitter.on(`connection error stall`, function() {
     console.log(`connection error stall`);
-    console.log(`recreating twitter stream api`);
-    Twitter.close();
-    GenerateTweetStream();
   });
   Twitter.on(`connection aborted`, function() {
     console.log(`connection aborted`);
-    console.log(`recreating twitter stream api`);
-    Twitter.close();
-    GenerateTweetStream();
   });
   Twitter.on(`connection error network`, function(error) {
     console.log(`connection error network`, error);
-    console.log(`recreating twitter stream api`);
-    Twitter.close();
-    GenerateTweetStream();
   });
   function GenerateTweetStream() {
     return new TwitterStream(keys, !1);

@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require(`mongoose`);
 var Schema = mongoose.Schema;
 var usersSchema = new Schema({
   accUserID: {
@@ -27,4 +27,4 @@ var usersSchema = new Schema({
     type: Number
   }
 });
-mongoose.model('users', usersSchema);
+mongoose.model(`users`, usersSchema);

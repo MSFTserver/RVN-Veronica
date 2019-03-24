@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require(`mongoose`);
 var Schema = mongoose.Schema;
 var timeoutSchema = new Schema({
   userID: {
@@ -31,4 +31,4 @@ var timeoutSchema = new Schema({
     required: true
   }
 });
-mongoose.model('timeout', timeoutSchema);
+mongoose.model(`timeout`, timeoutSchema);

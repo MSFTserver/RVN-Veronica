@@ -1,4 +1,3 @@
-var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var pm2Schema = new Schema({
   metricName: {
@@ -10,4 +9,4 @@ var pm2Schema = new Schema({
     required: true
   }
 });
-mongoose.model('pm2', pm2Schema);
+mongoose.model(`pm2`, pm2Schema);

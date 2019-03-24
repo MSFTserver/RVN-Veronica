@@ -1,27 +1,28 @@
-let findEntry = require("../db-helpers.js").findEntry;
-let newEntry = require("../db-helpers.js").newEntry;
-let updateEntry = require("../db-helpers.js").updateEntry;
-let inSpam = require("../helpers.js").inSpam;
-let inPrivate = require("../helpers.js").inPrivate;
-let hasPerms = require("../helpers.js").hasPerms;
-let config = require("config");
-let channelID = config.get("General").Channels.botspam;
-
-exports.commands = ["rep"];
-
+let findEntry = require(`../db-helpers.js`).findEntry;
+let newEntry = require(`../db-helpers.js`).newEntry;
+let updateEntry = require(`../db-helpers.js`).updateEntry;
+let inSpam = require(`../helpers.js`).inSpam;
+let inPrivate = require(`../helpers.js`).inPrivate;
+let hasPerms = require(`../helpers.js`).hasPerms;
+let config = require(`config`);
+let channelID = config.get(`General`).Channels.botspam;
+exports.commands = [`rep`];
 exports.rep = {
-  usage: "",
+  usage: ``,
   description:
-    "check your reputation\n     (rep is awarded 1 per message sent)\n**!rep give <@ username> <amount>**\n     :desktop: :cop: gives specified amoutn of rep to user :cop: :desktop:\n**!rep take <@ username> <amount>**\n    :desktop: :cop: takes specified amount of rep from user :cop: :desktop:",
+    `check your reputation\n` +
+    `     (rep is awarded 1 per message sent)\n` +
+    `**!rep give <@ username> <amount>**\n` +
+    `     :desktop: :cop: gives specified amoutn of rep to user :cop: :desktop:\n` +
+    `**!rep take <@ username> <amount>**\n` +
+    `    :desktop: :cop: takes specified amount of rep from user :cop: :desktop:`,
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {
-      msg.channel.send("You Can Not Use This Command In DMs!");
+      msg.channel.send(`You Can Not Use This Command In DMs!`);
       return;
     }
     if (!inSpam(msg)) {
-      msg.channel.send(
-        "Please use <#" + channelID + "> to talk to reputation bot."
-      );
+      msg.channel.send(`Please use <#${channelID}> to talk to reputation bot.`);
       return;
     }
     var user = msg.mentions.users.first()
@@ -29,9 +30,9 @@ exports.rep = {
       : msg.author;
     var cmd = suffix[0];
     if (user == msg.author) {
-      if (cmd == "give" || cmd == "take") {
+      if (cmd == `give` || cmd == `take`) {
         msg.channel.send(
-          "you can not control points on your own account sorry!"
+          `you can not control points on your own account sorry!`
         );
       }
       getUserRep(bot, msg, user);
@@ -41,14 +42,15 @@ exports.rep = {
         getUserRep(bot, msg, user);
         return;
       }
-      if (cmd == "give") {
+      if (cmd == `give`) {
         if (!hasPerms(msg)) {
-          msg.channel.send("only staff can use this command");
+          msg.channel.send(`only staff can use this command`);
           return;
         }
         if (suffix[2] == undefined) {
           msg.reply(
-            "Invalid Amount Please specify a number!\n!rep give <@ username> <amount>"
+            `Invalid Amount Please specify a number!\n` +
+              `!rep give <@ username> <amount>`
           );
           return;
         }
@@ -56,14 +58,15 @@ exports.rep = {
         giveUserRep(bot, msg, user, amount);
         return;
       }
-      if (cmd == "take") {
+      if (cmd == `take`) {
         if (!hasPerms(msg)) {
-          msg.channel.send("only staff can use this command");
+          msg.channel.send(`only staff can use this command`);
           return;
         }
         if (suffix[2] == undefined) {
           msg.reply(
-            "Invalid Amount Please specify a number!\n!rep take <@ username> <amount>"
+            `Invalid Amount Please specify a number!\n` +
+              `!rep take <@ username> <amount>`
           );
           return;
         }
@@ -72,15 +75,15 @@ exports.rep = {
         return;
       }
     }
-
     function takeUserRep(bot, msg, usr, amt) {
       if (suffix[0] == undefined || getValidatedAmount(amt) === null) {
         msg.reply(
-          "Invalid Amount Please specify a number!\n!rep take <@ username> <amount>"
+          `Invalid Amount Please specify a number!\n` +
+            `!rep take <@ username> <amount>`
         );
         return;
       }
-      findEntry(bot, msg, "users", "accUserID", user.id, findProfile1);
+      findEntry(bot, msg, `users`, `accUserID`, user.id, findProfile1);
       function findProfile1(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (
@@ -101,12 +104,12 @@ exports.rep = {
             accCreatedDate: usr.createdAt,
             accRep: 0
           };
-          newEntry(bot, msg, "users", newProfile);
+          newEntry(bot, msg, `users`, newProfile);
           return;
         } else {
           if (Number(amt) > docs[0].accRep) {
             msg.channel.send(
-              "user does not have that much rep to take setting to 0"
+              `user does not have that much rep to take setting to 0`
             );
             var userRep = 0;
           } else {
@@ -121,7 +124,7 @@ exports.rep = {
             accCreatedDate: docs[0].accCreatedDate,
             accRep: userRep
           };
-          updateEntry(bot, msg, "users", "accUserID", usr.id, updateProfile);
+          updateEntry(bot, msg, `users`, `accUserID`, usr.id, updateProfile);
           return;
         }
       }
@@ -129,11 +132,12 @@ exports.rep = {
     function giveUserRep(bot, msg, usr, amt) {
       if (getValidatedAmount(amt) === null) {
         msg.reply(
-          "Invalid Amount Please specify a number!\n!rep give <@ username> <amount>"
+          `Invalid Amount Please specify a number!\n` +
+            `!rep give <@ username> <amount>`
         );
         return;
       }
-      findEntry(bot, msg, "users", "accUserID", usr.id, findProfile2);
+      findEntry(bot, msg, `users`, `accUserID`, usr.id, findProfile2);
       function findProfile2(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (
@@ -154,7 +158,7 @@ exports.rep = {
             accCreatedDate: usr.createdAt,
             accRep: 0 + Number(amt)
           };
-          newEntry(bot, msg, "users", newProfile);
+          newEntry(bot, msg, `users`, newProfile);
           return;
         } else {
           var updateProfile = {
@@ -166,13 +170,13 @@ exports.rep = {
             accCreatedDate: docs[0].accCreatedDate,
             accRep: docs[0].accRep + Number(amt)
           };
-          updateEntry(bot, msg, "users", "accUserID", usr.id, updateProfile);
+          updateEntry(bot, msg, `users`, `accUserID`, usr.id, updateProfile);
           return;
         }
       }
     }
     function getUserRep(bot, msg, usr) {
-      findEntry(bot, msg, "users", "accUserID", usr.id, findProfile3);
+      findEntry(bot, msg, `users`, `accUserID`, usr.id, findProfile3);
       function findProfile3(bot, msg, docs) {
         if (!docs || !docs[0]) {
           if (
@@ -194,17 +198,17 @@ exports.rep = {
             accRep: 0
           };
           msg.channel.send(
-            usr.username +
-              " has 0 reputation points!\n stay active to earn more and show you are active in this community"
+            `${usr.username} has 0 reputation points!\n` +
+              `stay active to earn more and show you are active in this community`
           );
-          newEntry(bot, msg, "users", newProfile);
+          newEntry(bot, msg, `users`, newProfile);
           return;
         } else {
           msg.channel.send(
-            docs[0].accUsername +
-              " has " +
-              docs[0].accRep +
-              " reputation points!\n stay active to earn more and show you are active in this community"
+            `${docs[0].accUsername} has ${
+              docs[0].accRep
+            } reputation points!\n` +
+              `stay active to earn more and show you are active in this community`
           );
           return;
         }

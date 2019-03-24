@@ -1,20 +1,20 @@
-let hasPerms = require("../helpers.js").hasPerms;
-let inPrivate = require("../helpers.js").inPrivate;
-let config = require("config");
-let modLogChannel = config.get("moderation").modLogChannel;
-let logChannel = config.get("moderation").logchannel;
-let pm2Name = config.get("General").pm2Name;
-let moment = require("moment-timezone");
-
-exports.commands = ["purge"];
-
+let hasPerms = require(`../helpers.js`).hasPerms;
+let inPrivate = require(`../helpers.js`).inPrivate;
+let config = require(`config`);
+let modLogChannel = config.get(`moderation`).modLogChannel;
+let logChannel = config.get(`moderation`).logchannel;
+let pm2Name = config.get(`General`).pm2Name;
+let moment = require(`moment-timezone`);
+exports.commands = [`purge`];
 exports.purge = {
-  usage: "<number of messages>",
+  usage: `<number of messages>`,
   description:
-    ":desktop: :cop: Deletes message from current channel :cop: :desktop:\n**!purge** <#channel-name/@ username> <number of messages>\n     :desktop: :cop: Deletes Messages from User, Channel :cop: :desktop:",
+    `:desktop: :cop: Deletes message from current channel :cop: :desktop:\n` +
+    `**!purge** <#channel-name/@ username> <number of messages>\n` +
+    `     :desktop: :cop: Deletes Messages from User, Channel :cop: :desktop:`,
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {
-      msg.channel.send("You Cant Purge Message In DMs!");
+      msg.channel.send(`You Cant Purge Message In DMs!`);
       return;
     }
     if (hasPerms(msg)) {
@@ -37,55 +37,38 @@ exports.purge = {
               .bulkDelete(messages)
               .then(() => {
                 var time = moment()
-                  .tz("America/Los_Angeles")
-                  .format("MM-DD-YYYY hh:mm a");
+                  .tz(`America/Los_Angeles`)
+                  .format(`MM-DD-YYYY hh:mm a`);
                 bot.channels
                   .get(modLogChannel)
                   .send(
-                    "[" +
-                      time +
-                      " PST][" +
-                      pm2Name +
-                      `] ${author} Purged **${
-                        messages.size
-                      }** messages from <#${msg.mentions.channels.first().id}>.`
+                    `[${time} PST][${pm2Name}]` +
+                      ` ${author} Purged **${messages.size}**messages` +
+                      ` from <#${msg.mentions.channels.first().id}>.`
                   );
                 msg.channel
                   .send(
-                    `:ok_hand: Purged **${messages.size}** messages from <#${
-                      msg.mentions.channels.first().id
-                    }>.`
+                    `:ok_hand: Purged **${messages.size}** messages` +
+                      ` from <#${msg.mentions.channels.first().id}>.`
                   )
                   .then(msg => {
-                    msg.delete(10000).catch(err => {
-                      var time = moment()
-                        .tz("America/Los_Angeles")
-                        .format("MM-DD-YYYY hh:mm a");
-                      //console.log( '[' + time + ' PST][' + pm2Name + '] ERROR Purging purge message );
-                    });
+                    msg.delete(10000).catch(err => {});
                   });
               })
               .catch(e => {
                 var time = moment()
-                  .tz("America/Los_Angeles")
-                  .format("MM-DD-YYYY hh:mm a");
+                  .tz(`America/Los_Angeles`)
+                  .format(`MM-DD-YYYY hh:mm a`);
                 bot.channels
                   .get(logChannel)
                   .send(
-                    "[" +
-                      time +
-                      " PST][" +
-                      pm2Name +
-                      `] :x: Failed to purge **${
-                        messages.size
-                      }** messages from <#${
-                        msg.mentions.channels.first().id
-                      }>.\n${e}`
+                    `[${time} PST][${pm2Name}]` +
+                      ` :x: Failed to purge **${messages.size}** messages` +
+                      ` from <#${msg.mentions.channels.first().id}>.\n${e}`
                   );
                 msg.channel.send(
-                  `:x: Failed to purge **${messages.size}** messages from <#${
-                    msg.mentions.channels.first().id
-                  }>.`
+                  `:x: Failed to purge **${messages.size}** messages` +
+                    ` from <#${msg.mentions.channels.first().id}>.`
                 );
               });
           });
@@ -106,53 +89,38 @@ exports.purge = {
             .bulkDelete(found)
             .then(() => {
               var time = moment()
-                .tz("America/Los_Angeles")
-                .format("MM-DD-YYYY hh:mm a");
+                .tz(`America/Los_Angeles`)
+                .format(`MM-DD-YYYY hh:mm a`);
               bot.channels
                 .get(modLogChannel)
                 .send(
-                  "[" +
-                    time +
-                    " PST][" +
-                    pm2Name +
-                    `] ${author} Purged **${found.length}** messages from ${
-                      msg.mentions.users.first().username
-                    }.`
+                  `[${time} PST][${pm2Name}]` +
+                    ` ${author} Purged **${found.length}** messages` +
+                    ` from ${msg.mentions.users.first().username}.`
                 );
               msg.channel
                 .send(
-                  `:ok_hand: Purged **${found.length}** messages from ${
-                    msg.mentions.users.first().username
-                  }.`
+                  `:ok_hand: Purged **${found.length}** messages` +
+                    ` from ${msg.mentions.users.first().username}.`
                 )
                 .then(msg => {
-                  msg.delete(10000).catch(err => {
-                    var time = moment()
-                      .tz("America/Los_Angeles")
-                      .format("MM-DD-YYYY hh:mm a");
-                    //console.log( '[' + time + ' PST][' + pm2Name + '] ERROR Purging purge message );
-                  });
+                  msg.delete(10000).catch(err => {});
                 });
             })
             .catch(e => {
               var time = moment()
-                .tz("America/Los_Angeles")
-                .format("MM-DD-YYYY hh:mm a");
+                .tz(`America/Los_Angeles`)
+                .format(`MM-DD-YYYY hh:mm a`);
               bot.channels
                 .get(logChannel)
                 .send(
-                  "[" +
-                    time +
-                    " PST][" +
-                    pm2Name +
-                    `] :x: Failed to purge **${found.length}** messages from ${
-                      msg.mentions.users.first().username
-                    }.\n${e}`
+                  `[${time} PST][${pm2Name}]` +
+                    ` :x: Failed to purge **${found.length}** messages` +
+                    ` from ${msg.mentions.users.first().username}.\n${e}`
                 );
               msg.channel.send(
-                `:x: Failed to purge **${found.length}** messages from ${
-                  msg.mentions.users.first().username
-                }.`
+                `:x: Failed to purge **${found.length}** messages` +
+                  ` from ${msg.mentions.users.first().username}.`
               );
             });
         });
@@ -170,53 +138,38 @@ exports.purge = {
             .bulkDelete(messages)
             .then(() => {
               var time = moment()
-                .tz("America/Los_Angeles")
-                .format("MM-DD-YYYY hh:mm a");
+                .tz(`America/Los_Angeles`)
+                .format(`MM-DD-YYYY hh:mm a`);
               bot.channels
                 .get(modLogChannel)
                 .send(
-                  "[" +
-                    time +
-                    " PST][" +
-                    pm2Name +
-                    `] ${author} Purged **${messages.size}** messages from <#${
-                      msg.channel.id
-                    }>.`
+                  `[${time} PST][${pm2Name}]` +
+                    ` ${author} Purged **${messages.size}** messages` +
+                    ` from <#${msg.channel.id}>.`
                 );
               msg.channel
                 .send(
-                  `:ok_hand: Purged **${
-                    messages.size
-                  }** messages from this channel.`
+                  `:ok_hand: Purged **${messages.size}** messages` +
+                    ` from this channel.`
                 )
                 .then(msg => {
-                  msg.delete(10000).catch(err => {
-                    var time = moment()
-                      .tz("America/Los_Angeles")
-                      .format("MM-DD-YYYY hh:mm a");
-                    //console.log( '[' + time + ' PST][' + pm2Name + '] ERROR Purging purge message );
-                  });
+                  msg.delete(10000).catch(err => {});
                 });
             })
             .catch(e => {
               var time = moment()
-                .tz("America/Los_Angeles")
-                .format("MM-DD-YYYY hh:mm a");
+                .tz(`America/Los_Angeles`)
+                .format(`MM-DD-YYYY hh:mm a`);
               bot.channels
                 .get(logChannel)
                 .send(
-                  "[" +
-                    time +
-                    " PST][" +
-                    pm2Name +
-                    `] :x: Failed to purge **${
-                      messages.size
-                    }** messages from channel <#${msg.channel.id}>.\n${e}`
+                  `[${time} PST][${pm2Name}]` +
+                    ` :x: Failed to purge **${messages.size}** messages` +
+                    ` from channel <#${msg.channel.id}>.\n${e}`
                 );
               msg.channel.send(
-                `:x: Failed to purge **${
-                  messages.size
-                }** messages from this channel.`
+                `:x: Failed to purge **${messages.size}** messages` +
+                  ` from this channel.`
               );
             });
         });

@@ -1,23 +1,19 @@
-let config = require("config");
-let pm2Name = config.get("General").pm2Name;
-let inSpam = require("../helpers.js").inSpam;
-let moment = require("moment-timezone");
-
-exports.commands = ["uptime"];
-
+let config = require(`config`);
+let pm2Name = config.get(`General`).pm2Name;
+let inSpam = require(`../helpers.js`).inSpam;
+let moment = require(`moment-timezone`);
+exports.commands = [`uptime`];
 exports.uptime = {
-  usage: "",
-  description: "gets Uptime for Bot",
+  usage: ``,
+  description: `gets Uptime for Bot`,
   process: function(bot, msg, suffix) {
     if (!inSpam(msg)) {
-      msg.channel.send(
-        "Please use <#" + channelID + "> to talk to uptime bot."
-      );
+      msg.channel.send(`Please use <#${channelID}> to talk to uptime bot.`);
       return;
     }
     var started = moment(bot.readyAt)
-      .tz("America/Los_Angeles")
-      .format("MM-DD-YYYY hh:mm:ss a z");
+      .tz(`America/Los_Angeles`)
+      .format(`MM-DD-YYYY hh:mm:ss a z`);
     let sec = Math.floor(bot.uptime / 1000);
     let min = Math.floor(sec / 60);
     sec = sec % 60;
@@ -26,36 +22,36 @@ exports.uptime = {
     let days = Math.floor(hrs / 24);
     hrs = hrs % 24;
     if (!sec) {
-      sec = "0" + sec + "s";
+      sec = `00s`;
     } else if (sec < 10) {
-      sec = "0" + sec + "s";
+      sec = `0${sec}s`;
     } else {
-      sec += "s";
+      sec += `s`;
     }
     if (!min) {
-      min = "00m:";
+      min = `00m:`;
     } else if (min < 10) {
-      min = "0" + min + "m:";
+      min = `0${min}m:`;
     } else {
-      min += "m:";
+      min += `m:`;
     }
     if (!hrs) {
-      hrs = "00h:";
+      hrs = `00h:`;
     } else if (hrs < 10) {
-      hrs = "0" + hrs + "h:";
+      hrs = `0${hrs}h:`;
     } else {
-      hrs += "h:";
+      hrs += `h:`;
     }
     if (!days) {
-      days = "000d:";
+      days = `000d:`;
     } else if (days < 10) {
-      days = "00" + days + "d:";
+      days = `00${days}d:`;
     } else if (days >= 10) {
-      days = "0" + days + "d:";
+      days = `0${days}d:`;
     } else {
-      days += "d:";
+      days += `d:`;
     }
-    var t = "    ";
+    var t = `    `;
     msg.channel.send(
       `**Started**:\n${t}${started}\n` +
         `**Uptime**:\n${t}${days}${hrs}${min}${sec}\n`

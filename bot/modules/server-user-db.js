@@ -1,13 +1,11 @@
-let inPrivate = require("../helpers.js").inPrivate;
-let hasExcludedSpamChannels = require("../helpers.js").hasExcludedSpamChannels;
-let findEntry = require("../db-helpers.js").findEntry;
-let newEntry = require("../db-helpers.js").newEntry;
-let updateEntry = require("../db-helpers.js").updateEntry;
-
-exports.custom = ["UserDBs"];
-
+let inPrivate = require(`../helpers.js`).inPrivate;
+let hasExcludedSpamChannels = require(`../helpers.js`).hasExcludedSpamChannels;
+let findEntry = require(`../db-helpers.js`).findEntry;
+let newEntry = require(`../db-helpers.js`).newEntry;
+let updateEntry = require(`../db-helpers.js`).updateEntry;
+exports.custom = [`UserDBs`];
 exports.UserDBs = function(bot) {
-  bot.on("message", msg => {
+  bot.on(`message`, msg => {
     if (msg.author.id != bot.user.id) {
       if (inPrivate(msg)) {
         return;
@@ -17,16 +15,16 @@ exports.UserDBs = function(bot) {
       }
       if (
         !msg.author.presence.status ||
-        msg.author.presence.status == "offline" ||
-        msg.author.presence.status == "invisible"
+        msg.author.presence.status == `offline` ||
+        msg.author.presence.status == `invisible`
       ) {
         return;
       }
-      findEntry(bot, msg, "users", "accUserID", msg.author.id, findProfile);
+      findEntry(bot, msg, `users`, `accUserID`, msg.author.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
         if (!gotProfile) {
           var guild = bot.guilds.find(
-            guild => guild.name === "developer.ravencoin.online"
+            guild => guild.name === `developer.ravencoin.online`
           );
           if (
             !guild ||
@@ -36,12 +34,12 @@ exports.UserDBs = function(bot) {
             var joindate = null;
           } else {
             var joindate = moment(guild.member(msg.author).joinedAt)
-              .tz("America/Los_Angeles")
-              .format("MM-DD-YYYY hh:mm a z");
+              .tz(`America/Los_Angeles`)
+              .format(`MM-DD-YYYY hh:mm a z`);
           }
           var created = moment(msg.author.createdAt)
-            .tz("America/Los_Angeles")
-            .format("MM-DD-YYYY hh:mm a z");
+            .tz(`America/Los_Angeles`)
+            .format(`MM-DD-YYYY hh:mm a z`);
           var newProfile = {
             accUserID: msg.author.id,
             accUsername: msg.author.username,
@@ -51,7 +49,7 @@ exports.UserDBs = function(bot) {
             accCreatedDate: created,
             accRep: 1
           };
-          newEntry(bot, msg, "users", newProfile);
+          newEntry(bot, msg, `users`, newProfile);
         } else {
           var updateProfile = {
             accUsername: msg.author.username,
@@ -62,8 +60,8 @@ exports.UserDBs = function(bot) {
           updateEntry(
             bot,
             msg,
-            "users",
-            "accUserID",
+            `users`,
+            `accUserID`,
             msg.author.id,
             updateProfile
           );
@@ -71,9 +69,9 @@ exports.UserDBs = function(bot) {
       }
     }
   });
-  bot.on("guildMemberAdd", member => {
+  bot.on(`guildMemberAdd`, member => {
     if (!member) return;
-    findEntry(bot, member, "users", "accUserID", member.id, findProfile);
+    findEntry(bot, member, `users`, `accUserID`, member.id, findProfile);
     function findProfile(bot, member, gotProfile) {
       if (gotProfile) {
         var updateProfile = {
@@ -85,26 +83,26 @@ exports.UserDBs = function(bot) {
         updateEntry(
           bot,
           msg,
-          "users",
-          "accUserID",
+          `users`,
+          `accUserID`,
           msg.author.id,
           updateProfile
         );
       } else {
         var guild = bot.guilds.find(
-          guild => guild.name === "developer.ravencoin.online"
+          guild => guild.name === `developer.ravencoin.online`
         );
         if (!guild || !guild.member(member) || !guild.member(member).joinedAt) {
           var joindate = null;
         } else {
           var joindate = moment(guild.member(member).joinedAt)
-            .tz("America/Los_Angeles")
-            .format("MM-DD-YYYY hh:mm a z");
+            .tz(`America/Los_Angeles`)
+            .format(`MM-DD-YYYY hh:mm a z`);
         }
         var created = moment(member.createdAt)
-          .tz("America/Los_Angeles")
-          .format("MM-DD-YYYY hh:mm a z");
-        newEntry("users", {
+          .tz(`America/Los_Angeles`)
+          .format(`MM-DD-YYYY hh:mm a z`);
+        newEntry(`users`, {
           accUserID: member.id,
           accUsername: member.username,
           accDiscriminator: member.discriminator,

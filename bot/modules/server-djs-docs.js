@@ -1,7 +1,8 @@
+`use strict`;
 let fetch = require(`node-fetch`);
-let inSpam = require(`../helpers.js`).inSpam;
 let qs = require(`querystring`);
 const performance = require(`perf_hooks`).performance;
+let inSpam = require(`../helpers.js`).inSpam;
 exports.commands = [`djsdocs`];
 exports.djsdocs = {
   usage: ``,

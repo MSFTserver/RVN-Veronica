@@ -1,3 +1,4 @@
+`use strict`;
 let inSpam = require(`../helpers.js`).inSpam;
 let inPrivate = require(`../helpers.js`).inPrivate;
 let config = require(`config`);

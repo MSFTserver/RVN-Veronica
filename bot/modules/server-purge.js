@@ -1,10 +1,11 @@
+`use strict`;
+let moment = require(`moment-timezone`);
 let hasPerms = require(`../helpers.js`).hasPerms;
 let inPrivate = require(`../helpers.js`).inPrivate;
 let config = require(`config`);
 let modLogChannel = config.get(`moderation`).modLogChannel;
 let logChannel = config.get(`moderation`).logchannel;
 let pm2Name = config.get(`General`).pm2Name;
-let moment = require(`moment-timezone`);
 exports.commands = [`purge`];
 exports.purge = {
   usage: `<number of messages>`,

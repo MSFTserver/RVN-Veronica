@@ -1,6 +1,6 @@
 `use strict`;
-let commands = require(`../../config/commands`);
 const Discord = require(`discord.js`);
+let commands = require(`../../config/commands`);
 let initialized = !1;
 let discordBot = null;
 let commandsList = null;

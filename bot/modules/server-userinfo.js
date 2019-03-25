@@ -1,10 +1,12 @@
-let findEntry = require(`../db-helpers.js`).findEntry;
-let newEntry = require(`../db-helpers.js`).newEntry;
+`use strict`;
 let moment = require(`moment-timezone`);
 let inSpam = require(`../helpers.js`).inSpam;
 let inPrivate = require(`../helpers.js`).inPrivate;
+let findEntry = require(`../db-helpers.js`).findEntry;
+let newEntry = require(`../db-helpers.js`).newEntry;
 let config = require(`config`);
 let modLogChannel = config.get(`moderation`).modLogChannel;
+let channelID = config.get(`General`).Channels.botspam;
 let pm2Name = config.get(`General`).pm2Name;
 exports.commands = [`userinfo`];
 exports.userinfo = {
@@ -35,30 +37,10 @@ exports.userinfo = {
         nickname = `null`;
         join = `null`;
       } else {
-        var join = moment(member.joinedAt)
-          .tz(`America/Los_Angeles`)
-          .format(`MM-DD-YYYY hh:mm a z`);
+        var join = member.joinedTimestamp;
         var nickname = member.nickname || `null`;
         var roles = member.roles.map(val => val.name);
         var inVoice = member.voiceChannelID || null;
-        var lastMsg = member.lastMessage;
-        var lastMsgChan, lastMsgCont, lastMsgID;
-        if (lastMsg) {
-          lastMsgChan = lastMsg.channel
-            ? lastMsg.channel.name
-            : lastMsg.channel.name || `null`;
-          lastMsgCont =
-            lastMsg.content.replace(/^(.{20}[^\s]*).*/, `$1`) || `null`;
-          lastMsgID = lastMsg.id || `null`;
-          lastMsgTime = moment(lastMsg.createdTimestamp)
-            .tz(`America/Los_Angeles`)
-            .format(`MM-DD-YYYY hh:mm a z`);
-        } else {
-          lastMsgChan = `null`;
-          lastMsgCont = `null`;
-          lastMsgID = `null`;
-          lastMsgTime = `null`;
-        }
         var index = roles.indexOf(`@everyone`);
         if (index > -1) roles.splice(index, 1);
         if (!inVoice) {
@@ -84,10 +66,16 @@ exports.userinfo = {
           var discriminator = user.discriminator;
           var ava = user.avatarURL;
           var joined = join;
-          var created = moment(user.createdAt)
-            .tz(`America/Los_Angeles`)
-            .format(`MM-DD-YYYY hh:mm a z`);
+          var created = user.createdTimestamp;
           var userRep = 0;
+          var msgChan = `null`;
+          var msgCont = `null`;
+          var msgID = `null`;
+          var msgTime = `null`;
+          var cmdChan = `null`;
+          var cmdCont = `null`;
+          var cmdID = `null`;
+          var cmdTime = `null`;
           var newProfile = {
             accUserID: userid,
             accUsername: username,
@@ -110,6 +98,20 @@ exports.userinfo = {
             .tz(`America/Los_Angeles`)
             .format(`MM-DD-YYYY hh:mm a z`);
           var userRep = docs[0].accRep;
+          var msgTime =
+            moment(docs[0].lastMsg.msgTime)
+              .tz(`America/Los_Angeles`)
+              .format(`MM-DD-YYYY hh:mm a z`) || `null`;
+          var msgID = docs[0].lastMsg.msgID || `null`;
+          var msgCont = docs[0].lastMsg.msgCont || `null`;
+          var msgChan = docs[0].lastMsg.msgChan || `null`;
+          var cmdTime =
+            moment(docs[0].lastCMD.cmdTime)
+              .tz(`America/Los_Angeles`)
+              .format(`MM-DD-YYYY hh:mm a z`) || `null`;
+          var cmdID = docs[0].lastCMD.cmdID || `null`;
+          var cmdCont = docs[0].lastCMD.cmdCont || `null`;
+          var cmdChan = docs[0].lastCMD.cmdChan || `null`;
         }
         if (userRep == 0) {
           var rep = `none`;
@@ -142,10 +144,19 @@ exports.userinfo = {
             {
               name: `Last Message`,
               value:
-                `${lastMsgTime}\n` +
-                `Channel: ${lastMsgChan}\n` +
-                `Content: ${lastMsgCont}\n` +
-                `ID: ${lastMsgID}`,
+                `${msgTime}\n` +
+                `Channel: ${msgChan}\n` +
+                `Content: ${msgCont}\n` +
+                `ID: ${msgID}`,
+              inline: !0
+            },
+            {
+              name: `Last Command`,
+              value:
+                `${cmdTime}\n` +
+                `Channel: ${cmdChan}\n` +
+                `Content: ${cmdCont}\n` +
+                `ID: ${cmdID}`,
               inline: !0
             },
             { name: `Joined On`, value: joined, inline: !1 },

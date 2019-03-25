@@ -1,3 +1,4 @@
+`use strict`;
 var mongoose = require(`mongoose`);
 var Schema = mongoose.Schema;
 var usersSchema = new Schema({
@@ -14,17 +15,21 @@ var usersSchema = new Schema({
     type: String,
     required: true
   },
-  accAvatar: {
-    type: String
+  accAvatar: String,
+  accJoinedDate: Number,
+  accCreatedDate: Number,
+  accRep: Number,
+  lastMsg: {
+    msgTime: Number,
+    msgID: String,
+    msgChan: String,
+    msgCont: String
   },
-  accJoinedDate: {
-    type: String
-  },
-  accCreatedDate: {
-    type: String
-  },
-  accRep: {
-    type: Number
+  lastCMD: {
+    cmdTime: Number,
+    cmdID: String,
+    cmdChan: String,
+    cmdCont: String
   }
 });
 mongoose.model(`users`, usersSchema);

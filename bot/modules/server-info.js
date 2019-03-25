@@ -1,4 +1,6 @@
-const discord = require(`discord.js`);
+`use strict`;
+const { RichEmbed } = require(`discord.js`);
+let moment = require(`moment-timezone`);
 let hasPerms = require(`../helpers.js`).hasPerms;
 let inPrivate = require(`../helpers.js`).inPrivate;
 let inSpam = require(`../helpers.js`).inSpam;
@@ -58,7 +60,7 @@ exports.serverstats = {
       } else {
         Verification = `Verified email`;
       }
-      const embed = new discord.RichEmbed()
+      const embed = new RichEmbed()
         .setDescription(
           `__**Owner Info**__\n` +
             `**Username**: ` +

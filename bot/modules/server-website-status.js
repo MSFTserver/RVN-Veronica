@@ -1,3 +1,4 @@
+`use strict`;
 let tcpp = require(`tcp-ping`);
 let inSpam = require(`../helpers.js`).inSpam;
 let config = require(`config`);

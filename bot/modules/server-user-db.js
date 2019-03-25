@@ -1,18 +1,14 @@
+`use strict`;
 let inPrivate = require(`../helpers.js`).inPrivate;
 let hasExcludedSpamChannels = require(`../helpers.js`).hasExcludedSpamChannels;
 let findEntry = require(`../db-helpers.js`).findEntry;
 let newEntry = require(`../db-helpers.js`).newEntry;
 let updateEntry = require(`../db-helpers.js`).updateEntry;
+let { prefix } = require(`config`).bot;
 exports.custom = [`UserDBs`];
 exports.UserDBs = function(bot) {
   bot.on(`message`, msg => {
     if (msg.author.id != bot.user.id) {
-      if (inPrivate(msg)) {
-        return;
-      }
-      if (hasExcludedSpamChannels(msg)) {
-        return;
-      }
       if (
         !msg.author.presence.status ||
         msg.author.presence.status == `offline` ||
@@ -29,17 +25,49 @@ exports.UserDBs = function(bot) {
           if (
             !guild ||
             !guild.member(msg.author) ||
-            !guild.member(msg.author).joinedAt
+            !guild.member(msg.author).joinedTimestamp
           ) {
             var joindate = null;
           } else {
-            var joindate = moment(guild.member(msg.author).joinedAt)
-              .tz(`America/Los_Angeles`)
-              .format(`MM-DD-YYYY hh:mm a z`);
+            var joindate = guild.member(msg.author).joinedTimestamp;
           }
-          var created = moment(msg.author.createdAt)
-            .tz(`America/Los_Angeles`)
-            .format(`MM-DD-YYYY hh:mm a z`);
+          var created = msg.author.createdTimestamp;
+          var msgChan, msgCont, msgID, msgTime;
+          var cmdChan, cmdCont, cmdID, cmdTime;
+          if (msg.content.startsWith(prefix)) {
+            cmdChan = msg.channel
+              ? msg.channel.name
+              : msg.channel.name || `null`;
+            cmdCont = msg.content.replace(/^(.{20}[^\s]*).*/, `$1`) || `null`;
+            cmdID = msg.id || `null`;
+            cmdTime = msg.createdTimestamp;
+            msgChan = msg.channel
+              ? msg.channel.name
+              : msg.channel.name || `null`;
+            msgCont = msg.content.replace(/^(.{20}[^\s]*).*/, `$1`) || `null`;
+            msgID = msg.id || `null`;
+            msgTime = msg.createdTimestamp;
+          } else if (!msg.content.startsWith(prefix)) {
+            msgChan = msg.channel
+              ? msg.channel.name
+              : msg.channel.name || `null`;
+            msgCont = msg.content.replace(/^(.{20}[^\s]*).*/, `$1`) || `null`;
+            msgID = msg.id || `null`;
+            msgTime = msg.createdTimestamp;
+            cmdChan = `null`;
+            cmdCont = `null`;
+            cmdID = `null`;
+            cmdTime = `null`;
+          } else {
+            msgChan = `null`;
+            msgCont = `null`;
+            msgID = `null`;
+            msgTime = `null`;
+            cmdChan = `null`;
+            cmdCont = `null`;
+            cmdID = `null`;
+            cmdTime = `null`;
+          }
           var newProfile = {
             accUserID: msg.author.id,
             accUsername: msg.author.username,
@@ -47,15 +75,77 @@ exports.UserDBs = function(bot) {
             accAvatar: msg.author.avatarURL,
             accJoinedDate: joindate,
             accCreatedDate: created,
-            accRep: 1
+            accRep: 1,
+            lastMsg: {
+              msgTime: msgTime,
+              msgID: msgID,
+              msgChan: msgChan,
+              msgCont: msgCont
+            },
+            lastCMD: {
+              cmdTime: cmdTime,
+              cmdID: cmdID,
+              cmdChan: cmdChan,
+              cmdCont: cmdCont
+            }
           };
           newEntry(bot, msg, `users`, newProfile);
         } else {
+          var msgChan, msgCont, msgID;
+          var cmdChan, cmdCont, cmdID;
+          if (msg.content.startsWith(prefix)) {
+            cmdChan = msg.channel
+              ? msg.channel.name
+              : msg.channel.name || `null`;
+            cmdCont = msg.content.replace(/^(.{20}[^\s]*).*/, `$1`) || `null`;
+            cmdID = msg.id || `null`;
+            cmdTime = msg.createdTimestamp;
+            msgChan = gotProfile[0].lastMsg.msgChan;
+            msgCont = gotProfile[0].lastMsg.msgCont;
+            msgID = gotProfile[0].lastMsg.msgID;
+            msgTime = gotProfile[0].lastMsg.msgTime;
+          } else if (!msg.content.startsWith(prefix)) {
+            msgChan = msg.channel
+              ? msg.channel.name
+              : msg.channel.name || `null`;
+            msgCont = msg.content.replace(/^(.{20}[^\s]*).*/, `$1`) || `null`;
+            msgID = msg.id || `null`;
+            msgTime = msg.createdTimestamp;
+            cmdChan = gotProfile[0].lastCMD.cmdChan;
+            cmdCont = gotProfile[0].lastCMD.cmdCont;
+            cmdID = gotProfile[0].lastCMD.cmdID;
+            cmdTime = gotProfile[0].lastCMD.cmdTime;
+          } else {
+            msgChan = `null`;
+            msgCont = `null`;
+            msgID = `null`;
+            msgTime = `null`;
+            cmdChan = `null`;
+            cmdCont = `null`;
+            cmdID = `null`;
+            cmdTime = `null`;
+          }
+          var rep = Number(gotProfile[0].accRep);
+          if (!hasExcludedSpamChannels(msg)) {
+            rep = rep + 1;
+          }
           var updateProfile = {
             accUsername: msg.author.username,
             accDiscriminator: msg.author.discriminator,
             accAvatar: msg.author.avatarURL,
-            accRep: Number(gotProfile[0].accRep) + 1
+            accRep: rep,
+            lastMsg: {
+              msgTime: msgTime,
+              msgID: msgID,
+              msgChan: msgChan,
+              msgCont: msgCont
+            },
+            lastCMD: {
+              cmdTime: cmdTime,
+              cmdID: cmdID,
+              cmdChan: cmdChan,
+              cmdCont: cmdCont
+            }
           };
           updateEntry(
             bot,
@@ -92,16 +182,16 @@ exports.UserDBs = function(bot) {
         var guild = bot.guilds.find(
           guild => guild.name === `developer.ravencoin.online`
         );
-        if (!guild || !guild.member(member) || !guild.member(member).joinedAt) {
+        if (
+          !guild ||
+          !guild.member(member) ||
+          !guild.member(member).joinedTimestamp
+        ) {
           var joindate = null;
         } else {
-          var joindate = moment(guild.member(member).joinedAt)
-            .tz(`America/Los_Angeles`)
-            .format(`MM-DD-YYYY hh:mm a z`);
+          var joindate = guild.member(member).joinedTimestamp;
         }
-        var created = moment(member.createdAt)
-          .tz(`America/Los_Angeles`)
-          .format(`MM-DD-YYYY hh:mm a z`);
+        var created = member.createdTimestamp;
         newEntry(`users`, {
           accUserID: member.id,
           accUsername: member.username,

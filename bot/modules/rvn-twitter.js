@@ -1,13 +1,14 @@
+`use strict`;
 let TwitterStream = require(`twitter-stream-api`);
 let fs = require(`fs`);
-let config = require(`config`);
-let keys = config.get(`rvntweets`).config;
-let trackers = config.get(`rvntweets`).trackers;
-let tweetChannel = config.get(`General`).Channels.twitterRSS;
 let moment = require(`moment-timezone`);
 let pm2MetricGet = require(`../db-helpers.js`).pm2MetricGet;
 let pm2MetricSave = require(`../db-helpers.js`).pm2MetricSave;
 let randColor = require(`../helpers.js`).randColor;
+let config = require(`config`);
+let keys = config.get(`rvntweets`).config;
+let trackers = config.get(`rvntweets`).trackers;
+let tweetChannel = config.get(`General`).Channels.twitterRSS;
 setInterval(function() {
   pm2MetricGet(`tweets`);
 }, 100);

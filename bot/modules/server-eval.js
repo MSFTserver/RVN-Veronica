@@ -1,17 +1,18 @@
+`use strict`;
 let fetch = require(`node-fetch`);
-let inSpam = require(`../helpers.js`).inSpam;
 let qs = require(`querystring`);
 let moment = require(`moment-timezone`);
 let fs = require(`fs`);
-let TwitterStream = require(`twitter-stream-api`);
+let Twitter = require(`twitter-stream-api`);
 let _ = require(`underscore-node`);
 let Probe = require(`pmx`);
 let tcpp = require(`tcp-ping`);
 const path = require(`path`);
 const Discord = require(`discord.js`);
 const mongoose = require(`mongoose`);
-const performance = require(`perf_hooks`).performance;
+const { perf } = require(`perf_hooks`);
 const hastebin = require(`hastebin-gen`);
+let inSpam = require(`../helpers.js`).inSpam;
 exports.commands = [`eval`];
 exports.eval = {
   usage: ``,
@@ -25,9 +26,9 @@ exports.eval = {
     inSpam = null;
     try {
       const code = suffix.join(` `);
-      var t0 = performance.now();
+      var t0 = perf.now();
       let evaled = await eval(code);
-      var t1 = performance.now();
+      var t1 = perf.now();
       if (typeof evaled !== `string`) evaled = require(`util`).inspect(evaled);
       evaled = await clean(evaled);
       evaledt = `${(t1 - t0).toFixed(4)} ms`;

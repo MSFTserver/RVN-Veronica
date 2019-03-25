@@ -1,9 +1,10 @@
-let findEntry = require(`../db-helpers.js`).findEntry;
-let newEntry = require(`../db-helpers.js`).newEntry;
-let updateEntry = require(`../db-helpers.js`).updateEntry;
+`use strict`;
 let inSpam = require(`../helpers.js`).inSpam;
 let inPrivate = require(`../helpers.js`).inPrivate;
 let hasPerms = require(`../helpers.js`).hasPerms;
+let findEntry = require(`../db-helpers.js`).findEntry;
+let newEntry = require(`../db-helpers.js`).newEntry;
+let updateEntry = require(`../db-helpers.js`).updateEntry;
 let config = require(`config`);
 let channelID = config.get(`General`).Channels.botspam;
 exports.commands = [`rep`];
@@ -89,11 +90,11 @@ exports.rep = {
           if (
             !msg.guild ||
             !msg.guild.member(usr) ||
-            !msg.guild.member(usr).joinedAt
+            !msg.guild.member(usr).joinedTimestamp
           ) {
             var joindate = null;
           } else {
-            var joindate = msg.guild.member(usr).joinedAt.toString();
+            var joindate = msg.guild.member(usr).joinedTimestamp;
           }
           var newProfile = {
             accUserID: usr.id,
@@ -101,7 +102,7 @@ exports.rep = {
             accDiscriminator: usr.discriminator,
             accAvatar: usr.avatarURL,
             accJoinedDate: joindate,
-            accCreatedDate: usr.createdAt,
+            accCreatedDate: usr.createdTimestamp,
             accRep: 0
           };
           newEntry(bot, msg, `users`, newProfile);
@@ -143,11 +144,11 @@ exports.rep = {
           if (
             !msg.guild ||
             !msg.guild.member(usr) ||
-            !msg.guild.member(usr).joinedAt
+            !msg.guild.member(usr).joinedTimestamp
           ) {
             var joindate = null;
           } else {
-            var joindate = msg.guild.member(usr).joinedAt.toString();
+            var joindate = msg.guild.member(usr).joinedTimestamp;
           }
           var newProfile = {
             accUserID: usr.id,
@@ -155,7 +156,7 @@ exports.rep = {
             accDiscriminator: usr.discriminator,
             accAvatar: usr.avatarURL,
             accJoinedDate: joindate,
-            accCreatedDate: usr.createdAt,
+            accCreatedDate: usr.createdTimestamp,
             accRep: 0 + Number(amt)
           };
           newEntry(bot, msg, `users`, newProfile);
@@ -182,11 +183,11 @@ exports.rep = {
           if (
             !msg.guild ||
             !msg.guild.member(usr) ||
-            !msg.guild.member(usr).joinedAt
+            !msg.guild.member(usr).joinedTimestamp
           ) {
             var joindate = null;
           } else {
-            var joindate = msg.guild.member(usr).joinedAt.toString();
+            var joindate = msg.guild.member(usr).joinedTimestamp;
           }
           var newProfile = {
             accUserID: usr.id,
@@ -194,7 +195,7 @@ exports.rep = {
             accDiscriminator: usr.discriminator,
             accAvatar: usr.avatarURL,
             accJoinedDate: joindate,
-            accCreatedDate: usr.createdAt,
+            accCreatedDate: usr.createdTimestamp,
             accRep: 0
           };
           msg.channel.send(

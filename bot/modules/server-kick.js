@@ -1,9 +1,10 @@
+`use strict`;
+let moment = require(`moment-timezone`);
 let hasPerms = require(`../helpers.js`).hasPerms;
 let inPrivate = require(`../helpers.js`).inPrivate;
 let config = require(`config`);
 let modLogChannel = config.get(`moderation`).modLogChannel;
 let pm2Name = config.get(`General`).pm2Name;
-let moment = require(`moment-timezone`);
 exports.commands = [`kick`];
 exports.kick = {
   usage: `<@username> <reason>`,

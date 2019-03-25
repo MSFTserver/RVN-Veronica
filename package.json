@@ -21,8 +21,8 @@
   },
   "scripts": {
     "precommit": "npm run p && npm run p-style",
-    "p": "prettier --write \"{bot,.}/**/*.{js,json}\"",
-    "p-style": "prettier-stylelint --write \"{bot,.}/**/*.{js,json}\"",
+    "p": "prettier --write \"bot/**/*.{js,json}\"",
+    "p-style": "prettier-stylelint --write \"bot/**/*.{js,json}\"",
     "start": "pm2 start ecosystem.config.js"
   },
   "devDependencies": {

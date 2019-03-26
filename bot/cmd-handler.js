@@ -1,8 +1,10 @@
 let _ = require(`underscore-node`);
 let moment = require(`moment-timezone`);
+let { findEntry } = require(`./db-helpers.js`);
+let checkCommandThrottle = require(`./helpers.js`)
 let config = require(`config`);
-let logChannel = config.get(`moderation`).logchannel;
-let pm2Name = config.get(`General`).pm2Name;
+let { logChannel, commandThrottle } = config.get(`moderation`);
+let { pm2Name } = config.get(`General`);
 config = config.get(`bot`);
 exports.checkMessageForCommand = function(msg, bot, commands, aliases, isEdit) {
   if (msg.author.id != bot.user.id && msg.content.startsWith(config.prefix)) {
@@ -130,31 +132,51 @@ exports.checkMessageForCommand = function(msg, bot, commands, aliases, isEdit) {
         });
       }
     } else if (cmd) {
-      console.log(
-        `treating ${msg.content} from ` +
-          `UserName: ${msg.author.username} as command`
-      );
-      try {
-        suffix = suffix
-          .trim()
-          .split(` `)
-          .filter(function(n) {
-            return n !== ``;
-          });
-        cmd.process(bot, msg, suffix, isEdit);
-      } catch (e) {
-        var time = moment()
-          .tz(`America/Los_Angeles`)
-          .format(`MM-DD-YYYY hh:mm a`);
-        var msgTxt = `command ${cmdTxt} failed :(`;
-        var linebreak = `\n-------------------------------------------------\n`;
-        if (config.debug) {
-          msgTxt += `\n${e.stack}`;
+      var lastMsgTime,lastCMD; //msg.createdTimestamp from user-db handler
+      var currentTime = Date.now() - (commandThrottle * (100 * 10));
+      findEntry(bot, msg, `users`, `accUserID`, msg.author.id, findProfile);
+      function findProfile(bot, msg, gotProfile) {
+        if (gotProfile){
+          lastMsgTime = gotProfile[0].lastCMD.cmdTime;
+          lastCMD = gotProfile[0].lastCMD.cmdCont.split(" ")[0].trim();
         }
-        bot.channels
-          .get(logChannel)
-          .send(`[${time} PST][${pm2Name}] ${msgTxt + linebreak}`);
+        //console.log(lastCMD+"==="+config.prefix+cmdTxt+"="+(lastCMD === "!"+cmdTxt));
+        //console.log(lastMsgTime+">"+currentTime+"="+(lastMsgTime > currentTime));
+      if (lastMsgTime && lastCMD === (config.prefix+cmdTxt) || lastMsgTime > currentTime) {
+        msg.channel.send(`denied ${msg.content} throttling active!`)
+        console.log(
+          `denied ${msg.content} from ` +
+            `${msg.author.username} throttling active!`
+        );
+        return;
+      } else {
+        console.log(
+          `treating ${msg.content} from ` +
+            `${msg.author.username} as command`
+        );
+        try {
+          suffix = suffix
+            .trim()
+            .split(` `)
+            .filter(function(n) {
+              return n !== ``;
+            });
+          cmd.process(bot, msg, suffix, isEdit);
+        } catch (e) {
+          var time = moment()
+            .tz(`America/Los_Angeles`)
+            .format(`MM-DD-YYYY hh:mm a`);
+          var msgTxt = `command ${cmdTxt} failed :(`;
+          var linebreak = `\n-------------------------------------------------\n`;
+          if (config.debug) {
+            msgTxt += `\n${e.stack}`;
+          }
+          bot.channels
+            .get(logChannel)
+            .send(`[${time} PST][${pm2Name}] ${msgTxt + linebreak}`);
+        }
       }
+    }
     } else {
       return;
     }

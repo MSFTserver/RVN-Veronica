@@ -7,7 +7,7 @@
   },
    "moderation": {
       // Channel to log the bots moderation
-      "logchannel": "553459512976080902",
+      "logChannel": "553459512976080902",
       // error log channels
       "modLogChannel": "553484938150805515",
       // Bot Devs!
@@ -15,7 +15,9 @@
       "perms": [
           "Admin",
           "Veronica"
-      ]
+      ],
+	  //command throttling in seconds
+	  "commandThrottle": 60
   },
   "General": {
       //pm2 botname

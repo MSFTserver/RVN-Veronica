@@ -1,10 +1,10 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let hasPerms = require(`../helpers.js`).hasPerms;
-let inPrivate = require(`../helpers.js`).inPrivate;
+let { hasPerms } = require(`../helpers.js`);
+let { inPrivate } = require(`../helpers.js`);
 let config = require(`config`);
-let modLogChannel = config.get(`moderation`).modLogChannel;
-let pm2Name = config.get(`General`).pm2Name;
+let { modLogChannel } = config.get(`moderation`);
+let { pm2Name } = config.get(`General`);
 exports.commands = [`kick`];
 exports.kick = {
   usage: `<@username> <reason>`,
@@ -44,8 +44,8 @@ exports.kick = {
       .send(
         `[${time} PST][${pm2Name}]` +
           ` ${msg.author.username} **kicked** ${member.displayName},` +
-          ` reason: ${reason}`
+          ` **reason**: ${reason}`
       );
-    member.kick(`${member.displayName} **kicked**      reason: ${reason}`);
+    member.kick(`kicked by ${msg.author.username} Reason: ${reason}`);
   }
 };

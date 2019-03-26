@@ -1,19 +1,4 @@
 `use strict`;
-/*
-let fetch = require(`node-fetch`);
-let qs = require(`querystring`);
-let moment = require(`moment-timezone`);
-let fs = require(`fs`);
-let TwitterStream = require(`twitter-stream-api`);
-let _ = require(`underscore-node`);
-let Probe = require(`pmx`);
-let tcpp = require(`tcp-ping`);
-const path = require(`path`);
-const Discord = require(`discord.js`);
-const mongoose = require(`mongoose`);
-const performance = require(`perf_hooks`).performance;
-const hastebin = require(`hastebin-gen`);
-*/
 let inSpam = require(`../helpers.js`).inSpam;
 exports.commands = [`evalhelp`];
 exports.evalhelp = {
@@ -44,12 +29,12 @@ exports.evalhelp = {
         `let fs = require(\`fs\`);${t}${t}\n` +
         `let Twitter = require(\`twitter-stream-api\`);${t}${t}\n` +
         `let _ = require(\`underscore-node\`);${t}${t}\n` +
-        `let Probe = require(\`pmx\`);${t}${t}\n` +
+        `let probe = require(\`pmx\`).probe();${t}${t}\n` +
         `let tcpp = require(\`tcp-ping\`);${t}${t}\n` +
         `const path = require(\`path\`);${t}${t}\n` +
         `const Discord = require(\`discord.js\`);${t}${t}\n` +
         `const mongoose = require(\`mongoose\`);${t}${t}\n` +
-        `const { perf } = require(\`perf_hooks\`);${t}${t}\n` +
+        `const { performance } = require(\`perf_hooks\`);${t}${t}\n` +
         `const hastebin = require(\`hastebin-gen\`);${t}${t}\n\`\`\``
     };
     msg.channel.send({ embed });

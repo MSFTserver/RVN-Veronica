@@ -4,11 +4,10 @@ const mongoose = require(`mongoose`);
 let _ = require(`underscore-node`);
 let moment = require(`moment-timezone`);
 let fs = require(`fs`);
-let { checkMessageForCommand } = require("./cmd-handler.js");
+let { checkMessageForCommand } = require(`./cmd-handler.js`);
 let config = require(`config`);
-let logChannel = config.get(`moderation`).logchannel;
-let pm2Name = config.get(`General`).pm2Name;
-let mongoURL = config.get(`General`).mongoURL;
+let { logChannel } = config.get(`moderation`);
+let { pm2Name, mongoURL } = config.get(`General`);
 config = config.get(`bot`);
 mongoose
   .connect(mongoURL, { useNewUrlParser: !0, useCreateIndex: !0 })

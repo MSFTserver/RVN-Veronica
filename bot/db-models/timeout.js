@@ -1,6 +1,6 @@
 `use strict`;
 var mongoose = require(`mongoose`);
-var Schema = mongoose.Schema;
+var { Schema } = mongoose;
 var timeoutSchema = new Schema({
   userID: {
     type: String,

@@ -1,10 +1,10 @@
 `use strict`;
-let inSpam = require(`../helpers.js`).inSpam;
-let inPrivate = require(`../helpers.js`).inPrivate;
-let hasPerms = require(`../helpers.js`).hasPerms;
-let findEntry = require(`../db-helpers.js`).findEntry;
-let newEntry = require(`../db-helpers.js`).newEntry;
-let updateEntry = require(`../db-helpers.js`).updateEntry;
+let { inSpam } = require(`../helpers.js`);
+let { inPrivate } = require(`../helpers.js`);
+let { hasPerms } = require(`../helpers.js`);
+let { findEntry } = require(`../db-helpers.js`);
+let { newEntry } = require(`../db-helpers.js`);
+let { updateEntry } = require(`../db-helpers.js`);
 let config = require(`config`);
 let channelID = config.get(`General`).Channels.botspam;
 exports.commands = [`rep`];

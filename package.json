@@ -4,7 +4,6 @@
     "babel-preset-node8": "^1.2.0",
     "config": "^1.27.0",
     "discord.js": "^11.2.1",
-    "embed-creator": "^1.1.4",
     "hastebin-gen": "^1.3.1",
     "moment-timezone": "^0.5.14",
     "mongoose": "^5.0.13",
@@ -30,11 +29,10 @@
     "prettier-eslint": "^8.8.2",
     "prettier-stylelint": "^0.4.2"
   },
-  "name": "RVN-Veronica",
-  "version": "0.0.3",
-  "description": "discord bot for ravencoin communties discord",
+  "name": "Bot-tester",
+  "version": "0.0.0",
+  "description": "/Bot-tester",
   "main": "bot.js",
-  "repository": "https://github.com/raven-community/RVN-Veronica",
   "author": "MSFTserver <msftserver@gmail.com>",
   "license": "MIT"
 }

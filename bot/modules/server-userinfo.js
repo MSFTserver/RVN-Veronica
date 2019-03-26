@@ -1,13 +1,13 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let inSpam = require(`../helpers.js`).inSpam;
-let inPrivate = require(`../helpers.js`).inPrivate;
-let findEntry = require(`../db-helpers.js`).findEntry;
-let newEntry = require(`../db-helpers.js`).newEntry;
+let { inSpam } = require(`../helpers.js`);
+let { inPrivate } = require(`../helpers.js`);
+let { findEntry } = require(`../db-helpers.js`);
+let { newEntry } = require(`../db-helpers.js`);
 let config = require(`config`);
-let modLogChannel = config.get(`moderation`).modLogChannel;
+let { modLogChannel } = config.get(`moderation`);
 let channelID = config.get(`General`).Channels.botspam;
-let pm2Name = config.get(`General`).pm2Name;
+let { pm2Name } = config.get(`General`);
 exports.commands = [`userinfo`];
 exports.userinfo = {
   usage: `@username`,

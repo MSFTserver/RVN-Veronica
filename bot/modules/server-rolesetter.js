@@ -1,7 +1,7 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let inPrivate = require(`../helpers.js`).inPrivate;
-let inSpam = require(`../helpers.js`).inSpam;
+let { inPrivate } = require(`../helpers.js`);
+let { inSpam } = require(`../helpers.js`);
 let config = require(`config`);
 let serverRolesetter = config.get(`serverRolesetter`);
 let channelID = config.get(`General`).Channels.botspam;

@@ -1,8 +1,8 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let inSpam = require(`../helpers.js`).inSpam;
+let { inSpam } = require(`../helpers.js`);
 let config = require(`config`);
-let pm2Name = config.get(`General`).pm2Name;
+let { pm2Name } = config.get(`General`);
 exports.commands = [`uptime`];
 exports.uptime = {
   usage: ``,

@@ -1,10 +1,10 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let hasPerms = require(`../helpers.js`).hasPerms;
-let inPrivate = require(`../helpers.js`).inPrivate;
+let { hasPerms } = require(`../helpers.js`);
+let { inPrivate } = require(`../helpers.js`);
 let config = require(`config`);
-let modLogChannel = config.get(`moderation`).modLogChannel;
-let pm2Name = config.get(`General`).pm2Name;
+let { modLogChannel } = config.get(`moderation`);
+let { pm2Name } = config.get(`General`);
 exports.commands = [`ban`];
 exports.ban = {
   usage: `<@username> <purge 0,1,7> <reason>`,
@@ -58,7 +58,7 @@ exports.ban = {
     member
       .ban({
         days: Number(purge),
-        reason: `banned by ${msg.author.username}      Reason: ${reason}`
+        reason: `banned by ${msg.author.username} Reason: ${reason}`
       })
       .catch(function(error) {
         msg.channel.send(error);

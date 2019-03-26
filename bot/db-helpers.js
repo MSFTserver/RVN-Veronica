@@ -1,9 +1,9 @@
 const mongoose = require(`mongoose`);
-let Probe = require(`pmx`).probe();
+let probe = require(`pmx`).probe();
 let moment = require(`moment-timezone`);
 let config = require(`config`);
-let logChannel = config.get(`moderation`).logchannel;
-let pm2Name = config.get(`General`).pm2Name;
+let { logChannel } = config.get(`moderation`);
+let { pm2Name } = config.get(`General`);
 exports.findEntry = function(bot, msg, useDB, keyName, valueName, callback) {
   var database = mongoose.model(useDB);
   try {
@@ -83,7 +83,7 @@ exports.pm2MetricGet = function(pm2MetricName) {
     if (!docs || !docs[0]) {
       return;
     } else {
-      Probe.metric({
+      probe.metric({
         name: pm2MetricName,
         value: function() {
           return docs[0].metric;

@@ -1,6 +1,6 @@
 `use strict`;
 let tcpp = require(`tcp-ping`);
-let inSpam = require(`../helpers.js`).inSpam;
+let { inSpam } = require(`../helpers.js`);
 let config = require(`config`);
 let channelID = config.get(`General`).Channels.botspam;
 exports.commands = [`status`];

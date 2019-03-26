@@ -1,6 +1,6 @@
 `use strict`;
 var mongoose = require(`mongoose`);
-var Schema = mongoose.Schema;
+var { Schema } = mongoose;
 var pm2Schema = new Schema({
   metricName: {
     type: String,

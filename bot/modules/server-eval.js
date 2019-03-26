@@ -5,12 +5,12 @@ let moment = require(`moment-timezone`);
 let fs = require(`fs`);
 let Twitter = require(`twitter-stream-api`);
 let _ = require(`underscore-node`);
-let Probe = require(`pmx`);
+let probe = require(`pmx`).probe();
 let tcpp = require(`tcp-ping`);
 const path = require(`path`);
 const Discord = require(`discord.js`);
 const mongoose = require(`mongoose`);
-const perf = require(`perf_hooks`).performance;
+const { performance } = require(`perf_hooks`);
 const hastebin = require(`hastebin-gen`);
 let inSpam = require(`../helpers.js`).inSpam;
 exports.commands = [`eval`];
@@ -24,31 +24,36 @@ exports.eval = {
       return;
     }
     inSpam = null;
+    const code = suffix.join(` `);
     try {
-      const code = suffix.join(` `);
-      var t0 = perf.now();
+      var t0 = performance.now();
       let evaled = await eval(code);
-      var t1 = perf.now();
+      var t1 = performance.now();
       if (typeof evaled !== `string`) evaled = require(`util`).inspect(evaled);
       evaled = await clean(evaled);
       evaledt = `${(t1 - t0).toFixed(4)} ms`;
       let message;
-      if (evaled.length > 999) {
-        post = evaled.replace(/^(.{999}[^\s]*).*/, `$1`);
+      if (evaled.length > 950) {
+        post = evaled.replace(/^(.{950}[^\s]*).*/, `$1`);
         post = await hastebin(post, `js`);
         message =
-          `**Evaluated**:✅ (${evaledt})\n` +
+          `**Eval**:\n\`${code}\`\n`+
+          `**Evaluated**:🔵 (${evaledt})\n` +
           `response was to long instead i posted it to hastebin for you:\n` +
           ` ${post}`;
       } else {
         message =
-          `**Evaluated**:✅ (${evaledt})\n` + `\`\`\`xl\n${evaled}\n\`\`\``;
+          `**Eval**: \`${code}\`\n`+
+          `**Evaluated**:🔵 (${evaledt})\n` + `\`\`\`xl\n${evaled}\n\`\`\``;
       }
       msg.channel.send(message);
       inSpam = require(`../helpers.js`).inSpam;
     } catch (err) {
       err = await clean(err);
-      msg.channel.send(`**Evaluated**:❌\n\`\`\`xl\n${err}\n\`\`\``);
+      msg.channel.send(
+        `**Eval**:\n\`${code}\`\n`+
+        `**Evaluated**:🔴\n\`\`\`xl\n${err}\n\`\`\``
+      );
       inSpam = require(`../helpers.js`).inSpam;
     }
     function clean(text) {

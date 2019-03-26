@@ -1,13 +1,13 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let hasPerms = require(`../helpers.js`).hasPerms;
-let inPrivate = require(`../helpers.js`).inPrivate;
-let findEntry = require(`../db-helpers.js`).findEntry;
-let newEntry = require(`../db-helpers.js`).newEntry;
-let updateEntry = require(`../db-helpers.js`).updateEntry;
+let { hasPerms } = require(`../helpers.js`);
+let { inPrivate } = require(`../helpers.js`);
+let { findEntry } = require(`../db-helpers.js`);
+let { newEntry } = require(`../db-helpers.js`);
+let { updateEntry } = require(`../db-helpers.js`);
 let config = require(`config`);
-let modLogChannel = config.get(`moderation`).modLogChannel;
-let pm2Name = config.get(`General`).pm2Name;
+let { modLogChannel } = config.get(`moderation`);
+let { pm2Name } = config.get(`General`);
 exports.commands = [`timeout`];
 exports.timeout = {
   usage: `<@username> <Minutes> <reason>`,

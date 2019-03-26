@@ -8,7 +8,7 @@ let plugin_directory = path.join(__dirname, `modules`);
 let plugins = getPlugins(plugin_directory);
 let moment = require(`moment-timezone`);
 let config = require(`config`);
-let pm2Name = config.get(`General`).pm2Name;
+let { pm2Name } = config.get(`General`);
 exports.init = function init() {
   load_plugins();
 };

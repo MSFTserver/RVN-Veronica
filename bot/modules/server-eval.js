@@ -33,26 +33,27 @@ exports.eval = {
       evaled = await clean(evaled);
       evaledt = `${(t1 - t0).toFixed(4)} ms`;
       let message;
-      if (evaled.length > 950) {
-        post = evaled.replace(/^(.{950}[^\s]*).*/, `$1`);
+      if (evaled.length > 1900) {
+        post = evaled.replace(/^(.{1900}[^\s]*).*/, `$1`);
         post = await hastebin(post, `js`);
         message =
-          `**Eval**:\n\`${code}\`\n`+
+          `**Eval**:\n\`${code}\`\n` +
           `**Evaluated**:🔵 (${evaledt})\n` +
           `response was to long instead i posted it to hastebin for you:\n` +
           ` ${post}`;
       } else {
         message =
-          `**Eval**: \`${code}\`\n`+
-          `**Evaluated**:🔵 (${evaledt})\n` + `\`\`\`xl\n${evaled}\n\`\`\``;
+          `**Eval**: \`${code}\`\n` +
+          `**Evaluated**:🔵 (${evaledt})\n` +
+          `\`\`\`xl\n${evaled}\n\`\`\``;
       }
       msg.channel.send(message);
       inSpam = require(`../helpers.js`).inSpam;
     } catch (err) {
       err = await clean(err);
       msg.channel.send(
-        `**Eval**:\n\`${code}\`\n`+
-        `**Evaluated**:🔴\n\`\`\`xl\n${err}\n\`\`\``
+        `**Eval**:\n\`${code}\`\n` +
+          `**Evaluated**:🔴\n\`\`\`xl\n${err}\n\`\`\``
       );
       inSpam = require(`../helpers.js`).inSpam;
     }

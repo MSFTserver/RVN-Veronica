@@ -1,7 +1,6 @@
 let _ = require(`underscore-node`);
 let moment = require(`moment-timezone`);
 let { findEntry } = require(`./db-helpers.js`);
-let checkCommandThrottle = require(`./helpers.js`)
 let config = require(`config`);
 let { logChannel, commandThrottle } = config.get(`moderation`);
 let { pm2Name } = config.get(`General`);
@@ -132,27 +131,38 @@ exports.checkMessageForCommand = function(msg, bot, commands, aliases, isEdit) {
         });
       }
     } else if (cmd) {
-      var lastMsgTime,lastCMD; //msg.createdTimestamp from user-db handler
-      var currentTime = Date.now() - (commandThrottle * (100 * 10));
+      var lastMsgTime, lastCMD;
+      var currentTime = Date.now().valueOf();
+      currentTime = new Date(currentTime - commandThrottle * (10 * 100));
       findEntry(bot, msg, `users`, `accUserID`, msg.author.id, findProfile);
       function findProfile(bot, msg, gotProfile) {
-        if (gotProfile){
-          lastMsgTime = gotProfile[0].lastCMD.cmdTime;
+        if (gotProfile) {
+          lastMsgTime = new Date(gotProfile[0].lastCMD.cmdTime);
           lastCMD = gotProfile[0].lastCMD.cmdCont.split(" ")[0].trim();
         }
-        //console.log(lastCMD+"==="+config.prefix+cmdTxt+"="+(lastCMD === "!"+cmdTxt));
-        //console.log(lastMsgTime+">"+currentTime+"="+(lastMsgTime > currentTime));
-      if (lastMsgTime && lastCMD === (config.prefix+cmdTxt) || lastMsgTime > currentTime) {
-        msg.channel.send(`denied ${msg.content} throttling active!`)
+        if (msg.author.id !== msg.guild.ownerID) {
+          if (
+            lastMsgTime &&
+            lastCMD === config.prefix + cmdTxt &&
+            lastMsgTime > currentTime
+          ) {
+            msg.channel.send(`denied ${msg.content} throttling active!`);
+            console.log(
+              `denied ${msg.content} from ` +
+                `${msg.author.username} throttling active!`
+            );
+            return;
+          } else if (lastMsgTime && lastMsgTime > currentTime) {
+            msg.channel.send(`denied ${msg.content} throttling active!`);
+            console.log(
+              `denied ${msg.content} from ` +
+                `${msg.author.username} throttling active!`
+            );
+            return;
+          }
+        }
         console.log(
-          `denied ${msg.content} from ` +
-            `${msg.author.username} throttling active!`
-        );
-        return;
-      } else {
-        console.log(
-          `treating ${msg.content} from ` +
-            `${msg.author.username} as command`
+          `treating ${msg.content} from ` + `${msg.author.username} as command`
         );
         try {
           suffix = suffix
@@ -176,7 +186,6 @@ exports.checkMessageForCommand = function(msg, bot, commands, aliases, isEdit) {
             .send(`[${time} PST][${pm2Name}] ${msgTxt + linebreak}`);
         }
       }
-    }
     } else {
       return;
     }

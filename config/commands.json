@@ -14,38 +14,5 @@
         "icon_url": "https://i.imgur.com/ZoakSOl.png"
       }
     }
-  },
-  "!donate": {
-    "usage": "",
-    "description": "Raven Donations!",
-    "operation": "send",
-    "bundle": {
-      "url": "",
-      "title": "",
-      "description":
-        "Development Donation Address: [RW3x4EfTRAtPV2DeKexwFgp8wb4TSYebZA](https://rvn.hash4.life/address/RW3x4EfTRAtPV2DeKexwFgp8wb4TSYebZA)\n100% of collected funds will be used for things like new pools, added network tools for RVN, new mining clients, and further code development.\n\nMarketing Donation Address: [RXYnS1zrMMSiphwaGemdck66fawqrUFJkv](https://rvn.hash4.life/address/RXYnS1zrMMSiphwaGemdck66fawqrUFJkv)\n100% of collected funds will be used for things like running ads, translations, graphics, videos, and any other applicable needs.\n",
-      "color": 7976557,
-      "author": {
-        "name": "Raven Donations!",
-        "url": "",
-        "icon_url": "https://i.imgur.com/yWf5USu.png"
-      }
-    }
-  },
-  "!invite": {
-    "usage": "",
-    "description": "Discord Invite Code",
-    "operation": "send",
-    "bundle": {
-      "url": "",
-      "title": "",
-      "description": "http://discord.ravencoin.online",
-      "color": 7976557,
-      "author": {
-        "name": "Invite Code",
-        "url": "http://discord.ravencoin.online",
-        "icon_url": "https://i.imgur.com/yWf5USu.png"
-      }
-    }
   }
 }

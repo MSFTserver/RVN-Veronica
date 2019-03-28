@@ -3,7 +3,28 @@ let probe = require(`pmx`).probe();
 let moment = require(`moment-timezone`);
 let config = require(`config`);
 let { logChannel } = config.get(`moderation`);
-let { pm2Name } = config.get(`General`);
+let { pm2Name, mongoURL } = config.get(`General`);
+exports.dbConnect = async function() {
+  await mongoose
+    .connect(mongoURL, { useNewUrlParser: !0, useCreateIndex: !0 })
+    .then(() => {
+      var time = moment()
+        .tz(`America/Los_Angeles`)
+        .format(`MM-DD-YYYY hh:mm a`);
+      console.log(`[${time} PST][${pm2Name}] Mongodb Connection Successful`);
+      require(`../db-models/pm2.js`);
+      require(`../db-models/user.js`);
+      require(`../db-models/timeout.js`);
+    })
+    .catch(err => {
+      var time = moment()
+        .tz(`America/Los_Angeles`)
+        .format(`MM-DD-YYYY hh:mm a`);
+      console.log(
+        `[${time} PST][${pm2Name}] Mongodb Connection Error:, ${err}`
+      );
+    });
+};
 exports.findEntry = function(bot, msg, useDB, keyName, valueName, callback) {
   var database = mongoose.model(useDB);
   try {

@@ -1,7 +1,7 @@
 `use strict`;
 let fetch = require(`node-fetch`);
 let qs = require(`querystring`);
-let { inSpam } = require(`../helpers.js`);
+let { inSpam } = require(`../helpers/cmd-helper.js`);
 exports.commands = [`djsdocs`];
 exports.djsdocs = {
   usage: ``,

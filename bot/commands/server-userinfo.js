@@ -1,9 +1,7 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let { inSpam } = require(`../helpers.js`);
-let { inPrivate } = require(`../helpers.js`);
-let { findEntry } = require(`../db-helpers.js`);
-let { newEntry } = require(`../db-helpers.js`);
+let { inSpam, inPrivate } = require(`../helpers/cmd-helper.js`);
+let { findEntry, newEntry } = require(`../helpers/db-helper.js`);
 let config = require(`config`);
 let { modLogChannel } = config.get(`moderation`);
 let channelID = config.get(`General`).Channels.botspam;

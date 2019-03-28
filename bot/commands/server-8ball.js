@@ -1,6 +1,5 @@
 `use strict`;
-let { inSpam } = require(`../helpers.js`);
-let { inPrivate } = require(`../helpers.js`);
+let { inSpam, inPrivate } = require(`../helpers/cmd-helper.js`);
 let config = require(`config`);
 let channelID = config.get(`General`).Channels.botspam;
 exports.commands = [`8ball`];

@@ -1,17 +1,16 @@
 `use strict`;
 const Discord = require(`discord.js`);
-let commands = require(`../../config/commands`);
+let commands = require(`../../config/commands.json`);
 let initialized = !1;
 let discordBot = null;
 let commandsList = null;
-module.exports = { init: init };
-function init(discordBot_) {
+exports.helpfulHandler = function(discordBot_) {
   if (initialized) {
     throw new Error(`init was already called once`);
   }
   discordBot = discordBot_;
   discordBot.on(`message`, checkForCommand);
-}
+};
 let checkForCommand = function(message) {
   let firstRun = !1;
   if (commandsList === null) {

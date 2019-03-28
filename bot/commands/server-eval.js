@@ -12,7 +12,7 @@ const Discord = require(`discord.js`);
 const mongoose = require(`mongoose`);
 const { performance } = require(`perf_hooks`);
 const hastebin = require(`hastebin-gen`);
-let inSpam = require(`../helpers.js`).inSpam;
+let inSpam = require(`../helpers/cmd-helper.js`).inSpam;
 exports.commands = [`eval`];
 exports.eval = {
   usage: ``,
@@ -34,20 +34,18 @@ exports.eval = {
       evaledt = `${(t1 - t0).toFixed(4)} ms`;
       let message;
       //if (evaled.length > 1900) {
-        //post = evaled.replace(/^(.{1900}[^\s]*).*/, `$1`);
-        //post = await hastebin(post, `js`);
-        //message =
-          //`**Eval**:\n\`${code}\`\n` +
-          //`**Evaluated**:🔵 (${evaledt})\n` +
-          //`response was to long instead i posted it to hastebin for you:\n` +
-          //` ${post}`;
+      //post = evaled.replace(/^(.{1900}[^\s]*).*/, `$1`);
+      //post = await hastebin(post, `js`);
+      //message =
+      //`**Eval**:\n\`${code}\`\n` +
+      //`**Evaluated**:🔵 (${evaledt})\n` +
+      //`response was to long instead i posted it to hastebin for you:\n` +
+      //` ${post}`;
       //} else {
-        message =
-          `**Eval**: \`${code}\`\n` +
-          `**Evaluated**:🔵 (${evaledt})\n`
+      message = `**Eval**: \`${code}\`\n` + `**Evaluated**:🔵 (${evaledt})\n`;
       //}
       msg.channel.send(message);
-	  msg.channel.send(evaled,{split:true,code:'xl'})
+      msg.channel.send(evaled, { split: true, code: "xl" });
       inSpam = require(`../helpers.js`).inSpam;
     } catch (err) {
       err = await clean(err);

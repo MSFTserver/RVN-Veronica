@@ -1,11 +1,59 @@
 let _ = require(`underscore-node`);
 let moment = require(`moment-timezone`);
-let { findEntry } = require(`./db-helpers.js`);
+let { findEntry } = require(`../helpers/db-helper.js`);
 let config = require(`config`);
 let { logChannel, commandThrottle } = config.get(`moderation`);
 let { pm2Name } = config.get(`General`);
 config = config.get(`bot`);
-exports.checkMessageForCommand = function(msg, bot, commands, aliases, isEdit) {
+var commands = {};
+var aliases;
+exports.addAliases = function() {
+  try {
+    var time = moment()
+      .tz(`America/Los_Angeles`)
+      .format(`MM-DD-YYYY hh:mm a`);
+    aliases = require(`../../config/alias.json`);
+    console.log(
+      `[${time} PST][${pm2Name}]` +
+        ` ${Object.keys(aliases).length} aliases Loaded!`
+    );
+  } catch (e) {
+    var time = moment()
+      .tz(`America/Los_Angeles`)
+      .format(`MM-DD-YYYY hh:mm a`);
+    console.log(`[${time} PST][${pm2Name}] No aliases defined`);
+  }
+};
+exports.addCommand = function(bot, commandName, commandObject) {
+  try {
+    commands[commandName] = commandObject;
+  } catch (err) {
+    var time = moment()
+      .tz(`America/Los_Angeles`)
+      .format(`MM-DD-YYYY hh:mm a`);
+    console.log(`[${time} PST][${pm2Name}] Error addCommand: ${err}`);
+    bot.channels
+      .get(logChannel)
+      .send(`[${time} PST][${pm2Name}] Error addCommand: ${err}`);
+  }
+};
+exports.addCustomFunc = function(bot, customFunc) {
+  try {
+    customFunc(bot);
+  } catch (err) {
+    var time = moment()
+      .tz(`America/Los_Angeles`)
+      .format(`MM-DD-YYYY hh:mm a`);
+    console.log(`[${time} PST][${pm2Name}] Error addCustomFunc: ${err}`);
+    bot.channels
+      .get(logChannel)
+      .send(`[${time} PST][${pm2Name}] Error addCustomFunc: ${err}`);
+  }
+};
+exports.commandCount = function(err) {
+  return Object.keys(commands).length;
+};
+exports.checkMessageForCommand = function(msg, bot, isEdit) {
   if (msg.author.id != bot.user.id && msg.content.startsWith(config.prefix)) {
     if (
       !msg.author.presence.status ||

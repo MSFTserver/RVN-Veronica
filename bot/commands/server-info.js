@@ -1,9 +1,8 @@
 `use strict`;
 const { RichEmbed } = require(`discord.js`);
 let moment = require(`moment-timezone`);
-let { hasPerms } = require(`../helpers.js`);
-let { inPrivate } = require(`../helpers.js`);
-let { inSpam } = require(`../helpers.js`);
+let { hasPerms, inPrivate } = require(`../helpers/cmd-helper.js`);
+let { inSpam } = require(`../helpers/cmd-helper.js`);
 exports.commands = [`serverstats`];
 exports.serverstats = {
   usage: ``,

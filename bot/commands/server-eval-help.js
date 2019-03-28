@@ -1,5 +1,5 @@
 `use strict`;
-let inSpam = require(`../helpers.js`).inSpam;
+let { inSpam } = require(`../helpers/cmd-helper.js`);
 exports.commands = [`evalhelp`];
 exports.evalhelp = {
   usage: ``,

@@ -4,16 +4,16 @@ const fs = require(`fs`),
 function getPlugins(srcpath) {
   return fs.readdirSync(srcpath);
 }
-let plugin_directory = path.join(__dirname, `modules`);
+let plugin_directory = path.join(__dirname, `../`, `commands`);
 let plugins = getPlugins(plugin_directory);
 let moment = require(`moment-timezone`);
 let config = require(`config`);
 let { pm2Name } = config.get(`General`);
-exports.init = function init() {
-  load_plugins();
+exports.pluginHandler = function(bot) {
+  load_plugins(bot);
 };
-function load_plugins() {
-  const dbot = require(`./bot.js`);
+function load_plugins(bot) {
+  const dbot = require(`./cmd-handler.js`);
   let commandCount = 0;
   let otherFunc = 0;
   for (let i = 0; i < plugins.length; i++) {
@@ -33,7 +33,11 @@ function load_plugins() {
       if (`commands` in plugin) {
         for (let j = 0; j < plugin.commands.length; j++) {
           if (plugin.commands[j] in plugin) {
-            dbot.addCommand(plugin.commands[j], plugin[plugin.commands[j]]);
+            dbot.addCommand(
+              bot,
+              plugin.commands[j],
+              plugin[plugin.commands[j]]
+            );
             commandCount++;
           }
         }
@@ -41,7 +45,7 @@ function load_plugins() {
       if (`custom` in plugin) {
         for (let j = 0; j < plugin.custom.length; j++) {
           if (plugin.custom[j] in plugin) {
-            dbot.addCustomFunc(plugin[plugin.custom[j]]);
+            dbot.addCustomFunc(bot, plugin[plugin.custom[j]]);
             otherFunc++;
           }
         }

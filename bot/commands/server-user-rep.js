@@ -1,21 +1,18 @@
 `use strict`;
-let { inSpam } = require(`../helpers.js`);
-let { inPrivate } = require(`../helpers.js`);
-let { hasPerms } = require(`../helpers.js`);
-let { findEntry } = require(`../db-helpers.js`);
-let { newEntry } = require(`../db-helpers.js`);
-let { updateEntry } = require(`../db-helpers.js`);
+let { inSpam, inPrivate, hasPerms } = require(`../helpers/cmd-helper.js`);
+let { findEntry, newEntry, updateEntry } = require(`../helpers/db-helper.js`);
 let config = require(`config`);
 let channelID = config.get(`General`).Channels.botspam;
+let { prefix } = config.get(`bot`);
 exports.commands = [`rep`];
 exports.rep = {
   usage: ``,
   description:
     `check your reputation\n` +
     `     (rep is awarded 1 per message sent)\n` +
-    `**!rep give <@ username> <amount>**\n` +
+    `**${prefix}rep give <@ username> <amount>**\n` +
     `     :desktop: :cop: gives specified amoutn of rep to user :cop: :desktop:\n` +
-    `**!rep take <@ username> <amount>**\n` +
+    `**${prefix}rep take <@ username> <amount>**\n` +
     `    :desktop: :cop: takes specified amount of rep from user :cop: :desktop:`,
   process: function(bot, msg, suffix) {
     if (inPrivate(msg)) {

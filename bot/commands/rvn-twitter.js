@@ -2,9 +2,8 @@
 let TwitterStream = require(`twitter-stream-api`);
 let fs = require(`fs`);
 let moment = require(`moment-timezone`);
-let { pm2MetricGet } = require(`../db-helpers.js`);
-let { pm2MetricSave } = require(`../db-helpers.js`);
-let { randColor } = require(`../helpers.js`);
+let { pm2MetricGet, pm2MetricSave } = require(`../helpers/db-helper.js`);
+let { randColor } = require(`../helpers/cmd-helper.js`);
 let config = require(`config`);
 let keys = config.get(`rvntweets`).config;
 let { trackers } = config.get(`rvntweets`);

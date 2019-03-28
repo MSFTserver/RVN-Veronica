@@ -1,10 +1,7 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let { hasPerms } = require(`../helpers.js`);
-let { inPrivate } = require(`../helpers.js`);
-let { findEntry } = require(`../db-helpers.js`);
-let { newEntry } = require(`../db-helpers.js`);
-let { updateEntry } = require(`../db-helpers.js`);
+let { hasPerms, inPrivate } = require(`../helpers/cmd-helper.js`);
+let { findEntry, newEntry, updateEntry } = require(`../helpers/db-helper.js`);
 let config = require(`config`);
 let { modLogChannel } = config.get(`moderation`);
 let { pm2Name } = config.get(`General`);
@@ -75,9 +72,10 @@ exports.timeout = {
         member.addRole(msg.guild.roles.find(val => val.name === `Timeout`));
         newEntry(bot, msg, `timeout`, TimeoutUser);
         msg.channel.send(
-          `**${member.displayName}** Has Been Put in Timeout for ${
-            timer
-          } Minutes\n` + `reason: ${reason}`
+          `**${
+            member.displayName
+          }** Has Been Put in Timeout for ${timer} Minutes\n` +
+            `reason: ${reason}`
         );
         bot.channels
           .get(modLogChannel)
@@ -133,9 +131,9 @@ exports.timeout = {
                 .tz(`America/Los_Angeles`)
                 .format(`MM-DD-YYYY hh:mm a`)} PST][${pm2Name}]` +
                 ` ${msg.author.username} Put **${member} ** in Timeout` +
-                `Timeouts: ${gotProfile[0].times} times, this time for ${
-                  timer
-                } Minutes\n` +
+                `Timeouts: ${
+                  gotProfile[0].times
+                } times, this time for ${timer} Minutes\n` +
                 `reason: ${reason}`
             );
         } else {

@@ -1,6 +1,5 @@
 `use strict`;
-let { hasPerms } = require(`../helpers.js`);
-let { inPrivate } = require(`../helpers.js`);
+let { hasPerms, inPrivate } = require(`../helpers/cmd-helper.js`);
 let initialMessage =
   `Welcome to the developer.ravencoin.online Discord!\n` +
   `As a newcomer, you won't be able to participate for the next 5 minutes and until step 5 is completed.\n` +

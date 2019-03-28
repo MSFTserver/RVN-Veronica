@@ -1,6 +1,6 @@
 `use strict`;
 let moment = require(`moment-timezone`);
-let { inSpam } = require(`../helpers.js`);
+let { inSpam } = require(`../helpers/cmd-helper.js`);
 let config = require(`config`);
 let { pm2Name } = config.get(`General`);
 exports.commands = [`uptime`];

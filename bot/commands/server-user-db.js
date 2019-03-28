@@ -1,9 +1,9 @@
 `use strict`;
-let { inPrivate } = require(`../helpers.js`);
-let { hasExcludedSpamChannels } = require(`../helpers.js`);
-let { findEntry } = require(`../db-helpers.js`);
-let { newEntry } = require(`../db-helpers.js`);
-let { updateEntry } = require(`../db-helpers.js`);
+let {
+  inPrivate,
+  hasExcludedSpamChannels
+} = require(`../helpers/cmd-helper.js`);
+let { findEntry, newEntry, updateEntry } = require(`../helpers/db-helper.js`);
 let { prefix } = require(`config`).bot;
 exports.custom = [`UserDBs`];
 exports.UserDBs = function(bot) {

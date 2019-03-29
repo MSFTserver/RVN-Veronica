@@ -31,8 +31,8 @@ let checkForCommand = function(message) {
     ) {
       message.channel.send(``, new Discord.RichEmbed(commands[command].bundle));
     }
-    commandFound(message);
   });
+  commandFound(message);
 };
 function commandFound(message) {
   if (

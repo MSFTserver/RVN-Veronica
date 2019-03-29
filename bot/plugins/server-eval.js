@@ -46,14 +46,14 @@ exports.eval = {
       //}
       msg.channel.send(message);
       msg.channel.send(evaled, { split: true, code: "xl" });
-      inSpam = require(`../helpers.js`).inSpam;
+      inSpam = require(`../helpers/cmd-helper.js`).inSpam;
     } catch (err) {
       err = await clean(err);
       msg.channel.send(
         `**Eval**:\n\`${code}\`\n` +
           `**Evaluated**:🔴\n\`\`\`xl\n${err}\n\`\`\``
       );
-      inSpam = require(`../helpers.js`).inSpam;
+      inSpam = require(`../helpers/cmd-helper.js`).inSpam;
     }
     function clean(text) {
       if (typeof text === `string`) {

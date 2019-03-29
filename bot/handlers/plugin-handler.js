@@ -70,6 +70,7 @@ function load_plugins(bot) {
       }
     }
   }
+  bot.commands = commands;
   var time = moment()
     .tz(`America/Los_Angeles`)
     .format(`MM-DD-YYYY hh:mm a`);

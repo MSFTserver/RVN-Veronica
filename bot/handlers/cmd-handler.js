@@ -20,7 +20,10 @@ let checkForCommand = function(message) {
     commandsList = ``;
   }
   Object.keys(commands).forEach(command => {
-    if (firstRun) commandsList += command + `, `;
+    discordBot.commands[command] = commands[command];
+    if (firstRun) {
+      commandsList += prefix + command + `, `;
+    }
     if (
       !message.author.bot &&
       message.content.toLowerCase().indexOf(command.toLowerCase()) >= 0 &&
@@ -28,14 +31,17 @@ let checkForCommand = function(message) {
     ) {
       message.channel.send(``, new Discord.RichEmbed(commands[command].bundle));
     }
+    commandFound(message);
   });
+};
+function commandFound(message) {
   if (
     !message.author.bot &&
-    message.content.toLowerCase().indexOf(`${config.prefix}helpcommands`) >= 0
+    message.content.toLowerCase().indexOf(`${prefix}helpcommands`) >= 0
   ) {
-    let bundle = commands[`${config.prefix}helpcommands`].bundle;
+    let bundle = commands[`helpcommands`].bundle;
     commandsList = commandsList.replace(/,\s$/g, ``);
     bundle.description = `**${commandsList}**`;
     message.channel.send(``, new Discord.RichEmbed(bundle));
   }
-};
+}

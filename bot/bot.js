@@ -10,10 +10,10 @@ start();
 async function start() {
   await dbConnect(); //connect to mongodb
   var bot = new Discord.Client(); //creates the discord client
-  pluginHandler(bot); //load plugins
-  cmdHandler(bot); //load commands json
-  addAliases(); //load aliases for commands
-  eventHandler(bot); // handles events eg. `ready`,`message`
-  errorHandler(process, bot); // handles errors eg. `error`,`disconnect`
-  bot.login(token); // login the bot to discord
+  await pluginHandler(bot); //load plugins
+  await cmdHandler(bot); //load commands json
+  await addAliases(); //load aliases for commands
+  await eventHandler(bot); // handles events eg. `ready`,`message`
+  await errorHandler(process, bot); // handles errors eg. `error`,`disconnect`
+  await bot.login(token); // login the bot to discord
 }

@@ -1,5 +1,27 @@
 {
+  "ping": "status",
+  "check": "status",
+  "isitup": "status",
+  "isitdown": "status",
+  "sitestatus": "status",
+  "user": "userinfo",
+  "profile": "userinfo",
+  "userprofile": "userinfo",
+  "profileuser": "userinfo",
   "delete": "purge",
   "remove": "purge",
-  "prune": "purge"
+  "prune": "purge",
+  "stats": "serverstats",
+  "server": "serverstats",
+  "serverinfo": "serverstats",
+  "infoserver": "serverstats",
+  "eightball": "8ball",
+  "magic8ball": "8ball",
+  "ravengods": "8ball",
+  "rvngods": "8ball",
+  "gods": "8ball",
+  "ask": "8ball",
+  "xp": "rep",
+  "karma": "rep",
+  "points": "rep"
 }

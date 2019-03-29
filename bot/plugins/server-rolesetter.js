@@ -141,7 +141,7 @@ exports.roles = {
         ],
         footer: {
           icon_url: msg.author.avatarURL,
-          text: `Requested by: ${JSON.stringify(msg.author.username)}`
+          text: `Requested by: "${msg.author.username}"`
         }
       }
     });

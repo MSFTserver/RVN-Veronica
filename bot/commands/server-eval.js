@@ -13,11 +13,14 @@ const mongoose = require(`mongoose`);
 const { performance } = require(`perf_hooks`);
 const hastebin = require(`hastebin-gen`);
 let inSpam = require(`../helpers/cmd-helper.js`).inSpam;
+let config = require(`config`);
+let channelID = config.get(`General`).Channels.botspam;
 exports.commands = [`eval`];
 exports.eval = {
   usage: ``,
   description: ``,
   process: async function(bot, msg, suffix) {
+    let node_modules = bot.node_modules;
     if (msg.author.id !== msg.guild.owner.id) return;
     if (!inSpam(msg)) {
       msg.channel.send(`Please use <#${channelID}> to talk to eval bot.`);
@@ -33,17 +36,7 @@ exports.eval = {
       evaled = await clean(evaled);
       evaledt = `${(t1 - t0).toFixed(4)} ms`;
       let message;
-      //if (evaled.length > 1900) {
-      //post = evaled.replace(/^(.{1900}[^\s]*).*/, `$1`);
-      //post = await hastebin(post, `js`);
-      //message =
-      //`**Eval**:\n\`${code}\`\n` +
-      //`**Evaluated**:🔵 (${evaledt})\n` +
-      //`response was to long instead i posted it to hastebin for you:\n` +
-      //` ${post}`;
-      //} else {
       message = `**Eval**: \`${code}\`\n` + `**Evaluated**:🔵 (${evaledt})\n`;
-      //}
       msg.channel.send(message);
       msg.channel.send(evaled, { split: true, code: "xl" });
       inSpam = require(`../helpers/cmd-helper.js`).inSpam;

@@ -1,5 +1,5 @@
 let moment = require(`moment-timezone`);
-let { checkMessageForCommand } = require(`./plugin-handler.js`);
+let { checkMessageForCommand } = require(`./cmd-handler.js`);
 let config = require(`config`);
 let { logChannel } = config.get(`moderation`);
 let { pm2Name } = config.get(`General`);

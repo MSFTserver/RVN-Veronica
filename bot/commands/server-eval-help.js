@@ -1,5 +1,7 @@
 `use strict`;
 let { inSpam } = require(`../helpers/cmd-helper.js`);
+let config = require(`config`);
+let channelID = config.get(`General`).Channels.botspam;
 exports.commands = [`evalhelp`];
 exports.evalhelp = {
   usage: ``,

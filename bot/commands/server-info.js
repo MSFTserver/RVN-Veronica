@@ -3,6 +3,8 @@ const { RichEmbed } = require(`discord.js`);
 let moment = require(`moment-timezone`);
 let { hasPerms, inPrivate } = require(`../helpers/cmd-helper.js`);
 let { inSpam } = require(`../helpers/cmd-helper.js`);
+let config = require(`config`);
+let channelID = config.get(`General`).Channels.botspam;
 exports.commands = [`serverstats`];
 exports.serverstats = {
   usage: ``,
